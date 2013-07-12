@@ -1,0 +1,10 @@
+﻿[General]
+close_blindspot=ctrl+win+F4 // this bit should be ignored
+previous_buffer=ctrl+win+left
+next_buffer=ctrl+win+right
+previous_buffer_item=ctrl+win+up
+next_buffer_item=ctrl+win+down
+[Test Keys]
+// ignore_this=ctrl+shift+alt+win+headbutt
+test_function=ctrl+A
+test_function2=ctrl+shift+a // case insensative?

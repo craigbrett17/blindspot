@@ -1,0 +1,12 @@
+﻿[General]
+close_blindspot=control+windows+alt+F4
+previous_buffer=ctrl+shift+left
+next_buffer=ctrl+shift+right
+previous_buffer_item=ctrl+shift+up
+next_buffer_item=ctrl+shift+down
+activate_buffer_item=ctrl+alt+enter
+playback_volume_up=ctrl+shift+alt+up
+playback_volume_down=ctrl+shift+alt+down
+dismiss_buffer=ctrl+shift+d
+announce_now_playing=shift+win+n
+new_search=ctrl+shift+win+s
