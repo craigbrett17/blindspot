@@ -22,7 +22,7 @@ namespace Blindspot.Controllers
         string GetUserDisplayName(IntPtr userPtr);
         void Session_OnLoggedIn(IntPtr obj);
         void Session_OnNotifyMainThread(IntPtr sessionPtr);
-        IntPtr LastSearch { get; }
+        Search LastSearch { get; }
         void SetPrivateSession(bool enable);
     }
 }

@@ -78,6 +78,7 @@
     <Compile Include="Controllers\Logger.cs" />
     <Compile Include="Controllers\Playlist.cs" />
     <Compile Include="Controllers\PlaylistContainer.cs" />
+    <Compile Include="Controllers\Search.cs" />
     <Compile Include="Controllers\Session.cs" />
     <Compile Include="Controllers\SpotifyClient.cs" />
     <Compile Include="Controllers\SpotifyController.cs" />

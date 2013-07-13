@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Blindspot.Controllers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,13 +12,6 @@ namespace Blindspot
 {
     public partial class SearchWindow : Form
     {
-        public enum SearchType
-        {
-            Title,
-            Artist,
-            Album
-        }
-        
         public string SearchText { get; set; }
         public SearchType Type { get; set; }
 
@@ -36,7 +30,7 @@ namespace Blindspot
             this.SearchText = searchTextBox.Text;
             if (titleButton.Checked)
             {
-                this.Type = SearchType.Title; 
+                this.Type = SearchType.Track; 
             }
             else if (artistButton.Checked)
             {

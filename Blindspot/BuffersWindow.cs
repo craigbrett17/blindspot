@@ -292,17 +292,40 @@ namespace Blindspot
             string searchText = search.SearchText;
             var searchType = search.Type;
             search.Dispose();
-            if (searchType == SearchWindow.SearchType.Title)
+            if (searchType == SearchType.Track)
             {
-                
+                ScreenReader.SayString("Searching...", false);
+                Buffers.Add(new BufferList("Search for: " + searchText));
+                Buffers.CurrentListIndex = Buffers.Count - 1;
+                var searchBuffer = Buffers.CurrentList;
+                ScreenReader.SayString(searchBuffer.ToString(), false);
+                var tracks = spotify.SearchTracks(searchText);
+                if (tracks == null || tracks.Count == 0)
+                {
+                    if (spotify.LastSearch != null && !String.IsNullOrEmpty(spotify.LastSearch.DidYouMean))
+	                {
+                        searchBuffer.Add(new BufferItem("No search results. Did you mean: " + spotify.LastSearch.DidYouMean)); 
+	                }
+                    else
+	                {
+	                    searchBuffer.Add(new BufferItem("No search results")); 
+	                }
+                }
+                else
+                {
+                    foreach (Track t in tracks)
+                    {
+                        searchBuffer.Add(new TrackBufferItem(t));
+                    }
+                }
             }
-            else if (searchType == SearchWindow.SearchType.Artist)
+            else if (searchType == SearchType.Artist)
             {
-
+                MessageBox.Show("Not implemented yet!", "Oops!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else if (searchType == SearchWindow.SearchType.Album)
+            else if (searchType == SearchType.Album)
             {
-
+                MessageBox.Show("Not implemented yet!", "Oops!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

@@ -241,7 +241,7 @@ namespace Blindspot.Controllers
         private void populateMetadata() {
 
             this.Name = Functions.PtrToString(libspotify.sp_playlist_name(this.Pointer));
-            this.TrackCount = libspotify.sp_playlist_num_tracks(this.Pointer);
+            //this.TrackCount = libspotify.sp_playlist_num_tracks(this.Pointer);
             this.Description = Functions.PtrToString(libspotify.sp_playlist_get_description(this.Pointer));
             this.SubscriberCount = (int)libspotify.sp_playlist_num_subscribers(this.Pointer);
             this.IsInRAM = libspotify.sp_playlist_is_in_ram(Session.GetSessionPtr(), this.Pointer);

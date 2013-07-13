@@ -15,6 +15,13 @@ namespace Blindspot.Helpers
         public string Password { get; set; }
         public byte[] ApiKey { get; set; }
         public bool StartInPrivateSession { get; set; }
+        private int _searchResults = 50;
+        public int SearchResults
+        {
+            get { return _searchResults; }
+            set { _searchResults = value; }
+        }
+
 
         [NonSerialized]
         private const string fileLocation = @"Settings\user_settings.dat";

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using libspotifydotnet;
 using System.Runtime.InteropServices;
+using System.Threading;
 
 namespace Blindspot.Controllers
 {
@@ -16,7 +17,9 @@ namespace Blindspot.Controllers
     public class SpotifyClient : ISpotifyClient
     {
         private SpotifyClient()
-        { }
+        {
+            this.RequestTimeout = 30;
+        }
 
         private static SpotifyClient _instance;
         public static SpotifyClient Instance
@@ -31,13 +34,29 @@ namespace Blindspot.Controllers
             }
         }
 
-        public IntPtr LastSearch { get; set; }
+        public int RequestTimeout { get; set; }
+        public Search LastSearch { get; set; }
 
         public List<Track> SearchTracks(string query)
         {
-            var session = GetSession();
-            this.LastSearch = libspotify.sp_search_create(session, query, 0, 50, 0, 0, 0, 0, 0, 0, sp_search_type.SP_SEARCH_STANDARD, IntPtr.Zero, IntPtr.Zero);
-            return null;
+            Search search = new Search(query, SearchType.Track);
+            search.BeginBrowse();
+            bool loadedInTime = WaitFor(() => search.IsLoaded, RequestTimeout);
+            if (!loadedInTime)
+            {
+                Logger.WriteDebug("Browsing search results timed out");
+                return null;
+            }
+            var tracks = new List<Track>();
+            if (search.Tracks == null)
+            {
+                return tracks;
+            }
+            foreach (IntPtr pointer in search.Tracks)
+            {
+                tracks.Add(new Track(pointer));
+            }
+            return tracks;
         }
 
         public bool IsRunning
@@ -130,5 +149,21 @@ namespace Blindspot.Controllers
             }
             return session;
         }
+
+        // ok, I haven't been able to think of a better way of doing this yet, well done Jamcast
+        private static bool WaitFor(Func<bool> t, int timeout)
+        {
+            DateTime start = DateTime.Now;
+            while (DateTime.Now.Subtract(start).Seconds < timeout)
+            {
+                if (t.Invoke())
+                {
+                    return true;
+                }
+                Thread.Sleep(10);
+            }
+            return false;
+        }
+
     }
 }
