@@ -18,19 +18,11 @@ namespace Blindspot.ViewModels
 
         public override string ToString()
         {
-            StringBuilder outString = new StringBuilder();
             if (Model == null)
             {
-                outString.Append("No track information. This is embarrassing. ");
-                return outString.ToString();
+                return "No track information. This is embarrassing. ";
             }
-            outString.Append(Model.Name);
-            if (Model.Album != null || !String.IsNullOrEmpty(Model.Album.Artist))
-            {
-                outString.Append(" by ");
-                outString.Append(Model.Album.Artist);
-            }
-            return outString.ToString();
+            return Model.ToString();
         }
     }
 }
