@@ -21,8 +21,7 @@ namespace Blindspot.Helpers
             Buffering
         }
 
-        private SlidingStream bytesInWaiting;
-        private byte[] spareBytes;
+        private ByteGateKeeper gatekeeper;
         const int bufferAmount = 983040; // 3 seconds of 320kbps in other words
         const int secondsToBuffer = 3;
         private volatile float volume = 1f;
@@ -42,12 +41,12 @@ namespace Blindspot.Helpers
             this.timer1 = new System.Windows.Forms.Timer();
             this.timer1.Interval = 250;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            this.bytesInWaiting = new SlidingStream();
+            gatekeeper = new ByteGateKeeper();
         }
 
         public void AddBytesToPlayingStream(byte[] bytes)
         {
-            bytesInWaiting.Write(bytes, 0, bytes.Length);
+            gatekeeper.QueueBytes(bytes);
         }
 
         public void Play()
@@ -91,9 +90,8 @@ namespace Blindspot.Helpers
                 }
                 // n.b. streaming thread may not yet have exited
                 Thread.Sleep(500);
-                bytesInWaiting = new SlidingStream();
+                gatekeeper.Clear();
                 this.bufferedWaveProvider = null;
-                spareBytes = null;
                 timer1.Enabled = false;
                 if (OnPlaybackStopped != null)
                 {
@@ -148,6 +146,7 @@ namespace Blindspot.Helpers
                         this.bufferedWaveProvider = new BufferedWaveProvider(new WaveFormat(44100, 2));
                         this.bufferedWaveProvider.BufferDuration = TimeSpan.FromSeconds(20); // allow us to get well ahead of ourselves
                         Logger.WriteDebug("Creating buffered wave provider");
+                        this.gatekeeper.MinimumSampleSize = bufferedWaveProvider.WaveFormat.AverageBytesPerSecond * secondsToBuffer;
                     }
                     if (bufferedWaveProvider != null && bufferedWaveProvider.BufferLength - bufferedWaveProvider.BufferedBytes < bufferedWaveProvider.WaveFormat.AverageBytesPerSecond / 4)
                     {
@@ -157,32 +156,10 @@ namespace Blindspot.Helpers
                     // do we have at least double the buffered sample's size in free space, just in case
                     else if (bufferedWaveProvider.BufferLength - bufferedWaveProvider.BufferedBytes > bufferedWaveProvider.WaveFormat.AverageBytesPerSecond * (secondsToBuffer * 2))
                     {
-                        var sample = new byte[bufferedWaveProvider.WaveFormat.AverageBytesPerSecond * secondsToBuffer];
-                        var bytesRead = bytesInWaiting.Read(sample, 0, sample.Length - 1);
-                        if (bytesRead > 0)
+                        var sample = gatekeeper.Read();
+                        if (sample != null)
                         {
-                            // if we already have some spare data kicking around, join it together
-                            if (spareBytes != null)
-                            {
-                                var combinedSamples = new byte[spareBytes.Length + bytesRead];
-                                // combine the spare bytes with the new sample in this new array
-                                Buffer.BlockCopy(spareBytes, 0, combinedSamples, 0, spareBytes.Length);
-                                Buffer.BlockCopy(sample, 0, combinedSamples, spareBytes.Length, bytesRead);
-                                sample = combinedSamples;
-                                bytesRead = sample.Length; // the sample's new length has no silence, so we can use it as bytesRead
-                                spareBytes = null;
-                            }
-                            // if the sample isn't big enough to go in, wait for the next lot
-                            if (bytesRead < bufferedWaveProvider.WaveFormat.AverageBytesPerSecond * secondsToBuffer)
-                            {
-                                spareBytes = new byte[bytesRead];
-                                // yeah, we're using byte arrays, so lightning fast Buffer block copies for us
-                                Buffer.BlockCopy(sample, 0, spareBytes, 0, bytesRead);
-                            }
-                            else
-                            {
-                                bufferedWaveProvider.AddSamples(sample, 0, sample.Length);
-                            }
+                            bufferedWaveProvider.AddSamples(sample, 0, sample.Length);
                         }
                     }
                 } while (playbackState != StreamingPlaybackState.Stopped);

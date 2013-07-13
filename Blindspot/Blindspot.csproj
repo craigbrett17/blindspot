@@ -83,6 +83,7 @@
     <Compile Include="Controllers\SpotifyController.cs" />
     <Compile Include="Controllers\TopList.cs" />
     <Compile Include="Controllers\Track.cs" />
+    <Compile Include="Helpers\ByteGateKeeper.cs" />
     <Compile Include="Helpers\SlidingStream.cs" />
     <Compile Include="Helpers\PlaybackManager.cs" />
     <Compile Include="Helpers\UserSettings.cs" />

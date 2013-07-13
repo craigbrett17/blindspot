@@ -35,7 +35,9 @@ namespace Blindspot.Controllers
 
         public List<Track> SearchTracks(string query)
         {
-            throw new NotImplementedException();
+            var session = GetSession();
+            this.LastSearch = libspotify.sp_search_create(session, query, 0, 50, 0, 0, 0, 0, 0, 0, sp_search_type.SP_SEARCH_STANDARD, IntPtr.Zero, IntPtr.Zero);
+            return null;
         }
 
         public bool IsRunning
