@@ -67,9 +67,8 @@ namespace Blindspot
                 var response = logon.ShowDialog();
                 if (response != DialogResult.OK)
                 {
-                    ScreenReader.SayString("Exiting program");
-                    System.Threading.Thread.Sleep(3000);
                     this.Close();
+                    ScreenReader.SayString("Exiting program");
                     return;
                 }
                 username = logon.Username;
@@ -231,6 +230,7 @@ namespace Blindspot
                 playingTrack = tbi.Model;
                 playbackManager.fullyDownloaded = false;
                 playbackManager.Play();
+                isPaused = false;
             }
             else if (item is PlaylistBufferItem)
             {
@@ -313,6 +313,7 @@ namespace Blindspot
                 }
                 else
                 {
+                    ScreenReader.SayString(tracks.Count + " search results", false);
                     foreach (Track t in tracks)
                     {
                         searchBuffer.Add(new TrackBufferItem(t));
@@ -321,11 +322,11 @@ namespace Blindspot
             }
             else if (searchType == SearchType.Artist)
             {
-                MessageBox.Show("Not implemented yet!", "Oops!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Not implemented yet! Boo to the developers!", "Oops!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else if (searchType == SearchType.Album)
             {
-                MessageBox.Show("Not implemented yet!", "Oops!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Not implemented yet! Boo to the developers!", "Oops!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

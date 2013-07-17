@@ -377,21 +377,27 @@ namespace Blindspot.Controllers
             bool wasLoggedIn = Session.IsLoggedIn;
             lock (_syncObj)
             {
-                libspotify.sp_session_player_unload(Session.GetSessionPtr());
-                libspotify.sp_session_logout(Session.GetSessionPtr());
-                try
+                if (wasLoggedIn)
                 {
-                    if (wasLoggedIn && PlaylistContainer.GetSessionContainer() != null)
+                    libspotify.sp_session_player_unload(Session.GetSessionPtr());
+                    libspotify.sp_session_logout(Session.GetSessionPtr());
+                    try
                     {
-                        PlaylistContainer.GetSessionContainer().Dispose();
+                        if (PlaylistContainer.GetSessionContainer() != null)
+                        {
+                            PlaylistContainer.GetSessionContainer().Dispose();
+                        }
                     }
+                    catch { } 
                 }
-                catch { }
                 if (_mainSignal != null)
                     _mainSignal.Set();
                 _shutDown = true;
             }
-            _programSignal.WaitOne(2000, false);
+            if (_programSignal != null)
+            {
+                _programSignal.WaitOne(2000, false); 
+            }
         }
 
         private static void mainThread()

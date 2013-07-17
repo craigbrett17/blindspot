@@ -244,7 +244,7 @@ namespace Blindspot.Controllers
 
         private static void metadata_updated(IntPtr sessionPtr)
         {
-            Logger.WriteDebug("libspotify> metadata_updated");
+            // Logger.WriteDebug("libspotify> metadata_updated");
         }
 
         private static int music_delivery(IntPtr sessionPtr, IntPtr formatPtr, IntPtr framesPtr, int num_frame)
@@ -301,7 +301,7 @@ namespace Blindspot.Controllers
 
         private static void userinfo_updated(IntPtr sessionPtr)
         {
-            Logger.WriteDebug("libspotify> userinfo_updated");
+            // Logger.WriteDebug("libspotify> userinfo_updated");
         }
 
     }
