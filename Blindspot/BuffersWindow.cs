@@ -87,6 +87,7 @@ namespace Blindspot
                     ScreenReader.SayString("Logged in to Spotify");
                     UserSettings.Instance.Username = username;
                     UserSettings.Instance.Password = password;
+                    UserSettings.Save();
                     spotify.SetPrivateSession(true);
                 }
                 else
