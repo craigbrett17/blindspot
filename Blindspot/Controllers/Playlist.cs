@@ -80,14 +80,13 @@ namespace Blindspot.Controllers
         #region IDisposable Members
 
         public void Dispose() {
-
+            Logger.WriteDebug("Called dispose on playlist {0}", this.Name);
             dispose(true);
             GC.SuppressFinalize(this);
-
         }
 
         ~Playlist() {
-
+            Logger.WriteDebug("GC on playlist {0}", this.Name);
             dispose(false);
 
         }
@@ -199,11 +198,11 @@ namespace Blindspot.Controllers
             Marshal.StructureToPtr(callbacks, _callbacksPtr, true);
 
             libspotify.sp_playlist_add_callbacks(this.Pointer, _callbacksPtr, IntPtr.Zero);
-
+            Logger.WriteDebug("Initialised callbacks for playlist {0}", this.Name);
         }
 
         private void safeRemoveCallbacks() {
-            Logger.WriteDebug("Safely disposing of playlist callbacks");
+            
             try {
 
                 if (this.Pointer == IntPtr.Zero)
@@ -213,7 +212,7 @@ namespace Blindspot.Controllers
                     return;
 
                 libspotify.sp_playlist_remove_callbacks(this.Pointer, _callbacksPtr, IntPtr.Zero);
-
+                Logger.WriteDebug("Safely disposing of playlist callbacks for {0}", this.Name);
             } catch { }
 
         }
