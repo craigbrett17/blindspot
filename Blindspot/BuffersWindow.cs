@@ -241,13 +241,15 @@ namespace Blindspot
                 Buffers.CurrentListIndex = Buffers.Count - 1;
                 var playlistBuffer = Buffers.CurrentList;
                 ScreenReader.SayString(playlistBuffer.ToString(), false);
-                var playlist = SpotifyController.GetPlaylist(pbi.Model.Pointer, true);
-                ScreenReader.SayString(String.Format("{0} tracks loaded", playlist.TrackCount), false);
-                var tracks = playlist.GetTracks();
-                tracks.ForEach(t =>
+                using (var playlist = SpotifyController.GetPlaylist(pbi.Model.Pointer, true))
                 {
-                    playlistBuffer.Add(new TrackBufferItem(t));
-                });
+                    ScreenReader.SayString(String.Format("{0} tracks loaded", playlist.TrackCount), false);
+                    var tracks = playlist.GetTracks();
+                    tracks.ForEach(t =>
+                    {
+                        playlistBuffer.Add(new TrackBufferItem(t));
+                    });
+                }
             }
             else
             {
