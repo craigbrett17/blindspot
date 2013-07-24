@@ -2,7 +2,7 @@
 ;Comes with .NET installing and extraction of files
 
 ;What version are we on?
-!define VERSION "0.7"
+!define VERSION "0.8"
 
 ;Use Modern looking installer
 !include "MUI2.nsh"
@@ -18,11 +18,15 @@ InstallDir "$PROGRAMFILES\Blindspot"
 ; Will override InstallDir if a previous install was installed elsewhere
 InstallDirRegKey HKCU "Software\Blindspot" ""
 
-;Request application privileges for Windows Vista and later
-RequestExecutionLevel user
+; Request application privileges for Windows Vista and later
+; Since we may well be installing .NET framework, we need admin privilages
+RequestExecutionLevel admin
 
 ; Warn before exiting installer
 !define MUI_ABORTWARNING
+
+; Show the details of the isntall
+ShowInstDetails show
 
 ;Pages
 
@@ -93,6 +97,30 @@ CreateShortCut "$SMPROGRAMS\$StartMenuFolder\Uninstall.lnk" "$INSTDIR\Uninstall 
 !insertmacro MUI_STARTMENU_WRITE_END
 SectionEnd
 
+Section "MS .NET Framework"
+ClearErrors
+ReadRegDWORD $0 HKLM "Software\Microsoft\Net Framework Setup\NDP\v4\Full" "Install"
+IfErrors dotNet40FullNotFound
+IntCmp $0 1 dotNet40Found
+;if no .NET full version, maybe there's a client version
+dotNet40FullNotFound:
+ClearErrors
+ReadRegDWORD $0 HKLM "Software\Microsoft\Net Framework Setup\NDP\v4\Client" "Install"
+IfErrors dotNet40NotFound
+IntCmp $0 1 dotNet40Found
+dotNet40NotFound: 
+MessageBox MB_YESNO "The .NET framework version 4 is not currently installed. Do you want to install it? This requires 600MB free space on your system." IDNO dotNet40Found
+Banner::show /set 76 "Installing .NET Framework 4.0" "Please wait"  
+SetOutPath $TEMP
+File /nonfatal "tools\dotNetFx40_Client_x86_x64.exe"
+ExecWait "$TEMP\dotNetFx40_Client_x86_x64.exe /passive /showfinalerror /norestart"
+Delete /REBOOTOK "$TEMP\dotNetFx40_Client_x86_x64.exe"
+Banner::destroy
+; .NET requires a restart
+SetRebootFlag true
+dotNet40Found:
+SectionEnd
+
 Section "Uninstall"
 ;Delete all files in the install directory
 Delete "$INSTDIR\*.*"
@@ -110,4 +138,7 @@ RMDir "$SMPROGRAMS\$StartMenuFolder"
 
 ;Delete the registry entry
 DeleteRegKey /ifempty HKCU "Software\Blindspot"
+
+; We're leaving the .NET framework installed if it was for now
+; people might not want .NET framework mysteriously leaving their machines
 SectionEnd
