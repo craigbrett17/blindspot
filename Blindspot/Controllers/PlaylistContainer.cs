@@ -179,7 +179,7 @@ namespace Blindspot.Controllers
                         }
                     }
                 }
-                // we need the playlist to at least have a name
+                // we need the playlist to at least have a name as well as be loaded (for some reason not always the case)
                 if (_playlistsInLoading.Any(p => !p.IsLoaded || String.IsNullOrEmpty(p.Name)))
                     return false;
 
