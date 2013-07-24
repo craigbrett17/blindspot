@@ -30,6 +30,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using libspotifydotnet;
+using System.Linq;
 
 // namespace Jamcast.Plugins.Spotify.API
 namespace Blindspot.Controllers
@@ -50,6 +51,7 @@ namespace Blindspot.Controllers
         private IntPtr _callbacksPtr;
         private bool _disposed;
         private bool _loaded;
+        private List<Playlist> _playlistsInLoading;
         
         private static PlaylistContainer _sessionContainer;
 
@@ -163,27 +165,28 @@ namespace Blindspot.Controllers
                 if (!this.IsLoaded)
                     return false;
 
-                int count = libspotify.sp_playlistcontainer_num_playlists(_containerPtr);
-
-                for (int i = 0; i < count; i++) {                    
-
-                    if(libspotify.sp_playlistcontainer_playlist_type(_containerPtr, i) == libspotify.sp_playlist_type.SP_PLAYLIST_TYPE_PLAYLIST) {
-
-                        using (Playlist p = Playlist.Get(libspotify.sp_playlistcontainer_playlist(_containerPtr, i))) {
-
-                            if (!p.IsLoaded)
-                                return false;
-
+                if (_playlistsInLoading == null)
+                {
+                    _playlistsInLoading = new List<Playlist>();
+                    int count = libspotify.sp_playlistcontainer_num_playlists(_containerPtr);
+                    for (int i = 0; i < count; i++)
+                    {
+                        if (libspotify.sp_playlistcontainer_playlist_type(_containerPtr, i) == libspotify.sp_playlist_type.SP_PLAYLIST_TYPE_PLAYLIST)
+                        {
+                            // doing it this way saves on initializing and destructing playlists on first run too much and seems more efficient
+                            Playlist p = Playlist.Get(libspotify.sp_playlistcontainer_playlist(_containerPtr, i));
+                            _playlistsInLoading.Add(p);
                         }
-
                     }
-
                 }
+                // we need the playlist to at least have a name
+                if (_playlistsInLoading.Any(p => !p.IsLoaded || String.IsNullOrEmpty(p.Name)))
+                    return false;
 
+                _playlistsInLoading.ForEach(p => p.Dispose()); // deallocate playlists properly
+                _playlistsInLoading = null;
                 return true;
-
             }
-
         }
 
         public List<PlaylistInfo> GetAllPlaylists() {
