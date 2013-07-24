@@ -49,6 +49,7 @@ namespace Blindspot.Controllers
         private IntPtr _containerPtr;
         private IntPtr _callbacksPtr;
         private bool _disposed;
+        private bool _loaded;
         
         private static PlaylistContainer _sessionContainer;
 
@@ -149,7 +150,7 @@ namespace Blindspot.Controllers
 
             get {
 
-                return libspotify.sp_playlistcontainer_is_loaded(_containerPtr);
+                return _loaded;
 
             }
 
@@ -345,6 +346,7 @@ namespace Blindspot.Controllers
 
         private void container_loaded(IntPtr containerPtr, IntPtr userDataPtr) {
 
+            _loaded = true;
             Logger.WriteDebug("container_loaded");                                   
             
         }
