@@ -25,9 +25,6 @@ RequestExecutionLevel admin
 ; Warn before exiting installer
 !define MUI_ABORTWARNING
 
-; Show the details of the isntall
-ShowInstDetails show
-
 ;Pages
 
 !define MUI_WELCOMEPAGE_TEXT \
