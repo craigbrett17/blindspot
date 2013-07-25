@@ -2,7 +2,7 @@
 ;Comes with .NET installing and extraction of files
 
 ;What version are we on?
-!define VERSION "0.8"
+!define VERSION "0.9"
 
 ;Use Modern looking installer
 !include "MUI2.nsh"
