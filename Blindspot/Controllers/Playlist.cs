@@ -66,7 +66,6 @@ namespace Blindspot.Controllers
                         
         private IntPtr _callbacksPtr;
         private bool _disposed;
-        private bool _isLoaded;
 
         public string Name { get; private set; }
         public int TrackCount { get; private set; }
@@ -134,7 +133,7 @@ namespace Blindspot.Controllers
 
         public bool IsLoaded {
 
-            get { return this.Pointer != IntPtr.Zero && _isLoaded; }
+            get { return this.Pointer != IntPtr.Zero && libspotify.sp_playlist_is_loaded(this.Pointer); }
 
         }
 
@@ -269,7 +268,7 @@ namespace Blindspot.Controllers
         }
                        
         private void state_changed(IntPtr playlistPtr, IntPtr userDataPtr) {
-            _isLoaded = libspotify.sp_playlist_is_loaded(this.Pointer);
+                        
         }
 
         private void playlist_update_in_progress(IntPtr playlistPtr, bool done, IntPtr userDataPtr) {
