@@ -29,7 +29,7 @@ namespace Blindspot.Helpers
 
         public static BufferHotkeyManager LoadFromTextFile(IBufferHolder parent)
         {
-            return LoadFromTextFile(parent, new StreamReader(@"Settings\hotkeys.txt"));
+            return LoadFromTextFile(parent, new StreamReader(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"Blindspot\Settings\hotkeys.txt")));
         }
 
         public static BufferHotkeyManager LoadFromTextFile(IBufferHolder parent, StreamReader reader)

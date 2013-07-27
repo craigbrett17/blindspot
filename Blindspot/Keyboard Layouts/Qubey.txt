@@ -1,0 +1,13 @@
+﻿// a keyboard layout based on Qwitter or the Qube's keyboard layout
+[General]
+close_blindspot=control+windows+alt+F4
+previous_buffer=ctrl+win+left
+next_buffer=ctrl+win+right
+previous_buffer_item=ctrl+win+up
+next_buffer_item=ctrl+win+down
+activate_buffer_item=ctrl+win+enter
+playback_volume_up=ctrl+shift+alt+up
+playback_volume_down=ctrl+shift+alt+down
+dismiss_buffer=ctrl+shift+d
+announce_now_playing=ctrl+win+n
+new_search=ctrl+win+s

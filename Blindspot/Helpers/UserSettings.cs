@@ -21,10 +21,10 @@ namespace Blindspot.Helpers
             get { return _searchResults; }
             set { _searchResults = value; }
         }
-
+        public bool DontShowFirstTimeInfo { get; set; }
 
         [NonSerialized]
-        private const string fileLocation = @"Settings\user_settings.dat";
+        private static string fileLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"Blindspot\Settings\user_settings.dat");
 
         private static UserSettings _instance;
         public static UserSettings Instance

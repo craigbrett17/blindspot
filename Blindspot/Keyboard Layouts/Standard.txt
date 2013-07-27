@@ -1,4 +1,5 @@
-﻿[General]
+﻿// a keyboard layout of my own design - designed not to clash with Qwitter or The Qube's keyboard layout
+[General]
 close_blindspot=control+windows+alt+F4
 previous_buffer=alt+shift+left
 next_buffer=alt+shift+right

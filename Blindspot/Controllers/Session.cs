@@ -172,8 +172,8 @@ namespace Blindspot.Controllers
             config.user_agent = "BlindSpot";
             config.application_key_size = appkey.Length;
             config.application_key = Marshal.AllocHGlobal(appkey.Length);
-            config.cache_location = Path.Combine(Path.GetTempPath(), "spotify_api_temp");
-            config.settings_location = Path.Combine(Path.GetTempPath(), "spotify_api_temp");
+            config.cache_location = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Blindspot\\Libspotify");
+            config.settings_location = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Blindspot\\Libspotify");
             config.callbacks = callbacksPtr;
             config.compress_playlists = true;
             config.dont_save_metadata_for_playlists = false;

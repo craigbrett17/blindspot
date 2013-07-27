@@ -25,7 +25,7 @@ namespace Blindspot.Tests
         {
             holder = new Mock<IBufferHolder>();
             holder.Setup(h => h.Commands).Returns(new Dictionary<string, System.ComponentModel.HandledEventHandler>());
-            manager = BufferHotkeyManager.LoadFromTextFile(holder.Object);
+            manager = BufferHotkeyManager.LoadFromTextFile(holder.Object, new System.IO.StreamReader(@"Settings\hotkeys.txt"));
         }
 
         [TestMethod]

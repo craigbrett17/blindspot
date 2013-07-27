@@ -10,6 +10,7 @@
 ;Settings
 Name "Blindspot"
 OutFile "Blindspot Installer.exe"
+!define APPDATADIR "$LOCALAPPDATA\Blindspot"
 
 ;Install to program files directory
 InstallDir "$PROGRAMFILES\Blindspot"
@@ -72,9 +73,13 @@ File "*.dll"
 SetOutPath "$INSTDIR\Lib"
 File "Lib\*.*"
 
-; Getting the hotkeys file
-SetOutPath "$INSTDIR\Settings"
-File "Settings\hotkeys.txt"
+; Setting up local app data folders
+SetOutPath "${APPDATADIR}\Settings"
+IfFileExists "$OUTDIR\Settings\*.*" +2 0
+File /oname=hotkeys.txt "Keyboard Layouts\Standard.txt"
+; Copy keyboard layouts
+SetOutPath "${APPDATADIR}\Keyboard Layouts"
+File "Keyboard Layouts\*.txt"
 
 SetOutPath "$INSTDIR"
 
