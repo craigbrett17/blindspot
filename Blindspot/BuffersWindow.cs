@@ -55,7 +55,16 @@ namespace Blindspot
             // We want this in for debugging, uncomment it for better UI experience
             Application.ThreadException += new System.Threading.ThreadExceptionEventHandler((sender, e) =>
             {
-                MessageBox.Show("Unexpected error occurred.\r\n" + e.Exception.ToString(), "Oops!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (e.Exception is OutOfMemoryException)
+                {
+                    MessageBox.Show("Critical error: \r\n" + String.Format("{0}: {1}", e.Exception.GetType().ToString(), e.Exception.Message), "Out of cheese error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.Close(); // on OutOfMemory exceptions, we should close immediately
+                    return;
+                }
+                else
+                {
+                    MessageBox.Show("Unexpected error occurred.\r\n" + String.Format("{0}: {1}", e.Exception.GetType().ToString(), e.Exception.Message), "Oops!", MessageBoxButtons.OK, MessageBoxIcon.Error); 
+                }
             });
         }
 
