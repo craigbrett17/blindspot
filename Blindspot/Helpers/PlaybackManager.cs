@@ -226,6 +226,8 @@ namespace Blindspot.Helpers
         public void Dispose()
         {
             Stop();
+            timer1.Dispose();
+            gatekeeper.Dispose();
         }
     }
 }

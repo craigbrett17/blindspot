@@ -8,12 +8,13 @@ namespace Blindspot.Helpers
     /// <summary>
     /// An object that regulates the passing of music data from a store into a circular buffer
     /// </summary>
-    public class ByteGateKeeper
+    public class ByteGateKeeper : IDisposable
     {
         // the sliding stream yet to be used
         private SlidingStream bytesInWaiting;
         // any set of bytes that weren't big enough to go through alone wait here
         private byte[] spareBytes;
+        private bool _disposed;
 
         /// <summary>
         /// Gets or sets the minimum amount of data to be returned at any time
@@ -88,6 +89,31 @@ namespace Blindspot.Helpers
                 return null;
             }
         }
+        
+        #region IDisposable Members
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        ~ByteGateKeeper()
+        {
+            Dispose(false);
+        }
+
+        private void Dispose(bool disposing)
+        {
+            if (!_disposed)
+            {
+                if (disposing)
+                {
+                    bytesInWaiting.Dispose();
+                }
+                _disposed = true;
+            }
+        }
+        #endregion
 
     }
 
