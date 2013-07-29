@@ -160,6 +160,16 @@ namespace Blindspot
                 Buffers.CurrentList.PreviousItem();
                 ScreenReader.SayString(Buffers.CurrentList.CurrentItem.ToString());
             }));
+            commands.Add("first_buffer_item", new HandledEventHandler((sender, e) =>
+            {
+                Buffers.CurrentList.CurrentItemIndex = 0;
+                ScreenReader.SayString(Buffers.CurrentList.CurrentItem.ToString());
+            }));
+            commands.Add("last_buffer_item", new HandledEventHandler((sender, e) =>
+            {
+                Buffers.CurrentList.CurrentItemIndex = Buffers.CurrentList.Count - 1;
+                ScreenReader.SayString(Buffers.CurrentList.CurrentItem.ToString());
+            }));
             commands.Add("activate_buffer_item", new HandledEventHandler(BufferItemActivated));
             commands.Add("playback_volume_up", new HandledEventHandler((sender, e) =>
             {

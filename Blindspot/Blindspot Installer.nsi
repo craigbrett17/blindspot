@@ -75,9 +75,9 @@ File "Lib\*.*"
 
 ; Setting up local app data folders
 ; Don't overwrite existing hotkeys text file
-; If we need to override keyboard layouts for new features, comment out these next few lines
 SetOutPath "${APPDATADIR}\Settings"
-IfFileExists "$OUTDIR\hotkeys.txt" +2 0
+; If we need to override keyboard layouts for new features, comment out this line
+; IfFileExists "$OUTDIR\hotkeys.txt" +2 0
 File /oname=hotkeys.txt "Keyboard Layouts\Standard.txt"
 ; Copy keyboard layouts
 SetOutPath "${APPDATADIR}\Keyboard Layouts"

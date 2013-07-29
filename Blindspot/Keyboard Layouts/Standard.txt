@@ -1,13 +1,15 @@
 ﻿// a keyboard layout of my own design - designed not to clash with Qwitter or The Qube's keyboard layout
 [General]
-close_blindspot=control+windows+alt+F4
+close_blindspot=alt+shift+F4
 previous_buffer=alt+shift+left
 next_buffer=alt+shift+right
 previous_buffer_item=alt+shift+up
 next_buffer_item=alt+shift+down
-activate_buffer_item=ctrl+alt+enter
+first_buffer_item=alt+shift+home
+last_buffer_item=alt+shift+end
+activate_buffer_item=shift+alt+enter
 playback_volume_up=ctrl+shift+alt+up
 playback_volume_down=ctrl+shift+alt+down
-dismiss_buffer=ctrl+shift+d
-announce_now_playing=shift+win+n
-new_search=ctrl+shift+win+s
+dismiss_buffer=alt+shift+d
+announce_now_playing=shift+alt+n
+new_search=alt+shift+s
