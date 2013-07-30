@@ -10,6 +10,6 @@ last_buffer_item=ctrl+win+end
 activate_buffer_item=ctrl+win+enter
 playback_volume_up=ctrl+shift+alt+up
 playback_volume_down=ctrl+shift+alt+down
-dismiss_buffer=ctrl+shift+d
+dismiss_buffer=ctrl+win+d
 announce_now_playing=ctrl+win+n
 new_search=ctrl+win+s
