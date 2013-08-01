@@ -33,7 +33,7 @@ namespace Blindspot.Helpers
 
         public override long Length
         {
-            get { throw new NotImplementedException(); }
+            get { return _pendingSegments.Count; }
         }
 
         public override long Position

@@ -22,7 +22,6 @@ namespace Blindspot.Helpers
         }
 
         private ByteGateKeeper gatekeeper;
-        const int bufferAmount = 983040; // 3 seconds of 320kbps in other words
         const int secondsToBuffer = 3;
         private volatile float volume = 1f;
         private volatile StreamingPlaybackState playbackState;
@@ -163,7 +162,7 @@ namespace Blindspot.Helpers
                         }
                     }
                 } while (playbackState != StreamingPlaybackState.Stopped);
-                Logger.WriteDebug("Exiting");
+                Logger.WriteDebug("Playback stopped");
             }
             finally
             {
@@ -200,10 +199,21 @@ namespace Blindspot.Helpers
                         Logger.WriteDebug(String.Format("Started playing, waveOut.PlaybackState={0}", waveOut.PlaybackState));
                         this.playbackState = StreamingPlaybackState.Playing;
                     }
-                    else if (this.fullyDownloaded && bufferedSeconds == 0)
+                    else if (this.fullyDownloaded && bufferedSeconds < secondsToBuffer)
                     {
-                        Logger.WriteDebug("Reached end of stream");
-                        Stop();
+                        // put the last bytes in the buffer if there's only spare bytes left
+                        if (gatekeeper.IsSlidingStreamEmpty && gatekeeper.HasSpareBytes)
+                        {
+                            var sample = gatekeeper.ReadSpareBytes();
+                            Logger.WriteDebug("{0} bytes left as spare bytes, adding to the end", sample.Length);
+                            bufferedWaveProvider.AddSamples(sample, 0, sample.Length);
+                        }
+                        // if there's no spare bytes and the stream is empty, stop
+                        else if (bufferedSeconds == 0 && gatekeeper.IsSlidingStreamEmpty)
+                        {
+                            Logger.WriteDebug("Reached end of stream");
+                            Stop();
+                        }
                     }
                 }
             }

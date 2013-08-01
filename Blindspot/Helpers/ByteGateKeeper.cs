@@ -20,6 +20,25 @@ namespace Blindspot.Helpers
         /// Gets or sets the minimum amount of data to be returned at any time
         /// </summary>
         public int MinimumSampleSize { get; set; }
+        
+        /// <summary>
+        /// Returns true if there are no bytes in waiting otherwise false
+        /// </summary>
+        public bool IsSlidingStreamEmpty
+        {
+            get
+            {
+                return bytesInWaiting.Length == 0;
+            }
+        }
+
+        /// <summary>
+        /// Returns true if there are any spare bytes, otherwise false
+        /// </summary>
+        public bool HasSpareBytes
+        {
+            get { return spareBytes != null; }
+        }
 
         public ByteGateKeeper()
         {
@@ -89,7 +108,19 @@ namespace Blindspot.Helpers
                 return null;
             }
         }
-        
+
+        /// <summary>
+        /// Retrieves the spare bytes and clears spare bytes
+        /// </summary>
+        /// <returns>The bytes that are left over from reads, i.e spare bytes</returns>
+        public byte[] ReadSpareBytes()
+        {
+            byte[] sample = new byte[spareBytes.Length];
+            Array.Copy(spareBytes, sample, spareBytes.Length);
+            spareBytes = null;
+            return sample;
+        }
+
         #region IDisposable Members
         public void Dispose()
         {
@@ -114,6 +145,7 @@ namespace Blindspot.Helpers
             }
         }
         #endregion
+
 
     }
 
