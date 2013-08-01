@@ -22,6 +22,8 @@ namespace Blindspot.Helpers
             set { _searchResults = value; }
         }
         public bool DontShowFirstTimeInfo { get; set; }
+        public bool AutoLogin { get; set; }
+        public float LastVolume { get; set; }
 
         [NonSerialized]
         private static string fileLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"Blindspot\Settings\user_settings.dat");
