@@ -162,12 +162,22 @@ namespace Blindspot
             }));
             commands.Add("first_buffer_item", new HandledEventHandler((sender, e) =>
             {
-                Buffers.CurrentList.CurrentItemIndex = 0;
+                Buffers.CurrentList.FirstItem();
                 ScreenReader.SayString(Buffers.CurrentList.CurrentItem.ToString());
             }));
             commands.Add("last_buffer_item", new HandledEventHandler((sender, e) =>
             {
-                Buffers.CurrentList.CurrentItemIndex = Buffers.CurrentList.Count - 1;
+                Buffers.CurrentList.LastItem();
+                ScreenReader.SayString(Buffers.CurrentList.CurrentItem.ToString());
+            }));
+            commands.Add("next_buffer_item_jump", new HandledEventHandler((sender, e) =>
+            {
+                Buffers.CurrentList.NextJump();
+                ScreenReader.SayString(Buffers.CurrentList.CurrentItem.ToString());
+            }));
+            commands.Add("previous_buffer_item_jump", new HandledEventHandler((sender, e) =>
+            {
+                Buffers.CurrentList.PreviousJump();
                 ScreenReader.SayString(Buffers.CurrentList.CurrentItem.ToString());
             }));
             commands.Add("activate_buffer_item", new HandledEventHandler(BufferItemActivated));

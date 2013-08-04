@@ -85,6 +85,46 @@ namespace Blindspot.Tests
             Assert.AreEqual("Item 1", list.CurrentItem.Text);
         }
 
+        [TestMethod]
+        public void CanJumpForwardSetAmount()
+        {
+            var list = ThirtyItemBufferList;
+            list.CurrentItemIndex = 0;
+            list.NextJump();
+            Assert.AreEqual(10, list.CurrentItemIndex);
+            Assert.AreEqual("Item 10", list.CurrentItem.ToString());
+        }
+
+        [TestMethod]
+        public void CanJumpBackwardSetAmount()
+        {
+            var list = ThirtyItemBufferList;
+            list.CurrentItemIndex = list.Count - 1;
+            list.PreviousJump();
+            Assert.AreEqual(20, list.CurrentItemIndex);
+            Assert.AreEqual("Item 20", list.CurrentItem.ToString());
+        }
+
+        [TestMethod]
+        public void JumpingPastLastItemSelectsLastItem()
+        {
+            var list = ThirtyItemBufferList;
+            list.CurrentItemIndex = 25;
+            list.NextJump();
+            Assert.AreEqual(list.Count - 1, list.CurrentItemIndex);
+            Assert.AreEqual("Item 30", list.CurrentItem.ToString());
+        }
+
+        [TestMethod]
+        public void JumpingPastFirstItemStaysOnFirstItem()
+        {
+            var list = ThirtyItemBufferList;
+            list.CurrentItemIndex = 5;
+            list.PreviousJump();
+            Assert.AreEqual(0, list.CurrentItemIndex);
+            Assert.AreEqual("Item 0", list.CurrentItem.ToString());
+        }
+
         private BufferList ThreeItemBufferList
         {
             get
@@ -97,5 +137,19 @@ namespace Blindspot.Tests
                 };
             }
         }
+
+        private BufferList ThirtyItemBufferList
+        {
+            get
+            {
+                var list = new BufferList();
+                for (int count = 0; count <= 30; count++)
+			    {
+                    list.Add(new BufferItem("Item " + count));
+			    }
+                return list;
+            }
+        }
+
     }
 }

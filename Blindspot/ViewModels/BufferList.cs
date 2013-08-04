@@ -11,6 +11,8 @@ namespace Blindspot.ViewModels
         public string Name { get; private set; }
         public bool IsDismissable { get; private set; }
 
+        const int jumpAmount = 10;
+
         public BufferList()
             : base()
         {
@@ -67,6 +69,40 @@ namespace Blindspot.ViewModels
             if (CurrentItemIndex > 0)
             {
                 CurrentItemIndex--;
+            }
+        }
+
+        public void FirstItem()
+        {
+            CurrentItemIndex = 0;
+        }
+
+        public void LastItem()
+        {
+            CurrentItemIndex = this.Count - 1;
+        }
+
+        public void NextJump()
+        {
+            if (CurrentItemIndex + jumpAmount < this.Count - 1)
+            {
+                CurrentItemIndex += jumpAmount;
+            }
+            else
+            {
+                LastItem();
+            }
+        }
+
+        public void PreviousJump()
+        {
+            if (CurrentItemIndex  - jumpAmount > 0)
+            {
+                CurrentItemIndex -= jumpAmount;
+            }
+            else
+            {
+                FirstItem();
             }
         }
 
