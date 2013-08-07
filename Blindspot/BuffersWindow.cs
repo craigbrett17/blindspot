@@ -9,6 +9,7 @@ using Blindspot.Controllers;
 using System.IO;
 using libspotifydotnet;
 using System.Runtime.InteropServices;
+using System.Text;
 
 namespace Blindspot
 {
@@ -146,7 +147,7 @@ namespace Blindspot
                 ScreenReader.SayString(Buffers.CurrentList.ToString());
             }));
             commands.Add("previous_buffer", new HandledEventHandler((sender, e) =>
-                {
+            {
                 Buffers.PreviousList();
                 ScreenReader.SayString(Buffers.CurrentList.ToString());
             }));
@@ -217,6 +218,7 @@ namespace Blindspot
                 }
             }));
             commands.Add("new_search", new HandledEventHandler(ShowSearchWindow));
+            commands.Add("show_about_window", new HandledEventHandler(ShowAboutDialog));
             return commands;
         }
         
@@ -362,5 +364,24 @@ namespace Blindspot
             }
         }
 
+        private void ShowAboutDialog(object sender, HandledEventArgs e)
+        {
+            string aboutText = GetApplicationInfoText();
+            MessageBox.Show(aboutText, "About Blindspot", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private static string GetApplicationInfoText()
+        {
+            var version = Application.ProductVersion;
+            var productName = Application.ProductName;
+            StringBuilder aboutInfo = new StringBuilder();
+            aboutInfo.AppendFormat("{0} version {1}", productName, version);
+            aboutInfo.AppendLine();
+            aboutInfo.AppendFormat("Copyright (c) {0} {1}", DateTime.Now.Year, Application.CompanyName);
+            aboutInfo.AppendLine();
+            aboutInfo.AppendLine();
+            aboutInfo.AppendLine("Powered by SPOTIFY(R) CORE");
+            return aboutInfo.ToString();
+        }
     }
 }

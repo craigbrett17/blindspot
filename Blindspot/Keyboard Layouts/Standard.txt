@@ -15,3 +15,4 @@ playback_volume_down=ctrl+shift+alt+down
 dismiss_buffer=alt+shift+d
 announce_now_playing=shift+alt+n
 new_search=alt+shift+s
+show_about_window=alt+shift+h
