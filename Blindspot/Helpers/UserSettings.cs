@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
 
 namespace Blindspot.Helpers
 {
@@ -24,6 +20,7 @@ namespace Blindspot.Helpers
         public bool DontShowFirstTimeInfo { get; set; }
         public bool AutoLogin { get; set; }
         public float LastVolume { get; set; }
+        public Language UILanguage { get; set; }
 
         [NonSerialized]
         private static string fileLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"Blindspot\Settings\user_settings.dat");
@@ -67,6 +64,15 @@ namespace Blindspot.Helpers
                 BinaryFormatter serializer = new BinaryFormatter();
                 serializer.Serialize(saveStream, _instance); 
             }
+        }
+
+        public enum Language
+        {
+            English = 0,
+            French,
+            Spanish,
+            German,
+            Sweedish
         }
     }
 }

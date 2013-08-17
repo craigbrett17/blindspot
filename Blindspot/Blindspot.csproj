@@ -122,6 +122,11 @@
     <Compile Include="SearchWindow.Designer.cs">
       <DependentUpon>SearchWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="StringStore.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StringStore.resx</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\BufferItem.cs" />
     <Compile Include="ViewModels\BufferList.cs" />
     <Compile Include="ViewModels\BufferListCollection.cs" />
@@ -141,7 +146,19 @@
     <EmbeddedResource Include="BuffersWindow.resx">
       <DependentUpon>BuffersWindow.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="LoginWindow.de.resx">
+      <DependentUpon>LoginWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoginWindow.es.resx">
+      <DependentUpon>LoginWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoginWindow.fr.resx">
+      <DependentUpon>LoginWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LoginWindow.resx">
+      <DependentUpon>LoginWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoginWindow.sv.resx">
       <DependentUpon>LoginWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -154,8 +171,24 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="SearchWindow.de.resx">
+      <DependentUpon>SearchWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SearchWindow.es.resx">
+      <DependentUpon>SearchWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SearchWindow.fr.resx">
+      <DependentUpon>SearchWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SearchWindow.resx">
       <DependentUpon>SearchWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SearchWindow.sv.resx">
+      <DependentUpon>SearchWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StringStore.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>StringStore.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
