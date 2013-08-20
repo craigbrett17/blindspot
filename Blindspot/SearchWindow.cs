@@ -24,7 +24,7 @@ namespace Blindspot
         {
             if (searchTextBox.Text.Length == 0)
             {
-                MessageBox.Show("Please enter some search text to search for", "No search text", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show(StringStore.PleaseEnterSomeSearchTextToSearchFor, StringStore.NoSearchText, MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return;
             }
             this.SearchText = searchTextBox.Text;

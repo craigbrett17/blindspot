@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
+using System.Resources;
 using Blindspot.Helpers;
 using Blindspot.ViewModels;
 using Blindspot.Controllers;
@@ -22,7 +23,7 @@ namespace Blindspot
         private bool isPaused;
         private PlaybackManager playbackManager;
         private SpotifyClient spotify;
-
+        
         #region user32 functions for moving away from window
         // need a bit of pinvoke here to move away from the window if the user manages to reach the window
         [DllImport("user32.dll", EntryPoint = "FindWindow", SetLastError = true)]
@@ -58,13 +59,13 @@ namespace Blindspot
             {
                 if (e.Exception is OutOfMemoryException)
                 {
-                    MessageBox.Show("Critical error: \r\n" + String.Format("{0}: {1}", e.Exception.GetType().ToString(), e.Exception.Message), "Out of cheese error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(StringStore.CriticalError + "\r\n" + String.Format("{0}: {1}", e.Exception.GetType().ToString(), e.Exception.Message), "Out of cheese error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     this.Close(); // on OutOfMemory exceptions, we should close immediately
                     return;
                 }
                 else
                 {
-                    MessageBox.Show("Unexpected error occurred.\r\n" + String.Format("{0}: {1}", e.Exception.GetType().ToString(), e.Exception.Message), "Oops!", MessageBoxButtons.OK, MessageBoxIcon.Error); 
+                    MessageBox.Show(StringStore.AnUnexpectedErrorOccurred + "\r\n" + String.Format("{0}: {1}", e.Exception.GetType().ToString(), e.Exception.Message), StringStore.Oops, MessageBoxButtons.OK, MessageBoxIcon.Error); 
                 }
             });
         }
@@ -78,7 +79,7 @@ namespace Blindspot
                 if (response != DialogResult.OK)
                 {
                     this.Close();
-                    ScreenReader.SayString("Exiting program");
+                    ScreenReader.SayString(StringStore.ExitingProgram);
                     return;
                 }
                 username = logon.Username;
@@ -90,11 +91,11 @@ namespace Blindspot
                 KeyManager = BufferHotkeyManager.LoadFromTextFile(this);
                 SpotifyController.Initialize();
                 var appKeyBytes = Properties.Resources.spotify_appkey;
-                ScreenReader.SayString("Logging in");
+                ScreenReader.SayString(StringStore.LoggingIn);
                 bool loggedIn = SpotifyController.Login(appKeyBytes, username, password);
                 if (loggedIn)
                 {
-                    ScreenReader.SayString("Logged in to Spotify");
+                    ScreenReader.SayString(StringStore.LoggedInToSpotify);
                     UserSettings.Instance.Username = username;
                     UserSettings.Instance.Password = password;
                     UserSettings.Save();
@@ -103,23 +104,23 @@ namespace Blindspot
                 else
                 {
                     var reason = libspotify.sp_error_message(Session.LoginError);
-                    ScreenReader.SayString("Log in failure: " + reason);
+                    ScreenReader.SayString(StringStore.LogInFailure + reason);
                     // TODO: Make login window reappear until success or exit
                     this.Close();
                     return;
                 }
-                ScreenReader.SayString("Loading playlists", false);
+                ScreenReader.SayString(StringStore.LoadingPlaylists, false);
                 var playlists = SpotifyController.GetAllSessionPlaylists();
                 Buffers[0].Clear();
                 playlists.ForEach(p =>
                 {
                     Buffers[0].Add(new PlaylistBufferItem(p));
                 });
-                ScreenReader.SayString(String.Format("{0} playlists loaded", playlists.Count), false);
+                ScreenReader.SayString(String.Format("{0} {1}", playlists.Count, StringStore.PlaylistsLoaded), false);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error during load: " + ex.Message, "Oops!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(StringStore.ErrorDuringLoad + ex.Message, StringStore.Oops, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.Dispose();
             }
             ScreenReader.SayString(Buffers.CurrentList.ToString(), false);
@@ -131,7 +132,7 @@ namespace Blindspot
             var commands = new Dictionary<string, HandledEventHandler>();
             commands.Add("close_blindspot", new HandledEventHandler((sender, e) =>
             {
-                ScreenReader.SayString("Exiting program");
+                ScreenReader.SayString(StringStore.ExitingProgram);
                 if (this.InvokeRequired)
                 {
                     Invoke(new Action(() => { this.Close(); }));
@@ -184,12 +185,12 @@ namespace Blindspot
             commands.Add("activate_buffer_item", new HandledEventHandler(BufferItemActivated));
             commands.Add("playback_volume_up", new HandledEventHandler((sender, e) =>
             {
-                ScreenReader.SayString("Louder");
+                ScreenReader.SayString(StringStore.Louder);
                 playbackManager.VolumeUp(0.05f);
             }));
             commands.Add("playback_volume_down", new HandledEventHandler((sender, e) =>
             {
-                ScreenReader.SayString("Quieter");
+                ScreenReader.SayString(StringStore.Quieter);
                 playbackManager.VolumeDown(0.05f);
             }));
             commands.Add("dismiss_buffer", new HandledEventHandler((sender, e) =>
@@ -197,7 +198,7 @@ namespace Blindspot
                 var currentBuffer = Buffers.CurrentList;
                 if (!currentBuffer.IsDismissable)
                 {
-                    ScreenReader.SayString(String.Format("Cannot dismiss buffer {0}", currentBuffer.Name));
+                    ScreenReader.SayString(String.Format("{0} {1}", StringStore.CannotDismissBuffer, currentBuffer.Name));
                 }
                 else
                 {
@@ -214,7 +215,7 @@ namespace Blindspot
                 }
                 else
                 {
-                    ScreenReader.SayString("No track currently being played.");
+                    ScreenReader.SayString(StringStore.NoTrackCurrentlyBeingPlayed);
                 }
             }));
             commands.Add("new_search", new HandledEventHandler(ShowSearchWindow));
@@ -235,14 +236,14 @@ namespace Blindspot
                         // Session.Pause();
                         playbackManager.Pause();
                         isPaused = true;
-                        ScreenReader.SayString("Paused");
+                        ScreenReader.SayString(StringStore.Paused);
                     }
                     else
                     {
                         // Session.Play();
                         playbackManager.Play();
                         isPaused = false;
-                        ScreenReader.SayString("Playing");
+                        ScreenReader.SayString(StringStore.Playing);
                     }
                     return;
                 }
@@ -255,7 +256,7 @@ namespace Blindspot
                 if (response != libspotify.sp_error.OK)
                 {
                     var reason = libspotify.sp_error_message(response);
-                    ScreenReader.SayString("Unable to play track: " + reason, false);
+                    ScreenReader.SayString(StringStore.UnableToPlayTrack + reason, false);
                     return;
                 }
                 Session.Play();
@@ -267,14 +268,14 @@ namespace Blindspot
             else if (item is PlaylistBufferItem)
             {
                 PlaylistBufferItem pbi = item as PlaylistBufferItem;
-                ScreenReader.SayString("Loading playlist", false);
+                ScreenReader.SayString(StringStore.LoadingPlaylist, false);
                 Buffers.Add(new BufferList(pbi.Model.Name));
                 Buffers.CurrentListIndex = Buffers.Count - 1;
                 var playlistBuffer = Buffers.CurrentList;
                 ScreenReader.SayString(playlistBuffer.ToString(), false);
                 using (var playlist = SpotifyController.GetPlaylist(pbi.Model.Pointer, true))
                 {
-                    ScreenReader.SayString(String.Format("{0} tracks loaded", playlist.TrackCount), false);
+                    ScreenReader.SayString(String.Format("{0} {1}", playlist.TrackCount, StringStore.TracksLoaded), false);
                     var tracks = playlist.GetTracks();
                     tracks.ForEach(t =>
                     {
@@ -284,7 +285,7 @@ namespace Blindspot
             }
             else
             {
-                ScreenReader.SayString(String.Format("{0} item activated", item.ToString()), false);
+                ScreenReader.SayString(String.Format("{0} {1}", item.ToString(), StringStore.ItemActivated), false);
             }
         }
 
@@ -303,7 +304,7 @@ namespace Blindspot
             }
             else
             {
-                MessageBox.Show(message, "Streaming error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(message, StringStore.StreamingError, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Session.Pause();
             }
         }
@@ -328,7 +329,7 @@ namespace Blindspot
             search.Dispose();
             if (searchType == SearchType.Track)
             {
-                ScreenReader.SayString("Searching...", false);
+                ScreenReader.SayString(StringStore.Searching, false);
                 Buffers.Add(new BufferList("Search for: " + searchText));
                 Buffers.CurrentListIndex = Buffers.Count - 1;
                 var searchBuffer = Buffers.CurrentList;
@@ -342,12 +343,12 @@ namespace Blindspot
 	                }
                     else
 	                {
-	                    searchBuffer.Add(new BufferItem("No search results")); 
+	                    searchBuffer.Add(new BufferItem(StringStore.NoSearchResults)); 
 	                }
                 }
                 else
                 {
-                    ScreenReader.SayString(tracks.Count + " search results", false);
+                    ScreenReader.SayString(tracks.Count + " " + StringStore.SearchResults, false);
                     foreach (Track t in tracks)
                     {
                         searchBuffer.Add(new TrackBufferItem(t));
@@ -356,11 +357,11 @@ namespace Blindspot
             }
             else if (searchType == SearchType.Artist)
             {
-                MessageBox.Show("Not implemented yet! Boo to the developers!", "Oops!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Not implemented yet! Boo to the developers!", StringStore.Oops, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else if (searchType == SearchType.Album)
             {
-                MessageBox.Show("Not implemented yet! Boo to the developers!", "Oops!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Not implemented yet! Boo to the developers!", StringStore.Oops, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

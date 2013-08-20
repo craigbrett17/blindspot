@@ -108,7 +108,7 @@ namespace Blindspot.ViewModels
 
         public override string ToString()
         {
-            return String.Format("{0}: {1} of {2} items", this.Name, this.CurrentItemIndex + 1, this.Count);
+            return String.Format("{0}: {1} {3} {2} {4}", this.Name, this.CurrentItemIndex + 1, this.Count, StringStore.Of, StringStore.Items);
         }
     }
 }

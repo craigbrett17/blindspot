@@ -82,7 +82,7 @@ namespace Blindspot.Controllers
             {
                 mainArtist = _artists[0];
             }
-            return String.Format("{0} by {1}", this.Name, mainArtist);
+            return String.Format("{0} {2} {1}", this.Name, mainArtist, StringStore.By);
         }
     }
 
