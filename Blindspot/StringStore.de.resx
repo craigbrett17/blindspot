@@ -118,108 +118,108 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AnUnexpectedErrorOccurred" xml:space="preserve">
-    <value>An unexpected error occurred</value>
+    <value>Ein unerwarteter fehler ist aufgetreten</value>
   </data>
   <data name="By" xml:space="preserve">
-    <value>by</value>
+    <value>mit</value>
   </data>
   <data name="CannotDismissBuffer" xml:space="preserve">
-    <value>Cannot dismiss buffer </value>
+    <value>Kann nicht entlassen puffer </value>
   </data>
   <data name="CriticalError" xml:space="preserve">
-    <value>Critical error: </value>
+    <value>Kritischer fehler: </value>
   </data>
   <data name="ErrorDuringLoad" xml:space="preserve">
-    <value>Error during load: </value>
+    <value>Fehler beim laden: </value>
   </data>
   <data name="ExitingProgram" xml:space="preserve">
-    <value>Exiting program</value>
+    <value>Sie verlassen das programm</value>
   </data>
   <data name="ItemActivated" xml:space="preserve">
-    <value>Item activated</value>
+    <value>Artikel aktiviert</value>
   </data>
   <data name="Items" xml:space="preserve">
-    <value>items</value>
+    <value>Artikel</value>
   </data>
   <data name="LoadingPlaylist" xml:space="preserve">
     <value>Loading playlist</value>
   </data>
   <data name="LoadingPlaylists" xml:space="preserve">
-    <value>Loading playlists</value>
+    <value>Laden der playlists</value>
   </data>
   <data name="LoggedInToSpotify" xml:space="preserve">
-    <value>Logged in to Spotify</value>
+    <value>Gespeichert in Spotify</value>
   </data>
   <data name="LoggingIn" xml:space="preserve">
-    <value>Logging in</value>
+    <value>Protokollierung in</value>
   </data>
   <data name="LogInFailure" xml:space="preserve">
-    <value>Log in failure: </value>
+    <value>Einloggen failure: </value>
   </data>
   <data name="Louder" xml:space="preserve">
     <value>Louder</value>
   </data>
   <data name="NoSearchText" xml:space="preserve">
-    <value>No search text</value>
+    <value>Kein suchtext</value>
   </data>
   <data name="NoTrackCurrentlyBeingPlayed" xml:space="preserve">
-    <value>No track currently being played</value>
+    <value>Keine laufenden titels</value>
   </data>
   <data name="NoTrackInformation" xml:space="preserve">
-    <value>No track information. This is embarrassing.</value>
+    <value>Keine Titelinformationen</value>
   </data>
   <data name="NoUsernameOrPassword" xml:space="preserve">
-    <value>No username or password</value>
+    <value>Kein benutzername oder passwort</value>
   </data>
   <data name="Of" xml:space="preserve">
-    <value>of</value>
+    <value>aus</value>
   </data>
   <data name="Oops" xml:space="preserve">
-    <value>Oops!</value>
+    <value>Hoppla!</value>
   </data>
   <data name="Paused" xml:space="preserve">
-    <value>Paused</value>
+    <value>Angehalten</value>
   </data>
   <data name="Playing" xml:space="preserve">
-    <value>Playing</value>
+    <value>Spielend</value>
   </data>
   <data name="PlaylistsLoaded" xml:space="preserve">
-    <value>playlists loaded</value>
+    <value>wiedergabelisten geladen</value>
   </data>
   <data name="PleaseEnterAUsernameAndPasswordToLoginToSpotify" xml:space="preserve">
-    <value>Please enter a username and password to login to Spotify</value>
+    <value>Bitte geben sie einen benutzernamen und passwort einloggen, um zu Spotify</value>
   </data>
   <data name="PleaseEnterSomeSearchTextToSearchFor" xml:space="preserve">
-    <value>Please enter some search text to search for</value>
+    <value>Bitte geben sie einen suchtext zu suchen</value>
   </data>
   <data name="ProblemLoadingBrowser" xml:space="preserve">
-    <value>Problem loading browser</value>
+    <value>Fehler beim Laden der browser</value>
   </data>
   <data name="Quieter" xml:space="preserve">
-    <value>Quieter</value>
+    <value>Leiser</value>
   </data>
   <data name="Searching" xml:space="preserve">
-    <value>Searching...</value>
+    <value>Suche</value>
   </data>
   <data name="SearchResults" xml:space="preserve">
-    <value>Search results</value>
+    <value>Suchergebnisse</value>
   </data>
   <data name="StreamingError" xml:space="preserve">
-    <value>Streaming error</value>
+    <value>Streaming-fehler</value>
   </data>
   <data name="TracksLoaded" xml:space="preserve">
-    <value>tracks loaded</value>
+    <value>tracks geladen</value>
   </data>
   <data name="UnableToPlayTrack" xml:space="preserve">
-    <value>Unable to play track: </value>
+    <value>Kann Track zu spielen: </value>
   </data>
   <data name="UnexpectedError" xml:space="preserve">
-    <value>Unexpected error</value>
+    <value>Unerwarteter fehler</value>
   </data>
   <data name="UnexpectedErrorOccurred" xml:space="preserve">
-    <value>Unexpected error occurred.</value>
+    <value>Unerwarteter fehler aufgetreten.</value>
   </data>
   <data name="NoSearchResults" xml:space="preserve">
-    <value>No search results</value>
+    <value>Keine suchergebnisse</value>
   </data>
 </root>

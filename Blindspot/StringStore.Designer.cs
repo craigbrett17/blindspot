@@ -59,5 +59,320 @@ namespace Blindspot {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An unexpected error occurred.
+        /// </summary>
+        internal static string AnUnexpectedErrorOccurred {
+            get {
+                return ResourceManager.GetString("AnUnexpectedErrorOccurred", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to by.
+        /// </summary>
+        internal static string By {
+            get {
+                return ResourceManager.GetString("By", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot dismiss buffer .
+        /// </summary>
+        internal static string CannotDismissBuffer {
+            get {
+                return ResourceManager.GetString("CannotDismissBuffer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Critical error: .
+        /// </summary>
+        internal static string CriticalError {
+            get {
+                return ResourceManager.GetString("CriticalError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error during load: .
+        /// </summary>
+        internal static string ErrorDuringLoad {
+            get {
+                return ResourceManager.GetString("ErrorDuringLoad", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exiting program.
+        /// </summary>
+        internal static string ExitingProgram {
+            get {
+                return ResourceManager.GetString("ExitingProgram", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Item activated.
+        /// </summary>
+        internal static string ItemActivated {
+            get {
+                return ResourceManager.GetString("ItemActivated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to items.
+        /// </summary>
+        internal static string Items {
+            get {
+                return ResourceManager.GetString("Items", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading playlist.
+        /// </summary>
+        internal static string LoadingPlaylist {
+            get {
+                return ResourceManager.GetString("LoadingPlaylist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading playlists.
+        /// </summary>
+        internal static string LoadingPlaylists {
+            get {
+                return ResourceManager.GetString("LoadingPlaylists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Logged in to Spotify.
+        /// </summary>
+        internal static string LoggedInToSpotify {
+            get {
+                return ResourceManager.GetString("LoggedInToSpotify", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Logging in.
+        /// </summary>
+        internal static string LoggingIn {
+            get {
+                return ResourceManager.GetString("LoggingIn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Log in failure: .
+        /// </summary>
+        internal static string LogInFailure {
+            get {
+                return ResourceManager.GetString("LogInFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Louder.
+        /// </summary>
+        internal static string Louder {
+            get {
+                return ResourceManager.GetString("Louder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No search results.
+        /// </summary>
+        internal static string NoSearchResults {
+            get {
+                return ResourceManager.GetString("NoSearchResults", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No search text.
+        /// </summary>
+        internal static string NoSearchText {
+            get {
+                return ResourceManager.GetString("NoSearchText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No track currently being played.
+        /// </summary>
+        internal static string NoTrackCurrentlyBeingPlayed {
+            get {
+                return ResourceManager.GetString("NoTrackCurrentlyBeingPlayed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No track information. This is embarrassing..
+        /// </summary>
+        internal static string NoTrackInformation {
+            get {
+                return ResourceManager.GetString("NoTrackInformation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No username or password.
+        /// </summary>
+        internal static string NoUsernameOrPassword {
+            get {
+                return ResourceManager.GetString("NoUsernameOrPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to of.
+        /// </summary>
+        internal static string Of {
+            get {
+                return ResourceManager.GetString("Of", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Oops!.
+        /// </summary>
+        internal static string Oops {
+            get {
+                return ResourceManager.GetString("Oops", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Paused.
+        /// </summary>
+        internal static string Paused {
+            get {
+                return ResourceManager.GetString("Paused", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Playing.
+        /// </summary>
+        internal static string Playing {
+            get {
+                return ResourceManager.GetString("Playing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to playlists loaded.
+        /// </summary>
+        internal static string PlaylistsLoaded {
+            get {
+                return ResourceManager.GetString("PlaylistsLoaded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter a username and password to login to Spotify.
+        /// </summary>
+        internal static string PleaseEnterAUsernameAndPasswordToLoginToSpotify {
+            get {
+                return ResourceManager.GetString("PleaseEnterAUsernameAndPasswordToLoginToSpotify", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter some search text to search for.
+        /// </summary>
+        internal static string PleaseEnterSomeSearchTextToSearchFor {
+            get {
+                return ResourceManager.GetString("PleaseEnterSomeSearchTextToSearchFor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Problem loading browser.
+        /// </summary>
+        internal static string ProblemLoadingBrowser {
+            get {
+                return ResourceManager.GetString("ProblemLoadingBrowser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quieter.
+        /// </summary>
+        internal static string Quieter {
+            get {
+                return ResourceManager.GetString("Quieter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Searching....
+        /// </summary>
+        internal static string Searching {
+            get {
+                return ResourceManager.GetString("Searching", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search results.
+        /// </summary>
+        internal static string SearchResults {
+            get {
+                return ResourceManager.GetString("SearchResults", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Streaming error.
+        /// </summary>
+        internal static string StreamingError {
+            get {
+                return ResourceManager.GetString("StreamingError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to tracks loaded.
+        /// </summary>
+        internal static string TracksLoaded {
+            get {
+                return ResourceManager.GetString("TracksLoaded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to play track: .
+        /// </summary>
+        internal static string UnableToPlayTrack {
+            get {
+                return ResourceManager.GetString("UnableToPlayTrack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unexpected error.
+        /// </summary>
+        internal static string UnexpectedError {
+            get {
+                return ResourceManager.GetString("UnexpectedError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unexpected error occurred..
+        /// </summary>
+        internal static string UnexpectedErrorOccurred {
+            get {
+                return ResourceManager.GetString("UnexpectedErrorOccurred", resourceCulture);
+            }
+        }
     }
 }

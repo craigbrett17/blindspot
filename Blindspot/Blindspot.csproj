@@ -106,6 +106,26 @@
     <Compile Include="Controllers\SpotifyController.cs" />
     <Compile Include="Controllers\TopList.cs" />
     <Compile Include="Controllers\Track.cs" />
+    <Compile Include="StringStore.sv.Designer.cs">
+      <DependentUpon>StringStore.sv.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="StringStore.es.Designer.cs">
+      <DependentUpon>StringStore.es.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="StringStore.fr.Designer.cs">
+      <DependentUpon>StringStore.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="StringStore.de.Designer.cs">
+      <DependentUpon>StringStore.de.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Helpers\ByteGateKeeper.cs" />
     <Compile Include="Helpers\SlidingStream.cs" />
     <Compile Include="Helpers\PlaybackManager.cs" />
@@ -145,6 +165,22 @@
     <Compile Include="ViewModels\TrackBufferItem.cs" />
     <EmbeddedResource Include="BuffersWindow.resx">
       <DependentUpon>BuffersWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StringStore.sv.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>StringStore.sv.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StringStore.es.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>StringStore.es.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StringStore.fr.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>StringStore.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StringStore.de.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>StringStore.de.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginWindow.de.resx">
       <DependentUpon>LoginWindow.cs</DependentUpon>
