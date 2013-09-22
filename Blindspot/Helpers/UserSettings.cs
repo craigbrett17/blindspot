@@ -72,7 +72,7 @@ namespace Blindspot.Helpers
             French,
             Spanish,
             German,
-            Sweedish
+            Swedish
         }
     }
 }
