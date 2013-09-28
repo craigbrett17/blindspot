@@ -106,6 +106,13 @@
     <Compile Include="Controllers\SpotifyController.cs" />
     <Compile Include="Controllers\TopList.cs" />
     <Compile Include="Controllers\Track.cs" />
+    <Compile Include="FirstTimeWizard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FirstTimeWizard.Designer.cs">
+      <DependentUpon>FirstTimeWizard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\RegistryReader.cs" />
     <Compile Include="StringStore.sv.Designer.cs">
       <DependentUpon>StringStore.sv.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -165,6 +172,21 @@
     <Compile Include="ViewModels\TrackBufferItem.cs" />
     <EmbeddedResource Include="BuffersWindow.resx">
       <DependentUpon>BuffersWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FirstTimeWizard.de.resx">
+      <DependentUpon>FirstTimeWizard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FirstTimeWizard.es.resx">
+      <DependentUpon>FirstTimeWizard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FirstTimeWizard.fr.resx">
+      <DependentUpon>FirstTimeWizard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FirstTimeWizard.resx">
+      <DependentUpon>FirstTimeWizard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FirstTimeWizard.sv.resx">
+      <DependentUpon>FirstTimeWizard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="StringStore.sv.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -243,6 +265,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Blindspot Installer.nsi">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Keyboard Layouts\Layout Descriptions.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Keyboard Layouts\Qubey.txt">

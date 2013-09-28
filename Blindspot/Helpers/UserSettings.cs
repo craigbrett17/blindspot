@@ -17,10 +17,10 @@ namespace Blindspot.Helpers
             get { return _searchResults; }
             set { _searchResults = value; }
         }
-        public bool DontShowFirstTimeInfo { get; set; }
+        public bool DontShowFirstTimeWizard { get; set; }
         public bool AutoLogin { get; set; }
         public float LastVolume { get; set; }
-        public Language UILanguage { get; set; }
+        public int UILanguageCode { get; set; }
 
         [NonSerialized]
         private static string fileLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"Blindspot\Settings\user_settings.dat");
@@ -66,13 +66,5 @@ namespace Blindspot.Helpers
             }
         }
 
-        public enum Language
-        {
-            English = 0,
-            French,
-            Spanish,
-            German,
-            Swedish
-        }
     }
 }

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<KeyboardLayouts>
+  <KeyboardLayout name="Qubey">
+    <Description language="en">This keyboard layout is based on that of popular Twitter clients such as Qwitter or The Qube. It is not recommended to use this setting if you typically have these applications running. Most commands use the ctrl+win modifier keys, allowing for easy reach.</Description>
+    <Description language="de">Diese Tastatur Layout basiert auf dass der populären Twitter-Clients wie Qwitter oder The Qube basiert. Es wird nicht empfohlen, diese Einstellung zu verwenden, wenn Sie in der Regel diese Anwendungen laufen haben. Die meisten Befehle mit der Steuer-und Windows-Zusatztasten, so dass für Reichweite.</Description>
+    <Description language="fr">Ce type de clavier est basée sur celle de clients Twitter populaires tels que Qwitter ou The Qube. Il n'est pas recommandé d'utiliser ce paramètre si vous avez généralement ces applications en cours d'exécution. La plupart des commandes utilisent les touches de modification de configuration de Windows et permettant portée de main.</Description>
+    <Description language="es">Esta disposición de teclado se basa en el de clientes de Twitter más populares como Qwitter o The Qube. No se recomienda utilizar esta opción si normalmente tiene estas aplicaciones en ejecución. La mayoría de los comandos usan las teclas modificadores de Windows y de control, lo que permite fácil acceso.</Description>
+    <Description language="sv">Denna tangentbordslayout är baserad på den populära Twitter-klienter såsom Qwitter eller The Qube. Det rekommenderas inte att använda den här inställningen om du ofta har dessa program körs. De flesta kommandon använder kontrollen och Windows-tangenter modifier, vilket möjliggör bekvämt räckhåll.</Description>
+  </KeyboardLayout>
+  <KeyboardLayout name="Standard">
+    <Description language="en">This is the standard keyboard layout for Blindspot. It has been designed not to clash with popular applications. Most commands use the shift+alt modifier keys.</Description>
+    <Description language="de">Dies ist die Standard-Tastatur-Layout für Blindspot. Es wurde entwickelt, um nicht mit den gängigen Anwendungen kollidieren. Die meisten Befehle benutzen Sie Shift + Alt Zusatztasten.</Description>
+    <Description language="fr">C'est la disposition du clavier standard pour Blindspot. Il a été conçu pour ne pas entrer en conflit avec des applications populaires. La plupart des commandes utilisent les touches MAJ + modificateurs alt.</Description>
+    <Description language="es">Esta es la distribución del teclado estándar para Blindspot. Se ha diseñado para no entrar en conflicto con las aplicaciones más populares. La mayoría de los comandos usan las teclas modificadoras Alt Mayús +.</Description>
+    <Description language="sv">Detta är den standard tangentbordslayout för Blindspot. Den har utformats för att inte kollidera med populära applikationer. De flesta kommandon använder Skift + Alt specialtangenter.</Description>
+  </KeyboardLayout>
+</KeyboardLayouts>

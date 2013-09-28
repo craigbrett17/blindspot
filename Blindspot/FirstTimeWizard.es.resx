@@ -117,112 +117,47 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AnUnexpectedErrorOccurred" xml:space="preserve">
-    <value>Se ha producido un error inesperado</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="languageLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>145, 17</value>
   </data>
-  <data name="By" xml:space="preserve">
-    <value>de</value>
+  <data name="languageLabel.Text" xml:space="preserve">
+    <value>Seleccione su &amp;idioma:</value>
   </data>
-  <data name="CannotDismissBuffer" xml:space="preserve">
-    <value>No se puede descartar búfer</value>
+  <data name="step1WelcomeLabel.Text" xml:space="preserve">
+    <value>Bienvenido al asistente Blindspot primera vez. Esto le ayudará a fijar unos parámetros iniciales importantes para el uso de Blindspot. Haga clic en 'Omitir' para salir de este asistente. Puede cambiar esta configuración en el diálogo de opciones más adelante.</value>
   </data>
-  <data name="CriticalError" xml:space="preserve">
-    <value>Error crítico:</value>
+  <data name="keyboardDescriptionLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>82, 17</value>
   </data>
-  <data name="ErrorDuringLoad" xml:space="preserve">
-    <value>Error durante la carga:</value>
+  <data name="keyboardDescriptionLabel.Text" xml:space="preserve">
+    <value>&amp;Descripción</value>
   </data>
-  <data name="ExitingProgram" xml:space="preserve">
-    <value>Saliendo del programa</value>
+  <data name="keyboardStyleBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>245, 10</value>
   </data>
-  <data name="ItemActivated" xml:space="preserve">
-    <value>elemento activo</value>
+  <data name="keyboardStyleLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>2, 10</value>
   </data>
-  <data name="Items" xml:space="preserve">
-    <value>ítem</value>
+  <data name="keyboardStyleLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>245, 17</value>
   </data>
-  <data name="LoadingPlaylist" xml:space="preserve">
-    <value>Cargando lista de reproducción</value>
+  <data name="keyboardStyleLabel.Text" xml:space="preserve">
+    <value>Seleccione la distribución del &amp;teclado:</value>
   </data>
-  <data name="LoadingPlaylists" xml:space="preserve">
-    <value>Cargando listas de reproducción</value>
+  <data name="skipButton.Text" xml:space="preserve">
+    <value>&amp;Omitir</value>
   </data>
-  <data name="LoggedInToSpotify" xml:space="preserve">
-    <value>Conectado a Spotify</value>
+  <data name="backButton.Text" xml:space="preserve">
+    <value>&lt; &amp;Atrás</value>
   </data>
-  <data name="LoggingIn" xml:space="preserve">
-    <value>Inicio de sesión</value>
+  <data name="nextButton.Text" xml:space="preserve">
+    <value>&amp;Siguiente &gt;</value>
   </data>
-  <data name="LogInFailure" xml:space="preserve">
-    <value>Ingresa fracaso:</value>
+  <data name="saveButton.Text" xml:space="preserve">
+    <value>&amp;Guardar</value>
   </data>
-  <data name="Louder" xml:space="preserve">
-    <value>Louder</value>
-  </data>
-  <data name="NoSearchText" xml:space="preserve">
-    <value>Sin texto de búsqueda</value>
-  </data>
-  <data name="NoTrackCurrentlyBeingPlayed" xml:space="preserve">
-    <value>No hay ninguna pista que se está reproduciendo actualmente</value>
-  </data>
-  <data name="NoTrackInformation" xml:space="preserve">
-    <value>No hay información de la pista.</value>
-  </data>
-  <data name="NoUsernameOrPassword" xml:space="preserve">
-    <value>N nombre de usuario o contraseña</value>
-  </data>
-  <data name="Of" xml:space="preserve">
-    <value>de</value>
-  </data>
-  <data name="Oops" xml:space="preserve">
-    <value>Oops!</value>
-  </data>
-  <data name="Paused" xml:space="preserve">
-    <value>En pausa</value>
-  </data>
-  <data name="Playing" xml:space="preserve">
-    <value>Reproducción</value>
-  </data>
-  <data name="PlaylistsLoaded" xml:space="preserve">
-    <value>listas cargadas</value>
-  </data>
-  <data name="PleaseEnterAUsernameAndPasswordToLoginToSpotify" xml:space="preserve">
-    <value>Por favor, introduzca un nombre de usuario y contraseña para iniciar sesión en Spotify</value>
-  </data>
-  <data name="PleaseEnterSomeSearchTextToSearchFor" xml:space="preserve">
-    <value>Por favor, introduzca el texto de búsqueda para buscar</value>
-  </data>
-  <data name="ProblemLoadingBrowser" xml:space="preserve">
-    <value>Problema navegador carga</value>
-  </data>
-  <data name="Quieter" xml:space="preserve">
-    <value>Más silencioso</value>
-  </data>
-  <data name="Searching" xml:space="preserve">
-    <value>Buscando...</value>
-  </data>
-  <data name="SearchResults" xml:space="preserve">
-    <value>resultados de la búsqueda</value>
-  </data>
-  <data name="StreamingError" xml:space="preserve">
-    <value>Streaming error</value>
-  </data>
-  <data name="TracksLoaded" xml:space="preserve">
-    <value>pistas cargadas</value>
-  </data>
-  <data name="UnableToPlayTrack" xml:space="preserve">
-    <value>No se puede reproducir la pista:</value>
-  </data>
-  <data name="UnexpectedError" xml:space="preserve">
-    <value>Error inesperado</value>
-  </data>
-  <data name="UnexpectedErrorOccurred" xml:space="preserve">
-    <value>Se produjo un error inesperado</value>
-  </data>
-  <data name="NoSearchResults" xml:space="preserve">
-    <value>No hay resultados de la búsqueda</value>
-  </data>
-  <data name="NoDescriptionAvailable" xml:space="preserve">
-    <value>No se dispone de descripción</value>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Configuración Blindspot</value>
   </data>
 </root>

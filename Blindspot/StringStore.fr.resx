@@ -222,4 +222,7 @@
   <data name="NoSearchResults" xml:space="preserve">
     <value>Aucun résultat de recherche</value>
   </data>
+  <data name="NoDescriptionAvailable" xml:space="preserve">
+    <value>Aucune description disponible</value>
+  </data>
 </root>

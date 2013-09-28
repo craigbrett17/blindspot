@@ -11,6 +11,7 @@ using System.IO;
 using libspotifydotnet;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 
 namespace Blindspot
 {
@@ -23,6 +24,7 @@ namespace Blindspot
         private bool isPaused;
         private PlaybackManager playbackManager;
         private SpotifyClient spotify;
+        private UserSettings settings = UserSettings.Instance;
         
         #region user32 functions for moving away from window
         // need a bit of pinvoke here to move away from the window if the user manages to reach the window
@@ -34,10 +36,31 @@ namespace Blindspot
 
         public BuffersWindow()
         {
+            // language stuff needs to happen before InitializeComponent
+            if (!settings.DontShowFirstTimeWizard)
+            {
+                // find out what language was used in the installer and use it for the first time wizard and everything else
+                SetThreadToInstallationLanguage();
+                DisplayFirstTimeWizard();
+            }
+            else
+            {
+                // if a language code is set in settings, set it on the thread
+                if (settings.UILanguageCode != 0)
+                    Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(settings.UILanguageCode);
+            }
             InitializeComponent();
             Commands = new Dictionary<string, HandledEventHandler>();
             playbackManager = new PlaybackManager();
             playbackManager.OnError += new PlaybackManager.PlaybackManagerErrorHandler(StreamingError);
+            SetupFormEventHandlers();
+            Buffers = new BufferListCollection();
+            Buffers.Add(new BufferList("Playlists", false));
+            spotify = SpotifyClient.Instance;
+        }
+
+        private void SetupFormEventHandlers()
+        {
             Session.OnAudioDataArrived += new Action<byte[]>(bytes =>
             {
                 playbackManager.AddBytesToPlayingStream(bytes);
@@ -51,10 +74,7 @@ namespace Blindspot
             {
                 playingTrack = null;
             });
-            Buffers = new BufferListCollection();
-            Buffers.Add(new BufferList("Playlists", false));
-            spotify = SpotifyClient.Instance;
-            // We want this in for debugging, uncomment it for better UI experience
+            // comment this out for debugging, so that exceptions appear naturally
             Application.ThreadException += new System.Threading.ThreadExceptionEventHandler((sender, e) =>
             {
                 if (e.Exception is OutOfMemoryException)
@@ -65,11 +85,11 @@ namespace Blindspot
                 }
                 else
                 {
-                    MessageBox.Show(StringStore.AnUnexpectedErrorOccurred + "\r\n" + String.Format("{0}: {1}", e.Exception.GetType().ToString(), e.Exception.Message), StringStore.Oops, MessageBoxButtons.OK, MessageBoxIcon.Error); 
+                    MessageBox.Show(StringStore.AnUnexpectedErrorOccurred + "\r\n" + String.Format("{0}: {1}", e.Exception.GetType().ToString(), e.Exception.Message), StringStore.Oops, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             });
         }
-
+        
         protected override void OnLoad(EventArgs e)
         {
             string username = "", password = "";
@@ -384,5 +404,34 @@ namespace Blindspot
             aboutInfo.AppendLine("Powered by SPOTIFY(R) CORE");
             return aboutInfo.ToString();
         }
+
+        private void SetThreadToInstallationLanguage()
+        {
+            RegistryReader regReader = new RegistryReader();
+            var installedLang = regReader.Read("Installer Language");
+            if (!String.IsNullOrEmpty(installedLang))
+            {
+                var culture = new System.Globalization.CultureInfo(Convert.ToInt32(installedLang));
+                // get the neutral culture (as opposed to area specific ones), we're only interested in language for now
+                if (!culture.IsNeutralCulture) culture = culture.Parent;
+                Thread.CurrentThread.CurrentUICulture = culture;
+            }
+        }
+
+        private void DisplayFirstTimeWizard()
+        {
+            FirstTimeWizard wizard = new FirstTimeWizard();
+            wizard.ShowDialog();
+            if (wizard.DialogResult == DialogResult.OK)
+            {
+                // language may have changed, will be saved to settings object
+                // if settings is different from current (which came from installer or fallback of OS default), change to new one
+                if (settings.UILanguageCode != Thread.CurrentThread.CurrentUICulture.LCID)
+                {
+                    Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(settings.UILanguageCode);
+                }
+            }
+        }
+
     }
 }

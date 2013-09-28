@@ -150,6 +150,7 @@ File /oname=hotkeys.txt "Keyboard Layouts\Standard.txt"
 ; Copy keyboard layouts
 SetOutPath "${APPDATADIR}\Keyboard Layouts"
 File "Keyboard Layouts\*.txt"
+File "Keyboard Layouts\Layout Descriptions.xml"
 
 SetOutPath "$INSTDIR"
 
