@@ -48,19 +48,19 @@
             // 
             // step1GroupBox
             // 
+            resources.ApplyResources(this.step1GroupBox, "step1GroupBox");
             this.step1GroupBox.Controls.Add(this.languageBox);
             this.step1GroupBox.Controls.Add(this.languageLabel);
             this.step1GroupBox.Controls.Add(this.step1WelcomeLabel);
-            resources.ApplyResources(this.step1GroupBox, "step1GroupBox");
             this.step1GroupBox.Name = "step1GroupBox";
             this.step1GroupBox.TabStop = false;
             // 
             // languageBox
             // 
+            resources.ApplyResources(this.languageBox, "languageBox");
             this.languageBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.languageBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.languageBox.FormattingEnabled = true;
-            resources.ApplyResources(this.languageBox, "languageBox");
             this.languageBox.Name = "languageBox";
             // 
             // languageLabel
@@ -75,11 +75,11 @@
             // 
             // step2GroupBox
             // 
+            resources.ApplyResources(this.step2GroupBox, "step2GroupBox");
             this.step2GroupBox.Controls.Add(this.keyboardDescriptionBox);
             this.step2GroupBox.Controls.Add(this.keyboardDescriptionLabel);
             this.step2GroupBox.Controls.Add(this.keyboardStyleBox);
             this.step2GroupBox.Controls.Add(this.keyboardStyleLabel);
-            resources.ApplyResources(this.step2GroupBox, "step2GroupBox");
             this.step2GroupBox.Name = "step2GroupBox";
             this.step2GroupBox.TabStop = false;
             // 
@@ -96,9 +96,9 @@
             // 
             // keyboardStyleBox
             // 
+            resources.ApplyResources(this.keyboardStyleBox, "keyboardStyleBox");
             this.keyboardStyleBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.keyboardStyleBox.FormattingEnabled = true;
-            resources.ApplyResources(this.keyboardStyleBox, "keyboardStyleBox");
             this.keyboardStyleBox.Name = "keyboardStyleBox";
             this.keyboardStyleBox.SelectionChangeCommitted += new System.EventHandler(this.keyboardStyleBox_SelectionChangeCommitted);
             // 

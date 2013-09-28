@@ -139,11 +139,20 @@
   <data name="keyboardStyleLabel.Text" xml:space="preserve">
     <value>Välj &amp;tangentbordslayout:</value>
   </data>
+  <data name="skipButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 230</value>
+  </data>
   <data name="skipButton.Text" xml:space="preserve">
     <value>&amp;Fortsätt</value>
   </data>
+  <data name="backButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>105, 230</value>
+  </data>
+  <data name="backButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 23</value>
+  </data>
   <data name="backButton.Text" xml:space="preserve">
-    <value>&lt; &amp;Bakåt</value>
+    <value>&lt; Till&amp;bakå</value>
   </data>
   <data name="nextButton.Text" xml:space="preserve">
     <value>&amp;Nästa &gt;</value>
