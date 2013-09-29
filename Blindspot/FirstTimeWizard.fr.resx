@@ -128,7 +128,7 @@
     <value>360, 105</value>
   </data>
   <data name="step1WelcomeLabel.Text" xml:space="preserve">
-    <value>Bienvenue dans l'assistant Blindspot première fois. Cela vous aidera à configurer certains paramètres initiaux importants pour l'utilisation Blindspot. Cliquez sur «Skip» pour quitter cet assistant. Vous pouvez modifier ces paramètres dans la boîte de dialogue des options plus tard.</value>
+    <value>Bienvenue dans l'assistant Blindspot première fois. Cela vous aidera à configurer certains paramètres initiaux importants pour l'utilisation Blindspot. Cliquez sur «Précédent» pour quitter cet assistant. Vous pouvez modifier ces paramètres dans la boîte de dialogue des options plus tard.</value>
   </data>
   <data name="keyboardStyleLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>174, 17</value>
@@ -136,14 +136,29 @@
   <data name="keyboardStyleLabel.Text" xml:space="preserve">
     <value>Sélectionnez votre &amp;clavier:</value>
   </data>
+  <data name="skipButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 230</value>
+  </data>
   <data name="skipButton.Text" xml:space="preserve">
     <value>&amp;Passer</value>
   </data>
+  <data name="backButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>100, 230</value>
+  </data>
+  <data name="backButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>95, 23</value>
+  </data>
   <data name="backButton.Text" xml:space="preserve">
-    <value>&lt; &amp;Retour</value>
+    <value>&lt; P&amp;récédent</value>
+  </data>
+  <data name="nextButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>205, 230</value>
   </data>
   <data name="nextButton.Text" xml:space="preserve">
     <value>&amp;Suivant &gt;</value>
+  </data>
+  <data name="saveButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>290, 230</value>
   </data>
   <data name="saveButton.Text" xml:space="preserve">
     <value>&amp;Enregistrer</value>
