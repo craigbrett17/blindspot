@@ -225,4 +225,10 @@
   <data name="NoDescriptionAvailable" xml:space="preserve">
     <value>No se dispone de descripción</value>
   </data>
+  <data name="MoreSearchResults" xml:space="preserve">
+    <value>Más resultados de búsqueda</value>
+  </data>
+  <data name="SearchFor" xml:space="preserve">
+    <value>Buscar</value>
+  </data>
 </root>

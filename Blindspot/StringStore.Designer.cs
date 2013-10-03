@@ -187,6 +187,15 @@ namespace Blindspot {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to more search results.
+        /// </summary>
+        internal static string MoreSearchResults {
+            get {
+                return ResourceManager.GetString("MoreSearchResults", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No description available.
         /// </summary>
         internal static string NoDescriptionAvailable {
@@ -318,6 +327,15 @@ namespace Blindspot {
         internal static string Quieter {
             get {
                 return ResourceManager.GetString("Quieter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search for.
+        /// </summary>
+        internal static string SearchFor {
+            get {
+                return ResourceManager.GetString("SearchFor", resourceCulture);
             }
         }
         

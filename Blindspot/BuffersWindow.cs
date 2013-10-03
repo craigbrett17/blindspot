@@ -226,6 +226,11 @@ namespace Blindspot
                     Buffers.Remove(currentBuffer);
                     ScreenReader.SayString(Buffers.CurrentList.ToString());
                 }
+                // if it's a buffer with a search or other unmanaged resources, dispose it
+                if (currentBuffer is IDisposable)
+                {
+                    ((IDisposable)currentBuffer).Dispose();
+                }
             }));
             commands.Add("announce_now_playing", new HandledEventHandler((sender, e) =>
             {
@@ -338,28 +343,29 @@ namespace Blindspot
 
         private void ShowSearchWindow(object sender, HandledEventArgs e)
         {
-            SearchWindow search = new SearchWindow();
-            search.ShowDialog();
-            if (search.DialogResult != DialogResult.OK)
+            SearchWindow searchDialog = new SearchWindow();
+            searchDialog.ShowDialog();
+            if (searchDialog.DialogResult != DialogResult.OK)
             {
                 return; // cancelled search
             }
-            string searchText = search.SearchText;
-            var searchType = search.Type;
-            search.Dispose();
+            string searchText = searchDialog.SearchText;
+            var searchType = searchDialog.Type;
+            searchDialog.Dispose();
             if (searchType == SearchType.Track)
             {
                 ScreenReader.SayString(StringStore.Searching, false);
-                Buffers.Add(new BufferList("Search for: " + searchText));
+                var search = spotify.SearchTracks(searchText);
+                Buffers.Add(new SearchBufferList(search));
                 Buffers.CurrentListIndex = Buffers.Count - 1;
                 var searchBuffer = Buffers.CurrentList;
                 ScreenReader.SayString(searchBuffer.ToString(), false);
-                var tracks = spotify.SearchTracks(searchText);
+                var tracks = search.Tracks;
                 if (tracks == null || tracks.Count == 0)
                 {
-                    if (spotify.LastSearch != null && !String.IsNullOrEmpty(spotify.LastSearch.DidYouMean))
+                    if (search != null && !String.IsNullOrEmpty(search.DidYouMean))
 	                {
-                        searchBuffer.Add(new BufferItem("No search results. Did you mean: " + spotify.LastSearch.DidYouMean)); 
+                        searchBuffer.Add(new BufferItem("No search results. Did you mean: " + search.DidYouMean)); 
 	                }
                     else
 	                {
@@ -369,9 +375,9 @@ namespace Blindspot
                 else
                 {
                     ScreenReader.SayString(tracks.Count + " " + StringStore.SearchResults, false);
-                    foreach (Track t in tracks)
+                    foreach (IntPtr pointer in tracks)
                     {
-                        searchBuffer.Add(new TrackBufferItem(t));
+                        searchBuffer.Add(new TrackBufferItem(new Track(pointer)));
                     }
                 }
             }
