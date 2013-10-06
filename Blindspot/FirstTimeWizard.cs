@@ -137,7 +137,7 @@ namespace Blindspot
         private void saveButton_Click(object sender, EventArgs e)
         {
             var selectedKeyboardLayoutPath = keyboardStyleBox.SelectedValue as string;
-            if (!String.IsNullOrEmpty(selectedKeyboardLayoutPath))
+            if (!keyboardStyleNoChangeBox.Checked && !String.IsNullOrEmpty(selectedKeyboardLayoutPath))
             {
                 var targetDirectoryPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"Blindspot\Settings");
                 File.Copy(selectedKeyboardLayoutPath, Path.Combine(targetDirectoryPath, "hotkeys.txt"), true);
@@ -152,6 +152,11 @@ namespace Blindspot
         private void keyboardStyleBox_SelectionChangeCommitted(object sender, EventArgs e)
         {
             keyboardDescriptionBox.Text = GetKeyboardDescription();
+        }
+
+        private void keyboardStyleNoChangeBox_CheckedChanged(object sender, EventArgs e)
+        {
+            keyboardStyleBox.Enabled = !keyboardStyleNoChangeBox.Checked;
         }
 
     }

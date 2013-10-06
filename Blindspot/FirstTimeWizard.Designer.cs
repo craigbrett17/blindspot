@@ -34,6 +34,7 @@
             this.languageLabel = new System.Windows.Forms.Label();
             this.step1WelcomeLabel = new System.Windows.Forms.Label();
             this.step2GroupBox = new System.Windows.Forms.GroupBox();
+            this.keyboardStyleNoChangeBox = new System.Windows.Forms.CheckBox();
             this.keyboardDescriptionBox = new System.Windows.Forms.TextBox();
             this.keyboardDescriptionLabel = new System.Windows.Forms.Label();
             this.keyboardStyleBox = new System.Windows.Forms.ComboBox();
@@ -76,12 +77,20 @@
             // step2GroupBox
             // 
             resources.ApplyResources(this.step2GroupBox, "step2GroupBox");
+            this.step2GroupBox.Controls.Add(this.keyboardStyleNoChangeBox);
             this.step2GroupBox.Controls.Add(this.keyboardDescriptionBox);
             this.step2GroupBox.Controls.Add(this.keyboardDescriptionLabel);
             this.step2GroupBox.Controls.Add(this.keyboardStyleBox);
             this.step2GroupBox.Controls.Add(this.keyboardStyleLabel);
             this.step2GroupBox.Name = "step2GroupBox";
             this.step2GroupBox.TabStop = false;
+            // 
+            // keyboardStyleNoChangeBox
+            // 
+            resources.ApplyResources(this.keyboardStyleNoChangeBox, "keyboardStyleNoChangeBox");
+            this.keyboardStyleNoChangeBox.Name = "keyboardStyleNoChangeBox";
+            this.keyboardStyleNoChangeBox.UseVisualStyleBackColor = true;
+            this.keyboardStyleNoChangeBox.CheckedChanged += new System.EventHandler(this.keyboardStyleNoChangeBox_CheckedChanged);
             // 
             // keyboardDescriptionBox
             // 
@@ -139,8 +148,8 @@
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.step1GroupBox);
             this.Controls.Add(this.step2GroupBox);
+            this.Controls.Add(this.step1GroupBox);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.nextButton);
             this.Controls.Add(this.backButton);
@@ -172,5 +181,6 @@
         private System.Windows.Forms.Button backButton;
         private System.Windows.Forms.Button nextButton;
         private System.Windows.Forms.Button saveButton;
+        private System.Windows.Forms.CheckBox keyboardStyleNoChangeBox;
     }
 }

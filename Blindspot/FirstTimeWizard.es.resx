@@ -127,6 +127,12 @@
   <data name="step1WelcomeLabel.Text" xml:space="preserve">
     <value>Bienvenido al asistente Blindspot primera vez. Esto le ayudará a fijar unos parámetros iniciales importantes para el uso de Blindspot. Haga clic en 'Omitir' para salir de este asistente. Puede cambiar esta configuración en el diálogo de opciones más adelante.</value>
   </data>
+  <data name="keyboardStyleNoChangeBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>235, 21</value>
+  </data>
+  <data name="keyboardStyleNoChangeBox.Text" xml:space="preserve">
+    <value>No cambiar de diseño de teclado</value>
+  </data>
   <data name="keyboardDescriptionLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>82, 17</value>
   </data>

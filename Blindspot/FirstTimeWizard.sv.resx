@@ -127,6 +127,12 @@
   <data name="step1WelcomeLabel.Text" xml:space="preserve">
     <value>Välkommen till Blindspot Första gången guiden. Detta hjälper dig att ställa några viktiga första gången inställningar för att använda Blindspot. Klicka på "Fortsätt" för att avsluta guiden. Du kan ändra dessa inställningar i dialogrutan senare.</value>
   </data>
+  <data name="keyboardStyleNoChangeBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>244, 21</value>
+  </data>
+  <data name="keyboardStyleNoChangeBox.Text" xml:space="preserve">
+    <value>Ändra inte min tangentbordslayout</value>
+  </data>
   <data name="keyboardDescriptionLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>81, 17</value>
   </data>
