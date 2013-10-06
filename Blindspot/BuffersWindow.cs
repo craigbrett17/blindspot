@@ -130,7 +130,8 @@ namespace Blindspot
                     return;
                 }
                 ScreenReader.SayString(StringStore.LoadingPlaylists, false);
-                var playlists = SpotifyController.GetAllSessionPlaylists();
+                var playlists = LoadUserPlaylists();
+                if (playlists == null) return;
                 Buffers[0].Clear();
                 playlists.ForEach(p =>
                 {
@@ -141,9 +142,35 @@ namespace Blindspot
             catch (Exception ex)
             {
                 MessageBox.Show(StringStore.ErrorDuringLoad + ex.Message, StringStore.Oops, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                this.Dispose();
+                this.Close();
             }
             ScreenReader.SayString(Buffers.CurrentList.ToString(), false);
+        }
+
+        private List<PlaylistContainer.PlaylistInfo> LoadUserPlaylists()
+        {
+            string exceptionMessage = "";
+            try
+            {
+                return SpotifyController.GetAllSessionPlaylists();
+            }
+            // done this way so that we can recursively send this method on if the user chooses to retry
+            catch (Exception ex)
+            {
+                exceptionMessage = ex.Message;
+            }
+            // handle problems - display dialog to user giving them a chance to retry this operation
+            var dialog = MessageBox.Show(StringStore.ErrorDuringLoad + exceptionMessage + "\r\n\r\n" + StringStore.SelectRetryToTryAgainOrCancelToQuit, StringStore.ErrorDuringLoad, MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
+            if (dialog == DialogResult.Retry)
+            {
+                return LoadUserPlaylists();
+            }
+            else
+            {
+                // user has cancelled loading playlists and chosen to exit
+                this.Close();
+                return null;
+            }
         }
 
         // here be the various buffer controlling commands

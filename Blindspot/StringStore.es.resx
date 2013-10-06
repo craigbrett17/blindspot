@@ -234,4 +234,7 @@
   <data name="BlindspotIsAlreadyRunning" xml:space="preserve">
     <value>Blindspot ya está en ejecución</value>
   </data>
+  <data name="SelectRetryToTryAgainOrCancelToQuit" xml:space="preserve">
+    <value>Seleccione Reintentar para intentarlo de nuevo, o Cancelar para salir.</value>
+  </data>
 </root>

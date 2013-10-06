@@ -367,6 +367,15 @@ namespace Blindspot {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select Retry to try again, or Cancel to quit..
+        /// </summary>
+        internal static string SelectRetryToTryAgainOrCancelToQuit {
+            get {
+                return ResourceManager.GetString("SelectRetryToTryAgainOrCancelToQuit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Streaming error.
         /// </summary>
         internal static string StreamingError {
