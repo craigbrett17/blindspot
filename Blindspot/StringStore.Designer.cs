@@ -70,6 +70,15 @@ namespace Blindspot {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Blindspot is already running.
+        /// </summary>
+        internal static string BlindspotIsAlreadyRunning {
+            get {
+                return ResourceManager.GetString("BlindspotIsAlreadyRunning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to by.
         /// </summary>
         internal static string By {

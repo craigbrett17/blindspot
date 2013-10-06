@@ -231,4 +231,7 @@
   <data name="SearchFor" xml:space="preserve">
     <value>Sök</value>
   </data>
+  <data name="BlindspotIsAlreadyRunning" xml:space="preserve">
+    <value>Blindspot körs redan</value>
+  </data>
 </root>
