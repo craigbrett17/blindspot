@@ -85,7 +85,7 @@ namespace Blindspot.Controllers
             }
             else if (_artists.Count > 1)
             {
-                artistString = String.Join(", ", _artists.ToArray(), 0, _artists.Count - 1) + " and " + _artists.LastOrDefault();
+                artistString = String.Join(", ", _artists.ToArray(), 0, _artists.Count - 1) + String.Format(" {0} {1}", StringStore.And, _artists.LastOrDefault());
             }
             return String.Format("{0} {1} {2}", this.Name, StringStore.By, artistString);
         }

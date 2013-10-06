@@ -237,4 +237,7 @@
   <data name="SelectRetryToTryAgainOrCancelToQuit" xml:space="preserve">
     <value>Seleccione Reintentar para intentarlo de nuevo, o Cancelar para salir.</value>
   </data>
+  <data name="And" xml:space="preserve">
+    <value>y</value>
+  </data>
 </root>

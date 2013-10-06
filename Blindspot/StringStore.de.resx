@@ -237,4 +237,7 @@
   <data name="SelectRetryToTryAgainOrCancelToQuit" xml:space="preserve">
     <value>Wählen Sie Wiederholen, um erneut zu versuchen, oder Abbrechen, um zu beenden.</value>
   </data>
+  <data name="And" xml:space="preserve">
+    <value>und</value>
+  </data>
 </root>
