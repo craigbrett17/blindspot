@@ -272,6 +272,7 @@ namespace Blindspot
             }));
             commands.Add("new_search", new HandledEventHandler(ShowSearchWindow));
             commands.Add("show_about_window", new HandledEventHandler(ShowAboutDialog));
+            commands.Add("options_dialog", new HandledEventHandler(ShowOptionsWindow));
             return commands;
         }
         
@@ -459,6 +460,19 @@ namespace Blindspot
             {
                 // language may have changed, will be saved to settings object
                 // if settings is different from current (which came from installer or fallback of OS default), change to new one
+                if (settings.UILanguageCode != Thread.CurrentThread.CurrentUICulture.LCID)
+                {
+                    Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(settings.UILanguageCode);
+                }
+            }
+        }
+
+        private void ShowOptionsWindow(object sender, HandledEventArgs e)
+        {
+            OptionsDialog options = new OptionsDialog();
+            options.ShowDialog();
+            if (options.DialogResult == DialogResult.OK)
+            {
                 if (settings.UILanguageCode != Thread.CurrentThread.CurrentUICulture.LCID)
                 {
                     Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(settings.UILanguageCode);
