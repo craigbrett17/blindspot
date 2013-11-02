@@ -14,4 +14,11 @@
     <Description language="es">Esta es la distribución del teclado estándar para Blindspot. Se ha diseñado para no entrar en conflicto con las aplicaciones más populares. La mayoría de los comandos usan las teclas modificadoras Alt Mayús +.</Description>
     <Description language="sv">Detta är den standard tangentbordslayout för Blindspot. Den har utformats för att inte kollidera med populära applikationer. De flesta kommandon använder Skift + Alt specialtangenter.</Description>
   </KeyboardLayout>
+  <KeyboardLayout name="Modern">
+    <Description language="en">Created by Steve Markham:, this keyboard layout is designed to mimic the standard layout, except that it uses L, R, D and U to replace the down, up, left and right arrow keys. Recommended for JFW users who are likely to use Qwitter or The Qube alongside Blindspot.</Description>
+    <Description language="de">Erstellt von Steve Markham: ist diese Tastatur Layout entworfen, um das Standard-Layout nachahmen, außer dass es L, R, D und U verwendet, um die nach unten, oben, links und rechts Pfeiltasten zu ersetzen. Empfohlen für JFW Benutzer, die wahrscheinlich Qwitter oder The Qube neben Blindspot bedienen sind.</Description>
+    <Description language="fr">Créée par Steve Markham: ce clavier est conçu pour imiter la mise en page standard, sauf qu'il utilise L, R, D et U pour remplacer le bas, haut, gauche et droite touches fléchées. Recommandé pour les utilisateurs JFW qui sont susceptibles d'utiliser ou Qwitter Le Qube côtés Blindspot.</Description>
+    <Description language="es">Creado por Steve Markham: Este teclado está diseñado para imitar el diseño estándar, excepto que utiliza L, R, D y U para reemplazar el abajo, arriba, izquierda y derecha teclas de flecha. Recomendado para usuarios JFW que son propensos a usar Qwitter o The Qube junto Blindspot.</Description>
+    <Description language="sv">Skapad av Steve Markham: är denna tangentbordslayout för att efterlikna den standard, förutom att den använder L, R, D och U för att ersätta den nedåt, uppåt, vänster och höger piltangenter. Rekommenderas för JFW användare som kan tänkas använda Qwitter eller Qube tillsammans Blindspot.</Description>
+  </KeyboardLayout>
 </KeyboardLayouts>

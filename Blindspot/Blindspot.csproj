@@ -292,6 +292,9 @@
     <Content Include="Keyboard Layouts\Layout Descriptions.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Keyboard Layouts\Modern.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Keyboard Layouts\Qubey.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

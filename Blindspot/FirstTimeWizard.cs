@@ -1,4 +1,5 @@
 ﻿using Blindspot.Helpers;
+using ScreenReaderAPIWrapper;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -84,7 +85,13 @@ namespace Blindspot
             keyboardStyleBox.DataSource = new BindingSource(fileAndPath, null);
             keyboardStyleBox.DisplayMember = "Key";
             keyboardStyleBox.ValueMember = "Value";
-            if (fileAndPath.ContainsKey("Standard"))
+            string screenReaderName = ScreenReader.getCurrentScreenReaderName().ToLower();
+            if ((screenReaderName == "jfw" || screenReaderName == "jaws" || screenReaderName == "jaws for windows")
+                && fileAndPath.ContainsKey("Modern"))
+            {
+                keyboardStyleBox.SelectedValue = fileAndPath["Modern"];
+            }
+            else if (fileAndPath.ContainsKey("Standard"))
             {
                 keyboardStyleBox.SelectedValue = fileAndPath["Standard"];
             }
