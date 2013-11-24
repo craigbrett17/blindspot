@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Blindspot.Core.Models;
 
-namespace Blindspot.Controllers
+namespace Blindspot.Core
 {
     public interface ISpotifyClient
     {
@@ -24,5 +23,6 @@ namespace Blindspot.Controllers
         void Session_OnNotifyMainThread(IntPtr sessionPtr);
         Search LastSearch { get; }
         void SetPrivateSession(bool enable);
+        SpotifyError GetLoginError();
     }
 }

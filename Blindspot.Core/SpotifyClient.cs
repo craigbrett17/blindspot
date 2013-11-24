@@ -5,8 +5,9 @@ using System.Text;
 using libspotifydotnet;
 using System.Runtime.InteropServices;
 using System.Threading;
+using Blindspot.Core.Models;
 
-namespace Blindspot.Controllers
+namespace Blindspot.Core
 {
     /// <summary>
     /// A singleton client to handle interaction between Spotify and the application
@@ -18,7 +19,7 @@ namespace Blindspot.Controllers
     {
         private SpotifyClient()
         {
-            this.RequestTimeout = 30;
+            this.RequestTimeout = 15;
         }
 
         private static SpotifyClient _instance;
@@ -134,6 +135,11 @@ namespace Blindspot.Controllers
         {
             var session = GetSession();
             libspotify.sp_session_set_private_session(session, enable);
+        }
+
+        public SpotifyError GetLoginError()
+        {
+            return (SpotifyError)Session.LoginError;
         }
 
         private IntPtr GetSession()

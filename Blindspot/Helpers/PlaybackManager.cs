@@ -6,8 +6,7 @@ using NAudio;
 using NAudio.Wave;
 using System.IO;
 using System.Threading;
-using libspotifydotnet;
-using Blindspot.Controllers;
+using Logger = Blindspot.Core.Logger;
 
 namespace Blindspot.Helpers
 {

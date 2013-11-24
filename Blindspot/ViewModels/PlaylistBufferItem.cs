@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Blindspot.Controllers;
+using Blindspot.Core;
+using Blindspot.Core.Models;
 
 namespace Blindspot.ViewModels
 {

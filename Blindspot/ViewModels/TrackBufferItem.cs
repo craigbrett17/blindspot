@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Blindspot.Controllers;
+using Blindspot.Core;
+using Blindspot.Core.Models;
 
 namespace Blindspot.ViewModels
 {
@@ -22,7 +23,18 @@ namespace Blindspot.ViewModels
             {
                 return StringStore.NoTrackInformation;
             }
-            return Model.ToString();
+            string artistString = "Unknown";
+            var _artists = Model.Artists;
+            if (_artists.Length == 1)
+            {
+                artistString = _artists.First();
+            }
+            else if (_artists.Length > 1)
+            {
+                artistString = String.Join(", ", _artists, 0, _artists.Length - 1) + String.Format(" {0} {1}", StringStore.And, _artists.LastOrDefault());
+            }
+            return String.Format("{0} {1} {2}", Model.Name, StringStore.By, artistString);
         }
+
     }
 }

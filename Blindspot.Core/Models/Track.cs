@@ -31,7 +31,7 @@ using System.Text;
 using libspotifydotnet;
 
 // namespace Jamcast.Plugins.Spotify.API {
-namespace Blindspot.Controllers
+namespace Blindspot.Core.Models
 {
     public class Track
     {
@@ -76,19 +76,6 @@ namespace Blindspot.Controllers
 
         }
 
-        public override string ToString()
-        {
-            string artistString = "Unknown";
-            if (_artists.Count == 1)
-            {
-                artistString = _artists.First();
-            }
-            else if (_artists.Count > 1)
-            {
-                artistString = String.Join(", ", _artists.ToArray(), 0, _artists.Count - 1) + String.Format(" {0} {1}", StringStore.And, _artists.LastOrDefault());
-            }
-            return String.Format("{0} {1} {2}", this.Name, StringStore.By, artistString);
-        }
     }
 
 }

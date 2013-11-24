@@ -32,7 +32,7 @@ using System.Threading;
 using libspotifydotnet;
 
 // namespace Jamcast.Plugins.Spotify.API {
-namespace Blindspot.Controllers
+namespace Blindspot.Core.Models
 {
     public class Playlist : IDisposable {             
         

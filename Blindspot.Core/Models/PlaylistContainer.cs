@@ -33,7 +33,7 @@ using libspotifydotnet;
 using System.Linq;
 
 // namespace Jamcast.Plugins.Spotify.API
-namespace Blindspot.Controllers
+namespace Blindspot.Core.Models
 {
     public class PlaylistContainer : IDisposable {
 

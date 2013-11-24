@@ -29,10 +29,12 @@ using System.Collections.Generic;
 using System.Threading;
 using libspotifydotnet;
 using System.Runtime.ExceptionServices;
+using Blindspot.Core.Models;
 
 // namespace Jamcast.Plugins.Spotify.API This is its original usage
-namespace Blindspot.Controllers
+namespace Blindspot.Core
 {
+    // here's the old Jamcast Spotify interactor class
     public class SpotifyController
     {
         private delegate bool Test();

@@ -6,9 +6,9 @@ using System.Windows.Forms;
 using System.Resources;
 using Blindspot.Helpers;
 using Blindspot.ViewModels;
-using Blindspot.Controllers;
+using Blindspot.Core;
+using Blindspot.Core.Models;
 using System.IO;
-using libspotifydotnet;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
@@ -117,13 +117,12 @@ namespace Blindspot
                 {
                     ScreenReader.SayString(StringStore.LoggedInToSpotify);
                     UserSettings.Instance.Username = username;
-                    UserSettings.Instance.Password = password;
                     UserSettings.Save();
                     spotify.SetPrivateSession(true);
                 }
                 else
                 {
-                    var reason = libspotify.sp_error_message(Session.LoginError);
+                    var reason = spotify.GetLoginError().Message;
                     ScreenReader.SayString(StringStore.LogInFailure + reason);
                     // TODO: Make login window reappear until success or exit
                     this.Close();
@@ -306,10 +305,9 @@ namespace Blindspot
                     playbackManager.Stop(); 
                 }
                 var response = Session.LoadPlayer(tbi.Model.TrackPtr);
-                if (response != libspotify.sp_error.OK)
+                if (response.IsError)
                 {
-                    var reason = libspotify.sp_error_message(response);
-                    ScreenReader.SayString(StringStore.UnableToPlayTrack + reason, false);
+                    ScreenReader.SayString(StringStore.UnableToPlayTrack + response.Message, false);
                     return;
                 }
                 Session.Play();

@@ -4,9 +4,8 @@ using System.Linq;
 using System.Text;
 using libspotifydotnet;
 using System.Runtime.InteropServices;
-using Blindspot.Helpers;
 
-namespace Blindspot.Controllers
+namespace Blindspot.Core.Models
 {
     public class Search : IDisposable
     {

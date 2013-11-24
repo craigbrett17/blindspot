@@ -28,9 +28,10 @@ using System;
 using System.IO;
 using System.Runtime.InteropServices;
 using libspotifydotnet;
+using Blindspot.Core.Models;
 
 // namespace Jamcast.Plugins.Spotify.API // original API
-namespace Blindspot.Controllers
+namespace Blindspot.Core
 {
     public static class Session
     {
@@ -124,9 +125,9 @@ namespace Blindspot.Controllers
             return libspotify.sp_session_user_country(_sessionPtr);            
         }
         
-        public static libspotify.sp_error LoadPlayer(IntPtr trackPtr)
+        public static SpotifyError LoadPlayer(IntPtr trackPtr)
         {
-            return libspotify.sp_session_player_load(_sessionPtr, trackPtr);
+            return  (SpotifyError)libspotify.sp_session_player_load(_sessionPtr, trackPtr);
         }
 
         public static void Play()

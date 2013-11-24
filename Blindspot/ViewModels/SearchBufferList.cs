@@ -1,4 +1,5 @@
-﻿using Blindspot.Controllers;
+﻿using Blindspot.Core;
+using Blindspot.Core.Models;
 using ScreenReaderAPIWrapper;
 using System;
 using System.Collections.Generic;

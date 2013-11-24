@@ -30,7 +30,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using libspotifydotnet;
 
-namespace Blindspot.Controllers
+namespace Blindspot.Core.Models
 {
     public class TopList : IDisposable {
 

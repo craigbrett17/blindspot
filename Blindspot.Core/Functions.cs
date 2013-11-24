@@ -31,7 +31,7 @@ using System.Text;
 using libspotifydotnet;
 
 // namespace Jamcast.Plugins.Spotify.API {
-namespace Blindspot.Controllers
+namespace Blindspot.Core
 {
     internal static class Functions {
 

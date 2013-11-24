@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Diagnostics;
 
-namespace Blindspot.Controllers
+namespace Blindspot.Core
 {
     /// <summary>
     /// Outputs things to debug log
