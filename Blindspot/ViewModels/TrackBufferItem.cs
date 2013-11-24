@@ -20,7 +20,7 @@ namespace Blindspot.ViewModels
         {
             if (Model == null)
             {
-                return "No track information. This is embarrassing. ";
+                return StringStore.NoTrackInformation;
             }
             return Model.ToString();
         }

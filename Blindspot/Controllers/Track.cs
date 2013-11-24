@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using libspotifydotnet;
 
@@ -77,12 +78,16 @@ namespace Blindspot.Controllers
 
         public override string ToString()
         {
-            var mainArtist = "Unknown";
-            if (_artists.Count > 0)
+            string artistString = "Unknown";
+            if (_artists.Count == 1)
             {
-                mainArtist = _artists[0];
+                artistString = _artists.First();
             }
-            return String.Format("{0} by {1}", this.Name, mainArtist);
+            else if (_artists.Count > 1)
+            {
+                artistString = String.Join(", ", _artists.ToArray(), 0, _artists.Count - 1) + String.Format(" {0} {1}", StringStore.And, _artists.LastOrDefault());
+            }
+            return String.Format("{0} {1} {2}", this.Name, StringStore.By, artistString);
         }
     }
 

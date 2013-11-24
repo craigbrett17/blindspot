@@ -9,7 +9,7 @@ namespace Blindspot.ViewModels
     public class BufferList : List<BufferItem>
     {
         public string Name { get; private set; }
-        public bool IsDismissable { get; private set; }
+        public bool IsDismissable { get; protected set; }
 
         const int jumpAmount = 10;
 
@@ -56,7 +56,7 @@ namespace Blindspot.ViewModels
             }
         }
 
-        public void NextItem()
+        public virtual void NextItem()
         {
             if (CurrentItemIndex < this.Count - 1)
             {
@@ -64,7 +64,7 @@ namespace Blindspot.ViewModels
             }
         }
 
-        public void PreviousItem()
+        public virtual void PreviousItem()
         {
             if (CurrentItemIndex > 0)
             {
@@ -72,17 +72,17 @@ namespace Blindspot.ViewModels
             }
         }
 
-        public void FirstItem()
+        public virtual void FirstItem()
         {
             CurrentItemIndex = 0;
         }
 
-        public void LastItem()
+        public virtual void LastItem()
         {
             CurrentItemIndex = this.Count - 1;
         }
 
-        public void NextJump()
+        public virtual void NextJump()
         {
             if (CurrentItemIndex + jumpAmount < this.Count - 1)
             {
@@ -94,7 +94,7 @@ namespace Blindspot.ViewModels
             }
         }
 
-        public void PreviousJump()
+        public virtual void PreviousJump()
         {
             if (CurrentItemIndex  - jumpAmount > 0)
             {
@@ -108,7 +108,7 @@ namespace Blindspot.ViewModels
 
         public override string ToString()
         {
-            return String.Format("{0}: {1} of {2} items", this.Name, this.CurrentItemIndex + 1, this.Count);
+            return String.Format("{0}: {1} {3} {2} {4}", this.Name, this.CurrentItemIndex + 1, this.Count, StringStore.Of, StringStore.Items);
         }
     }
 }

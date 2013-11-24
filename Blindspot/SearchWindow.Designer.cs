@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SearchWindow));
             this.typeBox = new System.Windows.Forms.GroupBox();
             this.albumButton = new System.Windows.Forms.RadioButton();
             this.artistButton = new System.Windows.Forms.RadioButton();
@@ -41,109 +42,77 @@
             // 
             // typeBox
             // 
+            resources.ApplyResources(this.typeBox, "typeBox");
             this.typeBox.Controls.Add(this.albumButton);
             this.typeBox.Controls.Add(this.artistButton);
             this.typeBox.Controls.Add(this.titleButton);
-            this.typeBox.Location = new System.Drawing.Point(0, 0);
             this.typeBox.Name = "typeBox";
-            this.typeBox.Size = new System.Drawing.Size(300, 60);
-            this.typeBox.TabIndex = 0;
             this.typeBox.TabStop = false;
-            this.typeBox.Text = "Search type";
             // 
             // albumButton
             // 
-            this.albumButton.AutoSize = true;
-            this.albumButton.Location = new System.Drawing.Point(155, 25);
+            resources.ApplyResources(this.albumButton, "albumButton");
             this.albumButton.Name = "albumButton";
-            this.albumButton.Size = new System.Drawing.Size(65, 21);
-            this.albumButton.TabIndex = 2;
             this.albumButton.TabStop = true;
-            this.albumButton.Text = "A&lbum";
             this.albumButton.UseVisualStyleBackColor = true;
             // 
             // artistButton
             // 
-            this.artistButton.AutoSize = true;
-            this.artistButton.Location = new System.Drawing.Point(80, 25);
+            resources.ApplyResources(this.artistButton, "artistButton");
             this.artistButton.Name = "artistButton";
-            this.artistButton.Size = new System.Drawing.Size(58, 21);
-            this.artistButton.TabIndex = 1;
             this.artistButton.TabStop = true;
-            this.artistButton.Text = "A&rtist";
             this.artistButton.UseVisualStyleBackColor = true;
             // 
             // titleButton
             // 
-            this.titleButton.AutoSize = true;
+            resources.ApplyResources(this.titleButton, "titleButton");
             this.titleButton.Checked = true;
-            this.titleButton.Location = new System.Drawing.Point(10, 25);
             this.titleButton.Name = "titleButton";
-            this.titleButton.Size = new System.Drawing.Size(53, 21);
-            this.titleButton.TabIndex = 0;
             this.titleButton.TabStop = true;
-            this.titleButton.Text = "&Title";
             this.titleButton.UseVisualStyleBackColor = true;
             // 
             // searchTextLabel
             // 
-            this.searchTextLabel.AutoSize = true;
-            this.searchTextLabel.Location = new System.Drawing.Point(5, 70);
+            resources.ApplyResources(this.searchTextLabel, "searchTextLabel");
             this.searchTextLabel.Name = "searchTextLabel";
-            this.searchTextLabel.Size = new System.Drawing.Size(84, 17);
-            this.searchTextLabel.TabIndex = 1;
-            this.searchTextLabel.Text = "S&earch Text";
             // 
             // searchTextBox
             // 
-            this.searchTextBox.Location = new System.Drawing.Point(5, 90);
+            resources.ApplyResources(this.searchTextBox, "searchTextBox");
             this.searchTextBox.Name = "searchTextBox";
-            this.searchTextBox.Size = new System.Drawing.Size(200, 23);
-            this.searchTextBox.TabIndex = 2;
             // 
             // searchButton
             // 
+            resources.ApplyResources(this.searchButton, "searchButton");
             this.searchButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.searchButton.Location = new System.Drawing.Point(30, 130);
             this.searchButton.Name = "searchButton";
-            this.searchButton.Size = new System.Drawing.Size(75, 23);
-            this.searchButton.TabIndex = 3;
-            this.searchButton.Text = "&Search";
             this.searchButton.UseVisualStyleBackColor = true;
             this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
             // 
             // closeButton
             // 
+            resources.ApplyResources(this.closeButton, "closeButton");
             this.closeButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.closeButton.Location = new System.Drawing.Point(110, 130);
             this.closeButton.Name = "closeButton";
-            this.closeButton.Size = new System.Drawing.Size(75, 23);
-            this.closeButton.TabIndex = 4;
-            this.closeButton.Text = "&Cancel";
             this.closeButton.UseVisualStyleBackColor = true;
             this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
             // 
             // SearchWindow
             // 
             this.AcceptButton = this.searchButton;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.closeButton;
-            this.ClientSize = new System.Drawing.Size(234, 191);
             this.ControlBox = false;
             this.Controls.Add(this.closeButton);
             this.Controls.Add(this.searchButton);
             this.Controls.Add(this.searchTextBox);
             this.Controls.Add(this.searchTextLabel);
             this.Controls.Add(this.typeBox);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SearchWindow";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Blindspot Search";
             this.typeBox.ResumeLayout(false);
             this.typeBox.PerformLayout();
             this.ResumeLayout(false);

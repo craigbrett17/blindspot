@@ -221,7 +221,7 @@ namespace Blindspot.Helpers
 
         private IWavePlayer CreateWaveOut()
         {
-            return new WaveOut();
+            return new WaveOutEvent();
         }
 
         private void waveOut_PlaybackStopped(object sender, StoppedEventArgs e)

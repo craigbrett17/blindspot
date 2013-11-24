@@ -35,12 +35,12 @@ namespace Blindspot
             }
             catch (System.ComponentModel.Win32Exception ex)
             {
-                MessageBox.Show(ex.Message, "Problem loading browser",
+                MessageBox.Show(ex.Message, StringStore.ProblemLoadingBrowser,
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("An unexpected error occured. \r\n" + ex.Message, "Unexpected error",
+                MessageBox.Show(StringStore.AnUnexpectedErrorOccurred + "\r\n" + ex.Message, StringStore.UnexpectedError,
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -49,7 +49,7 @@ namespace Blindspot
         {
             if (usernameBox.Text.Length == 0 || passwordBox.Text.Length == 0)
             {
-                MessageBox.Show("Please enter a username and password to log into Spotify", "No username or password",
+                MessageBox.Show(StringStore.PleaseEnterAUsernameAndPasswordToLoginToSpotify, StringStore.NoUsernameOrPassword,
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }

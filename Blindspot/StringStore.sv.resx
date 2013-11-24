@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AnUnexpectedErrorOccurred" xml:space="preserve">
+    <value>Ett oväntat fel har inträffat</value>
+  </data>
+  <data name="By" xml:space="preserve">
+    <value>av</value>
+  </data>
+  <data name="CannotDismissBuffer" xml:space="preserve">
+    <value>Kan inte avfärda buffert </value>
+  </data>
+  <data name="CriticalError" xml:space="preserve">
+    <value>Kritiskt fel: </value>
+  </data>
+  <data name="ErrorDuringLoad" xml:space="preserve">
+    <value>Fel under belastning: </value>
+  </data>
+  <data name="ExitingProgram" xml:space="preserve">
+    <value>Avsluta programmet</value>
+  </data>
+  <data name="ItemActivated" xml:space="preserve">
+    <value>Sak aktiverad</value>
+  </data>
+  <data name="Items" xml:space="preserve">
+    <value>sak</value>
+  </data>
+  <data name="LoadingPlaylist" xml:space="preserve">
+    <value>Loading spellista</value>
+  </data>
+  <data name="LoadingPlaylists" xml:space="preserve">
+    <value>Laddar spellistor</value>
+  </data>
+  <data name="LoggedInToSpotify" xml:space="preserve">
+    <value>Loggade in till Spotify</value>
+  </data>
+  <data name="LoggingIn" xml:space="preserve">
+    <value>Inloggning</value>
+  </data>
+  <data name="LogInFailure" xml:space="preserve">
+    <value>Login misslyckande: </value>
+  </data>
+  <data name="Louder" xml:space="preserve">
+    <value>Louder</value>
+  </data>
+  <data name="NoSearchText" xml:space="preserve">
+    <value>Ingen söktext</value>
+  </data>
+  <data name="NoTrackCurrentlyBeingPlayed" xml:space="preserve">
+    <value>Inget spår som spelas</value>
+  </data>
+  <data name="NoTrackInformation" xml:space="preserve">
+    <value>Ingen spårinformation. Detta är pinsamt.</value>
+  </data>
+  <data name="NoUsernameOrPassword" xml:space="preserve">
+    <value>Inget användarnamn eller lösenord</value>
+  </data>
+  <data name="Of" xml:space="preserve">
+    <value>av</value>
+  </data>
+  <data name="Oops" xml:space="preserve">
+    <value>Hoppsan!</value>
+  </data>
+  <data name="Paused" xml:space="preserve">
+    <value>Pausad</value>
+  </data>
+  <data name="Playing" xml:space="preserve">
+    <value>Spela</value>
+  </data>
+  <data name="PlaylistsLoaded" xml:space="preserve">
+    <value>loaded spellistor</value>
+  </data>
+  <data name="PleaseEnterAUsernameAndPasswordToLoginToSpotify" xml:space="preserve">
+    <value>Ange ett användarnamn och lösenord för att logga in på Spotify</value>
+  </data>
+  <data name="PleaseEnterSomeSearchTextToSearchFor" xml:space="preserve">
+    <value>Ange en söktext för att söka efter</value>
+  </data>
+  <data name="ProblemLoadingBrowser" xml:space="preserve">
+    <value>Problem loading webbläsare</value>
+  </data>
+  <data name="Quieter" xml:space="preserve">
+    <value>Tystare</value>
+  </data>
+  <data name="Searching" xml:space="preserve">
+    <value>Söker...</value>
+  </data>
+  <data name="SearchResults" xml:space="preserve">
+    <value>sökresultat</value>
+  </data>
+  <data name="StreamingError" xml:space="preserve">
+    <value>Streaming error</value>
+  </data>
+  <data name="TracksLoaded" xml:space="preserve">
+    <value>spår laddade</value>
+  </data>
+  <data name="UnableToPlayTrack" xml:space="preserve">
+    <value>Kan inte spela upp spår: </value>
+  </data>
+  <data name="UnexpectedError" xml:space="preserve">
+    <value>oväntat fel</value>
+  </data>
+  <data name="UnexpectedErrorOccurred" xml:space="preserve">
+    <value>Oväntat fel inträffade.</value>
+  </data>
+  <data name="NoSearchResults" xml:space="preserve">
+    <value>Inga sökresultat</value>
+  </data>
+  <data name="NoDescriptionAvailable" xml:space="preserve">
+    <value>Ingen beskrivning tillgänglig</value>
+  </data>
+  <data name="MoreSearchResults" xml:space="preserve">
+    <value>fler sökresultat</value>
+  </data>
+  <data name="SearchFor" xml:space="preserve">
+    <value>Sök</value>
+  </data>
+  <data name="BlindspotIsAlreadyRunning" xml:space="preserve">
+    <value>Blindspot körs redan</value>
+  </data>
+  <data name="SelectRetryToTryAgainOrCancelToQuit" xml:space="preserve">
+    <value>Välj Försök igen eller Avbryt för att avsluta.</value>
+  </data>
+  <data name="And" xml:space="preserve">
+    <value>och</value>
+  </data>
+</root>

@@ -17,12 +17,13 @@ namespace Blindspot.Controllers
         public List<IntPtr> Tracks { get; set; }
         public List<IntPtr> Artists { get; set; }
         public List<IntPtr> Albums { get; set; }
-        
+
         private search_complete_cb_delegate searchCompleteDelegate;
 
         private IntPtr _browsePtr;
         private bool _disposed, _searchReleased;
         private int numResults = 50;
+        private int trackOffset = 0, albumOffset = 0, artistOffset = 0;
 
         public Search(string query, SearchType typeIn)
         {
@@ -32,6 +33,7 @@ namespace Blindspot.Controllers
 
         public bool BeginBrowse()
         {
+            this.IsLoaded = false; // set to false in case we're querying for a new page, the thread waits for true to know when things are done
             try
             {
                 this.searchCompleteDelegate = new search_complete_cb_delegate(SearchCompleted);
@@ -40,13 +42,13 @@ namespace Blindspot.Controllers
                 switch (this.Type)
                 {
                     case SearchType.Track:
-                        _browsePtr = libspotify.sp_search_create(Session.GetSessionPtr(), this.Query, 0, numResults, 0, 0, 0, 0, 0, 0, sp_search_type.SP_SEARCH_STANDARD, callbackPtr, IntPtr.Zero);
+                        _browsePtr = libspotify.sp_search_create(Session.GetSessionPtr(), this.Query, trackOffset, numResults, 0, 0, 0, 0, 0, 0, sp_search_type.SP_SEARCH_STANDARD, callbackPtr, IntPtr.Zero);
                         break;
                     case SearchType.Artist:
-                        _browsePtr = libspotify.sp_search_create(Session.GetSessionPtr(), this.Query, 0, 0, 0, 0, 0, numResults, 0, 0, sp_search_type.SP_SEARCH_STANDARD, callbackPtr, IntPtr.Zero);
+                        _browsePtr = libspotify.sp_search_create(Session.GetSessionPtr(), this.Query, 0, 0, 0, 0, artistOffset, numResults, 0, 0, sp_search_type.SP_SEARCH_STANDARD, callbackPtr, IntPtr.Zero);
                         break;
                     case SearchType.Album:
-                        _browsePtr = libspotify.sp_search_create(Session.GetSessionPtr(), this.Query, 0, 0, 0, numResults, 0, 0, 0, 0, sp_search_type.SP_SEARCH_STANDARD, callbackPtr, IntPtr.Zero);
+                        _browsePtr = libspotify.sp_search_create(Session.GetSessionPtr(), this.Query, 0, 0, albumOffset, numResults, 0, 0, 0, 0, sp_search_type.SP_SEARCH_STANDARD, callbackPtr, IntPtr.Zero);
                         break;
                     default:
                         throw new InvalidOperationException("No search type set");
@@ -62,26 +64,19 @@ namespace Blindspot.Controllers
 
         private void SearchCompleted(IntPtr searchPtr, IntPtr userDataPtr)
         {
-            try
+            libspotify.sp_error error = libspotify.sp_search_error(searchPtr);
+            if (error != libspotify.sp_error.OK)
             {
-                libspotify.sp_error error = libspotify.sp_search_error(searchPtr);
-                if (error != libspotify.sp_error.OK)
-                {
-                    Logger.WriteDebug("Search browse failed: {0}", libspotify.sp_error_message(error));
-                    this.IsLoaded = true;
-                    return;
-                }
-                this.DidYouMean = Functions.PtrToString(libspotify.sp_search_did_you_mean(_browsePtr));
-                if (this.Type == SearchType.Track)
-                {
-                    LoadTracks(); 
-                }
+                Logger.WriteDebug("Search browse failed: {0}", libspotify.sp_error_message(error));
                 this.IsLoaded = true;
+                return;
             }
-            finally
+            this.DidYouMean = Functions.PtrToString(libspotify.sp_search_did_you_mean(_browsePtr));
+            if (this.Type == SearchType.Track)
             {
-                safeReleaseSearch();
+                LoadTracks();
             }
+            this.IsLoaded = true;
         }
 
         private void LoadTracks()
@@ -93,6 +88,7 @@ namespace Blindspot.Controllers
                 trackPtrs.Add(libspotify.sp_search_track(_browsePtr, i));
             }
             Tracks = trackPtrs;
+            trackOffset += numtracks;
         }
 
         #region IDisposable Members

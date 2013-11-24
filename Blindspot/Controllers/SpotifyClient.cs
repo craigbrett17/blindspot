@@ -37,9 +37,14 @@ namespace Blindspot.Controllers
         public int RequestTimeout { get; set; }
         public Search LastSearch { get; set; }
 
-        public List<Track> SearchTracks(string query)
+        public Search SearchTracks(string query)
         {
             Search search = new Search(query, SearchType.Track);
+            return GetMoreTracksFromSearch(search);
+        }
+
+        public Search GetMoreTracksFromSearch(Search search)
+        {
             search.BeginBrowse();
             bool loadedInTime = WaitFor(() => search.IsLoaded, RequestTimeout);
             if (!loadedInTime)
@@ -47,16 +52,7 @@ namespace Blindspot.Controllers
                 Logger.WriteDebug("Browsing search results timed out");
                 return null;
             }
-            var tracks = new List<Track>();
-            if (search.Tracks == null)
-            {
-                return tracks;
-            }
-            foreach (IntPtr pointer in search.Tracks)
-            {
-                tracks.Add(new Track(pointer));
-            }
-            return tracks;
+            return search;
         }
 
         public bool IsRunning

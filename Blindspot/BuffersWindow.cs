@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
+using System.Resources;
 using Blindspot.Helpers;
 using Blindspot.ViewModels;
 using Blindspot.Controllers;
@@ -10,6 +11,7 @@ using System.IO;
 using libspotifydotnet;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 
 namespace Blindspot
 {
@@ -22,7 +24,8 @@ namespace Blindspot
         private bool isPaused;
         private PlaybackManager playbackManager;
         private SpotifyClient spotify;
-
+        private UserSettings settings = UserSettings.Instance;
+        
         #region user32 functions for moving away from window
         // need a bit of pinvoke here to move away from the window if the user manages to reach the window
         [DllImport("user32.dll", EntryPoint = "FindWindow", SetLastError = true)]
@@ -33,10 +36,31 @@ namespace Blindspot
 
         public BuffersWindow()
         {
+            // language stuff needs to happen before InitializeComponent
+            if (!settings.DontShowFirstTimeWizard)
+            {
+                // find out what language was used in the installer and use it for the first time wizard and everything else
+                SetThreadToInstallationLanguage();
+                DisplayFirstTimeWizard();
+            }
+            else
+            {
+                // if a language code is set in settings, set it on the thread
+                if (settings.UILanguageCode != 0)
+                    Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(settings.UILanguageCode);
+            }
             InitializeComponent();
             Commands = new Dictionary<string, HandledEventHandler>();
             playbackManager = new PlaybackManager();
             playbackManager.OnError += new PlaybackManager.PlaybackManagerErrorHandler(StreamingError);
+            SetupFormEventHandlers();
+            Buffers = new BufferListCollection();
+            Buffers.Add(new BufferList("Playlists", false));
+            spotify = SpotifyClient.Instance;
+        }
+
+        private void SetupFormEventHandlers()
+        {
             Session.OnAudioDataArrived += new Action<byte[]>(bytes =>
             {
                 playbackManager.AddBytesToPlayingStream(bytes);
@@ -50,25 +74,22 @@ namespace Blindspot
             {
                 playingTrack = null;
             });
-            Buffers = new BufferListCollection();
-            Buffers.Add(new BufferList("Playlists", false));
-            spotify = SpotifyClient.Instance;
-            // We want this in for debugging, uncomment it for better UI experience
+            // comment this out for debugging, so that exceptions appear naturally
             Application.ThreadException += new System.Threading.ThreadExceptionEventHandler((sender, e) =>
             {
                 if (e.Exception is OutOfMemoryException)
                 {
-                    MessageBox.Show("Critical error: \r\n" + String.Format("{0}: {1}", e.Exception.GetType().ToString(), e.Exception.Message), "Out of cheese error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(StringStore.CriticalError + "\r\n" + String.Format("{0}: {1}", e.Exception.GetType().ToString(), e.Exception.Message), "Out of cheese error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     this.Close(); // on OutOfMemory exceptions, we should close immediately
                     return;
                 }
                 else
                 {
-                    MessageBox.Show("Unexpected error occurred.\r\n" + String.Format("{0}: {1}", e.Exception.GetType().ToString(), e.Exception.Message), "Oops!", MessageBoxButtons.OK, MessageBoxIcon.Error); 
+                    MessageBox.Show(StringStore.AnUnexpectedErrorOccurred + "\r\n" + String.Format("{0}: {1}", e.Exception.GetType().ToString(), e.Exception.Message), StringStore.Oops, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             });
         }
-
+        
         protected override void OnLoad(EventArgs e)
         {
             string username = "", password = "";
@@ -78,7 +99,7 @@ namespace Blindspot
                 if (response != DialogResult.OK)
                 {
                     this.Close();
-                    ScreenReader.SayString("Exiting program");
+                    ScreenReader.SayString(StringStore.ExitingProgram);
                     return;
                 }
                 username = logon.Username;
@@ -90,11 +111,11 @@ namespace Blindspot
                 KeyManager = BufferHotkeyManager.LoadFromTextFile(this);
                 SpotifyController.Initialize();
                 var appKeyBytes = Properties.Resources.spotify_appkey;
-                ScreenReader.SayString("Logging in");
+                ScreenReader.SayString(StringStore.LoggingIn);
                 bool loggedIn = SpotifyController.Login(appKeyBytes, username, password);
                 if (loggedIn)
                 {
-                    ScreenReader.SayString("Logged in to Spotify");
+                    ScreenReader.SayString(StringStore.LoggedInToSpotify);
                     UserSettings.Instance.Username = username;
                     UserSettings.Instance.Password = password;
                     UserSettings.Save();
@@ -103,26 +124,53 @@ namespace Blindspot
                 else
                 {
                     var reason = libspotify.sp_error_message(Session.LoginError);
-                    ScreenReader.SayString("Log in failure: " + reason);
+                    ScreenReader.SayString(StringStore.LogInFailure + reason);
                     // TODO: Make login window reappear until success or exit
                     this.Close();
                     return;
                 }
-                ScreenReader.SayString("Loading playlists", false);
-                var playlists = SpotifyController.GetAllSessionPlaylists();
+                ScreenReader.SayString(StringStore.LoadingPlaylists, false);
+                var playlists = LoadUserPlaylists();
+                if (playlists == null) return;
                 Buffers[0].Clear();
                 playlists.ForEach(p =>
                 {
                     Buffers[0].Add(new PlaylistBufferItem(p));
                 });
-                ScreenReader.SayString(String.Format("{0} playlists loaded", playlists.Count), false);
+                ScreenReader.SayString(String.Format("{0} {1}", playlists.Count, StringStore.PlaylistsLoaded), false);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error during load: " + ex.Message, "Oops!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                this.Dispose();
+                MessageBox.Show(StringStore.ErrorDuringLoad + ex.Message, StringStore.Oops, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
             }
             ScreenReader.SayString(Buffers.CurrentList.ToString(), false);
+        }
+
+        private List<PlaylistContainer.PlaylistInfo> LoadUserPlaylists()
+        {
+            string exceptionMessage = "";
+            try
+            {
+                return SpotifyController.GetAllSessionPlaylists();
+            }
+            // done this way so that we can recursively send this method on if the user chooses to retry
+            catch (Exception ex)
+            {
+                exceptionMessage = ex.Message;
+            }
+            // handle problems - display dialog to user giving them a chance to retry this operation
+            var dialog = MessageBox.Show(StringStore.ErrorDuringLoad + exceptionMessage + "\r\n\r\n" + StringStore.SelectRetryToTryAgainOrCancelToQuit, StringStore.ErrorDuringLoad, MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
+            if (dialog == DialogResult.Retry)
+            {
+                return LoadUserPlaylists();
+            }
+            else
+            {
+                // user has cancelled loading playlists and chosen to exit
+                this.Close();
+                return null;
+            }
         }
 
         // here be the various buffer controlling commands
@@ -131,7 +179,7 @@ namespace Blindspot
             var commands = new Dictionary<string, HandledEventHandler>();
             commands.Add("close_blindspot", new HandledEventHandler((sender, e) =>
             {
-                ScreenReader.SayString("Exiting program");
+                ScreenReader.SayString(StringStore.ExitingProgram);
                 if (this.InvokeRequired)
                 {
                     Invoke(new Action(() => { this.Close(); }));
@@ -184,12 +232,12 @@ namespace Blindspot
             commands.Add("activate_buffer_item", new HandledEventHandler(BufferItemActivated));
             commands.Add("playback_volume_up", new HandledEventHandler((sender, e) =>
             {
-                ScreenReader.SayString("Louder");
+                ScreenReader.SayString(StringStore.Louder);
                 playbackManager.VolumeUp(0.05f);
             }));
             commands.Add("playback_volume_down", new HandledEventHandler((sender, e) =>
             {
-                ScreenReader.SayString("Quieter");
+                ScreenReader.SayString(StringStore.Quieter);
                 playbackManager.VolumeDown(0.05f);
             }));
             commands.Add("dismiss_buffer", new HandledEventHandler((sender, e) =>
@@ -197,13 +245,18 @@ namespace Blindspot
                 var currentBuffer = Buffers.CurrentList;
                 if (!currentBuffer.IsDismissable)
                 {
-                    ScreenReader.SayString(String.Format("Cannot dismiss buffer {0}", currentBuffer.Name));
+                    ScreenReader.SayString(String.Format("{0} {1}", StringStore.CannotDismissBuffer, currentBuffer.Name));
                 }
                 else
                 {
                     Buffers.PreviousList();
                     Buffers.Remove(currentBuffer);
                     ScreenReader.SayString(Buffers.CurrentList.ToString());
+                }
+                // if it's a buffer with a search or other unmanaged resources, dispose it
+                if (currentBuffer is IDisposable)
+                {
+                    ((IDisposable)currentBuffer).Dispose();
                 }
             }));
             commands.Add("announce_now_playing", new HandledEventHandler((sender, e) =>
@@ -214,11 +267,12 @@ namespace Blindspot
                 }
                 else
                 {
-                    ScreenReader.SayString("No track currently being played.");
+                    ScreenReader.SayString(StringStore.NoTrackCurrentlyBeingPlayed);
                 }
             }));
             commands.Add("new_search", new HandledEventHandler(ShowSearchWindow));
             commands.Add("show_about_window", new HandledEventHandler(ShowAboutDialog));
+            commands.Add("options_dialog", new HandledEventHandler(ShowOptionsWindow));
             return commands;
         }
         
@@ -235,14 +289,14 @@ namespace Blindspot
                         // Session.Pause();
                         playbackManager.Pause();
                         isPaused = true;
-                        ScreenReader.SayString("Paused");
+                        ScreenReader.SayString(StringStore.Paused);
                     }
                     else
                     {
                         // Session.Play();
                         playbackManager.Play();
                         isPaused = false;
-                        ScreenReader.SayString("Playing");
+                        ScreenReader.SayString(StringStore.Playing);
                     }
                     return;
                 }
@@ -255,7 +309,7 @@ namespace Blindspot
                 if (response != libspotify.sp_error.OK)
                 {
                     var reason = libspotify.sp_error_message(response);
-                    ScreenReader.SayString("Unable to play track: " + reason, false);
+                    ScreenReader.SayString(StringStore.UnableToPlayTrack + reason, false);
                     return;
                 }
                 Session.Play();
@@ -267,14 +321,14 @@ namespace Blindspot
             else if (item is PlaylistBufferItem)
             {
                 PlaylistBufferItem pbi = item as PlaylistBufferItem;
-                ScreenReader.SayString("Loading playlist", false);
+                ScreenReader.SayString(StringStore.LoadingPlaylist, false);
                 Buffers.Add(new BufferList(pbi.Model.Name));
                 Buffers.CurrentListIndex = Buffers.Count - 1;
                 var playlistBuffer = Buffers.CurrentList;
                 ScreenReader.SayString(playlistBuffer.ToString(), false);
                 using (var playlist = SpotifyController.GetPlaylist(pbi.Model.Pointer, true))
                 {
-                    ScreenReader.SayString(String.Format("{0} tracks loaded", playlist.TrackCount), false);
+                    ScreenReader.SayString(String.Format("{0} {1}", playlist.TrackCount, StringStore.TracksLoaded), false);
                     var tracks = playlist.GetTracks();
                     tracks.ForEach(t =>
                     {
@@ -284,7 +338,7 @@ namespace Blindspot
             }
             else
             {
-                ScreenReader.SayString(String.Format("{0} item activated", item.ToString()), false);
+                ScreenReader.SayString(String.Format("{0} {1}", item.ToString(), StringStore.ItemActivated), false);
             }
         }
 
@@ -303,7 +357,7 @@ namespace Blindspot
             }
             else
             {
-                MessageBox.Show(message, "Streaming error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(message, StringStore.StreamingError, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Session.Pause();
             }
         }
@@ -317,50 +371,51 @@ namespace Blindspot
 
         private void ShowSearchWindow(object sender, HandledEventArgs e)
         {
-            SearchWindow search = new SearchWindow();
-            search.ShowDialog();
-            if (search.DialogResult != DialogResult.OK)
+            SearchWindow searchDialog = new SearchWindow();
+            searchDialog.ShowDialog();
+            if (searchDialog.DialogResult != DialogResult.OK)
             {
                 return; // cancelled search
             }
-            string searchText = search.SearchText;
-            var searchType = search.Type;
-            search.Dispose();
+            string searchText = searchDialog.SearchText;
+            var searchType = searchDialog.Type;
+            searchDialog.Dispose();
             if (searchType == SearchType.Track)
             {
-                ScreenReader.SayString("Searching...", false);
-                Buffers.Add(new BufferList("Search for: " + searchText));
+                ScreenReader.SayString(StringStore.Searching, false);
+                var search = spotify.SearchTracks(searchText);
+                Buffers.Add(new SearchBufferList(search));
                 Buffers.CurrentListIndex = Buffers.Count - 1;
                 var searchBuffer = Buffers.CurrentList;
                 ScreenReader.SayString(searchBuffer.ToString(), false);
-                var tracks = spotify.SearchTracks(searchText);
+                var tracks = search.Tracks;
                 if (tracks == null || tracks.Count == 0)
                 {
-                    if (spotify.LastSearch != null && !String.IsNullOrEmpty(spotify.LastSearch.DidYouMean))
+                    if (search != null && !String.IsNullOrEmpty(search.DidYouMean))
 	                {
-                        searchBuffer.Add(new BufferItem("No search results. Did you mean: " + spotify.LastSearch.DidYouMean)); 
+                        searchBuffer.Add(new BufferItem("No search results. Did you mean: " + search.DidYouMean)); 
 	                }
                     else
 	                {
-	                    searchBuffer.Add(new BufferItem("No search results")); 
+	                    searchBuffer.Add(new BufferItem(StringStore.NoSearchResults)); 
 	                }
                 }
                 else
                 {
-                    ScreenReader.SayString(tracks.Count + " search results", false);
-                    foreach (Track t in tracks)
+                    ScreenReader.SayString(tracks.Count + " " + StringStore.SearchResults, false);
+                    foreach (IntPtr pointer in tracks)
                     {
-                        searchBuffer.Add(new TrackBufferItem(t));
+                        searchBuffer.Add(new TrackBufferItem(new Track(pointer)));
                     }
                 }
             }
             else if (searchType == SearchType.Artist)
             {
-                MessageBox.Show("Not implemented yet! Boo to the developers!", "Oops!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Not implemented yet! Boo to the developers!", StringStore.Oops, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else if (searchType == SearchType.Album)
             {
-                MessageBox.Show("Not implemented yet! Boo to the developers!", "Oops!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Not implemented yet! Boo to the developers!", StringStore.Oops, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -383,5 +438,47 @@ namespace Blindspot
             aboutInfo.AppendLine("Powered by SPOTIFY(R) CORE");
             return aboutInfo.ToString();
         }
+
+        private void SetThreadToInstallationLanguage()
+        {
+            RegistryReader regReader = new RegistryReader();
+            var installedLang = regReader.Read("Installer Language");
+            if (!String.IsNullOrEmpty(installedLang))
+            {
+                var culture = new System.Globalization.CultureInfo(Convert.ToInt32(installedLang));
+                // get the neutral culture (as opposed to area specific ones), we're only interested in language for now
+                if (!culture.IsNeutralCulture) culture = culture.Parent;
+                Thread.CurrentThread.CurrentUICulture = culture;
+            }
+        }
+
+        private void DisplayFirstTimeWizard()
+        {
+            FirstTimeWizard wizard = new FirstTimeWizard();
+            wizard.ShowDialog();
+            if (wizard.DialogResult == DialogResult.OK)
+            {
+                // language may have changed, will be saved to settings object
+                // if settings is different from current (which came from installer or fallback of OS default), change to new one
+                if (settings.UILanguageCode != Thread.CurrentThread.CurrentUICulture.LCID)
+                {
+                    Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(settings.UILanguageCode);
+                }
+            }
+        }
+
+        private void ShowOptionsWindow(object sender, HandledEventArgs e)
+        {
+            OptionsDialog options = new OptionsDialog();
+            options.ShowDialog();
+            if (options.DialogResult == DialogResult.OK)
+            {
+                if (settings.UILanguageCode != Thread.CurrentThread.CurrentUICulture.LCID)
+                {
+                    Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(settings.UILanguageCode);
+                }
+            }
+        }
+
     }
 }
