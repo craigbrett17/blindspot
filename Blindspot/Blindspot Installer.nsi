@@ -2,7 +2,9 @@
 ;Comes with .NET installing and extraction of files
 
 ;What version are we on?
-!define VERSION "1.1"
+!define VERSION "2.0"
+;The name of the executable
+!define APP_EXECUTABLE "Blindspot.exe"
 
 ;Use Modern looking installer
 !include "MUI2.nsh"
@@ -201,6 +203,11 @@ Banner::destroy
 ; .NET requires a restart
 SetRebootFlag true
 dotNet40Found:
+SectionEnd
+
+Section "Silencio"
+IfSilent 0 +2
+EXEC "$INSTDIR\${APP_EXECUTABLE}"
 SectionEnd
 
 Section "Uninstall"
