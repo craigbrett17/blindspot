@@ -73,6 +73,9 @@
     <Reference Include="NAudio">
       <HintPath>..\packages\NAudio.1.6\lib\net20\NAudio.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Screen Reader API Wrapper">
       <HintPath>..\packages\ScreenReaderAPIWrapper.2.5.3\lib\Screen Reader API Wrapper.dll</HintPath>
     </Reference>
@@ -96,6 +99,7 @@
       <DependentUpon>FirstTimeWizard.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\RegistryReader.cs" />
+    <Compile Include="Helpers\UpdateResponse.cs" />
     <Compile Include="OptionsDialog.cs">
       <SubType>Form</SubType>
     </Compile>
