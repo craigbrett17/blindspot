@@ -240,4 +240,22 @@
   <data name="And" xml:space="preserve">
     <value>and</value>
   </data>
+  <data name="AnUpdateToBlindspotIsAvailableQuestionNoVersion" xml:space="preserve">
+    <value>An update to Blindspot is available. Would you like to download it now?</value>
+  </data>
+  <data name="AnUpDateToBlindspotIsAvailableQuestionWithVersion" xml:space="preserve">
+    <value>A new version of Blindspot, version {0}.{1}.{2}, is available. Would you like to download it now?</value>
+  </data>
+  <data name="ErrorDuringUpdate" xml:space="preserve">
+    <value>Error during update</value>
+  </data>
+  <data name="NewVersionAvailable" xml:space="preserve">
+    <value>New version available</value>
+  </data>
+  <data name="NewVersionDownloadedSuccessfully" xml:space="preserve">
+    <value>New version downloaded successfully! It will now be installed</value>
+  </data>
+  <data name="ReadyToInstall" xml:space="preserve">
+    <value>Ready to install</value>
+  </data>
 </root>

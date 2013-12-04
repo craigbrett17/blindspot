@@ -21,6 +21,7 @@ namespace Blindspot.Helpers
         public bool AutoLogin { get; set; }
         public float LastVolume { get; set; }
         public int UILanguageCode { get; set; }
+        public UpdateType UpdatesInterestedIn { get; set; }
 
         [NonSerialized]
         private static string fileLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"Blindspot\Settings\user_settings.dat");
@@ -65,6 +66,12 @@ namespace Blindspot.Helpers
                 serializer.Serialize(saveStream, _instance); 
             }
         }
-
+        
+        public enum UpdateType
+        {
+            Stable = 0,
+            Beta,
+            Dev
+        }
     }
 }

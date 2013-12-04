@@ -1,17 +1,17 @@
-﻿using ScreenReaderAPIWrapper;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Windows.Forms;
-using System.Resources;
-using Blindspot.Helpers;
-using Blindspot.ViewModels;
-using Blindspot.Core;
-using Blindspot.Core.Models;
 using System.IO;
+using System.Resources;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
+using System.Windows.Forms;
+using Blindspot.Core;
+using Blindspot.Core.Models;
+using Blindspot.Helpers;
+using Blindspot.ViewModels;
+using ScreenReaderAPIWrapper;
 
 namespace Blindspot
 {
@@ -25,6 +25,7 @@ namespace Blindspot
         private PlaybackManager playbackManager;
         private SpotifyClient spotify;
         private UserSettings settings = UserSettings.Instance;
+        private UpdateManager updater = UpdateManager.Instance;
         
         #region user32 functions for moving away from window
         // need a bit of pinvoke here to move away from the window if the user manages to reach the window
@@ -57,6 +58,7 @@ namespace Blindspot
             Buffers = new BufferListCollection();
             Buffers.Add(new BufferList("Playlists", false));
             spotify = SpotifyClient.Instance;
+            updater.CheckForNewVersion();
         }
 
         private void SetupFormEventHandlers()
@@ -73,6 +75,29 @@ namespace Blindspot
             playbackManager.OnPlaybackStopped += new Action(() =>
             {
                 playingTrack = null;
+            });
+            updater.NewVersionDetected += new EventHandler((sender, e) =>
+            {
+                Version newVersion = sender as Version;
+                string updateMessage = StringStore.AnUpdateToBlindspotIsAvailableQuestionNoVersion;
+                if (newVersion != null)
+                    updateMessage = String.Format(StringStore.AnUpDateToBlindspotIsAvailableQuestionWithVersion, newVersion.Major, newVersion.Minor, newVersion.Build);
+                if (MessageBox.Show(updateMessage, StringStore.NewVersionAvailable, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    updater.DownloadNewVersion();
+                }
+            });
+            updater.UpdateDownloaded += new EventHandler((sender, e) =>
+            {
+                MessageBox.Show(StringStore.NewVersionDownloadedSuccessfully, StringStore.ReadyToInstall, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Close();
+                updater.RunInstaller();
+            });
+            updater.UpdateFailed += new EventHandler((sender, e) =>
+            {
+                var exception = sender as Exception;
+                if (exception != null)
+                    MessageBox.Show(String.Format("{0}. {1}: {2}", StringStore.AnUnexpectedErrorOccurred, exception.GetType().ToString(), exception.Message), StringStore.ErrorDuringUpdate, MessageBoxButtons.OK, MessageBoxIcon.Error);
             });
             // comment this out for debugging, so that exceptions appear naturally
             Application.ThreadException += new System.Threading.ThreadExceptionEventHandler((sender, e) =>

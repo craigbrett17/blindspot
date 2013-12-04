@@ -80,6 +80,7 @@
       <HintPath>..\packages\ScreenReaderAPIWrapper.2.5.3\lib\Screen Reader API Wrapper.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -99,7 +100,7 @@
       <DependentUpon>FirstTimeWizard.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\RegistryReader.cs" />
-    <Compile Include="Helpers\UpdateResponse.cs" />
+    <Compile Include="Helpers\UpdateManager.cs" />
     <Compile Include="OptionsDialog.cs">
       <SubType>Form</SubType>
     </Compile>
