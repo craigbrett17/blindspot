@@ -26,6 +26,7 @@ namespace Blindspot
         private SpotifyClient spotify;
         private UserSettings settings = UserSettings.Instance;
         private UpdateManager updater = UpdateManager.Instance;
+        private bool downloadedUpdate = false; // for checks for updates
         
         #region user32 functions for moving away from window
         // need a bit of pinvoke here to move away from the window if the user manages to reach the window
@@ -58,7 +59,6 @@ namespace Blindspot
             Buffers = new BufferListCollection();
             Buffers.Add(new BufferList("Playlists", false));
             spotify = SpotifyClient.Instance;
-            updater.CheckForNewVersion();
         }
 
         private void SetupFormEventHandlers()
@@ -90,7 +90,7 @@ namespace Blindspot
             updater.UpdateDownloaded += new EventHandler((sender, e) =>
             {
                 MessageBox.Show(StringStore.NewVersionDownloadedSuccessfully, StringStore.ReadyToInstall, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Close();
+                downloadedUpdate = true;
                 updater.RunInstaller();
             });
             updater.UpdateFailed += new EventHandler((sender, e) =>
@@ -117,6 +117,12 @@ namespace Blindspot
         
         protected override void OnLoad(EventArgs e)
         {
+            updater.CheckForNewVersion();
+            if (downloadedUpdate)
+            {
+                this.Close();
+                return;
+            }
             string username = "", password = "";
             using (LoginWindow logon = new LoginWindow())
             {
