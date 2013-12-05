@@ -179,7 +179,23 @@ SectionEnd
 
 ; make sure we show the language select dialog
 Function .onInit
+IfSilent 0 +2
+Call checkForRunningApp
 !insertmacro MUI_LANGDLL_DISPLAY
+FunctionEnd
+
+; Checks if Blindspot is running using Mutex. If it is, try again in a few seconds and if still running, abort
+Function checkForRunningApp
+System::Call 'kernel32::OpenMutex(i 0x100000, b 0, t "Global/Blindspot") i .R0'
+	IntCmp $R0 0 notRunning
+System::Call 'kernel32::CloseHandle(i $R0)'
+Sleep 3000
+System::Call 'kernel32::OpenMutex(i 0x100000, b 0, t "Global/Blindspot") i .R0'
+	IntCmp $R0 0 notRunning
+System::Call 'kernel32::CloseHandle(i $R0)'
+MessageBox MB_OK|MB_ICONEXCLAMATION "Error updating Blindspot. The application is still running. The installer will now quit. $\r$\n$\r$\nTo install Blindspot, please manually run the installer which can be found at $EXEPATH"
+Abort
+notRunning:
 FunctionEnd
 
 Section "MS .NET Framework"
