@@ -166,6 +166,7 @@ WriteUninstaller "$INSTDIR\Uninstall Blindspot.exe"
 ; Create start menu shortcuts
 CreateDirectory "$SMPROGRAMS\$StartMenuFolder"
 CreateShortCut "$SMPROGRAMS\$StartMenuFolder\Blindspot.lnk" "$INSTDIR\Blindspot.exe"
+CreateShortCut "$SMPROGRAMS\$StartMenuFolder\Go to Blindspot app data folder.lnk" "${APPDATADIR}\"
 ; Shortcut for the helpfiles
 CreateShortCut "$SMPROGRAMS\$StartMenuFolder\Getting started guide.lnk" "http://blindspot.codeplex.com/wikipage?title=Getting%20Started&referringTitle=Documentation"
 CreateShortCut "$SMPROGRAMS\$StartMenuFolder\Keyboard shortcuts.lnk" "http://blindspot.codeplex.com/wikipage?title=Hotkey%20list&referringTitle=Documentation"
