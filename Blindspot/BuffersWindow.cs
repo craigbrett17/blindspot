@@ -100,7 +100,7 @@ namespace Blindspot
                     MessageBox.Show(String.Format("{0}. {1}: {2}", StringStore.AnUnexpectedErrorOccurred, exception.GetType().ToString(), exception.Message), StringStore.ErrorDuringUpdate, MessageBoxButtons.OK, MessageBoxIcon.Error);
             });
             // comment this out for debugging, so that exceptions appear naturally
-            Application.ThreadException += new System.Threading.ThreadExceptionEventHandler((sender, e) =>
+            /*Application.ThreadException += new System.Threading.ThreadExceptionEventHandler((sender, e) =>
             {
                 if (e.Exception is OutOfMemoryException)
                 {
@@ -112,12 +112,14 @@ namespace Blindspot
                 {
                     MessageBox.Show(StringStore.AnUnexpectedErrorOccurred + "\r\n" + String.Format("{0}: {1}", e.Exception.GetType().ToString(), e.Exception.Message), StringStore.Oops, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-            });
+            });*/
         }
         
         protected override void OnLoad(EventArgs e)
         {
-            updater.CheckForNewVersion();
+            if (settings.UpdatesInterestedIn != UserSettings.UpdateType.None)
+                updater.CheckForNewVersion();
+
             if (downloadedUpdate)
             {
                 this.Close();
@@ -505,6 +507,14 @@ namespace Blindspot
                 if (settings.UILanguageCode != Thread.CurrentThread.CurrentUICulture.LCID)
                 {
                     Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(settings.UILanguageCode);
+                }
+                if (options.KeyboardSettingsChanged)
+                {
+                    KeyManager.Hotkeys.ForEach(hotkey =>
+                    {
+                        hotkey.Unregister();
+                    });
+                    KeyManager = BufferHotkeyManager.LoadFromTextFile(this);
                 }
             }
         }

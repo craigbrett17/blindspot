@@ -11,17 +11,13 @@ namespace Blindspot.Helpers
         public string Password { get; set; }
         public byte[] ApiKey { get; set; }
         public bool StartInPrivateSession { get; set; }
-        private int _searchResults = 50;
-        public int SearchResults
-        {
-            get { return _searchResults; }
-            set { _searchResults = value; }
-        }
+        public int SearchResults { get; set; }
         public bool DontShowFirstTimeWizard { get; set; }
         public bool AutoLogin { get; set; }
         public float LastVolume { get; set; }
         public int UILanguageCode { get; set; }
         public UpdateType UpdatesInterestedIn { get; set; }
+        public string KeyboardLayoutName { get; set; }
 
         [NonSerialized]
         private static string fileLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"Blindspot\Settings\user_settings.dat");
@@ -44,7 +40,11 @@ namespace Blindspot.Helpers
             }
         }
 
-        private UserSettings() { }
+        private UserSettings()
+        {
+            // set default values
+            SearchResults = 50;
+        }
 
         private static void Load()
         {
@@ -69,7 +69,8 @@ namespace Blindspot.Helpers
         
         public enum UpdateType
         {
-            Stable = 0,
+            None = 0,
+            Stable,
             Beta,
             Dev
         }

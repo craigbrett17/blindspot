@@ -117,21 +117,57 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="generalPage.Text" xml:space="preserve">
-    <value>Generales</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="editHotkeysButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>128, 23</value>
+  <data name="autoUpdateTypeLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 13</value>
   </data>
-  <data name="editHotkeysButton.Text" xml:space="preserve">
-    <value>Editar atajos de &amp;teclado</value>
+  <data name="autoUpdateTypeLabel.Text" xml:space="preserve">
+    <value>&amp;Tipo de cambios:</value>
+  </data>
+  <data name="autoUpdateEnabledBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>211, 17</value>
+  </data>
+  <data name="autoUpdateEnabledBox.Text" xml:space="preserve">
+    <value>Activar las actualizaciones &amp;automáticas</value>
   </data>
   <data name="languageLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>41, 13</value>
   </data>
   <data name="languageLabel.Text" xml:space="preserve">
     <value>&amp;Idioma:</value>
+  </data>
+  <data name="generalPage.Text" xml:space="preserve">
+    <value>Generales</value>
+  </data>
+  <data name="keyboardDescriptionLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>66, 13</value>
+  </data>
+  <data name="keyboardDescriptionLabel.Text" xml:space="preserve">
+    <value>&amp;Descripción:</value>
+  </data>
+  <data name="keyboardLayoutBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>130, 40</value>
+  </data>
+  <data name="keyboardLayoutLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 13</value>
+  </data>
+  <data name="keyboardLayoutLabel.Text" xml:space="preserve">
+    <value>&amp;Distribución del teclado:</value>
+  </data>
+  <data name="keyboardPageDescription.Size" type="System.Drawing.Size, System.Drawing">
+    <value>312, 13</value>
+  </data>
+  <data name="keyboardPageDescription.Text" xml:space="preserve">
+    <value>Seleccione un diseño de teclado existente, o crear el tuyo propio</value>
+  </data>
+  <data name="editHotkeysButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>128, 23</value>
+  </data>
+  <data name="editHotkeysButton.Text" xml:space="preserve">
+    <value>Editar atajos de &amp;teclado</value>
+  </data>
+  <data name="keyboardPage.Text" xml:space="preserve">
+    <value>teclado</value>
   </data>
   <data name="closeButton.Text" xml:space="preserve">
     <value>&amp;Cancelar</value>
