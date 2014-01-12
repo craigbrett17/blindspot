@@ -305,6 +305,7 @@ namespace Blindspot
             commands.Add("new_search", new HandledEventHandler(ShowSearchWindow));
             commands.Add("show_about_window", new HandledEventHandler(ShowAboutDialog));
             commands.Add("options_dialog", new HandledEventHandler(ShowOptionsWindow));
+            commands.Add("item_details", new HandledEventHandler(ShowItemDetailsDialog));
             return commands;
         }
         
@@ -516,6 +517,23 @@ namespace Blindspot
                     });
                     KeyManager = BufferHotkeyManager.LoadFromTextFile(this);
                 }
+            }
+        }
+
+        private void ShowItemDetailsDialog(object sender, HandledEventArgs e)
+        {
+            BufferItem item = Buffers.CurrentList.CurrentItem;
+            object model = null;
+            if (item is TrackBufferItem) model = ((TrackBufferItem)item).Model;
+            else if (item is PlaylistBufferItem) model = ((PlaylistBufferItem)item).Model;
+            if (model != null)
+            {
+                ItemDetailsWindow detailsView = new ItemDetailsWindow(model);
+                detailsView.ShowDialog();
+            }
+            else
+            {
+                ScreenReader.SayString("View details is not a valid action for this type of item", true);
             }
         }
 

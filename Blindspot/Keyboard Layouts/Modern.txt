@@ -16,3 +16,4 @@ announce_now_playing=alt+shift+n
 new_search=alt+shift+s
 show_about_window=alt+shift+h
 options_dialog=alt+shift+o
+item_details=alt+shift+v

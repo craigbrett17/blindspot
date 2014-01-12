@@ -148,6 +148,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>StringStore.resx</DependentUpon>
     </Compile>
+    <Compile Include="ItemDetailsWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ItemDetailsWindow.Designer.cs">
+      <DependentUpon>ItemDetailsWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\BufferItem.cs" />
     <Compile Include="ViewModels\BufferList.cs" />
     <Compile Include="ViewModels\BufferListCollection.cs" />
@@ -257,6 +263,9 @@
     <EmbeddedResource Include="StringStore.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>StringStore.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ItemDetailsWindow.resx">
+      <DependentUpon>ItemDetailsWindow.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
