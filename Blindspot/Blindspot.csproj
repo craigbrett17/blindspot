@@ -189,6 +189,18 @@
     <EmbeddedResource Include="FirstTimeWizard.sv.resx">
       <DependentUpon>FirstTimeWizard.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ItemDetailsWindow.de.resx">
+      <DependentUpon>ItemDetailsWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ItemDetailsWindow.es.resx">
+      <DependentUpon>ItemDetailsWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ItemDetailsWindow.fr.resx">
+      <DependentUpon>ItemDetailsWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ItemDetailsWindow.sv.resx">
+      <DependentUpon>ItemDetailsWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="OptionsDialog.de.resx">
       <DependentUpon>OptionsDialog.cs</DependentUpon>
     </EmbeddedResource>
