@@ -69,6 +69,9 @@
     <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
     <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>blindspot.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="NAudio">
       <HintPath>..\packages\NAudio.1.6\lib\net20\NAudio.dll</HintPath>
@@ -296,6 +299,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Blindspot Installer.nsi">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="blindspot.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Keyboard Layouts\Layout Descriptions.xml">

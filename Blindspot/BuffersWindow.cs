@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.IO;
+using System.Reflection;
 using System.Resources;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -27,6 +29,7 @@ namespace Blindspot
         private UserSettings settings = UserSettings.Instance;
         private UpdateManager updater = UpdateManager.Instance;
         private bool downloadedUpdate = false; // for checks for updates
+        protected NotifyIcon _trayIcon;
         
         #region user32 functions for moving away from window
         // need a bit of pinvoke here to move away from the window if the user manages to reach the window
@@ -52,6 +55,7 @@ namespace Blindspot
                     Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(settings.UILanguageCode);
             }
             InitializeComponent();
+            InitializeTrayIcon();
             Commands = new Dictionary<string, HandledEventHandler>();
             playbackManager = new PlaybackManager();
             playbackManager.OnError += new PlaybackManager.PlaybackManagerErrorHandler(StreamingError);
@@ -60,7 +64,7 @@ namespace Blindspot
             Buffers.Add(new BufferList("Playlists", false));
             spotify = SpotifyClient.Instance;
         }
-
+        
         private void SetupFormEventHandlers()
         {
             Session.OnAudioDataArrived += new Action<byte[]>(bytes =>
@@ -114,7 +118,21 @@ namespace Blindspot
                 }
             });*/
         }
-        
+
+        private void InitializeTrayIcon()
+        {
+            _trayIcon = new NotifyIcon
+            {
+                ContextMenuStrip = new ContextMenuStrip(),
+                Icon = new Icon("blindspot.ico"),
+                Text = "Blindspot",
+                Visible = true
+            };
+            _trayIcon.ContextMenuStrip.Opening += _trayIcon_ContextMenuStrip_Opening;
+            _trayIcon.MouseUp += _trayIcon_MouseUp;
+        }
+
+
         protected override void OnLoad(EventArgs e)
         {
             if (settings.UpdatesInterestedIn != UserSettings.UpdateType.None)
@@ -209,18 +227,7 @@ namespace Blindspot
         public Dictionary<string, HandledEventHandler> LoadBufferWindowCommands()
         {
             var commands = new Dictionary<string, HandledEventHandler>();
-            commands.Add("close_blindspot", new HandledEventHandler((sender, e) =>
-            {
-                ScreenReader.SayString(StringStore.ExitingProgram);
-                if (this.InvokeRequired)
-                {
-                    Invoke(new Action(() => { this.Close(); }));
-                }
-                else
-                {
-                    this.Close();
-                }
-            }));
+            commands.Add("close_blindspot", new HandledEventHandler((sender, e) => ExitBlindspot()));
             commands.Add("next_buffer", new HandledEventHandler((sender, e) =>
             {
                 Buffers.NextList();
@@ -303,10 +310,23 @@ namespace Blindspot
                 }
             }));
             commands.Add("new_search", new HandledEventHandler(ShowSearchWindow));
-            commands.Add("show_about_window", new HandledEventHandler(ShowAboutDialog));
+            commands.Add("show_about_window", new HandledEventHandler((sender, e) => ShowAboutDialog()));
             commands.Add("options_dialog", new HandledEventHandler(ShowOptionsWindow));
             commands.Add("item_details", new HandledEventHandler(ShowItemDetailsDialog));
             return commands;
+        }
+
+        private void ExitBlindspot()
+        {
+            ScreenReader.SayString(StringStore.ExitingProgram);
+            if (this.InvokeRequired)
+            {
+                Invoke(new Action(() => { this.Close(); }));
+            }
+            else
+            {
+                this.Close();
+            }
         }
         
         private void BufferItemActivated(object sender, HandledEventArgs e)
@@ -378,6 +398,7 @@ namespace Blindspot
         {
             SpotifyController.ShutDown();
             playbackManager.Dispose();
+            _trayIcon.Visible = false; // remove tray icon
             base.OnFormClosing(e);
         }
 
@@ -451,7 +472,7 @@ namespace Blindspot
             }
         }
 
-        private void ShowAboutDialog(object sender, HandledEventArgs e)
+        private void ShowAboutDialog()
         {
             string aboutText = GetApplicationInfoText();
             MessageBox.Show(aboutText, "About Blindspot", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -534,6 +555,37 @@ namespace Blindspot
             else
             {
                 ScreenReader.SayString("View details is not a valid action for this type of item", true);
+            }
+        }
+
+        private void _trayIcon_MouseUp(object sender, MouseEventArgs e)
+        {
+            // making left clicks launch the context menu as well
+            if (e.Button == MouseButtons.Left)
+            {
+                MethodInfo mi = typeof(NotifyIcon).GetMethod("ShowContextMenu", BindingFlags.Instance | BindingFlags.NonPublic);
+                mi.Invoke(_trayIcon, null);
+            }
+        }
+
+        private void _trayIcon_ContextMenuStrip_Opening(object sender, CancelEventArgs e)
+        {
+            e.Cancel = false; // we haven't got any items in there yet, but please don't cancel!
+            _trayIcon.ContextMenuStrip.Items.Clear(); // rebuild the context menu dynamically
+
+            _trayIcon.ContextMenuStrip.Items.AddRange(_globalTrayIconMenuItems);
+        }
+
+        private ToolStripItem[] _globalTrayIconMenuItems
+        {
+            get
+            {
+                return new ToolStripItem[]
+                {
+                    new ToolStripSeparator(),
+                    new ToolStripMenuItem("&About", null, new EventHandler((sender2, e2) => ShowAboutDialog())),
+                    new ToolStripMenuItem("E&xit", null, new EventHandler((sender2, e2) => ExitBlindspot()))
+                };
             }
         }
 
