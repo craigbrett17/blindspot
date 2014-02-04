@@ -457,6 +457,24 @@ namespace Blindspot {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &amp;About.
+        /// </summary>
+        internal static string TrayIconAboutMenuItemText {
+            get {
+                return ResourceManager.GetString("TrayIconAboutMenuItemText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to E&amp;xit.
+        /// </summary>
+        internal static string TrayIconExitMenuItemText {
+            get {
+                return ResourceManager.GetString("TrayIconExitMenuItemText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unable to play track: .
         /// </summary>
         internal static string UnableToPlayTrack {

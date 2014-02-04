@@ -585,8 +585,8 @@ namespace Blindspot
                 return new ToolStripItem[]
                 {
                     new ToolStripSeparator(),
-                    new ToolStripMenuItem("&About", null, new EventHandler((sender2, e2) => ShowAboutDialog())),
-                    new ToolStripMenuItem("E&xit", null, new EventHandler((sender2, e2) => ExitBlindspot()))
+                    new ToolStripMenuItem(StringStore.TrayIconAboutMenuItemText, null, new EventHandler((sender2, e2) => ShowAboutDialog())),
+                    new ToolStripMenuItem(StringStore.TrayIconExitMenuItemText, null, new EventHandler((sender2, e2) => ExitBlindspot()))
                 };
             }
         }

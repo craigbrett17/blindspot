@@ -258,4 +258,10 @@
   <data name="ReadyToInstall" xml:space="preserve">
     <value>Bereit zur Installation</value>
   </data>
+  <data name="TrayIconAboutMenuItemText" xml:space="preserve">
+    <value>ü&amp;ber</value>
+  </data>
+  <data name="TrayIconExitMenuItemText" xml:space="preserve">
+    <value>B&amp;eenden</value>
+  </data>
 </root>
