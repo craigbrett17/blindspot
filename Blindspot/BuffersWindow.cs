@@ -79,6 +79,7 @@ namespace Blindspot
             playbackManager.OnPlaybackStopped += new Action(() =>
             {
                 playingTrack = null;
+                _trayIcon.Text = "Blindspot";
             });
             updater.NewVersionDetected += new EventHandler((sender, e) =>
             {
@@ -131,8 +132,7 @@ namespace Blindspot
             _trayIcon.ContextMenuStrip.Opening += _trayIcon_ContextMenuStrip_Opening;
             _trayIcon.MouseUp += _trayIcon_MouseUp;
         }
-
-
+        
         protected override void OnLoad(EventArgs e)
         {
             if (settings.UpdatesInterestedIn != UserSettings.UpdateType.None)
@@ -356,7 +356,8 @@ namespace Blindspot
                 if (playingTrack != null)
                 {
                     Session.UnloadPlayer();
-                    playbackManager.Stop(); 
+                    playbackManager.Stop();
+                    _trayIcon.Text = "Blindspot";
                 }
                 var response = Session.LoadPlayer(tbi.Model.TrackPtr);
                 if (response.IsError)
@@ -369,6 +370,7 @@ namespace Blindspot
                 playbackManager.fullyDownloaded = false;
                 playbackManager.Play();
                 isPaused = false;
+                _trayIcon.Text = String.Format("Blindspot - {0}", tbi.ToString());
             }
             else if (item is PlaylistBufferItem)
             {
