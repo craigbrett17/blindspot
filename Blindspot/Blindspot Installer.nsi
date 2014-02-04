@@ -126,6 +126,7 @@ SetOutPath "$INSTDIR"
 
 File "Blindspot.exe"
 File "Blindspot.exe.config"
+File "blindspot.ico"
 File "*.txt"
 File "*.dll"
 
