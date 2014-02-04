@@ -30,6 +30,7 @@ namespace Blindspot
         private UpdateManager updater = UpdateManager.Instance;
         private bool downloadedUpdate = false; // for checks for updates
         protected NotifyIcon _trayIcon;
+        private BufferList _playQueueBuffer;
         
         #region user32 functions for moving away from window
         // need a bit of pinvoke here to move away from the window if the user manages to reach the window
@@ -61,6 +62,8 @@ namespace Blindspot
             playbackManager.OnError += new PlaybackManager.PlaybackManagerErrorHandler(StreamingError);
             SetupFormEventHandlers();
             Buffers = new BufferListCollection();
+            _playQueueBuffer = new BufferList("Play Queue", false);
+            Buffers.Add(_playQueueBuffer);
             Buffers.Add(new BufferList("Playlists", false));
             spotify = SpotifyClient.Instance;
         }
@@ -182,12 +185,13 @@ namespace Blindspot
                 ScreenReader.SayString(StringStore.LoadingPlaylists, false);
                 var playlists = LoadUserPlaylists();
                 if (playlists == null) return;
-                Buffers[0].Clear();
+                Buffers[1].Clear();
                 playlists.ForEach(p =>
                 {
-                    Buffers[0].Add(new PlaylistBufferItem(p));
+                    Buffers[1].Add(new PlaylistBufferItem(p));
                 });
                 ScreenReader.SayString(String.Format("{0} {1}", playlists.Count, StringStore.PlaylistsLoaded), false);
+                Buffers.CurrentListIndex = 1; // start on the playllists list
             }
             catch (Exception ex)
             {
