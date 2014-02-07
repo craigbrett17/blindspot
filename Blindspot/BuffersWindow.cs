@@ -83,6 +83,13 @@ namespace Blindspot
             {
                 playingTrack = null;
                 _trayIcon.Text = "Blindspot";
+                _playQueueBuffer.RemoveAt(0);
+                if (_playQueueBuffer.Count > 0)
+                {
+                    var nextBufferItem = _playQueueBuffer[0] as TrackBufferItem;
+                    var nextTrack = nextBufferItem.Model;
+                    playingTrack = nextTrack;
+                }
             });
             updater.NewVersionDetected += new EventHandler((sender, e) =>
             {
@@ -357,30 +364,28 @@ namespace Blindspot
                     }
                     return;
                 }
-                if (playingTrack != null)
+                var isInQueue = _playQueueBuffer.Contains(tbi);
+                ClearCurrentlyPlayingTrack();
+                PlayNewTrackBufferItem(tbi);
+                if (isInQueue && Buffers.CurrentListIndex == 0) // if they've picked it from the play queue
                 {
-                    Session.UnloadPlayer();
-                    playbackManager.Stop();
-                    _trayIcon.Text = "Blindspot";
+                    int indexOfChosenTrack = _playQueueBuffer.IndexOf(tbi);
+                    if (indexOfChosenTrack > 0)
+                    {
+                        _playQueueBuffer.RemoveRange(0, indexOfChosenTrack - 2);
+                    }
                 }
-                var response = Session.LoadPlayer(tbi.Model.TrackPtr);
-                if (response.IsError)
+                else
                 {
-                    ScreenReader.SayString(StringStore.UnableToPlayTrack + response.Message, false);
-                    return;
+                    _playQueueBuffer.Clear();
+                    _playQueueBuffer.Add(tbi);
                 }
-                Session.Play();
-                playingTrack = tbi.Model;
-                playbackManager.fullyDownloaded = false;
-                playbackManager.Play();
-                isPaused = false;
-                _trayIcon.Text = String.Format("Blindspot - {0}", tbi.ToString());
             }
             else if (item is PlaylistBufferItem)
             {
                 PlaylistBufferItem pbi = item as PlaylistBufferItem;
                 ScreenReader.SayString(StringStore.LoadingPlaylist, false);
-                Buffers.Add(new BufferList(pbi.Model.Name));
+                Buffers.Add(new PlaylistBufferList(pbi.Model.Name));
                 Buffers.CurrentListIndex = Buffers.Count - 1;
                 var playlistBuffer = Buffers.CurrentList;
                 ScreenReader.SayString(playlistBuffer.ToString(), false);
@@ -399,7 +404,7 @@ namespace Blindspot
                 ScreenReader.SayString(String.Format("{0} {1}", item.ToString(), StringStore.ItemActivated), false);
             }
         }
-
+        
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             SpotifyController.ShutDown();
@@ -562,6 +567,32 @@ namespace Blindspot
             {
                 ScreenReader.SayString("View details is not a valid action for this type of item", true);
             }
+        }
+
+        private void ClearCurrentlyPlayingTrack()
+        {
+            if (playingTrack != null)
+            {
+                Session.UnloadPlayer();
+                playbackManager.Stop();
+                _trayIcon.Text = "Blindspot";
+            }
+        }
+
+        private void PlayNewTrackBufferItem(TrackBufferItem item)
+        {
+            var response = Session.LoadPlayer(item.Model.TrackPtr);
+            if (response.IsError)
+            {
+                ScreenReader.SayString(StringStore.UnableToPlayTrack + response.Message, false);
+                return;
+            }
+            Session.Play();
+            playingTrack = item.Model;
+            playbackManager.fullyDownloaded = false;
+            playbackManager.Play();
+            isPaused = false;
+            _trayIcon.Text = String.Format("Blindspot - {0}", item.ToString());
         }
 
         private void _trayIcon_MouseUp(object sender, MouseEventArgs e)
