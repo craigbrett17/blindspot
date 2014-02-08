@@ -608,7 +608,7 @@ namespace Blindspot
             playbackManager.fullyDownloaded = false;
             playbackManager.Play();
             isPaused = false;
-            _trayIcon.Text = String.Format("Blindspot - {0}", item.ToString());
+            _trayIcon.Text = String.Format("Blindspot - {0}", item.ToTruncatedString());
         }
 
         private void _trayIcon_MouseUp(object sender, MouseEventArgs e)
