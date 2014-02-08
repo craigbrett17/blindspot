@@ -79,18 +79,7 @@ namespace Blindspot
                 playbackManager.fullyDownloaded = true;
                 Session.UnloadPlayer();
             });
-            playbackManager.OnPlaybackStopped += new Action(() =>
-            {
-                playingTrack = null;
-                _trayIcon.Text = "Blindspot";
-                _playQueueBuffer.RemoveAt(0);
-                if (_playQueueBuffer.Count > 0)
-                {
-                    var nextBufferItem = _playQueueBuffer[0] as TrackBufferItem;
-                    PlayNewTrackBufferItem(nextBufferItem);
-                    _playQueueBuffer.CurrentItemIndex = 0;
-                }
-            });
+            playbackManager.OnPlaybackStopped += new Action(HandleEndOfCurrentTrack);
             updater.NewVersionDetected += new EventHandler((sender, e) =>
             {
                 Version newVersion = sender as Version;
@@ -129,7 +118,7 @@ namespace Blindspot
                 }
             });*/
         }
-
+        
         private void InitializeTrayIcon()
         {
             _trayIcon = new NotifyIcon
@@ -381,13 +370,10 @@ namespace Blindspot
                 PlayNewTrackBufferItem(tbi);
                 if (Buffers.CurrentListIndex == 0 && _playQueueBuffer.Contains(tbi)) // if they've picked it from the play queue
                 {
-                    Logger.WriteTrace("Clicked a track queue item");
-                    int indexOfChosenTrack = _playQueueBuffer.CurrentItemIndex;
-                    Logger.WriteTrace("Index is {0} out of a possible {1}", indexOfChosenTrack, _playQueueBuffer.Count - 1);
+                    int indexOfChosenTrack = _playQueueBuffer.IndexOf(tbi);
                     if (indexOfChosenTrack > 0)
                     {
                         _playQueueBuffer.RemoveRange(0, indexOfChosenTrack);
-                        Logger.WriteTrace("Removing from 0 to {0}", indexOfChosenTrack - 1);
                     }
                 }
                 else
@@ -609,6 +595,19 @@ namespace Blindspot
             playbackManager.Play();
             isPaused = false;
             _trayIcon.Text = String.Format("Blindspot - {0}", item.ToTruncatedString());
+        }
+
+        private void HandleEndOfCurrentTrack()
+        {
+            playingTrack = null;
+            _trayIcon.Text = "Blindspot";
+            _playQueueBuffer.RemoveAt(0);
+            if (_playQueueBuffer.Count > 0)
+            {
+                var nextBufferItem = _playQueueBuffer[0] as TrackBufferItem;
+                PlayNewTrackBufferItem(nextBufferItem);
+                _playQueueBuffer.CurrentItemIndex = 0;
+            }
         }
 
         private void _trayIcon_MouseUp(object sender, MouseEventArgs e)
