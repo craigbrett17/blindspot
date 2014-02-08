@@ -380,6 +380,15 @@ namespace Blindspot
                 {
                     _playQueueBuffer.Clear();
                     _playQueueBuffer.Add(tbi);                    
+                    if (Buffers.CurrentList is PlaylistBufferList) // add the remaining playlist to the queue
+                    {
+                        var playlist = Buffers.CurrentList as PlaylistBufferList;
+                        int indexOfTrack = playlist.CurrentItemIndex;
+                        for (int index = indexOfTrack + 1; index < playlist.Count; index++)
+                        {
+                            _playQueueBuffer.Add(playlist[index]);
+                        }
+                    }
                 }
                 _playQueueBuffer.CurrentItemIndex = 0;
             }
