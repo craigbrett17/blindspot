@@ -264,4 +264,7 @@
   <data name="TrayIconExitMenuItemText" xml:space="preserve">
     <value>B&amp;eenden</value>
   </data>
+  <data name="AddedToQueue" xml:space="preserve">
+    <value>Hinzu Warteschlange</value>
+  </data>
 </root>

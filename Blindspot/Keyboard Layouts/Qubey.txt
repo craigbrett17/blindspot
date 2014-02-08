@@ -17,4 +17,5 @@ announce_now_playing=ctrl+win+n
 new_search=ctrl+win+s
 show_about_window=ctrl+win+h
 options_dialog=ctrl+win+o
-item_details=alt+shift+v
+item_details=ctrl+win+v
+add_to_queue=ctrl+win+q

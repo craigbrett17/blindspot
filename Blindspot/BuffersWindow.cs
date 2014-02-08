@@ -87,8 +87,8 @@ namespace Blindspot
                 if (_playQueueBuffer.Count > 0)
                 {
                     var nextBufferItem = _playQueueBuffer[0] as TrackBufferItem;
-                    var nextTrack = nextBufferItem.Model;
-                    playingTrack = nextTrack;
+                    PlayNewTrackBufferItem(nextBufferItem);
+                    _playQueueBuffer.CurrentItemIndex = 0;
                 }
             });
             updater.NewVersionDetected += new EventHandler((sender, e) =>
@@ -324,6 +324,19 @@ namespace Blindspot
             commands.Add("show_about_window", new HandledEventHandler((sender, e) => ShowAboutDialog()));
             commands.Add("options_dialog", new HandledEventHandler(ShowOptionsWindow));
             commands.Add("item_details", new HandledEventHandler(ShowItemDetailsDialog));
+            commands.Add("add_to_queue", new HandledEventHandler((sender, e) =>
+            {
+                var item = Buffers.CurrentList.CurrentItem;
+                if (item is TrackBufferItem)
+                {
+                    _playQueueBuffer.Add(item);
+                    ScreenReader.SayString(StringStore.AddedToQueue, true);
+                }
+                else
+                {
+                    
+                }
+            }));
             return commands;
         }
 
@@ -364,22 +377,25 @@ namespace Blindspot
                     }
                     return;
                 }
-                var isInQueue = _playQueueBuffer.Contains(tbi);
                 ClearCurrentlyPlayingTrack();
                 PlayNewTrackBufferItem(tbi);
-                if (isInQueue && Buffers.CurrentListIndex == 0) // if they've picked it from the play queue
+                if (Buffers.CurrentListIndex == 0 && _playQueueBuffer.Contains(tbi)) // if they've picked it from the play queue
                 {
-                    int indexOfChosenTrack = _playQueueBuffer.IndexOf(tbi);
+                    Logger.WriteTrace("Clicked a track queue item");
+                    int indexOfChosenTrack = _playQueueBuffer.CurrentItemIndex;
+                    Logger.WriteTrace("Index is {0} out of a possible {1}", indexOfChosenTrack, _playQueueBuffer.Count - 1);
                     if (indexOfChosenTrack > 0)
                     {
-                        _playQueueBuffer.RemoveRange(0, indexOfChosenTrack - 2);
+                        _playQueueBuffer.RemoveRange(0, indexOfChosenTrack);
+                        Logger.WriteTrace("Removing from 0 to {0}", indexOfChosenTrack - 1);
                     }
                 }
                 else
                 {
                     _playQueueBuffer.Clear();
-                    _playQueueBuffer.Add(tbi);
+                    _playQueueBuffer.Add(tbi);                    
                 }
+                _playQueueBuffer.CurrentItemIndex = 0;
             }
             else if (item is PlaylistBufferItem)
             {

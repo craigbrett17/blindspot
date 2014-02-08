@@ -61,6 +61,15 @@ namespace Blindspot {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Added to queue.
+        /// </summary>
+        internal static string AddedToQueue {
+            get {
+                return ResourceManager.GetString("AddedToQueue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to and.
         /// </summary>
         internal static string And {
