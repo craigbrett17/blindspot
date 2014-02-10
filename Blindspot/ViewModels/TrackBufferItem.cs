@@ -11,7 +11,7 @@ namespace Blindspot.ViewModels
     public class TrackBufferItem : BufferItem
     {
         public Track Model { get; set; }
-        const int _truncationLength = 52;
+        const int _truncationLength = 51;
 
         public TrackBufferItem(Track trackIn)
         {
