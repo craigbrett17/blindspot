@@ -264,4 +264,7 @@
   <data name="TrayIconExitMenuItemText" xml:space="preserve">
     <value>&amp;Utgång</value>
   </data>
+  <data name="AddedToQueue" xml:space="preserve">
+    <value>Inkom till i kön</value>
+  </data>
 </root>

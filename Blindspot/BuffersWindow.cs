@@ -30,6 +30,7 @@ namespace Blindspot
         private UpdateManager updater = UpdateManager.Instance;
         private bool downloadedUpdate = false; // for checks for updates
         protected NotifyIcon _trayIcon;
+        private BufferList _playQueueBuffer;
         
         #region user32 functions for moving away from window
         // need a bit of pinvoke here to move away from the window if the user manages to reach the window
@@ -61,6 +62,8 @@ namespace Blindspot
             playbackManager.OnError += new PlaybackManager.PlaybackManagerErrorHandler(StreamingError);
             SetupFormEventHandlers();
             Buffers = new BufferListCollection();
+            _playQueueBuffer = new BufferList("Play Queue", false);
+            Buffers.Add(_playQueueBuffer);
             Buffers.Add(new BufferList("Playlists", false));
             spotify = SpotifyClient.Instance;
         }
@@ -76,11 +79,7 @@ namespace Blindspot
                 playbackManager.fullyDownloaded = true;
                 Session.UnloadPlayer();
             });
-            playbackManager.OnPlaybackStopped += new Action(() =>
-            {
-                playingTrack = null;
-                _trayIcon.Text = "Blindspot";
-            });
+            playbackManager.OnPlaybackStopped += new Action(HandleEndOfCurrentTrack);
             updater.NewVersionDetected += new EventHandler((sender, e) =>
             {
                 Version newVersion = sender as Version;
@@ -119,7 +118,7 @@ namespace Blindspot
                 }
             });*/
         }
-
+        
         private void InitializeTrayIcon()
         {
             _trayIcon = new NotifyIcon
@@ -182,12 +181,13 @@ namespace Blindspot
                 ScreenReader.SayString(StringStore.LoadingPlaylists, false);
                 var playlists = LoadUserPlaylists();
                 if (playlists == null) return;
-                Buffers[0].Clear();
+                Buffers[1].Clear();
                 playlists.ForEach(p =>
                 {
-                    Buffers[0].Add(new PlaylistBufferItem(p));
+                    Buffers[1].Add(new PlaylistBufferItem(p));
                 });
                 ScreenReader.SayString(String.Format("{0} {1}", playlists.Count, StringStore.PlaylistsLoaded), false);
+                Buffers.CurrentListIndex = 1; // start on the playllists list
             }
             catch (Exception ex)
             {
@@ -313,6 +313,19 @@ namespace Blindspot
             commands.Add("show_about_window", new HandledEventHandler((sender, e) => ShowAboutDialog()));
             commands.Add("options_dialog", new HandledEventHandler(ShowOptionsWindow));
             commands.Add("item_details", new HandledEventHandler(ShowItemDetailsDialog));
+            commands.Add("add_to_queue", new HandledEventHandler((sender, e) =>
+            {
+                var item = Buffers.CurrentList.CurrentItem;
+                if (item is TrackBufferItem)
+                {
+                    _playQueueBuffer.Add(item);
+                    ScreenReader.SayString(StringStore.AddedToQueue, true);
+                }
+                else
+                {
+                    
+                }
+            }));
             return commands;
         }
 
@@ -353,30 +366,37 @@ namespace Blindspot
                     }
                     return;
                 }
-                if (playingTrack != null)
+                ClearCurrentlyPlayingTrack();
+                PlayNewTrackBufferItem(tbi);
+                if (Buffers.CurrentListIndex == 0 && _playQueueBuffer.Contains(tbi)) // if they've picked it from the play queue
                 {
-                    Session.UnloadPlayer();
-                    playbackManager.Stop();
-                    _trayIcon.Text = "Blindspot";
+                    int indexOfChosenTrack = _playQueueBuffer.IndexOf(tbi);
+                    if (indexOfChosenTrack > 0)
+                    {
+                        _playQueueBuffer.RemoveRange(0, indexOfChosenTrack);
+                    }
                 }
-                var response = Session.LoadPlayer(tbi.Model.TrackPtr);
-                if (response.IsError)
+                else
                 {
-                    ScreenReader.SayString(StringStore.UnableToPlayTrack + response.Message, false);
-                    return;
+                    _playQueueBuffer.Clear();
+                    _playQueueBuffer.Add(tbi);                    
+                    if (Buffers.CurrentList is PlaylistBufferList) // add the remaining playlist to the queue
+                    {
+                        var playlist = Buffers.CurrentList as PlaylistBufferList;
+                        int indexOfTrack = playlist.CurrentItemIndex;
+                        for (int index = indexOfTrack + 1; index < playlist.Count; index++)
+                        {
+                            _playQueueBuffer.Add(playlist[index]);
+                        }
+                    }
                 }
-                Session.Play();
-                playingTrack = tbi.Model;
-                playbackManager.fullyDownloaded = false;
-                playbackManager.Play();
-                isPaused = false;
-                _trayIcon.Text = String.Format("Blindspot - {0}", tbi.ToString());
+                _playQueueBuffer.CurrentItemIndex = 0;
             }
             else if (item is PlaylistBufferItem)
             {
                 PlaylistBufferItem pbi = item as PlaylistBufferItem;
                 ScreenReader.SayString(StringStore.LoadingPlaylist, false);
-                Buffers.Add(new BufferList(pbi.Model.Name));
+                Buffers.Add(new PlaylistBufferList(pbi.Model.Name));
                 Buffers.CurrentListIndex = Buffers.Count - 1;
                 var playlistBuffer = Buffers.CurrentList;
                 ScreenReader.SayString(playlistBuffer.ToString(), false);
@@ -395,7 +415,7 @@ namespace Blindspot
                 ScreenReader.SayString(String.Format("{0} {1}", item.ToString(), StringStore.ItemActivated), false);
             }
         }
-
+        
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             SpotifyController.ShutDown();
@@ -557,6 +577,45 @@ namespace Blindspot
             else
             {
                 ScreenReader.SayString("View details is not a valid action for this type of item", true);
+            }
+        }
+
+        private void ClearCurrentlyPlayingTrack()
+        {
+            if (playingTrack != null)
+            {
+                Session.UnloadPlayer();
+                playbackManager.Stop();
+                _trayIcon.Text = "Blindspot";
+            }
+        }
+
+        private void PlayNewTrackBufferItem(TrackBufferItem item)
+        {
+            var response = Session.LoadPlayer(item.Model.TrackPtr);
+            if (response.IsError)
+            {
+                ScreenReader.SayString(StringStore.UnableToPlayTrack + response.Message, false);
+                return;
+            }
+            Session.Play();
+            playingTrack = item.Model;
+            playbackManager.fullyDownloaded = false;
+            playbackManager.Play();
+            isPaused = false;
+            _trayIcon.Text = String.Format("Blindspot - {0}", item.ToTruncatedString());
+        }
+
+        private void HandleEndOfCurrentTrack()
+        {
+            playingTrack = null;
+            _trayIcon.Text = "Blindspot";
+            _playQueueBuffer.RemoveAt(0);
+            if (_playQueueBuffer.Count > 0)
+            {
+                var nextBufferItem = _playQueueBuffer[0] as TrackBufferItem;
+                PlayNewTrackBufferItem(nextBufferItem);
+                _playQueueBuffer.CurrentItemIndex = 0;
             }
         }
 

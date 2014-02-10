@@ -8,7 +8,7 @@ namespace Blindspot.ViewModels
 {
     public class BufferList : List<BufferItem>
     {
-        public string Name { get; private set; }
+        public string Name { get; protected set; }
         public bool IsDismissable { get; protected set; }
 
         const int jumpAmount = 10;

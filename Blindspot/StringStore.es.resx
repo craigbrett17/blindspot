@@ -264,4 +264,7 @@
   <data name="TrayIconExitMenuItemText" xml:space="preserve">
     <value>&amp;Salida</value>
   </data>
+  <data name="AddedToQueue" xml:space="preserve">
+    <value>Agregado a la cola</value>
+  </data>
 </root>

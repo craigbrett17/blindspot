@@ -18,3 +18,4 @@ new_search=alt+shift+s
 show_about_window=alt+shift+h
 options_dialog=alt+shift+o
 item_details=alt+shift+v
+add_to_queue=alt+shift+q
