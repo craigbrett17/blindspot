@@ -5,13 +5,20 @@
 !define VERSION "2.0"
 ;The name of the executable
 !define APP_EXECUTABLE "Blindspot.exe"
+!ifndef INCLUDE_DOTNET
+	!define INCLUDE_DOTNET 0
+!endif
 
 ;Use Modern looking installer
 !include "MUI2.nsh"
 
 ;Settings
 Name "Blindspot"
-OutFile "Blindspot Installer.exe"
+!if ${INCLUDE_DOTNET} = 1
+OutFile "Blindspot Installer with DotNet.exe"
+!else
+OutFile "Blindspot Installer no DotNet.exe"
+!endif
 !define APPDATADIR "$LOCALAPPDATA\Blindspot"
 
 ;Install to program files directory
@@ -80,6 +87,7 @@ LangString welcome_dotnet ${LANG_ENGLISH} "Note: Blindspot requires installation
 LangString finishpage_text_reboot ${LANG_ENGLISH} "Since .NET Framework has been installed, a system reboot is needed to launch the application"
 LangString show_readme ${LANG_ENGLISH} "View Getting Started guide"
 LangString install_dotnet_question ${LANG_ENGLISH} "The .NET framework version 4 is not currently installed. Do you want to install it? This requires 600MB free space on your system"
+LangString install_dotnet_wrong_installer ${LANG_ENGLISH} "The .NET framework version 4 is not currently installed. This is the installer that is not bundled with the .NET framework. Please download the installer that comes with the .NET framework to continue."
 
 ;French
 LangString welcome_top_1 ${LANG_FRENCH} "Bienvenue dans l'assistant d'installation pour Blindspot version"
@@ -88,6 +96,7 @@ LangString welcome_dotnet ${LANG_FRENCH} "Note: Blindspot nécessite l'installati
 LangString finishpage_text_reboot ${LANG_FRENCH} "Parce que .NET Framework a été installé, un redémarrage du système est nécessaire pour lancer l'application"
 LangString show_readme ${LANG_FRENCH} "Voir le Guide de démarrage"
 LangString install_dotnet_question ${LANG_FRENCH} ".NET Framework version 4 n'est pas installé. Voulez-vous installer? Cela nécessite 600 Mo d'espace libre sur votre système"
+LangString install_dotnet_wrong_installer ${LANG_FRENCH} "La version du. NET Framework 4 n'est pas installé. C'est l'installateur qui n'est pas fourni avec le framework. NET. S'il vous plaît télécharger le programme d'installation fourni avec le framework. NET pour continuer."
 
 ;German
 LangString welcome_top_1 ${LANG_GERMAN} "Willkommen auf der Installations-Assistent für Blindspot version"
@@ -96,6 +105,7 @@ LangString welcome_dotnet ${LANG_GERMAN} "Hinweis: Blindspot erfordert die insta
 LangString finishpage_text_reboot ${LANG_GERMAN} "Weil .NET Framework installiert wurde, ist ein neustart des systems erforderlich, um die anwendung zu starten"
 LangString show_readme ${LANG_GERMAN} "Sehen sie im Handbuch Erste Schritte"
 LangString install_dotnet_question ${LANG_GERMAN} "Die .NET Framework Version 4 noch nicht installiert ist. Möchten Sie es installieren? Dies erfordert 600 MB freien speicherplatz auf ihrem system"
+LangString install_dotnet_wrong_installer ${LANG_GERMAN} ".NET Framework Version 4 ist derzeit nicht installiert. Dies ist das Installationsprogramm, das nicht mit dem.NET-Framework ausgeliefert wird. Bitte laden Sie das Installationsprogramm, das mit dem .NET-Framework weiter geht."
 
 ;Spanish
 LangString welcome_top_1 ${LANG_SPANISH} "Bienvenido al asistente de instalación para la Blindspot versión"
@@ -104,6 +114,7 @@ LangString welcome_dotnet ${LANG_SPANISH} "Nota: Blindspot requiere la instalaci
 LangString finishpage_text_reboot ${LANG_SPANISH} "Debido .NET Framework está instalado, es necesario un reinicio del sistema para iniciar la aplicación"
 LangString show_readme ${LANG_SPANISH} "Ver Guía de introducción"
 LangString install_dotnet_question ${LANG_SPANISH} "El .NET Framework versión 4 no está instalado. ¿Desea instalarlo? Esto requiere 600 MB de espacio libre en el sistema"
+LangString install_dotnet_wrong_installer ${LANG_SPANISH} "El. NET Framework versión 4 no está instalado actualmente. Este es el programa de instalación que no está incluido con el marco NET.. Por favor, descargue el instalador que viene con el marco NET. Continuar."
 
 ;Swedish
 LangString welcome_top_1 ${LANG_SWEDISH} "Välkommen till installationsguiden för Blindspot version"
@@ -112,6 +123,7 @@ LangString welcome_dotnet ${LANG_SWEDISH} "Obs: Blindspot kräver installation av
 LangString finishpage_text_reboot ${LANG_SWEDISH} "Eftersom .NET Framework har installerats, är en omstart krävs för att starta programmet"
 LangString show_readme ${LANG_SWEDISH} "Se Komma igång"
 LangString install_dotnet_question ${LANG_SWEDISH} "Den .NET Framework version 4 är för närvarande inte installerat. Vill du installera det? Detta kräver 600 MB ledigt utrymme på ditt system"
+LangString install_dotnet_wrong_installer ${LANG_SWEDISH} "Den .NET Framework version 4 är för närvarande inte installerat. Detta är installatören som inte följer med. NET Framework. Vänligen ladda ner installationsprogrammet som följer med. NET Framework för att fortsätta."
 
 ;Reserve Files
 
@@ -150,6 +162,9 @@ SetOutPath "${APPDATADIR}\Settings"
 ; If we need to override keyboard layouts for new features, comment out this line
 ; IfFileExists "$OUTDIR\hotkeys.txt" +2 0
 File /oname=hotkeys.txt "Keyboard Layouts\Standard.txt"
+; If we need to overwrite usersettings.dat
+IfFileExists "$OUTDIR\user_settings.dat" +2 0
+Delete "$OUTDIR\user_settings.dat"
 ; Copy keyboard layouts
 SetOutPath "${APPDATADIR}\Keyboard Layouts"
 File "Keyboard Layouts\*.txt"
@@ -211,15 +226,20 @@ ReadRegDWORD $0 HKLM "Software\Microsoft\Net Framework Setup\NDP\v4\Client" "Ins
 IfErrors dotNet40NotFound
 IntCmp $0 1 dotNet40Found
 dotNet40NotFound: 
+!if ${INCLUDE_DOTNET} = 0
+MessageBox MB_OK|MB_ICONEXCLAMATION "$(install_dotnet_wrong_installer)"
+Abort
+!else
 MessageBox MB_YESNO "$(install_dotnet_question)" IDNO dotNet40Found
 Banner::show /set 76 "Installing .NET Framework 4.0" "Please wait"  
 SetOutPath $TEMP
-File /nonfatal "tools\dotNetFx40_Client_x86_x64.exe"
+File "tools\dotNetFx40_Client_x86_x64.exe"
 ExecWait "$TEMP\dotNetFx40_Client_x86_x64.exe /passive /showfinalerror /norestart"
 Delete /REBOOTOK "$TEMP\dotNetFx40_Client_x86_x64.exe"
 Banner::destroy
 ; .NET requires a restart
 SetRebootFlag true
+!endif
 dotNet40Found:
 SectionEnd
 
