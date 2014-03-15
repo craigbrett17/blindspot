@@ -326,6 +326,7 @@ namespace Blindspot
                     
                 }
             }));
+            commands.Add("media_play_pause", new HandledEventHandler((sender, e) => TogglePlayPause(false)));
             return commands;
         }
 
@@ -350,20 +351,7 @@ namespace Blindspot
                 var tbi = item as TrackBufferItem;
                 if (playingTrackItem != null && tbi.Model.TrackPtr == playingTrackItem.Model.TrackPtr)
                 {
-                    if (!isPaused)
-                    {
-                        // Session.Pause();
-                        playbackManager.Pause();
-                        isPaused = true;
-                        ScreenReader.SayString(StringStore.Paused);
-                    }
-                    else
-                    {
-                        // Session.Play();
-                        playbackManager.Play();
-                        isPaused = false;
-                        ScreenReader.SayString(StringStore.Playing);
-                    }
+                    TogglePlayPause(true);
                     return;
                 }
                 ClearCurrentlyPlayingTrack();
@@ -413,6 +401,26 @@ namespace Blindspot
             else
             {
                 ScreenReader.SayString(String.Format("{0} {1}", item.ToString(), StringStore.ItemActivated), false);
+            }
+        }
+
+        private void TogglePlayPause(bool announcePauseState)
+        {
+            if (!isPaused)
+            {
+                // Session.Pause();
+                playbackManager.Pause();
+                isPaused = true;
+                if (announcePauseState)
+                    ScreenReader.SayString(StringStore.Paused);
+            }
+            else
+            {
+                // Session.Play();
+                playbackManager.Play();
+                isPaused = false;
+                if (announcePauseState)
+                    ScreenReader.SayString(StringStore.Playing);
             }
         }
         
@@ -584,8 +592,8 @@ namespace Blindspot
         {
             if (playingTrackItem != null)
             {
-                Session.UnloadPlayer();
                 playbackManager.Stop();
+                Session.UnloadPlayer();
                 _trayIcon.Text = "Blindspot";
             }
         }
@@ -618,7 +626,7 @@ namespace Blindspot
                 _playQueueBuffer.CurrentItemIndex = 0;
             }
         }
-
+        
         private void _trayIcon_MouseUp(object sender, MouseEventArgs e)
         {
             // making left clicks launch the context menu as well

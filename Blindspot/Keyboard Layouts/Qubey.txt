@@ -19,3 +19,4 @@ show_about_window=ctrl+win+h
 options_dialog=ctrl+win+o
 item_details=ctrl+win+v
 add_to_queue=ctrl+win+q
+media_play_pause=MediaPlayPause
