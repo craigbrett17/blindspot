@@ -22,7 +22,7 @@ namespace Blindspot
         public BufferHotkeyManager KeyManager { get; set; }
         public Dictionary<string, HandledEventHandler> Commands { get; set; }
         public BufferListCollection Buffers { get; set; }
-        private Track playingTrack;
+        private TrackBufferItem playingTrackItem;
         private bool isPaused;
         private PlaybackManager playbackManager;
         private SpotifyClient spotify;
@@ -300,9 +300,9 @@ namespace Blindspot
             }));
             commands.Add("announce_now_playing", new HandledEventHandler((sender, e) =>
             {
-                if (playingTrack != null)
+                if (playingTrackItem != null)
                 {
-                    ScreenReader.SayString(playingTrack.ToString());
+                    ScreenReader.SayString(playingTrackItem.ToString());
                 }
                 else
                 {
@@ -348,7 +348,7 @@ namespace Blindspot
             if (item is TrackBufferItem)
             {
                 var tbi = item as TrackBufferItem;
-                if (playingTrack != null && tbi.Model.TrackPtr == playingTrack.TrackPtr)
+                if (playingTrackItem != null && tbi.Model.TrackPtr == playingTrackItem.Model.TrackPtr)
                 {
                     if (!isPaused)
                     {
@@ -582,7 +582,7 @@ namespace Blindspot
 
         private void ClearCurrentlyPlayingTrack()
         {
-            if (playingTrack != null)
+            if (playingTrackItem != null)
             {
                 Session.UnloadPlayer();
                 playbackManager.Stop();
@@ -599,7 +599,7 @@ namespace Blindspot
                 return;
             }
             Session.Play();
-            playingTrack = item.Model;
+            playingTrackItem = item;
             playbackManager.fullyDownloaded = false;
             playbackManager.Play();
             isPaused = false;
@@ -608,7 +608,7 @@ namespace Blindspot
 
         private void HandleEndOfCurrentTrack()
         {
-            playingTrack = null;
+            playingTrackItem = null;
             _trayIcon.Text = "Blindspot";
             _playQueueBuffer.RemoveAt(0);
             if (_playQueueBuffer.Count > 0)
