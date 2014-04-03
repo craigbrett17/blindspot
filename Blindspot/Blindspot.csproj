@@ -96,6 +96,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\HotkeyCommandBase.cs" />
     <Compile Include="FirstTimeWizard.cs">
       <SubType>Form</SubType>
     </Compile>
