@@ -7,6 +7,7 @@ using NAudio.Wave;
 using System.IO;
 using System.Threading;
 using Logger = Blindspot.Core.Logger;
+using TrackBufferItem = Blindspot.ViewModels.TrackBufferItem;
 
 namespace Blindspot.Helpers
 {
@@ -29,10 +30,22 @@ namespace Blindspot.Helpers
         private IWavePlayer waveOut;
         private VolumeWaveProvider16 volumeProvider;
         private System.Windows.Forms.Timer timer1;
+        private TrackBufferItem _playingTrackItem;
+        public TrackBufferItem PlayingTrackItem
+        {
+            get { return _playingTrackItem; }
+            set
+            {
+                _playingTrackItem = value;
+                if (OnPlayingTrackChanged != null)
+                    OnPlayingTrackChanged();
+            }
+        }
         
         public delegate void PlaybackManagerErrorHandler(string message);
         public event PlaybackManagerErrorHandler OnError;
         public event Action OnPlaybackStopped;
+        public event Action OnPlayingTrackChanged;
 
         public PlaybackManager()
         {
@@ -237,6 +250,11 @@ namespace Blindspot.Helpers
             Stop();
             timer1.Dispose();
             gatekeeper.Dispose();
+        }
+
+        public bool IsPaused
+        {
+            get { return playbackState == StreamingPlaybackState.Paused; }
         }
     }
 }

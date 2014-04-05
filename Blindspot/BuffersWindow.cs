@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.IO;
+using System.Linq;
 using System.Reflection;
-using System.Resources;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using Blindspot.Commands;
 using Blindspot.Core;
 using Blindspot.Core.Models;
 using Blindspot.Helpers;
@@ -20,10 +19,8 @@ namespace Blindspot
     public partial class BuffersWindow : Form, IBufferHolder
     {
         public BufferHotkeyManager KeyManager { get; set; }
-        public Dictionary<string, HandledEventHandler> Commands { get; set; }
+        public Dictionary<string, HotkeyCommandBase> Commands { get; set; }
         public BufferListCollection Buffers { get; set; }
-        private TrackBufferItem playingTrackItem;
-        private bool isPaused;
         private PlaybackManager playbackManager;
         private SpotifyClient spotify;
         private UserSettings settings = UserSettings.Instance;
@@ -57,7 +54,7 @@ namespace Blindspot
             }
             InitializeComponent();
             InitializeTrayIcon();
-            Commands = new Dictionary<string, HandledEventHandler>();
+            Commands = new Dictionary<string, HotkeyCommandBase>();
             playbackManager = new PlaybackManager();
             playbackManager.OnError += new PlaybackManager.PlaybackManagerErrorHandler(StreamingError);
             SetupFormEventHandlers();
@@ -80,6 +77,7 @@ namespace Blindspot
                 Session.UnloadPlayer();
             });
             playbackManager.OnPlaybackStopped += new Action(HandleEndOfCurrentTrack);
+            playbackManager.OnPlayingTrackChanged += new Action(HandleChangeOfTrack);
             updater.NewVersionDetected += new EventHandler((sender, e) =>
             {
                 Version newVersion = sender as Version;
@@ -118,7 +116,7 @@ namespace Blindspot
                 }
             });*/
         }
-        
+
         private void InitializeTrayIcon()
         {
             _trayIcon = new NotifyIcon
@@ -157,7 +155,7 @@ namespace Blindspot
             }
             try
             {
-                Commands = LoadBufferWindowCommands();
+                LoadBufferWindowCommands();
                 KeyManager = BufferHotkeyManager.LoadFromTextFile(this);
                 SpotifyController.Initialize();
                 var appKeyBytes = Properties.Resources.spotify_appkey;
@@ -224,204 +222,35 @@ namespace Blindspot
         }
 
         // here be the various buffer controlling commands
-        public Dictionary<string, HandledEventHandler> LoadBufferWindowCommands()
+        public void LoadBufferWindowCommands()
         {
-            var commands = new Dictionary<string, HandledEventHandler>();
-            commands.Add("close_blindspot", new HandledEventHandler((sender, e) => ExitBlindspot()));
-            commands.Add("next_buffer", new HandledEventHandler((sender, e) =>
+            // first we make a list of all the commands, so we can slot them into a dictionary with LINQ later
+            var hotkeyCommands = new List<HotkeyCommandBase>()
             {
-                Buffers.NextList();
-                ScreenReader.SayString(Buffers.CurrentList.ToString());
-            }));
-            commands.Add("previous_buffer", new HandledEventHandler((sender, e) =>
-            {
-                Buffers.PreviousList();
-                ScreenReader.SayString(Buffers.CurrentList.ToString());
-            }));
-            commands.Add("next_buffer_item", new HandledEventHandler((sender, e) =>
-            {
-                Buffers.CurrentList.NextItem();
-                ScreenReader.SayString(Buffers.CurrentList.CurrentItem.ToString());
-            }));
-            commands.Add("previous_buffer_item", new HandledEventHandler((sender, e) =>
-            {
-                Buffers.CurrentList.PreviousItem();
-                ScreenReader.SayString(Buffers.CurrentList.CurrentItem.ToString());
-            }));
-            commands.Add("first_buffer_item", new HandledEventHandler((sender, e) =>
-            {
-                Buffers.CurrentList.FirstItem();
-                ScreenReader.SayString(Buffers.CurrentList.CurrentItem.ToString());
-            }));
-            commands.Add("last_buffer_item", new HandledEventHandler((sender, e) =>
-            {
-                Buffers.CurrentList.LastItem();
-                ScreenReader.SayString(Buffers.CurrentList.CurrentItem.ToString());
-            }));
-            commands.Add("next_buffer_item_jump", new HandledEventHandler((sender, e) =>
-            {
-                Buffers.CurrentList.NextJump();
-                ScreenReader.SayString(Buffers.CurrentList.CurrentItem.ToString());
-            }));
-            commands.Add("previous_buffer_item_jump", new HandledEventHandler((sender, e) =>
-            {
-                Buffers.CurrentList.PreviousJump();
-                ScreenReader.SayString(Buffers.CurrentList.CurrentItem.ToString());
-            }));
-            commands.Add("activate_buffer_item", new HandledEventHandler(BufferItemActivated));
-            commands.Add("playback_volume_up", new HandledEventHandler((sender, e) =>
-            {
-                ScreenReader.SayString(StringStore.Louder);
-                playbackManager.VolumeUp(0.05f);
-            }));
-            commands.Add("playback_volume_down", new HandledEventHandler((sender, e) =>
-            {
-                ScreenReader.SayString(StringStore.Quieter);
-                playbackManager.VolumeDown(0.05f);
-            }));
-            commands.Add("dismiss_buffer", new HandledEventHandler((sender, e) =>
-            {
-                var currentBuffer = Buffers.CurrentList;
-                if (!currentBuffer.IsDismissable)
-                {
-                    ScreenReader.SayString(String.Format("{0} {1}", StringStore.CannotDismissBuffer, currentBuffer.Name));
-                }
-                else
-                {
-                    Buffers.PreviousList();
-                    Buffers.Remove(currentBuffer);
-                    ScreenReader.SayString(Buffers.CurrentList.ToString());
-                }
-                // if it's a buffer with a search or other unmanaged resources, dispose it
-                if (currentBuffer is IDisposable)
-                {
-                    ((IDisposable)currentBuffer).Dispose();
-                }
-            }));
-            commands.Add("announce_now_playing", new HandledEventHandler((sender, e) =>
-            {
-                if (playingTrackItem != null)
-                {
-                    ScreenReader.SayString(playingTrackItem.ToString());
-                }
-                else
-                {
-                    ScreenReader.SayString(StringStore.NoTrackCurrentlyBeingPlayed);
-                }
-            }));
-            commands.Add("new_search", new HandledEventHandler(ShowSearchWindow));
-            commands.Add("show_about_window", new HandledEventHandler((sender, e) => ShowAboutDialog()));
-            commands.Add("options_dialog", new HandledEventHandler(ShowOptionsWindow));
-            commands.Add("item_details", new HandledEventHandler(ShowItemDetailsDialog));
-            commands.Add("add_to_queue", new HandledEventHandler((sender, e) =>
-            {
-                var item = Buffers.CurrentList.CurrentItem;
-                if (item is TrackBufferItem)
-                {
-                    _playQueueBuffer.Add(item);
-                    ScreenReader.SayString(StringStore.AddedToQueue, true);
-                }
-                else
-                {
-                    
-                }
-            }));
-            commands.Add("media_play_pause", new HandledEventHandler((sender, e) => TogglePlayPause(false)));
-            return commands;
-        }
-
-        private void ExitBlindspot()
-        {
-            ScreenReader.SayString(StringStore.ExitingProgram);
-            if (this.InvokeRequired)
-            {
-                Invoke(new Action(() => { this.Close(); }));
-            }
-            else
-            {
-                this.Close();
-            }
-        }
-        
-        private void BufferItemActivated(object sender, HandledEventArgs e)
-        {
-            var item = Buffers.CurrentList.CurrentItem;
-            if (item is TrackBufferItem)
-            {
-                var tbi = item as TrackBufferItem;
-                if (playingTrackItem != null && tbi.Model.TrackPtr == playingTrackItem.Model.TrackPtr)
-                {
-                    TogglePlayPause(true);
-                    return;
-                }
-                ClearCurrentlyPlayingTrack();
-                PlayNewTrackBufferItem(tbi);
-                if (Buffers.CurrentListIndex == 0 && _playQueueBuffer.Contains(tbi)) // if they've picked it from the play queue
-                {
-                    int indexOfChosenTrack = _playQueueBuffer.IndexOf(tbi);
-                    if (indexOfChosenTrack > 0)
-                    {
-                        _playQueueBuffer.RemoveRange(0, indexOfChosenTrack);
-                    }
-                }
-                else
-                {
-                    _playQueueBuffer.Clear();
-                    _playQueueBuffer.Add(tbi);                    
-                    if (Buffers.CurrentList is PlaylistBufferList) // add the remaining playlist to the queue
-                    {
-                        var playlist = Buffers.CurrentList as PlaylistBufferList;
-                        int indexOfTrack = playlist.CurrentItemIndex;
-                        for (int index = indexOfTrack + 1; index < playlist.Count; index++)
-                        {
-                            _playQueueBuffer.Add(playlist[index]);
-                        }
-                    }
-                }
-                _playQueueBuffer.CurrentItemIndex = 0;
-            }
-            else if (item is PlaylistBufferItem)
-            {
-                PlaylistBufferItem pbi = item as PlaylistBufferItem;
-                ScreenReader.SayString(StringStore.LoadingPlaylist, false);
-                Buffers.Add(new PlaylistBufferList(pbi.Model.Name));
-                Buffers.CurrentListIndex = Buffers.Count - 1;
-                var playlistBuffer = Buffers.CurrentList;
-                ScreenReader.SayString(playlistBuffer.ToString(), false);
-                using (var playlist = SpotifyController.GetPlaylist(pbi.Model.Pointer, true))
-                {
-                    ScreenReader.SayString(String.Format("{0} {1}", playlist.TrackCount, StringStore.TracksLoaded), false);
-                    var tracks = playlist.GetTracks();
-                    tracks.ForEach(t =>
-                    {
-                        playlistBuffer.Add(new TrackBufferItem(t));
-                    });
-                }
-            }
-            else
-            {
-                ScreenReader.SayString(String.Format("{0} {1}", item.ToString(), StringStore.ItemActivated), false);
-            }
-        }
-
-        private void TogglePlayPause(bool announcePauseState)
-        {
-            if (!isPaused)
-            {
-                // Session.Pause();
-                playbackManager.Pause();
-                isPaused = true;
-                if (announcePauseState)
-                    ScreenReader.SayString(StringStore.Paused);
-            }
-            else
-            {
-                // Session.Play();
-                playbackManager.Play();
-                isPaused = false;
-                if (announcePauseState)
-                    ScreenReader.SayString(StringStore.Playing);
-            }
+                new CloseCommand(this),
+                new NextBufferCommand(Buffers),
+                new PreviousBufferCommand(Buffers),
+                new NextBufferItemCommand(Buffers),
+                new PreviousBufferItemCommand(Buffers),
+                new FirstBufferItemCommand(Buffers),
+                new LastBufferItemCommand(Buffers),
+                new NextBufferItemJumpCommand(Buffers),
+                new PreviousBufferItemJumpCommand(Buffers),
+                new ActivateBufferItemCommand(Buffers, playbackManager),
+                new PlaybackVolumeUpCommand(playbackManager),
+                new PlaybackVolumeDownCommand(playbackManager),
+                new DismissBufferCommand(Buffers),
+                new AnnounceNowPlayingCommand(playbackManager),
+                new NewSearchCommand(Buffers),
+                new ShowAboutDialogCommand(),
+                new ShowOptionsDialogCommand(this),
+                new ShowItemDetailsCommand(Buffers),
+                new AddToQueueCommand(Buffers),
+                new MediaPlayPauseCommand(playbackManager)
+            };
+            
+            // the hotkeys use the key to know which command to execute
+            Commands = hotkeyCommands.ToDictionary(k => k.Key, v => v);
         }
         
         protected override void OnFormClosing(FormClosingEventArgs e)
@@ -451,77 +280,7 @@ namespace Blindspot
             IntPtr desktopHwnd = FindWindow("Shell_TrayWnd", null);
             BringWindowToTop(desktopHwnd);
         }
-
-        private void ShowSearchWindow(object sender, HandledEventArgs e)
-        {
-            SearchWindow searchDialog = new SearchWindow();
-            searchDialog.ShowDialog();
-            if (searchDialog.DialogResult != DialogResult.OK)
-            {
-                return; // cancelled search
-            }
-            string searchText = searchDialog.SearchText;
-            var searchType = searchDialog.Type;
-            searchDialog.Dispose();
-            if (searchType == SearchType.Track)
-            {
-                ScreenReader.SayString(StringStore.Searching, false);
-                var search = spotify.SearchTracks(searchText);
-                Buffers.Add(new SearchBufferList(search));
-                Buffers.CurrentListIndex = Buffers.Count - 1;
-                var searchBuffer = Buffers.CurrentList;
-                ScreenReader.SayString(searchBuffer.ToString(), false);
-                var tracks = search.Tracks;
-                if (tracks == null || tracks.Count == 0)
-                {
-                    if (search != null && !String.IsNullOrEmpty(search.DidYouMean))
-	                {
-                        searchBuffer.Add(new BufferItem("No search results. Did you mean: " + search.DidYouMean)); 
-	                }
-                    else
-	                {
-	                    searchBuffer.Add(new BufferItem(StringStore.NoSearchResults)); 
-	                }
-                }
-                else
-                {
-                    ScreenReader.SayString(tracks.Count + " " + StringStore.SearchResults, false);
-                    foreach (IntPtr pointer in tracks)
-                    {
-                        searchBuffer.Add(new TrackBufferItem(new Track(pointer)));
-                    }
-                }
-            }
-            else if (searchType == SearchType.Artist)
-            {
-                MessageBox.Show("Not implemented yet! Boo to the developers!", StringStore.Oops, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else if (searchType == SearchType.Album)
-            {
-                MessageBox.Show("Not implemented yet! Boo to the developers!", StringStore.Oops, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void ShowAboutDialog()
-        {
-            string aboutText = GetApplicationInfoText();
-            MessageBox.Show(aboutText, "About Blindspot", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
-        private static string GetApplicationInfoText()
-        {
-            var version = Application.ProductVersion;
-            var productName = Application.ProductName;
-            StringBuilder aboutInfo = new StringBuilder();
-            aboutInfo.AppendFormat("{0} version {1}", productName, version);
-            aboutInfo.AppendLine();
-            aboutInfo.AppendFormat("Copyright (c) {0} {1}", DateTime.Now.Year, Application.CompanyName);
-            aboutInfo.AppendLine();
-            aboutInfo.AppendLine();
-            aboutInfo.AppendLine("Powered by SPOTIFY(R) CORE");
-            return aboutInfo.ToString();
-        }
-
+        
         private void SetThreadToInstallationLanguage()
         {
             RegistryReader regReader = new RegistryReader();
@@ -549,52 +308,13 @@ namespace Blindspot
                 }
             }
         }
-
-        private void ShowOptionsWindow(object sender, HandledEventArgs e)
-        {
-            OptionsDialog options = new OptionsDialog();
-            options.ShowDialog();
-            if (options.DialogResult == DialogResult.OK)
-            {
-                if (settings.UILanguageCode != Thread.CurrentThread.CurrentUICulture.LCID)
-                {
-                    Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(settings.UILanguageCode);
-                }
-                if (options.KeyboardSettingsChanged)
-                {
-                    KeyManager.Hotkeys.ForEach(hotkey =>
-                    {
-                        hotkey.Unregister();
-                    });
-                    KeyManager = BufferHotkeyManager.LoadFromTextFile(this);
-                }
-            }
-        }
-
-        private void ShowItemDetailsDialog(object sender, HandledEventArgs e)
-        {
-            BufferItem item = Buffers.CurrentList.CurrentItem;
-            object model = null;
-            if (item is TrackBufferItem) model = ((TrackBufferItem)item).Model;
-            else if (item is PlaylistBufferItem) model = ((PlaylistBufferItem)item).Model;
-            if (model != null)
-            {
-                ItemDetailsWindow detailsView = new ItemDetailsWindow(model);
-                detailsView.ShowDialog();
-            }
-            else
-            {
-                ScreenReader.SayString("View details is not a valid action for this type of item", true);
-            }
-        }
-
+        
         private void ClearCurrentlyPlayingTrack()
         {
-            if (playingTrackItem != null)
+            if (playbackManager.PlayingTrackItem != null)
             {
                 playbackManager.Stop();
                 Session.UnloadPlayer();
-                _trayIcon.Text = "Blindspot";
             }
         }
 
@@ -607,17 +327,14 @@ namespace Blindspot
                 return;
             }
             Session.Play();
-            playingTrackItem = item;
+            playbackManager.PlayingTrackItem = item;
             playbackManager.fullyDownloaded = false;
             playbackManager.Play();
-            isPaused = false;
-            _trayIcon.Text = String.Format("Blindspot - {0}", item.ToTruncatedString());
         }
 
         private void HandleEndOfCurrentTrack()
         {
-            playingTrackItem = null;
-            _trayIcon.Text = "Blindspot";
+            playbackManager.PlayingTrackItem = null;
             _playQueueBuffer.RemoveAt(0);
             if (_playQueueBuffer.Count > 0)
             {
@@ -652,11 +369,31 @@ namespace Blindspot
                 return new ToolStripItem[]
                 {
                     new ToolStripSeparator(),
-                    new ToolStripMenuItem(StringStore.TrayIconAboutMenuItemText, null, new EventHandler((sender2, e2) => ShowAboutDialog())),
-                    new ToolStripMenuItem(StringStore.TrayIconExitMenuItemText, null, new EventHandler((sender2, e2) => ExitBlindspot()))
+                    new ToolStripMenuItem(StringStore.TrayIconAboutMenuItemText, null, new EventHandler((sender2, e2) => Commands["show_about_window"].Execute(this, null))),
+                    new ToolStripMenuItem(StringStore.TrayIconExitMenuItemText, null, new EventHandler((sender2, e2) => Commands["close_blindspot"].Execute(this, null)))
                 };
             }
         }
 
+        private void HandleChangeOfTrack()
+        {
+            if (playbackManager.PlayingTrackItem == null)
+            {
+                _trayIcon.Text = "Blindspot";
+            }
+            else
+            {
+                _trayIcon.Text = String.Format("Blindspot - {0}", playbackManager.PlayingTrackItem.ToTruncatedString());
+            }
+        }
+
+        public void ReRegisterHotkeys()
+        {
+            KeyManager.Hotkeys.ForEach(hotkey =>
+            {
+                hotkey.Unregister();
+            });
+            KeyManager = BufferHotkeyManager.LoadFromTextFile(this);
+        }
     }
 }

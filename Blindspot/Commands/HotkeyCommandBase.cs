@@ -4,12 +4,12 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
-namespace Blindspot.Helpers
+namespace Blindspot.Commands
 {
     /// <summary>
     /// An abstract class to inherit commands from
     /// </summary>
-    internal abstract class HotkeyCommandBase
+    public abstract class HotkeyCommandBase
     {
         /// <summary>
         /// The key for the command. This should directly reference the name given to the command in the hotkeys files
@@ -20,6 +20,6 @@ namespace Blindspot.Helpers
         /// </summary>
         /// <param name="sender">The object that sent this command</param>
         /// <param name="e">Any additional event info</param>
-        public abstract void Execute(object sender, HandledEventHandler e);
+        public abstract void Execute(object sender, HandledEventArgs e);
     }
 }

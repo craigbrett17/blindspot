@@ -96,7 +96,27 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helpers\HotkeyCommandBase.cs" />
+    <Compile Include="Commands\ActivateBufferItemCommand.cs" />
+    <Compile Include="Commands\AddToQueueCommand.cs" />
+    <Compile Include="Commands\AnnounceNowPlayingCommand.cs" />
+    <Compile Include="Commands\CloseCommand.cs" />
+    <Compile Include="Commands\DismissBufferCommand.cs" />
+    <Compile Include="Commands\FirstBufferItemCommand.cs" />
+    <Compile Include="Commands\HotkeyCommandBase.cs" />
+    <Compile Include="Commands\LastBufferItemCommand.cs" />
+    <Compile Include="Commands\MediaPlayPauseCommand.cs" />
+    <Compile Include="Commands\NewSearchCommand.cs" />
+    <Compile Include="Commands\NextBufferItemJumpCommand.cs" />
+    <Compile Include="Commands\PlaybackVolumeDownCommand.cs" />
+    <Compile Include="Commands\PlaybackVolumeUpCommand.cs" />
+    <Compile Include="Commands\PreviousBufferItemCommand.cs" />
+    <Compile Include="Commands\NextBufferItemCommand.cs" />
+    <Compile Include="Commands\PreviousBufferCommand.cs" />
+    <Compile Include="Commands\NextBufferCommand.cs" />
+    <Compile Include="Commands\PreviousBufferItemJumpCommand.cs" />
+    <Compile Include="Commands\ShowAboutDialogCommand.cs" />
+    <Compile Include="Commands\ShowItemDetailsCommand.cs" />
+    <Compile Include="Commands\ShowOptionsDialogCommand.cs" />
     <Compile Include="FirstTimeWizard.cs">
       <SubType>Form</SubType>
     </Compile>

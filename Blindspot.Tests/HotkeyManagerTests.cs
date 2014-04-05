@@ -4,6 +4,7 @@ using Blindspot.Helpers;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using Moq;
+using Blindspot.Commands;
 
 namespace Blindspot.Tests
 {
@@ -24,7 +25,7 @@ namespace Blindspot.Tests
         private static void RemakeManager()
         {
             holder = new Mock<IBufferHolder>();
-            holder.Setup(h => h.Commands).Returns(new Dictionary<string, System.ComponentModel.HandledEventHandler>());
+            holder.Setup(h => h.Commands).Returns(new Dictionary<string, HotkeyCommandBase>());
             manager = BufferHotkeyManager.LoadFromTextFile(holder.Object, new System.IO.StreamReader(@"Settings\hotkeys.txt"));
         }
 
