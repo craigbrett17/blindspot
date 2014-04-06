@@ -125,7 +125,6 @@ namespace Blindspot.Commands
                 ScreenReader.SayString(StringStore.UnableToPlayTrack + response.Message, false);
                 return;
             }
-            ClearCurrentlyPlayingTrack();
             Session.Play();
             playbackManager.PlayingTrackItem = item;
             playbackManager.fullyDownloaded = false;
