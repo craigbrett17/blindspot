@@ -70,9 +70,9 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="libspotifydotnet">
-      <HintPath>..\..\libspotifydotnet.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="libspotifydotnet, Version=3.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\libspotifydotnet.dll</HintPath>
     </Reference>
     <Reference Include="NAudio">
       <HintPath>..\packages\NAudio.1.6\lib\net20\NAudio.dll</HintPath>
