@@ -76,7 +76,7 @@ namespace Blindspot
                 playbackManager.fullyDownloaded = true;
                 Session.UnloadPlayer();
             });
-            playbackManager.OnPlaybackStopped += new Action(HandleEndOfCurrentTrack);
+            playbackManager.OnEndOfTrack += new Action(HandleEndOfCurrentTrack);
             playbackManager.OnPlayingTrackChanged += new Action(HandleChangeOfTrack);
             updater.NewVersionDetected += new EventHandler((sender, e) =>
             {
@@ -246,7 +246,8 @@ namespace Blindspot
                 new ShowOptionsDialogCommand(this),
                 new ShowItemDetailsCommand(Buffers),
                 new AddToQueueCommand(Buffers),
-                new MediaPlayPauseCommand(playbackManager)
+                new MediaPlayPauseCommand(playbackManager),
+                new NextTrackCommand(Buffers, playbackManager)
             };
             
             // the hotkeys use the key to know which command to execute

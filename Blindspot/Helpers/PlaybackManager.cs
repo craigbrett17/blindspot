@@ -44,6 +44,7 @@ namespace Blindspot.Helpers
         
         public delegate void PlaybackManagerErrorHandler(string message);
         public event PlaybackManagerErrorHandler OnError;
+        public event Action OnEndOfTrack;
         public event Action OnPlaybackStopped;
         public event Action OnPlayingTrackChanged;
 
@@ -225,6 +226,10 @@ namespace Blindspot.Helpers
                         {
                             Logger.WriteDebug("Reached end of stream");
                             Stop();
+
+                            // handle end of track logic
+                            if (OnEndOfTrack != null)
+                                OnEndOfTrack();
                         }
                     }
                 }

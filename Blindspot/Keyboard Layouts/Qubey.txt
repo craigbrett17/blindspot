@@ -20,3 +20,5 @@ options_dialog=ctrl+win+o
 item_details=ctrl+win+v
 add_to_queue=ctrl+win+q
 media_play_pause=MediaPlayPause
+next_track=MediaNextTrack
+next_track=ctrl+shift+alt+right
