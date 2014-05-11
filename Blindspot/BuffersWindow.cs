@@ -247,7 +247,8 @@ namespace Blindspot
                 new ShowItemDetailsCommand(Buffers),
                 new AddToQueueCommand(Buffers),
                 new MediaPlayPauseCommand(playbackManager),
-                new NextTrackCommand(Buffers, playbackManager)
+                new NextTrackCommand(Buffers, playbackManager),
+                new PreviousTrackCommand(Buffers, playbackManager)
             };
             
             // the hotkeys use the key to know which command to execute
@@ -335,6 +336,7 @@ namespace Blindspot
 
         private void HandleEndOfCurrentTrack()
         {
+            playbackManager.AddCurrentTrackToPreviousTracks();
             playbackManager.PlayingTrackItem = null;
             _playQueueBuffer.RemoveAt(0);
             if (_playQueueBuffer.Count > 0)

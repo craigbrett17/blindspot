@@ -8,43 +8,36 @@ using Blindspot.Core.Models;
 using Blindspot.Helpers;
 using Blindspot.ViewModels;
 using ScreenReaderAPIWrapper;
-using NotifyIcon = System.Windows.Forms.NotifyIcon;
 
 namespace Blindspot.Commands
 {
-    public class NextTrackCommand : HotkeyCommandBase
+    public class PreviousTrackCommand : HotkeyCommandBase
     {
         private BufferListCollection buffers;
         private PlaybackManager playbackManager;
-        
-        public NextTrackCommand(BufferListCollection buffersIn, PlaybackManager pbManagerIn)
+
+        public PreviousTrackCommand(BufferListCollection buffersIn, PlaybackManager pbManagerIn)
         {
             buffers = buffersIn;
             playbackManager = pbManagerIn;
         }
-        
+
         public override string Key
         {
-            get { return "next_track"; }
+            get { return "previous_track"; }
         }
 
         public override void Execute(object sender, HandledEventArgs e)
         {
             var playQueue = buffers[0];
-            if (playQueue.Count > 0)
+            ClearCurrentlyPlayingTrack();
+
+            if (playbackManager.HasPreviousTracks)
             {
-                playbackManager.AddCurrentTrackToPreviousTracks();
-                ClearCurrentlyPlayingTrack();
-                playQueue.RemoveAt(0);
-
-                if (playQueue.Count > 0)
-                {
-                    var nextTrack = playQueue[0] as TrackBufferItem;
-                    if (nextTrack == null) return;
-
-                    PlayNewTrackBufferItem(nextTrack);
-                    playQueue.CurrentItemIndex = 0;
-                }
+                var nextTrack = playbackManager.GetPreviousTrack();
+                playQueue.Insert(0, nextTrack);
+                PlayNewTrackBufferItem(nextTrack);
+                playQueue.CurrentItemIndex = 0;
             }
         }
 

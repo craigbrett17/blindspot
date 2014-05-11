@@ -62,17 +62,25 @@ namespace Blindspot.Commands
                 int indexOfChosenTrack = playQueue.IndexOf(tbi);
                 if (indexOfChosenTrack > 0)
                 {
+                    var skippedTracks = playQueue.Take(indexOfChosenTrack);
+                    playbackManager.PutTracksIntoPreviousTracks(skippedTracks);
                     playQueue.RemoveRange(0, indexOfChosenTrack);
                 }
             }
             else
             {
                 playQueue.Clear();
+                playbackManager.ClearPreviousTracks();
                 playQueue.Add(tbi);
                 if (buffers.CurrentList is PlaylistBufferList) // add the remaining playlist to the queue
                 {
                     var playlist = buffers.CurrentList as PlaylistBufferList;
                     int indexOfTrack = playlist.CurrentItemIndex;
+                    if (indexOfTrack > 0)
+                    {
+                        var preceedingTracks = playlist.Take(indexOfTrack);
+                        playbackManager.PutTracksIntoPreviousTracks(preceedingTracks);
+                    }
                     for (int index = indexOfTrack + 1; index < playlist.Count; index++)
                     {
                         playQueue.Add(playlist[index]);

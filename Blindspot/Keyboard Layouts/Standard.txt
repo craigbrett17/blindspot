@@ -22,3 +22,5 @@ add_to_queue=alt+shift+q
 media_play_pause=MediaPlayPause
 next_track=MediaNextTrack
 next_track=ctrl+shift+alt+right
+previous_track=MediaPreviousTrack
+previous_track=ctrl+shift+alt+left

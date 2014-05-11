@@ -8,6 +8,7 @@ using System.IO;
 using System.Threading;
 using Logger = Blindspot.Core.Logger;
 using TrackBufferItem = Blindspot.ViewModels.TrackBufferItem;
+using Blindspot.ViewModels;
 
 namespace Blindspot.Helpers
 {
@@ -30,6 +31,7 @@ namespace Blindspot.Helpers
         private IWavePlayer waveOut;
         private VolumeWaveProvider16 volumeProvider;
         private System.Windows.Forms.Timer timer1;
+        private Stack<TrackBufferItem> _previousTracks { get; set; }
         private TrackBufferItem _playingTrackItem;
         public TrackBufferItem PlayingTrackItem
         {
@@ -54,6 +56,7 @@ namespace Blindspot.Helpers
             this.timer1.Interval = 250;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             gatekeeper = new ByteGateKeeper();
+            _previousTracks = new Stack<TrackBufferItem>();
         }
 
         public void AddBytesToPlayingStream(byte[] bytes)
@@ -260,6 +263,43 @@ namespace Blindspot.Helpers
         public bool IsPaused
         {
             get { return playbackState == StreamingPlaybackState.Paused; }
+        }
+
+        public void AddCurrentTrackToPreviousTracks()
+        {
+            _previousTracks.Push(PlayingTrackItem);
+        }
+
+        public TrackBufferItem GetPreviousTrack()
+        {
+            if (_previousTracks.Any())
+            {
+                return _previousTracks.Pop();
+            }
+            return null;
+        }
+
+        public void PutTracksIntoPreviousTracks(IEnumerable<BufferItem> items)
+        {
+            foreach (var item in items)
+            {
+                PutTrackIntoPreviousTrack((TrackBufferItem)item);
+            }
+        }
+
+        public void PutTrackIntoPreviousTrack(TrackBufferItem item)
+        {
+            _previousTracks.Push(item);
+        }
+
+        public bool HasPreviousTracks
+        {
+            get { return _previousTracks.Any(); }
+        }
+
+        public void ClearPreviousTracks()
+        {
+            _previousTracks.Clear();
         }
     }
 }
