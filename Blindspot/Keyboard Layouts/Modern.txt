@@ -23,3 +23,4 @@ next_track=MediaNextTrack
 next_track=ctrl+shift+alt+right
 previous_track=MediaPreviousTrack
 previous_track=ctrl+shift+alt+left
+show_context_menu=alt+shift+m

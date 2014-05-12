@@ -119,6 +119,7 @@
     <Compile Include="Commands\PreviousBufferItemJumpCommand.cs" />
     <Compile Include="Commands\PreviousTrackCommand.cs" />
     <Compile Include="Commands\ShowAboutDialogCommand.cs" />
+    <Compile Include="Commands\ShowContextMenuCommand.cs" />
     <Compile Include="Commands\ShowItemDetailsCommand.cs" />
     <Compile Include="Commands\ShowOptionsDialogCommand.cs" />
     <Compile Include="FirstTimeWizard.cs">

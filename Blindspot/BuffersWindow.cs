@@ -248,7 +248,8 @@ namespace Blindspot
                 new AddToQueueCommand(Buffers),
                 new MediaPlayPauseCommand(playbackManager),
                 new NextTrackCommand(Buffers, playbackManager),
-                new PreviousTrackCommand(Buffers, playbackManager)
+                new PreviousTrackCommand(Buffers, playbackManager),
+                new ShowContextMenuCommand(_trayIcon)
             };
             
             // the hotkeys use the key to know which command to execute
