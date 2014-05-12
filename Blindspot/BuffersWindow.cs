@@ -395,7 +395,8 @@ namespace Blindspot
         {
             KeyManager.Hotkeys.ForEach(hotkey =>
             {
-                hotkey.Unregister();
+                if (hotkey.Registered)
+                    hotkey.Unregister();
             });
             KeyManager = BufferHotkeyManager.LoadFromTextFile(this);
         }
