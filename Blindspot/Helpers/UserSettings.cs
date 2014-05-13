@@ -8,7 +8,6 @@ namespace Blindspot.Helpers
     public class UserSettings
     {
         public string Username { get; set; }
-        public string Password { get; set; }
         public byte[] ApiKey { get; set; }
         public bool StartInPrivateSession { get; set; }
         public int SearchResults { get; set; }
@@ -18,6 +17,8 @@ namespace Blindspot.Helpers
         public int UILanguageCode { get; set; }
         public UpdateType UpdatesInterestedIn { get; set; }
         public string KeyboardLayoutName { get; set; }
+        public bool ScreenReaderOutput { get; set; }
+        public bool GraphicalOutput { get; set; }
 
         [NonSerialized]
         private static string fileLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"Blindspot\Settings\user_settings.dat");
