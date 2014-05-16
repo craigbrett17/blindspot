@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Blindspot;
 using Blindspot.ViewModels;
 
-namespace Blindspot.Tests
+namespace Blindspot.Tests.ViewModels
 {
     [TestClass]
     public class BufferListCollectionTests

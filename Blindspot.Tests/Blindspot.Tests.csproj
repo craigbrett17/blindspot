@@ -49,6 +49,10 @@
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.2.1402.2112\lib\net40\Moq.dll</HintPath>
     </Reference>
+    <Reference Include="Screen Reader API Wrapper, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ScreenReaderAPIWrapper.3.0.1\lib\Screen Reader API Wrapper.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
@@ -65,9 +69,10 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="BufferListTests.cs" />
-    <Compile Include="BufferListCollectionTests.cs" />
-    <Compile Include="HotkeyManagerTests.cs" />
+    <Compile Include="Helpers\OutputManagerTest.cs" />
+    <Compile Include="ViewModels\BufferListTests.cs" />
+    <Compile Include="ViewModels\BufferListCollectionTests.cs" />
+    <Compile Include="Helpers\HotkeyManagerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -77,6 +82,18 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Lib\dolapi.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Lib\nvdaControllerClient.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Lib\saapi32.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Lib\ScreenReaderAPI.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Settings\hotkeys.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using Moq;
 using Blindspot.Commands;
 
-namespace Blindspot.Tests
+namespace Blindspot.Tests.Helpers
 {
     // more of a system test here
     [TestClass]
