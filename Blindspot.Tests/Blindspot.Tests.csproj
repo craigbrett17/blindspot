@@ -51,7 +51,7 @@
     </Reference>
     <Reference Include="Screen Reader API Wrapper, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ScreenReaderAPIWrapper.3.0.1\lib\Screen Reader API Wrapper.dll</HintPath>
+      <HintPath>..\packages\ScreenReaderAPIWrapper.3.0.2\lib\Screen Reader API Wrapper.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Windows.Forms" />
