@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Blindspot.Helpers;
-using ScreenReaderAPIWrapper;
 
 namespace Blindspot.Commands
 {
@@ -24,7 +23,8 @@ namespace Blindspot.Commands
         public override void Execute(object sender, System.ComponentModel.HandledEventArgs e)
         {
             playbackManager.VolumeUp(0.05f);
-            ScreenReader.SayString(StringStore.Louder);
+            var output = OutputManager.Instance;
+            output.OutputMessage(StringStore.Louder);
         }
     }
 }

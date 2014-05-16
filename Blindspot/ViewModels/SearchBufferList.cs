@@ -40,7 +40,6 @@ namespace Blindspot.ViewModels
             {
                 this.Add(new TrackBufferItem(new Track(pointer)));
             });
-            ScreenReader.SayString(String.Format("{0} {1}", _search.Tracks.Count, StringStore.MoreSearchResults), true);
         }
 
         public override string ToString()

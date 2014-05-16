@@ -4,17 +4,18 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using Blindspot.Helpers;
-using ScreenReaderAPIWrapper;
 
 namespace Blindspot.Commands
 {
     public class AnnounceNowPlayingCommand : HotkeyCommandBase
     {
         private PlaybackManager playbackManager;
+        private IOutputManager _output;
 
         public AnnounceNowPlayingCommand(PlaybackManager managerIn)
         {
             playbackManager = managerIn;
+            _output = OutputManager.Instance;
         }
 
         public override string Key
@@ -26,11 +27,11 @@ namespace Blindspot.Commands
         {
             if (playbackManager.PlayingTrackItem != null)
             {
-                ScreenReader.SayString(playbackManager.PlayingTrackItem.ToString());
+                _output.OutputMessage(playbackManager.PlayingTrackItem.ToString());
             }
             else
             {
-                ScreenReader.SayString(StringStore.NoTrackCurrentlyBeingPlayed);
+                _output.OutputMessage(StringStore.NoTrackCurrentlyBeingPlayed);
             }
         }
 

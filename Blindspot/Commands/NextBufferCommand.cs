@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using Blindspot.ViewModels;
-using ScreenReaderAPIWrapper;
+using Blindspot.Helpers;
 
 namespace Blindspot.Commands
 {
@@ -25,7 +25,8 @@ namespace Blindspot.Commands
         public override void Execute(object sender, HandledEventArgs e)
         {
             buffers.NextList();
-            ScreenReader.SayString(buffers.CurrentList.ToString());
+            var output = OutputManager.Instance;
+            output.OutputMessage(buffers.CurrentList.ToString(), true, NavigationDirection.Right);
         }
     }
 }

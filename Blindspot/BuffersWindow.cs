@@ -12,7 +12,6 @@ using Blindspot.Core;
 using Blindspot.Core.Models;
 using Blindspot.Helpers;
 using Blindspot.ViewModels;
-using ScreenReaderAPIWrapper;
 
 namespace Blindspot
 {
@@ -25,6 +24,7 @@ namespace Blindspot
         private SpotifyClient spotify;
         private UserSettings settings = UserSettings.Instance;
         private UpdateManager updater = UpdateManager.Instance;
+        private IOutputManager output = OutputManager.Instance;
         private bool downloadedUpdate = false; // for checks for updates
         protected NotifyIcon _trayIcon;
         private BufferList _playQueueBuffer;
@@ -63,6 +63,8 @@ namespace Blindspot
             Buffers.Add(_playQueueBuffer);
             Buffers.Add(new BufferList("Playlists", false));
             spotify = SpotifyClient.Instance;
+            settings.ScreenReaderOutput = true;
+            // settings.GraphicalOutput = true;
         }
         
         private void SetupFormEventHandlers()
@@ -147,7 +149,7 @@ namespace Blindspot
                 if (response != DialogResult.OK)
                 {
                     this.Close();
-                    ScreenReader.SayString(StringStore.ExitingProgram);
+                    output.OutputMessage(StringStore.ExitingProgram);
                     return;
                 }
                 username = logon.Username;
@@ -159,11 +161,11 @@ namespace Blindspot
                 KeyManager = BufferHotkeyManager.LoadFromTextFile(this);
                 SpotifyController.Initialize();
                 var appKeyBytes = Properties.Resources.spotify_appkey;
-                ScreenReader.SayString(StringStore.LoggingIn);
+                output.OutputMessage(StringStore.LoggingIn);
                 bool loggedIn = SpotifyController.Login(appKeyBytes, username, password);
                 if (loggedIn)
                 {
-                    ScreenReader.SayString(StringStore.LoggedInToSpotify);
+                    output.OutputMessage(StringStore.LoggedInToSpotify);
                     UserSettings.Instance.Username = username;
                     UserSettings.Save();
                     spotify.SetPrivateSession(true);
@@ -171,12 +173,12 @@ namespace Blindspot
                 else
                 {
                     var reason = spotify.GetLoginError().Message;
-                    ScreenReader.SayString(StringStore.LogInFailure + reason);
+                    output.OutputMessage(StringStore.LogInFailure + reason);
                     // TODO: Make login window reappear until success or exit
                     this.Close();
                     return;
                 }
-                ScreenReader.SayString(StringStore.LoadingPlaylists, false);
+                output.OutputMessage(StringStore.LoadingPlaylists, false);
                 var playlists = LoadUserPlaylists();
                 if (playlists == null) return;
                 Buffers[1].Clear();
@@ -184,7 +186,7 @@ namespace Blindspot
                 {
                     Buffers[1].Add(new PlaylistBufferItem(p));
                 });
-                ScreenReader.SayString(String.Format("{0} {1}", playlists.Count, StringStore.PlaylistsLoaded), false);
+                output.OutputMessage(String.Format("{0} {1}", playlists.Count, StringStore.PlaylistsLoaded), false);
                 Buffers.CurrentListIndex = 1; // start on the playllists list
             }
             catch (Exception ex)
@@ -192,7 +194,7 @@ namespace Blindspot
                 MessageBox.Show(StringStore.ErrorDuringLoad + ex.Message, StringStore.Oops, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.Close();
             }
-            ScreenReader.SayString(Buffers.CurrentList.ToString(), false);
+            output.OutputMessage(Buffers.CurrentList.ToString(), false);
         }
 
         private List<PlaylistContainer.PlaylistInfo> LoadUserPlaylists()
@@ -326,7 +328,7 @@ namespace Blindspot
             var response = Session.LoadPlayer(item.Model.TrackPtr);
             if (response.IsError)
             {
-                ScreenReader.SayString(StringStore.UnableToPlayTrack + response.Message, false);
+                output.OutputMessage(StringStore.UnableToPlayTrack + response.Message, false);
                 return;
             }
             Session.Play();

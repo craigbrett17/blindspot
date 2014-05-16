@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using Blindspot.Helpers;
 using Blindspot.ViewModels;
-using ScreenReaderAPIWrapper;
 
 namespace Blindspot.Commands
 {
@@ -25,7 +25,8 @@ namespace Blindspot.Commands
         public override void Execute(object sender, HandledEventArgs e)
         {
             buffers.CurrentList.NextItem();
-            ScreenReader.SayString(buffers.CurrentList.CurrentItem.ToString());
+            var output = OutputManager.Instance;
+            output.OutputMessage(buffers.CurrentList.CurrentItem.ToString(), true, NavigationDirection.Down);
         }
     }
 }

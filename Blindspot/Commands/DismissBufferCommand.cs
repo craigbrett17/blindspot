@@ -4,17 +4,19 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using Blindspot.ViewModels;
-using ScreenReaderAPIWrapper;
+using Blindspot.Helpers;
 
 namespace Blindspot.Commands
 {
     public class DismissBufferCommand : HotkeyCommandBase
     {
         private BufferListCollection buffers;
+        private IOutputManager _output;
 
         public DismissBufferCommand(BufferListCollection buffersIn)
         {
             buffers = buffersIn;
+            _output = OutputManager.Instance;
         }
 
         public override string Key
@@ -27,13 +29,13 @@ namespace Blindspot.Commands
             var currentBuffer = buffers.CurrentList;
             if (!currentBuffer.IsDismissable)
             {
-                ScreenReader.SayString(String.Format("{0} {1}", StringStore.CannotDismissBuffer, currentBuffer.Name));
+                _output.OutputMessage(String.Format("{0} {1}", StringStore.CannotDismissBuffer, currentBuffer.Name));
             }
             else
             {
                 buffers.PreviousList();
                 buffers.Remove(currentBuffer);
-                ScreenReader.SayString(buffers.CurrentList.ToString());
+                _output.OutputMessage(buffers.CurrentList.ToString(), navigationDirection: NavigationDirection.Left);
             }
             // if it's a buffer with a search or other unmanaged resources, dispose it
             if (currentBuffer is IDisposable)

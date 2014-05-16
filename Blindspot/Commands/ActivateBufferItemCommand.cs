@@ -7,7 +7,6 @@ using Blindspot.Core;
 using Blindspot.Core.Models;
 using Blindspot.Helpers;
 using Blindspot.ViewModels;
-using ScreenReaderAPIWrapper;
 using NotifyIcon = System.Windows.Forms.NotifyIcon;
 
 namespace Blindspot.Commands
@@ -17,11 +16,13 @@ namespace Blindspot.Commands
     {
         private BufferListCollection buffers;
         private PlaybackManager playbackManager;
+        private IOutputManager _output;
         
         public ActivateBufferItemCommand(BufferListCollection buffersIn, PlaybackManager pbManagerIn)
         {
             buffers = buffersIn;
             playbackManager = pbManagerIn;
+            _output = OutputManager.Instance;
         }
         
         public override string Key
@@ -42,7 +43,7 @@ namespace Blindspot.Commands
             }
             else
             {
-                ScreenReader.SayString(String.Format("{0} {1}", item.ToString(), StringStore.ItemActivated), false);
+                _output.OutputMessage(String.Format("{0} {1}", item.ToString(), StringStore.ItemActivated), false);
             }
         }
 
@@ -93,14 +94,14 @@ namespace Blindspot.Commands
         private void LoadPlaylist(BufferItem item)
         {
             PlaylistBufferItem pbi = item as PlaylistBufferItem;
-            ScreenReader.SayString(StringStore.LoadingPlaylist, false);
+            _output.OutputMessage(StringStore.LoadingPlaylist, false);
             buffers.Add(new PlaylistBufferList(pbi.Model.Name));
             buffers.CurrentListIndex = buffers.Count - 1;
             var playlistBuffer = buffers.CurrentList;
-            ScreenReader.SayString(playlistBuffer.ToString(), false);
+            _output.OutputMessage(playlistBuffer.ToString(), false);
             using (var playlist = SpotifyController.GetPlaylist(pbi.Model.Pointer, true))
             {
-                ScreenReader.SayString(String.Format("{0} {1}", playlist.TrackCount, StringStore.TracksLoaded), false);
+                _output.OutputMessage(String.Format("{0} {1}", playlist.TrackCount, StringStore.TracksLoaded), false);
                 var tracks = playlist.GetTracks();
                 tracks.ForEach(t =>
                 {
@@ -115,13 +116,13 @@ namespace Blindspot.Commands
             {
                 // Session.Pause();
                 playbackManager.Pause();
-                ScreenReader.SayString(StringStore.Paused);
+                _output.OutputMessage(StringStore.Paused);
             }
             else
             {
                 // Session.Play();
                 playbackManager.Play();
-                ScreenReader.SayString(StringStore.Playing);
+                _output.OutputMessage(StringStore.Playing);
             }
         }
         
@@ -130,7 +131,7 @@ namespace Blindspot.Commands
             var response = Session.LoadPlayer(item.Model.TrackPtr);
             if (response.IsError)
             {
-                ScreenReader.SayString(StringStore.UnableToPlayTrack + response.Message, false);
+                _output.OutputMessage(StringStore.UnableToPlayTrack + response.Message, false);
                 return;
             }
             Session.Play();

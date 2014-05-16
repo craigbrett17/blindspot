@@ -4,17 +4,19 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using Blindspot.ViewModels;
-using ScreenReaderAPIWrapper;
+using Blindspot.Helpers;
 
 namespace Blindspot.Commands
 {
     public class LastBufferItemCommand : HotkeyCommandBase
     {
         private BufferListCollection buffers;
+        private IOutputManager _output;
 
         public LastBufferItemCommand(BufferListCollection buffersIn)
         {
             buffers = buffersIn;
+            _output = OutputManager.Instance;
         }
 
         public override string Key
@@ -25,7 +27,7 @@ namespace Blindspot.Commands
         public override void Execute(object sender, HandledEventArgs e)
         {
             buffers.CurrentList.LastItem();
-            ScreenReader.SayString(buffers.CurrentList.CurrentItem.ToString());
+            _output.OutputMessage(buffers.CurrentList.CurrentItem.ToString(), navigationDirection: NavigationDirection.Down);
         }
     }
 }

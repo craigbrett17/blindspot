@@ -193,7 +193,6 @@ namespace Blindspot
             keyboardLayoutBox.DataSource = new BindingSource(fileAndPath, null);
             keyboardLayoutBox.DisplayMember = "Key";
             keyboardLayoutBox.ValueMember = "Value";
-            string screenReaderName = ScreenReader.getCurrentScreenReaderName().ToLower();
             if (!String.IsNullOrEmpty(settings.KeyboardLayoutName) && fileAndPath.ContainsKey(settings.KeyboardLayoutName))
             {
                 keyboardLayoutBox.SelectedValue = fileAndPath[settings.KeyboardLayoutName];

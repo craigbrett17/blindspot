@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using Blindspot.Helpers;
 using Blindspot.ViewModels;
-using ScreenReaderAPIWrapper;
 
 namespace Blindspot.Commands
 {
@@ -35,7 +35,8 @@ namespace Blindspot.Commands
             }
             else
             {
-                ScreenReader.SayString("View details is not a valid action for this type of item", true);
+                var output = OutputManager.Instance;
+                output.OutputMessage("View details is not a valid action for this type of item", true);
             }
         }
 

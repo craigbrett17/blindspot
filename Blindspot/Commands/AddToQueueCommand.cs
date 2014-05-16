@@ -3,18 +3,20 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using Blindspot.Helpers;
 using Blindspot.ViewModels;
-using ScreenReaderAPIWrapper;
 
 namespace Blindspot.Commands
 {
     public class AddToQueueCommand : HotkeyCommandBase
     {
         private BufferListCollection buffers;
+        private IOutputManager _output;
 
         public AddToQueueCommand(BufferListCollection buffersIn)
         {
             this.buffers = buffersIn;
+            _output = OutputManager.Instance;
         }
         
         public override string Key
@@ -29,7 +31,7 @@ namespace Blindspot.Commands
             if (item is TrackBufferItem)
             {
                 playQueue.Add(item);
-                ScreenReader.SayString(StringStore.AddedToQueue, true);
+                _output.OutputMessage(StringStore.AddedToQueue, true);
             }
             else
             {

@@ -53,7 +53,8 @@ namespace Blindspot.Commands
             var response = Session.LoadPlayer(item.Model.TrackPtr);
             if (response.IsError)
             {
-                ScreenReader.SayString(StringStore.UnableToPlayTrack + response.Message, false);
+                var output = OutputManager.Instance;
+                output.OutputMessage(StringStore.UnableToPlayTrack + response.Message, false);
                 return;
             }
             Session.Play();

@@ -6,18 +6,20 @@ using System.Text;
 using System.Windows.Forms;
 using Blindspot.Core;
 using Blindspot.Core.Models;
+using Blindspot.Helpers;
 using Blindspot.ViewModels;
-using ScreenReaderAPIWrapper;
 
 namespace Blindspot.Commands
 {
     public class NewSearchCommand : HotkeyCommandBase
     {
         private BufferListCollection buffers;
+        private OutputManager _output;
 
         public NewSearchCommand(BufferListCollection buffersIn)
         {
             buffers = buffersIn;
+            _output = OutputManager.Instance;
         }
 
         public override string Key
@@ -38,13 +40,13 @@ namespace Blindspot.Commands
             searchDialog.Dispose();
             if (searchType == SearchType.Track)
             {
-                ScreenReader.SayString(StringStore.Searching, false);
+                _output.OutputMessage(StringStore.Searching, false);
                 var spotify = SpotifyClient.Instance;
                 var search = spotify.SearchTracks(searchText);
                 buffers.Add(new SearchBufferList(search));
                 buffers.CurrentListIndex = buffers.Count - 1;
                 var searchBuffer = buffers.CurrentList;
-                ScreenReader.SayString(searchBuffer.ToString(), false);
+                _output.OutputMessage(searchBuffer.ToString(), false);
                 var tracks = search.Tracks;
                 if (tracks == null || tracks.Count == 0)
                 {
@@ -59,7 +61,7 @@ namespace Blindspot.Commands
                 }
                 else
                 {
-                    ScreenReader.SayString(tracks.Count + " " + StringStore.SearchResults, false);
+                    _output.OutputMessage(tracks.Count + " " + StringStore.SearchResults, false);
                     foreach (IntPtr pointer in tracks)
                     {
                         searchBuffer.Add(new TrackBufferItem(new Track(pointer)));

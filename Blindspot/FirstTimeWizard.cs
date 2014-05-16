@@ -85,7 +85,8 @@ namespace Blindspot
             keyboardStyleBox.DataSource = new BindingSource(fileAndPath, null);
             keyboardStyleBox.DisplayMember = "Key";
             keyboardStyleBox.ValueMember = "Value";
-            string screenReaderName = ScreenReader.getCurrentScreenReaderName().ToLower();
+            var screenReader = OutputManager.Instance.ScreenReader;
+            string screenReaderName = screenReader.ScreenReaderName.ToLower();
             if ((screenReaderName == "jfw" || screenReaderName == "jaws" || screenReaderName == "jaws for windows")
                 && fileAndPath.ContainsKey("Modern"))
             {
