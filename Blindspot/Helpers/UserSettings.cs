@@ -35,7 +35,7 @@ namespace Blindspot.Helpers
                 if (_instance == null)
                 {
                     _instance = new UserSettings();
-                    Save();
+                    //Save();
                 }
                 return _instance;
             }

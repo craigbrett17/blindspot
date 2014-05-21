@@ -69,6 +69,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Builders\MockIScreenReaderBuilder.cs" />
     <Compile Include="Helpers\OutputManagerTest.cs" />
     <Compile Include="ViewModels\BufferListTests.cs" />
     <Compile Include="ViewModels\BufferListCollectionTests.cs" />

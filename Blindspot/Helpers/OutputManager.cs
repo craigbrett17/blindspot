@@ -20,10 +20,15 @@ namespace Blindspot.Helpers
     {
         public IScreenReader ScreenReader { get; set; }
         
-        private OutputManager()
+        public OutputManager()
         {
             ScreenReader = new ScreenReader();
             ScreenReader.SapiEnabled = true;
+        }
+
+        public OutputManager(IScreenReader screenreader)
+        {
+            ScreenReader = screenreader;
         }
 
         private static OutputManager _instance;
