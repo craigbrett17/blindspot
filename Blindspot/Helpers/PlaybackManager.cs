@@ -267,7 +267,8 @@ namespace Blindspot.Helpers
 
         public void AddCurrentTrackToPreviousTracks()
         {
-            _previousTracks.Push(PlayingTrackItem);
+            if (PlayingTrackItem != null)
+                _previousTracks.Push(PlayingTrackItem);
         }
 
         public TrackBufferItem GetPreviousTrack()
