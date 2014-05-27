@@ -1,18 +1,19 @@
 ﻿using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Xml.Serialization;
 
 namespace Blindspot.Helpers
 {
     [Serializable()]
+    [XmlRoot]
     public class UserSettings
     {
         public string Username { get; set; }
-        public byte[] ApiKey { get; set; }
-        public bool StartInPrivateSession { get; set; }
+        public bool AutoLogin { get; set; }
         public int SearchResults { get; set; }
         public bool DontShowFirstTimeWizard { get; set; }
-        public bool AutoLogin { get; set; }
+        public bool StartInPrivateSession { get; set; }
         public float LastVolume { get; set; }
         public int UILanguageCode { get; set; }
         public UpdateType UpdatesInterestedIn { get; set; }
@@ -21,7 +22,7 @@ namespace Blindspot.Helpers
         public bool GraphicalOutput { get; set; }
 
         [NonSerialized]
-        private static string fileLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"Blindspot\Settings\user_settings.dat");
+        private static string fileLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"Blindspot\Settings\user_settings.xml");
 
         private static UserSettings _instance;
         public static UserSettings Instance
@@ -30,7 +31,11 @@ namespace Blindspot.Helpers
             {
                 if (_instance == null)
                 {
-                    Load();
+                    LoadFromXML();
+                }
+                if (_instance == null)
+                {
+                    LoadFromBinary();
                 }
                 if (_instance == null)
                 {
@@ -45,32 +50,49 @@ namespace Blindspot.Helpers
         {
             // set default values
             SearchResults = 50;
+            GraphicalOutput = true;
+            ScreenReaderOutput = true;
+            StartInPrivateSession = true;
         }
 
-        private static void Load()
+        private static void LoadFromBinary()
         {
-            if (File.Exists(fileLocation))
+            string location = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"Blindspot\Settings\user_settings.dat");
+
+            if (File.Exists(location))
             {
-                using (Stream loadStream = File.OpenRead(fileLocation))
+                using (Stream loadStream = File.OpenRead(location))
                 {
                     BinaryFormatter deserializer = new BinaryFormatter();
                     _instance = deserializer.Deserialize(loadStream) as UserSettings; 
                 }
             }
         }
-        
+
+        public static void LoadFromXML()
+        {
+            // don't set the instance if there is no file there
+            if (!File.Exists(fileLocation)) return;
+
+            var serializer = new XmlSerializer(typeof(UserSettings));
+            using (Stream loadStream = File.OpenRead(fileLocation))
+            {
+                _instance = serializer.Deserialize(loadStream) as UserSettings;
+            }
+        }
+
         public static void Save()
         {
+            var serializer = new XmlSerializer(typeof(UserSettings));
             using (Stream saveStream = File.Create(fileLocation))
             {
-                BinaryFormatter serializer = new BinaryFormatter();
                 serializer.Serialize(saveStream, _instance); 
             }
         }
         
         public enum UpdateType
         {
-            None = 0,
+            None,
             Stable,
             Beta,
             Dev

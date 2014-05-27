@@ -162,9 +162,6 @@ SetOutPath "${APPDATADIR}\Settings"
 ; If we need to override keyboard layouts for new features, comment out this line
 ; IfFileExists "$OUTDIR\hotkeys.txt" +2 0
 File /oname=hotkeys.txt "Keyboard Layouts\Standard.txt"
-; If we need to overwrite usersettings.dat
-IfFileExists "$OUTDIR\user_settings.dat" 0 +2
-Delete "$OUTDIR\user_settings.dat"
 ; Copy keyboard layouts
 SetOutPath "${APPDATADIR}\Keyboard Layouts"
 File "Keyboard Layouts\*.txt"
