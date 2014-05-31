@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Drawing;
 using ScreenReaderAPIWrapper;
 
 namespace Blindspot.Helpers
@@ -19,11 +20,29 @@ namespace Blindspot.Helpers
     public class OutputManager : IOutputManager
     {
         public IScreenReader ScreenReader { get; set; }
+        public TaskbarNotifier Notifyer { get; set; }
         
         public OutputManager()
         {
             ScreenReader = new ScreenReader();
             ScreenReader.SapiEnabled = true;
+            var screenWidth = System.Windows.Forms.Screen.PrimaryScreen.WorkingArea.Width;
+            Notifyer = new TaskbarNotifier()
+            {
+                ContentClickable = false,
+                TitleClickable = false,
+                EnableSelectionRectangle = false,
+                NormalContentColor = Color.White,
+                HoverContentColor = Color.White,
+                NormalTitleColor = Color.White,
+                HoverTitleColor = Color.White,
+                BackColor = Color.DarkBlue,
+                TitleRectangle=new Rectangle(20, 5, screenWidth / 4 - 40, 25),
+                ContentRectangle=new Rectangle(8, 25, screenWidth / 4 - 16, 60),
+                KeepVisibleOnMousOver= true,
+                ChangeContentResetsTimer = true,
+                ChangeTitleResetsTimer = true
+            };
         }
 
         public OutputManager(IScreenReader screenreader)
@@ -58,7 +77,21 @@ namespace Blindspot.Helpers
 
         public void OutputMessageGraphically(string message, bool interrupt = false, NavigationDirection navigationDirection = NavigationDirection.None)
         {
-            throw new NotImplementedException();
+            int appearingTime = 100, showingTime = 5000, disappearingTime = 200;
+            switch (Notifyer.TaskbarState)
+            {
+                case TaskbarNotifier.TaskbarStates.appearing:
+                case TaskbarNotifier.TaskbarStates.disappearing:
+                    Notifyer.Hide();
+                    Notifyer.Show(null, message, appearingTime, showingTime, disappearingTime);
+                    break;
+                case TaskbarNotifier.TaskbarStates.visible:
+                    Notifyer.ContentText = message;
+                    break;
+                default:
+                    Notifyer.Show(null, message, appearingTime, showingTime, disappearingTime);
+                    break;
+            }
         }
     }
 
