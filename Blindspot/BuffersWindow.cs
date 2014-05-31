@@ -123,7 +123,7 @@ namespace Blindspot
         {
             _trayIcon = new NotifyIcon
             {
-                ContextMenuStrip = new ContextMenuStrip(),
+                ContextMenuStrip = new ContextMenuStrip() { AccessibleName = "Blindspot" },
                 Icon = new Icon("blindspot.ico"),
                 Text = "Blindspot",
                 Visible = true
