@@ -63,8 +63,6 @@ namespace Blindspot
             Buffers.Add(_playQueueBuffer);
             Buffers.Add(new BufferList("Playlists", false));
             spotify = SpotifyClient.Instance;
-            settings.ScreenReaderOutput = true;
-            // settings.GraphicalOutput = true;
         }
         
         private void SetupFormEventHandlers()
@@ -335,6 +333,8 @@ namespace Blindspot
             playbackManager.PlayingTrackItem = item;
             playbackManager.fullyDownloaded = false;
             playbackManager.Play();
+            output.OutputTrackItem(playbackManager.PlayingTrackItem,
+                    settings.OutputTrackChangesGraphically, settings.OutputTrackChangesWithSpeech);
         }
 
         private void HandleEndOfCurrentTrack()
