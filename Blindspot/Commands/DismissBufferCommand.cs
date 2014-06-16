@@ -35,7 +35,7 @@ namespace Blindspot.Commands
             {
                 buffers.PreviousList();
                 buffers.Remove(currentBuffer);
-                _output.OutputMessage(buffers.CurrentList.ToString(), navigationDirection: NavigationDirection.Left);
+                _output.OutputBufferListState(buffers, NavigationDirection.Left);
             }
             // if it's a buffer with a search or other unmanaged resources, dispose it
             if (currentBuffer is IDisposable)

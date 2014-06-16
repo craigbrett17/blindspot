@@ -27,7 +27,7 @@ namespace Blindspot.Commands
         public override void Execute(object sender, HandledEventArgs e)
         {
             buffers.CurrentList.LastItem();
-            _output.OutputMessage(buffers.CurrentList.CurrentItem.ToString(), navigationDirection: NavigationDirection.Down);
+            _output.OutputBufferListState(buffers, NavigationDirection.Down);
         }
     }
 }

@@ -20,6 +20,8 @@ namespace Blindspot.Helpers
         public string KeyboardLayoutName { get; set; }
         public bool ScreenReaderOutput { get; set; }
         public bool GraphicalOutput { get; set; }
+        public bool OutputTrackChangesGraphically { get; set; }
+        public bool OutputTrackChangesWithSpeech { get; set; }
 
         [NonSerialized]
         private static string fileLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"Blindspot\Settings\user_settings.xml");
