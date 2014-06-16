@@ -163,6 +163,18 @@
   <data name="saveButton.Text" xml:space="preserve">
     <value>&amp;Guardar</value>
   </data>
+  <data name="graphicalOutputBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>204, 21</value>
+  </data>
+  <data name="graphicalOutputBox.Text" xml:space="preserve">
+    <value>Utilice una salida de &amp;imagen</value>
+  </data>
+  <data name="screenReaderOutputBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>282, 21</value>
+  </data>
+  <data name="screenReaderOutputBox.Text" xml:space="preserve">
+    <value>Utilice el lector de &amp;pantalla para la salida</value>
+  </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Configuración Blindspot</value>
   </data>
