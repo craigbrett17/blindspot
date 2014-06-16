@@ -15,6 +15,7 @@ namespace Blindspot.ViewModels
         public SearchBufferList(Search searchIn)
         {
             _search = searchIn;
+            Name = searchIn.Query;
         }
 
         public SearchBufferList(Search searchIn, bool isDismissableIn)
