@@ -181,6 +181,18 @@
   <data name="saveButton.Text" xml:space="preserve">
     <value>Speicher&amp;n</value>
   </data>
+  <data name="graphicalOutputBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>233, 21</value>
+  </data>
+  <data name="graphicalOutputBox.Text" xml:space="preserve">
+    <value>Verwenden Sie &amp;visuelle Ausgabe</value>
+  </data>
+  <data name="screenReaderOutputBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>301, 21</value>
+  </data>
+  <data name="screenReaderOutputBox.Text" xml:space="preserve">
+    <value>Verwenden &amp;Bildschirmleser für die Ausgabe</value>
+  </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>419, 261</value>
   </data>

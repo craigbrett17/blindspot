@@ -36,6 +36,18 @@ namespace Blindspot
         /// Whether the auto-update setting has changed whilst this dialog has been open
         /// </summary>
         public bool AutoUpdateSettingsChanged;
+        /// <summary>
+        /// Whether or not the screen reader output setting has changed whilst this dialog has been open
+        /// </summary>
+        public bool ScreenReaderOutputChanged { get; set; }
+        /// <summary>
+        /// Whether or not the SAPI fallback setting has changed whilst this dialog has been open
+        /// </summary>
+        public bool SAPIIsFallbackChanged;
+        public bool OutputTrackChangeWithScreenReaderChanged;
+        public bool VisualOutputChanged;
+        public bool OutputTrackChangeGraphicallyChanged;
+        public bool VisualDisplayTimeChanged;
 
         public OptionsDialog()
         {
@@ -57,6 +69,16 @@ namespace Blindspot
             autoUpdateTypeBox.Enabled = settings.UpdatesInterestedIn != UserSettings.UpdateType.None;
             if (autoUpdateEnabledBox.Checked)
                 autoUpdateTypeBox.Text = settings.UpdatesInterestedIn.ToString();
+
+            screenReaderBox.Checked = settings.ScreenReaderOutput;
+            screenReaderSapiFallbackBox.Checked = settings.SapiIsScreenReaderFallback;
+            screenReaderTrackChangeBox.Checked = settings.OutputTrackChangesWithSpeech;
+            EnableOrDisableControlsFromMasterCheckbox(screenReaderBox, speechPage);
+
+            visualOutputBox.Checked = settings.GraphicalOutput;
+            visualOutputTimeBox.Value = settings.VisualOutputDisplayTime;
+            visualDisplayTrackChangesBox.Checked = settings.OutputTrackChangesGraphically;
+            EnableOrDisableControlsFromMasterCheckbox(visualOutputBox, visualPage);
         }
 
         private void okButton_Click(object sender, EventArgs e)
@@ -72,6 +94,14 @@ namespace Blindspot
             LangSettingsChanged = langSettingsHaveChanged;
             KeyboardSettingsChanged = keyboardSettingsHaveChanged;
             AutoUpdateSettingsChanged = autoUpdateSettingsHaveChanged;
+
+            ScreenReaderOutputChanged = screenReaderBox.Checked != settings.ScreenReaderOutput;
+            SAPIIsFallbackChanged = screenReaderSapiFallbackBox.Checked != settings.SapiIsScreenReaderFallback;
+            OutputTrackChangeWithScreenReaderChanged = screenReaderTrackChangeBox.Checked != settings.OutputTrackChangesWithSpeech;
+
+            VisualOutputChanged = visualOutputBox.Checked != settings.GraphicalOutput;
+            VisualDisplayTimeChanged = visualOutputTimeBox.Value != settings.VisualOutputDisplayTime;
+            OutputTrackChangeGraphicallyChanged = visualDisplayTrackChangesBox.Checked != settings.OutputTrackChangesGraphically;
         }
 
         private void ProcessSettingsChanges()
@@ -98,6 +128,37 @@ namespace Blindspot
                 settings.UpdatesInterestedIn = (autoUpdateEnabledBox.Checked)
                     ? (UserSettings.UpdateType)Enum.Parse(typeof(UserSettings.UpdateType), autoUpdateTypeBox.Text, true)
                     : UserSettings.UpdateType.None;
+                hasAnythingChanged = true;
+            }
+            if (ScreenReaderOutputChanged)
+            {
+                settings.ScreenReaderOutput = screenReaderBox.Checked;
+                hasAnythingChanged = true;
+            }
+            if (OutputTrackChangeWithScreenReaderChanged)
+            {
+                settings.OutputTrackChangesWithSpeech = screenReaderTrackChangeBox.Checked;
+                hasAnythingChanged = true;
+            }
+            if (SAPIIsFallbackChanged)
+            {
+                settings.SapiIsScreenReaderFallback = screenReaderSapiFallbackBox.Checked;
+                OutputManager.Instance.ScreenReader.SapiEnabled = settings.SapiIsScreenReaderFallback;
+                hasAnythingChanged = true;
+            }
+            if (VisualOutputChanged)
+            {
+                settings.GraphicalOutput = visualOutputBox.Checked;
+                hasAnythingChanged = true;
+            }
+            if (VisualDisplayTimeChanged)
+            {
+                settings.VisualOutputDisplayTime = (int)visualOutputTimeBox.Value;
+                hasAnythingChanged = true;
+            }
+            if (OutputTrackChangeGraphicallyChanged)
+            {
+                settings.OutputTrackChangesGraphically = visualDisplayTrackChangesBox.Checked;
                 hasAnythingChanged = true;
             }
             if (hasAnythingChanged)
@@ -247,6 +308,28 @@ namespace Blindspot
                     updateType = (UserSettings.UpdateType)Enum.Parse(typeof(UserSettings.UpdateType), autoUpdateTypeBox.Text, true);
                 }
                 return settings.UpdatesInterestedIn != updateType;
+            }
+        }
+
+        private void screenReaderBox_CheckedChanged(object sender, EventArgs e)
+        {
+            EnableOrDisableControlsFromMasterCheckbox(screenReaderBox, speechPage);
+        }
+        
+        private void visualOutputBox_CheckedChanged(object sender, EventArgs e)
+        {
+            EnableOrDisableControlsFromMasterCheckbox(visualOutputBox, visualPage);
+        }
+
+        private static void EnableOrDisableControlsFromMasterCheckbox(CheckBox masterCheckbox, Control container)
+        {
+            bool enabled = masterCheckbox.Checked;
+            foreach (Control control in container.Controls)
+            {
+                // find all the controls except the main one and set them to the checked state of the main box
+                if (control.Name == masterCheckbox.Name)
+                    continue;
+                control.Enabled = enabled;
             }
         }
 

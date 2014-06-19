@@ -46,7 +46,6 @@ namespace Blindspot.Commands
                 buffers.Add(new SearchBufferList(search));
                 buffers.CurrentListIndex = buffers.Count - 1;
                 var searchBuffer = buffers.CurrentList;
-                _output.OutputMessage(searchBuffer.ToString(), false);
                 var tracks = search.Tracks;
                 if (tracks == null || tracks.Count == 0)
                 {
@@ -66,6 +65,7 @@ namespace Blindspot.Commands
                     {
                         searchBuffer.Add(new TrackBufferItem(new Track(pointer)));
                     }
+                    _output.OutputBufferListState(buffers, NavigationDirection.Right);
                 }
             }
             else if (searchType == SearchType.Artist)

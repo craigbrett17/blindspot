@@ -131,6 +131,9 @@
     </Compile>
     <Compile Include="Helpers\OutputManager.cs" />
     <Compile Include="Helpers\RegistryReader.cs" />
+    <Compile Include="Helpers\TaskbarNotifier.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Helpers\UpdateManager.cs" />
     <Compile Include="OptionsDialog.cs">
       <SubType>Form</SubType>

@@ -24,6 +24,12 @@ namespace Blindspot.ViewModels
             {
                 return StringStore.NoTrackInformation;
             }
+            string artistString = GetArtistNames();
+            return String.Format("{0} {1} {2}", Model.Name, StringStore.By, artistString);
+        }
+
+        public string GetArtistNames()
+        {
             string artistString = "Unknown";
             var _artists = Model.Artists;
             if (_artists.Length == 1)
@@ -34,7 +40,7 @@ namespace Blindspot.ViewModels
             {
                 artistString = String.Join(", ", _artists, 0, _artists.Length - 1) + String.Format(" {0} {1}", StringStore.And, _artists.LastOrDefault());
             }
-            return String.Format("{0} {1} {2}", Model.Name, StringStore.By, artistString);
+            return artistString;
         }
 
         public string ToTruncatedString()
@@ -52,5 +58,7 @@ namespace Blindspot.ViewModels
 
             return Model.Name.Substring(0, _truncationLength);
         }
+
+
     }
 }

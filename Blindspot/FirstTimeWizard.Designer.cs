@@ -43,25 +43,29 @@
             this.backButton = new System.Windows.Forms.Button();
             this.nextButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
+            this.step3GroupBox = new System.Windows.Forms.GroupBox();
+            this.graphicalOutputBox = new System.Windows.Forms.CheckBox();
+            this.screenReaderOutputBox = new System.Windows.Forms.CheckBox();
             this.step1GroupBox.SuspendLayout();
             this.step2GroupBox.SuspendLayout();
+            this.step3GroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // step1GroupBox
             // 
-            resources.ApplyResources(this.step1GroupBox, "step1GroupBox");
             this.step1GroupBox.Controls.Add(this.languageBox);
             this.step1GroupBox.Controls.Add(this.languageLabel);
             this.step1GroupBox.Controls.Add(this.step1WelcomeLabel);
+            resources.ApplyResources(this.step1GroupBox, "step1GroupBox");
             this.step1GroupBox.Name = "step1GroupBox";
             this.step1GroupBox.TabStop = false;
             // 
             // languageBox
             // 
-            resources.ApplyResources(this.languageBox, "languageBox");
             this.languageBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.languageBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.languageBox.FormattingEnabled = true;
+            resources.ApplyResources(this.languageBox, "languageBox");
             this.languageBox.Name = "languageBox";
             // 
             // languageLabel
@@ -76,12 +80,12 @@
             // 
             // step2GroupBox
             // 
-            resources.ApplyResources(this.step2GroupBox, "step2GroupBox");
             this.step2GroupBox.Controls.Add(this.keyboardStyleNoChangeBox);
             this.step2GroupBox.Controls.Add(this.keyboardDescriptionBox);
             this.step2GroupBox.Controls.Add(this.keyboardDescriptionLabel);
             this.step2GroupBox.Controls.Add(this.keyboardStyleBox);
             this.step2GroupBox.Controls.Add(this.keyboardStyleLabel);
+            resources.ApplyResources(this.step2GroupBox, "step2GroupBox");
             this.step2GroupBox.Name = "step2GroupBox";
             this.step2GroupBox.TabStop = false;
             // 
@@ -105,9 +109,9 @@
             // 
             // keyboardStyleBox
             // 
-            resources.ApplyResources(this.keyboardStyleBox, "keyboardStyleBox");
             this.keyboardStyleBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.keyboardStyleBox.FormattingEnabled = true;
+            resources.ApplyResources(this.keyboardStyleBox, "keyboardStyleBox");
             this.keyboardStyleBox.Name = "keyboardStyleBox";
             this.keyboardStyleBox.SelectionChangeCommitted += new System.EventHandler(this.keyboardStyleBox_SelectionChangeCommitted);
             // 
@@ -144,10 +148,35 @@
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
+            // step3GroupBox
+            // 
+            this.step3GroupBox.Controls.Add(this.graphicalOutputBox);
+            this.step3GroupBox.Controls.Add(this.screenReaderOutputBox);
+            resources.ApplyResources(this.step3GroupBox, "step3GroupBox");
+            this.step3GroupBox.Name = "step3GroupBox";
+            this.step3GroupBox.TabStop = false;
+            // 
+            // graphicalOutputBox
+            // 
+            resources.ApplyResources(this.graphicalOutputBox, "graphicalOutputBox");
+            this.graphicalOutputBox.Checked = true;
+            this.graphicalOutputBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.graphicalOutputBox.Name = "graphicalOutputBox";
+            this.graphicalOutputBox.UseVisualStyleBackColor = true;
+            // 
+            // screenReaderOutputBox
+            // 
+            resources.ApplyResources(this.screenReaderOutputBox, "screenReaderOutputBox");
+            this.screenReaderOutputBox.Checked = true;
+            this.screenReaderOutputBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.screenReaderOutputBox.Name = "screenReaderOutputBox";
+            this.screenReaderOutputBox.UseVisualStyleBackColor = true;
+            // 
             // FirstTimeWizard
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.step3GroupBox);
             this.Controls.Add(this.step2GroupBox);
             this.Controls.Add(this.step1GroupBox);
             this.Controls.Add(this.saveButton);
@@ -162,6 +191,8 @@
             this.step1GroupBox.PerformLayout();
             this.step2GroupBox.ResumeLayout(false);
             this.step2GroupBox.PerformLayout();
+            this.step3GroupBox.ResumeLayout(false);
+            this.step3GroupBox.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -182,5 +213,8 @@
         private System.Windows.Forms.Button nextButton;
         private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.CheckBox keyboardStyleNoChangeBox;
+        private System.Windows.Forms.GroupBox step3GroupBox;
+        private System.Windows.Forms.CheckBox screenReaderOutputBox;
+        private System.Windows.Forms.CheckBox graphicalOutputBox;
     }
 }

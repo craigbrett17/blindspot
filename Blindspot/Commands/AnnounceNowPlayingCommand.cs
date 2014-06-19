@@ -27,7 +27,7 @@ namespace Blindspot.Commands
         {
             if (playbackManager.PlayingTrackItem != null)
             {
-                _output.OutputMessage(playbackManager.PlayingTrackItem.ToString());
+                _output.OutputTrackItem(playbackManager.PlayingTrackItem);
             }
             else
             {

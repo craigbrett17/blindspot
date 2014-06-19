@@ -30,7 +30,7 @@ namespace Blindspot
             SetupLanguageBox();
             LoadKeyboardDescriptions();
             SetupKeyboardSettingsBox();
-            stepBoxes = new List<GroupBox>() { step1GroupBox, step2GroupBox };
+            stepBoxes = new List<GroupBox>() { step1GroupBox, step2GroupBox, step3GroupBox };
         }
         
         private void FirstTimeWizard_Load(object sender, EventArgs e)
@@ -151,6 +151,9 @@ namespace Blindspot
                 File.Copy(selectedKeyboardLayoutPath, Path.Combine(targetDirectoryPath, "hotkeys.txt"), true);
             }
             UserSettings.Instance.UILanguageCode = (int)languageBox.SelectedValue;
+            UserSettings.Instance.KeyboardLayoutName = keyboardStyleBox.Text;
+            UserSettings.Instance.ScreenReaderOutput = screenReaderOutputBox.Checked;
+            UserSettings.Instance.GraphicalOutput = graphicalOutputBox.Checked;
             UserSettings.Instance.DontShowFirstTimeWizard = true;
             UserSettings.Save();
             this.DialogResult = DialogResult.OK;

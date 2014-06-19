@@ -26,7 +26,7 @@ namespace Blindspot.Commands
         {
             buffers.NextList();
             var output = OutputManager.Instance;
-            output.OutputMessage(buffers.CurrentList.ToString(), true, NavigationDirection.Right);
+            output.OutputBufferListState(buffers, NavigationDirection.Right);
         }
     }
 }
