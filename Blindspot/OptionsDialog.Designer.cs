@@ -43,11 +43,23 @@
             this.keyboardLayoutLabel = new System.Windows.Forms.Label();
             this.keyboardPageDescription = new System.Windows.Forms.Label();
             this.editHotkeysButton = new System.Windows.Forms.Button();
+            this.speechPage = new System.Windows.Forms.TabPage();
+            this.screenReaderSapiFallbackBox = new System.Windows.Forms.CheckBox();
+            this.screenReaderTrackChangeBox = new System.Windows.Forms.CheckBox();
+            this.screenReaderBox = new System.Windows.Forms.CheckBox();
+            this.visualPage = new System.Windows.Forms.TabPage();
+            this.visualOutputTimeBox = new System.Windows.Forms.NumericUpDown();
+            this.visualOutputTimeLabel = new System.Windows.Forms.Label();
+            this.visualDisplayTrackChangesBox = new System.Windows.Forms.CheckBox();
+            this.visualOutputBox = new System.Windows.Forms.CheckBox();
             this.okButton = new System.Windows.Forms.Button();
             this.closeButton = new System.Windows.Forms.Button();
             this.tabHolder.SuspendLayout();
             this.generalPage.SuspendLayout();
             this.keyboardPage.SuspendLayout();
+            this.speechPage.SuspendLayout();
+            this.visualPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.visualOutputTimeBox)).BeginInit();
             this.SuspendLayout();
             // 
             // tabHolder
@@ -55,6 +67,8 @@
             resources.ApplyResources(this.tabHolder, "tabHolder");
             this.tabHolder.Controls.Add(this.generalPage);
             this.tabHolder.Controls.Add(this.keyboardPage);
+            this.tabHolder.Controls.Add(this.speechPage);
+            this.tabHolder.Controls.Add(this.visualPage);
             this.tabHolder.Name = "tabHolder";
             this.tabHolder.SelectedIndex = 0;
             // 
@@ -151,6 +165,72 @@
             this.editHotkeysButton.UseVisualStyleBackColor = true;
             this.editHotkeysButton.Click += new System.EventHandler(this.editHotkeysButton_Click);
             // 
+            // speechPage
+            // 
+            resources.ApplyResources(this.speechPage, "speechPage");
+            this.speechPage.Controls.Add(this.screenReaderSapiFallbackBox);
+            this.speechPage.Controls.Add(this.screenReaderTrackChangeBox);
+            this.speechPage.Controls.Add(this.screenReaderBox);
+            this.speechPage.Name = "speechPage";
+            this.speechPage.UseVisualStyleBackColor = true;
+            // 
+            // screenReaderSapiFallbackBox
+            // 
+            resources.ApplyResources(this.screenReaderSapiFallbackBox, "screenReaderSapiFallbackBox");
+            this.screenReaderSapiFallbackBox.Name = "screenReaderSapiFallbackBox";
+            this.screenReaderSapiFallbackBox.UseVisualStyleBackColor = true;
+            // 
+            // screenReaderTrackChangeBox
+            // 
+            resources.ApplyResources(this.screenReaderTrackChangeBox, "screenReaderTrackChangeBox");
+            this.screenReaderTrackChangeBox.Name = "screenReaderTrackChangeBox";
+            this.screenReaderTrackChangeBox.UseVisualStyleBackColor = true;
+            // 
+            // screenReaderBox
+            // 
+            resources.ApplyResources(this.screenReaderBox, "screenReaderBox");
+            this.screenReaderBox.Name = "screenReaderBox";
+            this.screenReaderBox.UseVisualStyleBackColor = true;
+            this.screenReaderBox.CheckedChanged += new System.EventHandler(this.screenReaderBox_CheckedChanged);
+            // 
+            // visualPage
+            // 
+            resources.ApplyResources(this.visualPage, "visualPage");
+            this.visualPage.Controls.Add(this.visualOutputTimeBox);
+            this.visualPage.Controls.Add(this.visualOutputTimeLabel);
+            this.visualPage.Controls.Add(this.visualDisplayTrackChangesBox);
+            this.visualPage.Controls.Add(this.visualOutputBox);
+            this.visualPage.Name = "visualPage";
+            this.visualPage.UseVisualStyleBackColor = true;
+            // 
+            // visualOutputTimeBox
+            // 
+            resources.ApplyResources(this.visualOutputTimeBox, "visualOutputTimeBox");
+            this.visualOutputTimeBox.Name = "visualOutputTimeBox";
+            this.visualOutputTimeBox.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            // 
+            // visualOutputTimeLabel
+            // 
+            resources.ApplyResources(this.visualOutputTimeLabel, "visualOutputTimeLabel");
+            this.visualOutputTimeLabel.Name = "visualOutputTimeLabel";
+            // 
+            // visualDisplayTrackChangesBox
+            // 
+            resources.ApplyResources(this.visualDisplayTrackChangesBox, "visualDisplayTrackChangesBox");
+            this.visualDisplayTrackChangesBox.Name = "visualDisplayTrackChangesBox";
+            this.visualDisplayTrackChangesBox.UseVisualStyleBackColor = true;
+            // 
+            // visualOutputBox
+            // 
+            resources.ApplyResources(this.visualOutputBox, "visualOutputBox");
+            this.visualOutputBox.Name = "visualOutputBox";
+            this.visualOutputBox.UseVisualStyleBackColor = true;
+            this.visualOutputBox.CheckedChanged += new System.EventHandler(this.visualOutputBox_CheckedChanged);
+            // 
             // okButton
             // 
             resources.ApplyResources(this.okButton, "okButton");
@@ -186,6 +266,11 @@
             this.generalPage.PerformLayout();
             this.keyboardPage.ResumeLayout(false);
             this.keyboardPage.PerformLayout();
+            this.speechPage.ResumeLayout(false);
+            this.speechPage.PerformLayout();
+            this.visualPage.ResumeLayout(false);
+            this.visualPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.visualOutputTimeBox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -208,5 +293,14 @@
         private System.Windows.Forms.Button editHotkeysButton;
         private System.Windows.Forms.TextBox keyboardDescriptionBox;
         private System.Windows.Forms.Label keyboardDescriptionLabel;
+        private System.Windows.Forms.TabPage speechPage;
+        private System.Windows.Forms.CheckBox screenReaderTrackChangeBox;
+        private System.Windows.Forms.CheckBox screenReaderBox;
+        private System.Windows.Forms.CheckBox screenReaderSapiFallbackBox;
+        private System.Windows.Forms.TabPage visualPage;
+        private System.Windows.Forms.CheckBox visualDisplayTrackChangesBox;
+        private System.Windows.Forms.CheckBox visualOutputBox;
+        private System.Windows.Forms.NumericUpDown visualOutputTimeBox;
+        private System.Windows.Forms.Label visualOutputTimeLabel;
     }
 }

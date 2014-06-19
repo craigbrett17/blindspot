@@ -22,6 +22,8 @@ namespace Blindspot.Helpers
         public bool GraphicalOutput { get; set; }
         public bool OutputTrackChangesGraphically { get; set; }
         public bool OutputTrackChangesWithSpeech { get; set; }
+        public bool SapiIsScreenReaderFallback { get; set; }
+        public int VisualOutputDisplayTime { get; set; }
 
         [NonSerialized]
         private static string fileLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"Blindspot\Settings\user_settings.xml");
@@ -55,6 +57,9 @@ namespace Blindspot.Helpers
             GraphicalOutput = true;
             ScreenReaderOutput = true;
             StartInPrivateSession = true;
+            OutputTrackChangesGraphically = true;
+            SapiIsScreenReaderFallback = true;
+            VisualOutputDisplayTime = 5;
         }
 
         private static void LoadFromBinary()

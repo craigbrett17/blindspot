@@ -166,6 +166,45 @@
   <data name="keyboardPage.Text" xml:space="preserve">
     <value>Tangentbord</value>
   </data>
+  <data name="screenReaderSapiFallback.Size" type="System.Drawing.Size, System.Drawing">
+    <value>196, 17</value>
+  </data>
+  <data name="screenReaderSapiFallback.Text" xml:space="preserve">
+    <value>Använd SAPI när ingen skärmläsare</value>
+  </data>
+  <data name="screenReaderTrackChangeBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>142, 17</value>
+  </data>
+  <data name="screenReaderTrackChangeBox.Text" xml:space="preserve">
+    <value>Meddela ändringar i spår</value>
+  </data>
+  <data name="screenReaderBox.Text" xml:space="preserve">
+    <value>Aktivera skärmläsare utgång</value>
+  </data>
+  <data name="speechPage.Text" xml:space="preserve">
+    <value>Tal</value>
+  </data>
+  <data name="visualOutputTimeLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>156, 13</value>
+  </data>
+  <data name="visualOutputTimeLabel.Text" xml:space="preserve">
+    <value>Sekunder för att visa utdata för:</value>
+  </data>
+  <data name="visualDisplayTrackChangesBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 17</value>
+  </data>
+  <data name="visualDisplayTrackChangesBox.Text" xml:space="preserve">
+    <value>Visa ändringar i spår</value>
+  </data>
+  <data name="visualOutputBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 17</value>
+  </data>
+  <data name="visualOutputBox.Text" xml:space="preserve">
+    <value>Aktivera visuell utgång</value>
+  </data>
+  <data name="visualPage.Text" xml:space="preserve">
+    <value>Visuell</value>
+  </data>
   <data name="closeButton.Text" xml:space="preserve">
     <value>&amp;Avbryt</value>
   </data>
