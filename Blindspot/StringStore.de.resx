@@ -267,4 +267,7 @@
   <data name="AddedToQueue" xml:space="preserve">
     <value>Hinzu Warteschlange</value>
   </data>
+  <data name="TrayIconOptionsMenuItemText" xml:space="preserve">
+    <value>&amp;Optionen</value>
+  </data>
 </root>

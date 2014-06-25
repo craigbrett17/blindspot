@@ -375,8 +375,9 @@ namespace Blindspot
                 return new ToolStripItem[]
                 {
                     new ToolStripSeparator(),
-                    new ToolStripMenuItem(StringStore.TrayIconAboutMenuItemText, null, new EventHandler((sender2, e2) => Commands["show_about_window"].Execute(this, null))),
-                    new ToolStripMenuItem(StringStore.TrayIconExitMenuItemText, null, new EventHandler((sender2, e2) => Commands["close_blindspot"].Execute(this, null)))
+                    MakeCommandMenuItem(StringStore.TrayIconOptionsMenuItemText, "options_dialog"),
+                    MakeCommandMenuItem(StringStore.TrayIconAboutMenuItemText, "show_about_window"),
+                    MakeCommandMenuItem(StringStore.TrayIconExitMenuItemText, "close_blindspot"),
                 };
             }
         }
@@ -402,5 +403,17 @@ namespace Blindspot
             });
             KeyManager = BufferHotkeyManager.LoadFromTextFile(this);
         }
+
+        private ToolStripMenuItem MakeCommandMenuItem(string text, string commandKey)
+        {
+            if (Commands.ContainsKey(commandKey))
+                return new ToolStripMenuItem(text, null, new EventHandler((sender, e) => Commands[commandKey].Execute(this, null)));
+            else
+            {
+                Logger.WriteDebug("No such command {0}", commandKey);
+                return null;
+            }
+        }
+
     }
 }

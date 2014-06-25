@@ -267,4 +267,7 @@
   <data name="AddedToQueue" xml:space="preserve">
     <value>Agregado a la cola</value>
   </data>
+  <data name="TrayIconOptionsMenuItemText" xml:space="preserve">
+    <value>&amp;Opciones</value>
+  </data>
 </root>

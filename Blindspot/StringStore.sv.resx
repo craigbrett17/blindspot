@@ -267,4 +267,7 @@
   <data name="AddedToQueue" xml:space="preserve">
     <value>Inkom till i kön</value>
   </data>
+  <data name="TrayIconOptionsMenuItemText" xml:space="preserve">
+    <value>&amp;Alternativ</value>
+  </data>
 </root>

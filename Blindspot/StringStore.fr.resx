@@ -267,4 +267,7 @@
   <data name="AddedToQueue" xml:space="preserve">
     <value>Ajouté à la file d'attente</value>
   </data>
+  <data name="TrayIconOptionsMenuItemText" xml:space="preserve">
+    <value>&amp;Options</value>
+  </data>
 </root>
