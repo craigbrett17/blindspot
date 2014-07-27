@@ -175,6 +175,15 @@ WriteRegStr HKCU "Software\Blindspot" "" $INSTDIR
 ;Create uninstaller
 WriteUninstaller "$INSTDIR\Uninstall Blindspot.exe"
 
+; Write registry info so this appears in add/remove programs
+WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Blindspot" "DisplayName" "Blindspot"
+WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Blindspot" "UninstallString" "$\"$INSTDIR\Uninstall Blindspot.exe$\""
+WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Blindspot" "QuietUninstallString" "$\"$INSTDIR\Uninstall Blindspot.exe$\" /S"
+WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Blindspot" "InstallLocation" "$\"$INSTDIR$\""
+WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Blindspot" "Publisher" "Blindspot open source community"
+WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Blindspot" "NoModify" 1
+WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Blindspot" "NoRepair" 1
+
 !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
 ; Create start menu shortcuts
 CreateDirectory "$SMPROGRAMS\$StartMenuFolder"
@@ -270,6 +279,7 @@ RMDir "$SMPROGRAMS\$StartMenuFolder"
 
 ;Delete the registry entry
 DeleteRegKey /ifempty HKCU "Software\Blindspot"
+DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Blindspot"
 
 ; We're leaving the .NET framework installed if it was for now
 ; people might not want .NET framework mysteriously leaving their machines
