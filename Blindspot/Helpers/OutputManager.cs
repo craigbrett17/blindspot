@@ -14,7 +14,7 @@ namespace Blindspot.Helpers
         void OutputMessageToScreenReader(string message, bool interrupt = false);
         void OutputMessageGraphically(string title, string message, NavigationDirection navigationDirection = NavigationDirection.None);
         void OutputTrackItem(TrackBufferItem item, bool graphicalOutput = true, bool screenReaderOutput = true);
-        void OutputBufferListState(BufferListCollection buffers, NavigationDirection direction);
+        void OutputBufferListState(BufferListCollection buffers, NavigationDirection direction, bool interrupt = true);
     }
     
     /// <summary>
@@ -113,11 +113,11 @@ namespace Blindspot.Helpers
             }
         }
 
-        public void OutputBufferListState(BufferListCollection buffers, NavigationDirection direction)
+        public void OutputBufferListState(BufferListCollection buffers, NavigationDirection direction, bool interrupt = true)
         {
             if (UseScreenReader)
             {
-                OutputCurrentBufferItemToScreenReader(buffers, direction);
+                OutputCurrentBufferItemToScreenReader(buffers, direction, interrupt);
             }
             if (UseGraphicalOutput)
             {
@@ -125,7 +125,7 @@ namespace Blindspot.Helpers
             }
         }
 
-        private void OutputCurrentBufferItemToScreenReader(BufferListCollection buffers, NavigationDirection direction)
+        private void OutputCurrentBufferItemToScreenReader(BufferListCollection buffers, NavigationDirection direction, bool interrupt)
         {
             string textToRead;
             if (direction == NavigationDirection.Left || direction == NavigationDirection.Right)
@@ -136,7 +136,7 @@ namespace Blindspot.Helpers
             {
                 textToRead = buffers.CurrentList.CurrentItem.ToString();
             }
-            OutputMessageToScreenReader(textToRead, true);
+            OutputMessageToScreenReader(textToRead, interrupt);
         }
 
         private void OutputCurrentBufferItemGraphically(BufferListCollection buffers)

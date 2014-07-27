@@ -97,6 +97,8 @@ namespace Blindspot.Core
         
         public static void Login(object[] args)
         {
+            // make the error back to normal
+            _loginError = libspotify.sp_error.OK;
             Session.appkey = (byte[])args[0];
             if (_sessionPtr == IntPtr.Zero)
                 _loginError = initSession();

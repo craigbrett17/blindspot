@@ -28,7 +28,7 @@ namespace Blindspot
         private bool downloadedUpdate = false; // for checks for updates
         protected NotifyIcon _trayIcon;
         private BufferList _playQueueBuffer;
-        
+
         #region user32 functions for moving away from window
         // need a bit of pinvoke here to move away from the window if the user manages to reach the window
         [DllImport("user32.dll", EntryPoint = "FindWindow", SetLastError = true)]
@@ -64,7 +64,7 @@ namespace Blindspot
             Buffers.Add(new BufferList("Playlists", false));
             spotify = SpotifyClient.Instance;
         }
-        
+
         private void SetupFormEventHandlers()
         {
             Session.OnAudioDataArrived += new Action<byte[]>(bytes =>
@@ -129,7 +129,7 @@ namespace Blindspot
             _trayIcon.ContextMenuStrip.Opening += _trayIcon_ContextMenuStrip_Opening;
             _trayIcon.MouseUp += _trayIcon_MouseUp;
         }
-        
+
         protected override void OnLoad(EventArgs e)
         {
             if (settings.UpdatesInterestedIn != UserSettings.UpdateType.None)
@@ -140,59 +140,62 @@ namespace Blindspot
                 this.Close();
                 return;
             }
+            SpotifyController.Initialize();
+            var appKeyBytes = Properties.Resources.spotify_appkey;
+            LoadBufferWindowCommands();
+            KeyManager = BufferHotkeyManager.LoadFromTextFile(this);
             string username = "", password = "";
-            using (LoginWindow logon = new LoginWindow())
+            // the first one controls the loop, the second is the response from Libspotify's login call
+            bool isLoggedIn = false, logInResponse = false;
+            while (!isLoggedIn)
             {
-                var response = logon.ShowDialog();
-                if (response != DialogResult.OK)
+                using (LoginWindow logon = new LoginWindow())
                 {
-                    this.Close();
-                    output.OutputMessage(StringStore.ExitingProgram);
-                    return;
+                    var response = logon.ShowDialog();
+                    if (response != DialogResult.OK)
+                    {
+                        this.Close();
+                        output.OutputMessage(StringStore.ExitingProgram);
+                        return;
+                    }
+                    username = logon.Username;
+                    password = logon.Password;
                 }
-                username = logon.Username;
-                password = logon.Password;
-            }
-            try
-            {
-                LoadBufferWindowCommands();
-                KeyManager = BufferHotkeyManager.LoadFromTextFile(this);
-                SpotifyController.Initialize();
-                var appKeyBytes = Properties.Resources.spotify_appkey;
-                output.OutputMessage(StringStore.LoggingIn);
-                bool loggedIn = SpotifyController.Login(appKeyBytes, username, password);
-                if (loggedIn)
+                try
+                {
+                    output.OutputMessage(StringStore.LoggingIn);
+                    logInResponse = SpotifyController.Login(appKeyBytes, username, password);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(StringStore.ErrorDuringLoad + "\\r\\nInitialization: " + ex.Message, StringStore.Oops, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    continue;
+                }
+                if (logInResponse)
                 {
                     output.OutputMessage(StringStore.LoggedInToSpotify);
                     UserSettings.Instance.Username = username;
                     UserSettings.Save();
-                    spotify.SetPrivateSession(true);
+                    spotify.SetPrivateSession(UserSettings.Instance.StartInPrivateSession);
+                    isLoggedIn = true;
                 }
                 else
                 {
                     var reason = spotify.GetLoginError().Message;
-                    output.OutputMessage(StringStore.LogInFailure + reason);
-                    // TODO: Make login window reappear until success or exit
-                    this.Close();
-                    return;
+                    MessageBox.Show(reason, StringStore.LogInFailure, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                output.OutputMessage(StringStore.LoadingPlaylists, false);
-                var playlists = LoadUserPlaylists();
-                if (playlists == null) return;
-                Buffers[1].Clear();
-                playlists.ForEach(p =>
-                {
-                    Buffers[1].Add(new PlaylistBufferItem(p));
-                });
-                output.OutputMessage(String.Format("{0} {1}", playlists.Count, StringStore.PlaylistsLoaded), false);
-                Buffers.CurrentListIndex = 1; // start on the playllists list
             }
-            catch (Exception ex)
+            output.OutputMessage(StringStore.LoadingPlaylists, false);
+            var playlists = LoadUserPlaylists();
+            if (playlists == null) return;
+            Buffers[1].Clear();
+            playlists.ForEach(p =>
             {
-                MessageBox.Show(StringStore.ErrorDuringLoad + ex.Message, StringStore.Oops, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                this.Close();
-            }
-            output.OutputMessage(Buffers.CurrentList.ToString(), false);
+                Buffers[1].Add(new PlaylistBufferItem(p));
+            });
+            output.OutputMessage(String.Format("{0} {1}", playlists.Count, StringStore.PlaylistsLoaded), false);
+            Buffers.CurrentListIndex = 1; // start on the playllists list
+            output.OutputBufferListState(Buffers, NavigationDirection.None, false);
         }
 
         private List<PlaylistContainer.PlaylistInfo> LoadUserPlaylists()
@@ -251,11 +254,11 @@ namespace Blindspot
                 new PreviousTrackCommand(Buffers, playbackManager),
                 new ShowContextMenuCommand(_trayIcon)
             };
-            
+
             // the hotkeys use the key to know which command to execute
             Commands = hotkeyCommands.ToDictionary(k => k.Key, v => v);
         }
-        
+
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             SpotifyController.ShutDown();
@@ -283,7 +286,7 @@ namespace Blindspot
             IntPtr desktopHwnd = FindWindow("Shell_TrayWnd", null);
             BringWindowToTop(desktopHwnd);
         }
-        
+
         private void SetThreadToInstallationLanguage()
         {
             RegistryReader regReader = new RegistryReader();
@@ -311,7 +314,7 @@ namespace Blindspot
                 }
             }
         }
-        
+
         private void ClearCurrentlyPlayingTrack()
         {
             if (playbackManager.PlayingTrackItem != null)
@@ -349,7 +352,7 @@ namespace Blindspot
                 _playQueueBuffer.CurrentItemIndex = 0;
             }
         }
-        
+
         private void _trayIcon_MouseUp(object sender, MouseEventArgs e)
         {
             // making left clicks launch the context menu as well

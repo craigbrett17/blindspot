@@ -52,7 +52,7 @@ namespace Blindspot.Core
         private static Action<IntPtr> d_on_logged_in = new Action<IntPtr>(Session_OnLoggedIn);
         private static Thread _t;
 
-        private static readonly int REQUEST_TIMEOUT = 30;
+        private static readonly int REQUEST_TIMEOUT = 15;
 
         private struct MainThreadMessage
         {
