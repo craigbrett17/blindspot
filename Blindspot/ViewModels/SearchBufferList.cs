@@ -1,4 +1,5 @@
-﻿using Blindspot.Controllers;
+﻿using Blindspot.Core;
+using Blindspot.Core.Models;
 using ScreenReaderAPIWrapper;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace Blindspot.ViewModels
         public SearchBufferList(Search searchIn)
         {
             _search = searchIn;
+            Name = searchIn.Query;
         }
 
         public SearchBufferList(Search searchIn, bool isDismissableIn)
@@ -39,7 +41,6 @@ namespace Blindspot.ViewModels
             {
                 this.Add(new TrackBufferItem(new Track(pointer)));
             });
-            ScreenReader.SayString(String.Format("{0} {1}", _search.Tracks.Count, StringStore.MoreSearchResults), true);
         }
 
         public override string ToString()

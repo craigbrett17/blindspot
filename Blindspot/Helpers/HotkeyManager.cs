@@ -64,7 +64,7 @@ namespace Blindspot.Helpers
                 newKey = new Hotkey((Keys)Enum.Parse(typeof(Keys), key, true), shift, ctrl, alt, win);
                 if (parent.Commands.ContainsKey(command))
                 {
-                    newKey.Pressed += parent.Commands[command];
+                    newKey.Pressed += parent.Commands[command].Execute;
                     if (parent is ContainerControl)
                     {
                         newKey.Register((ContainerControl)parent);

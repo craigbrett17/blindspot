@@ -1,29 +1,32 @@
 ﻿using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Xml.Serialization;
 
 namespace Blindspot.Helpers
 {
     [Serializable()]
+    [XmlRoot]
     public class UserSettings
     {
         public string Username { get; set; }
-        public string Password { get; set; }
-        public byte[] ApiKey { get; set; }
-        public bool StartInPrivateSession { get; set; }
-        private int _searchResults = 50;
-        public int SearchResults
-        {
-            get { return _searchResults; }
-            set { _searchResults = value; }
-        }
-        public bool DontShowFirstTimeWizard { get; set; }
         public bool AutoLogin { get; set; }
+        public int SearchResults { get; set; }
+        public bool DontShowFirstTimeWizard { get; set; }
+        public bool StartInPrivateSession { get; set; }
         public float LastVolume { get; set; }
         public int UILanguageCode { get; set; }
+        public UpdateType UpdatesInterestedIn { get; set; }
+        public string KeyboardLayoutName { get; set; }
+        public bool ScreenReaderOutput { get; set; }
+        public bool GraphicalOutput { get; set; }
+        public bool OutputTrackChangesGraphically { get; set; }
+        public bool OutputTrackChangesWithSpeech { get; set; }
+        public bool SapiIsScreenReaderFallback { get; set; }
+        public int VisualOutputDisplayTime { get; set; }
 
         [NonSerialized]
-        private static string fileLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"Blindspot\Settings\user_settings.dat");
+        private static string fileLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"Blindspot\Settings\user_settings.xml");
 
         private static UserSettings _instance;
         public static UserSettings Instance
@@ -32,39 +35,74 @@ namespace Blindspot.Helpers
             {
                 if (_instance == null)
                 {
-                    Load();
+                    LoadFromXML();
+                }
+                if (_instance == null)
+                {
+                    LoadFromBinary();
                 }
                 if (_instance == null)
                 {
                     _instance = new UserSettings();
-                    Save();
+                    //Save();
                 }
                 return _instance;
             }
         }
 
-        private UserSettings() { }
-
-        private static void Load()
+        private UserSettings()
         {
-            if (File.Exists(fileLocation))
+            // set default values
+            SearchResults = 50;
+            GraphicalOutput = true;
+            ScreenReaderOutput = true;
+            StartInPrivateSession = true;
+            OutputTrackChangesGraphically = true;
+            SapiIsScreenReaderFallback = true;
+            VisualOutputDisplayTime = 5;
+        }
+
+        private static void LoadFromBinary()
+        {
+            string location = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"Blindspot\Settings\user_settings.dat");
+
+            if (File.Exists(location))
             {
-                using (Stream loadStream = File.OpenRead(fileLocation))
+                using (Stream loadStream = File.OpenRead(location))
                 {
                     BinaryFormatter deserializer = new BinaryFormatter();
                     _instance = deserializer.Deserialize(loadStream) as UserSettings; 
                 }
             }
         }
-        
-        public static void Save()
+
+        public static void LoadFromXML()
         {
-            using (Stream saveStream = File.Create(fileLocation))
+            // don't set the instance if there is no file there
+            if (!File.Exists(fileLocation)) return;
+
+            var serializer = new XmlSerializer(typeof(UserSettings));
+            using (Stream loadStream = File.OpenRead(fileLocation))
             {
-                BinaryFormatter serializer = new BinaryFormatter();
-                serializer.Serialize(saveStream, _instance); 
+                _instance = serializer.Deserialize(loadStream) as UserSettings;
             }
         }
 
+        public static void Save()
+        {
+            var serializer = new XmlSerializer(typeof(UserSettings));
+            using (Stream saveStream = File.Create(fileLocation))
+            {
+                serializer.Serialize(saveStream, _instance); 
+            }
+        }
+        
+        public enum UpdateType
+        {
+            None,
+            Stable,
+            Beta,
+            Dev
+        }
     }
 }

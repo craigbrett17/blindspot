@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Blindspot.Helpers;
 using ScreenReaderAPIWrapper;
 
 namespace Blindspot
@@ -16,18 +17,19 @@ namespace Blindspot
         [STAThread]
         static void Main()
         {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            var output = OutputManager.Instance;
+            
             // first check if there's not an instance of Blindspot running already
             bool isOnlyInstanceOfApplication;
             var applicationMutex = new Mutex(true, "Global/Blindspot", out isOnlyInstanceOfApplication);
             if (!isOnlyInstanceOfApplication)
             {
-                ScreenReader.SayString(StringStore.BlindspotIsAlreadyRunning, false);
+                output.OutputMessage(StringStore.BlindspotIsAlreadyRunning, false);
                 return;
             }
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            ScreenReader.sapiEnable(true);
-            ScreenReader.SayString("Launching Blindspot...");
+            output.OutputMessage("Launching Blindspot...");
             Application.Run(new BuffersWindow());
             GC.KeepAlive(applicationMutex); // says that up to this point (end of program), we hold this Mutex. MINE!
         }

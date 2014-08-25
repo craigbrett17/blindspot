@@ -240,4 +240,34 @@
   <data name="And" xml:space="preserve">
     <value>et</value>
   </data>
+  <data name="AnUpdateToBlindspotIsAvailableQuestionNoVersion" xml:space="preserve">
+    <value>Une mise à jour est disponible Blindspot. Souhaitez-vous la télécharger maintenant?</value>
+  </data>
+  <data name="AnUpDateToBlindspotIsAvailableQuestionWithVersion" xml:space="preserve">
+    <value>Une nouvelle version de Blindspot, version {0}.{1}.{2}, est disponible. Souhaitez-vous la télécharger maintenant?</value>
+  </data>
+  <data name="ErrorDuringUpdate" xml:space="preserve">
+    <value>Erreur lors de la mise à jour</value>
+  </data>
+  <data name="NewVersionAvailable" xml:space="preserve">
+    <value>Nouvelle version disponible</value>
+  </data>
+  <data name="NewVersionDownloadedSuccessfully" xml:space="preserve">
+    <value>Nouvelle version téléchargée. Il va maintenant être installé</value>
+  </data>
+  <data name="ReadyToInstall" xml:space="preserve">
+    <value>Prêt à installer</value>
+  </data>
+  <data name="TrayIconAboutMenuItemText" xml:space="preserve">
+    <value>&amp;Sur</value>
+  </data>
+  <data name="TrayIconExitMenuItemText" xml:space="preserve">
+    <value>&amp;Quitter</value>
+  </data>
+  <data name="AddedToQueue" xml:space="preserve">
+    <value>Ajouté à la file d'attente</value>
+  </data>
+  <data name="TrayIconOptionsMenuItemText" xml:space="preserve">
+    <value>&amp;Options</value>
+  </data>
 </root>

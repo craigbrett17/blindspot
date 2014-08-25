@@ -117,62 +117,95 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddedToQueue" xml:space="preserve">
+    <value>Zur Warteschlange hinzugefügt</value>
+  </data>
+  <data name="And" xml:space="preserve">
+    <value>und</value>
+  </data>
   <data name="AnUnexpectedErrorOccurred" xml:space="preserve">
     <value>Ein unerwarteter fehler ist aufgetreten</value>
   </data>
+  <data name="AnUpdateToBlindspotIsAvailableQuestionNoVersion" xml:space="preserve">
+    <value>Ein Update für Blindspot ist jetzt verfügbar. Möchten Sie es jetzt herunterladen?</value>
+  </data>
+  <data name="AnUpDateToBlindspotIsAvailableQuestionWithVersion" xml:space="preserve">
+    <value>Eine neue Version von Blindspot, Version {0}.{1}.{2} ist verfügbar. Möchten Sie diese jetzt herunterladen?</value>
+  </data>
+  <data name="BlindspotIsAlreadyRunning" xml:space="preserve">
+    <value>Blindspot läuft bereits</value>
+  </data>
   <data name="By" xml:space="preserve">
-    <value>mit</value>
+    <value>von</value>
   </data>
   <data name="CannotDismissBuffer" xml:space="preserve">
-    <value>Kann nicht entlassen puffer </value>
+    <value>Kann puffer nicht entfernen</value>
   </data>
   <data name="CriticalError" xml:space="preserve">
-    <value>Kritischer fehler: </value>
+    <value>Kritischer fehler:</value>
   </data>
   <data name="ErrorDuringLoad" xml:space="preserve">
-    <value>Fehler beim laden: </value>
+    <value>Fehler beim laden:</value>
+  </data>
+  <data name="ErrorDuringUpdate" xml:space="preserve">
+    <value>Fehler beim Update</value>
   </data>
   <data name="ExitingProgram" xml:space="preserve">
-    <value>Sie verlassen das programm</value>
+    <value>beende programm</value>
   </data>
   <data name="ItemActivated" xml:space="preserve">
-    <value>Artikel aktiviert</value>
+    <value>Eintrag aktiviert</value>
   </data>
   <data name="Items" xml:space="preserve">
-    <value>Artikel</value>
+    <value>Einträge</value>
   </data>
   <data name="LoadingPlaylist" xml:space="preserve">
-    <value>Loading playlist</value>
+    <value>Lade Wiedergabeliste</value>
   </data>
   <data name="LoadingPlaylists" xml:space="preserve">
-    <value>Laden der playlists</value>
+    <value>Lade Wiedergabelisten</value>
   </data>
   <data name="LoggedInToSpotify" xml:space="preserve">
-    <value>Gespeichert in Spotify</value>
+    <value>bei Spotify angemeldet</value>
   </data>
   <data name="LoggingIn" xml:space="preserve">
-    <value>Protokollierung in</value>
+    <value>anmelden</value>
   </data>
   <data name="LogInFailure" xml:space="preserve">
-    <value>Einloggen failure: </value>
+    <value>Fehler beim Einloggen:</value>
   </data>
   <data name="Louder" xml:space="preserve">
-    <value>Louder</value>
+    <value>Lauter</value>
+  </data>
+  <data name="MoreSearchResults" xml:space="preserve">
+    <value>weitere Suchergebnisse</value>
+  </data>
+  <data name="NewVersionAvailable" xml:space="preserve">
+    <value>Neue Version verfügbar</value>
+  </data>
+  <data name="NewVersionDownloadedSuccessfully" xml:space="preserve">
+    <value>Neue Version erfolgreich heruntergeladen! Sie wird nun installiert.</value>
+  </data>
+  <data name="NoDescriptionAvailable" xml:space="preserve">
+    <value>Keine Beschreibung vorhanden</value>
+  </data>
+  <data name="NoSearchResults" xml:space="preserve">
+    <value>Keine suchergebnisse</value>
   </data>
   <data name="NoSearchText" xml:space="preserve">
     <value>Kein suchtext</value>
   </data>
   <data name="NoTrackCurrentlyBeingPlayed" xml:space="preserve">
-    <value>Keine laufenden titels</value>
+    <value>Kein laufender titel</value>
   </data>
   <data name="NoTrackInformation" xml:space="preserve">
-    <value>Keine Titelinformationen</value>
+    <value>Keine Titelinformationen.</value>
   </data>
   <data name="NoUsernameOrPassword" xml:space="preserve">
     <value>Kein benutzername oder passwort</value>
   </data>
   <data name="Of" xml:space="preserve">
-    <value>aus</value>
+    <value>von</value>
   </data>
   <data name="Oops" xml:space="preserve">
     <value>Hoppla!</value>
@@ -187,22 +220,31 @@
     <value>wiedergabelisten geladen</value>
   </data>
   <data name="PleaseEnterAUsernameAndPasswordToLoginToSpotify" xml:space="preserve">
-    <value>Bitte geben sie einen benutzernamen und passwort einloggen, um zu Spotify</value>
+    <value>Bitte geben sie benutzername und passwort ein, um sich bei  Spotify anzumelden</value>
   </data>
   <data name="PleaseEnterSomeSearchTextToSearchFor" xml:space="preserve">
-    <value>Bitte geben sie einen suchtext zu suchen</value>
+    <value>Bitte geben sie einen suchtext ein, nach dem gesucht werden soll</value>
   </data>
   <data name="ProblemLoadingBrowser" xml:space="preserve">
-    <value>Fehler beim Laden der browser</value>
+    <value>Fehler beim Laden des browsers</value>
   </data>
   <data name="Quieter" xml:space="preserve">
     <value>Leiser</value>
   </data>
+  <data name="ReadyToInstall" xml:space="preserve">
+    <value>Bereit zur Installation</value>
+  </data>
+  <data name="SearchFor" xml:space="preserve">
+    <value>Suche nach</value>
+  </data>
   <data name="Searching" xml:space="preserve">
-    <value>Suche</value>
+    <value>Suche...</value>
   </data>
   <data name="SearchResults" xml:space="preserve">
     <value>Suchergebnisse</value>
+  </data>
+  <data name="SelectRetryToTryAgainOrCancelToQuit" xml:space="preserve">
+    <value>Wählen Sie Wiederholen, um es erneut zu versuchen, oder Abbrechen, um zu beenden.</value>
   </data>
   <data name="StreamingError" xml:space="preserve">
     <value>Streaming-fehler</value>
@@ -210,34 +252,22 @@
   <data name="TracksLoaded" xml:space="preserve">
     <value>tracks geladen</value>
   </data>
+  <data name="TrayIconAboutMenuItemText" xml:space="preserve">
+    <value>&amp;über</value>
+  </data>
+  <data name="TrayIconExitMenuItemText" xml:space="preserve">
+    <value>&amp;Beenden</value>
+  </data>
+  <data name="TrayIconOptionsMenuItemText" xml:space="preserve">
+    <value>&amp;Optionen</value>
+  </data>
   <data name="UnableToPlayTrack" xml:space="preserve">
-    <value>Kann Track zu spielen: </value>
+    <value>Kann Track nicht spielen:</value>
   </data>
   <data name="UnexpectedError" xml:space="preserve">
     <value>Unerwarteter fehler</value>
   </data>
   <data name="UnexpectedErrorOccurred" xml:space="preserve">
     <value>Unerwarteter fehler aufgetreten.</value>
-  </data>
-  <data name="NoSearchResults" xml:space="preserve">
-    <value>Keine suchergebnisse</value>
-  </data>
-  <data name="NoDescriptionAvailable" xml:space="preserve">
-    <value>Keine Beschreibung vorhanden</value>
-  </data>
-  <data name="MoreSearchResults" xml:space="preserve">
-    <value>weitere Suchergebnisse</value>
-  </data>
-  <data name="SearchFor" xml:space="preserve">
-    <value>Suche nach</value>
-  </data>
-  <data name="BlindspotIsAlreadyRunning" xml:space="preserve">
-    <value>Blindspot läuft bereits</value>
-  </data>
-  <data name="SelectRetryToTryAgainOrCancelToQuit" xml:space="preserve">
-    <value>Wählen Sie Wiederholen, um erneut zu versuchen, oder Abbrechen, um zu beenden.</value>
-  </data>
-  <data name="And" xml:space="preserve">
-    <value>und</value>
   </data>
 </root>

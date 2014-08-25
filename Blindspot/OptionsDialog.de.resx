@@ -118,11 +118,17 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="editHotkeysButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 23</value>
+  <data name="autoUpdateTypeLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>86, 13</value>
   </data>
-  <data name="editHotkeysButton.Text" xml:space="preserve">
-    <value>Bearbeiten &amp;Tastatur-Hotkeys</value>
+  <data name="autoUpdateTypeLabel.Text" xml:space="preserve">
+    <value>Ar&amp;t des Updates:</value>
+  </data>
+  <data name="autoUpdateEnabledBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>243, 17</value>
+  </data>
+  <data name="autoUpdateEnabledBox.Text" xml:space="preserve">
+    <value>Aktivieren Sie die automatische Akt&amp;ualisierung</value>
   </data>
   <data name="languageLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 13</value>
@@ -132,6 +138,78 @@
   </data>
   <data name="generalPage.Text" xml:space="preserve">
     <value>Allgemeine</value>
+  </data>
+  <data name="keyboardDescriptionLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 13</value>
+  </data>
+  <data name="keyboardDescriptionLabel.Text" xml:space="preserve">
+    <value>&amp;Beschreibung:</value>
+  </data>
+  <data name="keyboardLayoutLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>77, 13</value>
+  </data>
+  <data name="keyboardLayoutLabel.Text" xml:space="preserve">
+    <value>&amp;Tastaturlayout:</value>
+  </data>
+  <data name="keyboardPageDescription.Size" type="System.Drawing.Size, System.Drawing">
+    <value>373, 13</value>
+  </data>
+  <data name="keyboardPageDescription.Text" xml:space="preserve">
+    <value>Wählen Sie einen vorhandenen Tastaturlayout oder erstellen Sie Ihre eigenen</value>
+  </data>
+  <data name="editHotkeysButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 23</value>
+  </data>
+  <data name="editHotkeysButton.Text" xml:space="preserve">
+    <value>&amp;Fertigen Layout:</value>
+  </data>
+  <data name="keyboardPage.Text" xml:space="preserve">
+    <value>Tastatur</value>
+  </data>
+  <data name="screenReaderSapiFallbackBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>251, 17</value>
+  </data>
+  <data name="screenReaderSapiFallbackBox.Text" xml:space="preserve">
+    <value>Verwenden SAPI, wenn es keine Bildschirmlese</value>
+  </data>
+  <data name="screenReaderTrackChangeBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>177, 17</value>
+  </data>
+  <data name="screenReaderTrackChangeBox.Text" xml:space="preserve">
+    <value>Kündigen Sie track Änderungen</value>
+  </data>
+  <data name="screenReaderBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>188, 17</value>
+  </data>
+  <data name="screenReaderBox.Text" xml:space="preserve">
+    <value>Aktivieren Bildschirmleseausgangs</value>
+  </data>
+  <data name="speechPage.Text" xml:space="preserve">
+    <value>Rede</value>
+  </data>
+  <data name="visualOutputTimeBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>200, 70</value>
+  </data>
+  <data name="visualOutputTimeLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>195, 13</value>
+  </data>
+  <data name="visualOutputTimeLabel.Text" xml:space="preserve">
+    <value>Sekunden bis zur Anzeige ausgegeben:</value>
+  </data>
+  <data name="visualDisplayTrackChangesBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 17</value>
+  </data>
+  <data name="visualDisplayTrackChangesBox.Text" xml:space="preserve">
+    <value>Anzeige track Änderungen</value>
+  </data>
+  <data name="visualOutputBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>156, 17</value>
+  </data>
+  <data name="visualOutputBox.Text" xml:space="preserve">
+    <value>Aktivieren visuelle Ausgabe</value>
+  </data>
+  <data name="visualPage.Text" xml:space="preserve">
+    <value>Visuell</value>
   </data>
   <data name="closeButton.Text" xml:space="preserve">
     <value>&amp;Abbrechen</value>

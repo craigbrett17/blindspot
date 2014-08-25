@@ -1,0 +1,567 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="&gt;&gt;track_titleBox.Name" xml:space="preserve">
+    <value>track_titleBox</value>
+  </data>
+  <data name="&gt;&gt;artistInfoPanel.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;playlist_numTracksLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;playlist_numTracksBox.Name" xml:space="preserve">
+    <value>playlist_numTracksBox</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="artistInfoPanel.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="track_artistsBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>300, 16</value>
+  </data>
+  <data name="&gt;&gt;track_titleLabel.Parent" xml:space="preserve">
+    <value>trackInfoPanel</value>
+  </data>
+  <data name="track_albumLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;userInfoPanel.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="playlistInfoPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="&gt;&gt;playlist_nameLabel.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="albumInfoPanel.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;track_albumBox.Parent" xml:space="preserve">
+    <value>trackInfoPanel</value>
+  </data>
+  <data name="&gt;&gt;closeButton.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;playlistInfoPanel.Name" xml:space="preserve">
+    <value>playlistInfoPanel</value>
+  </data>
+  <data name="&gt;&gt;playlist_nameLabel.Name" xml:space="preserve">
+    <value>playlist_nameLabel</value>
+  </data>
+  <data name="&gt;&gt;track_titleBox.Parent" xml:space="preserve">
+    <value>trackInfoPanel</value>
+  </data>
+  <data name="&gt;&gt;track_albumBox.Name" xml:space="preserve">
+    <value>track_albumBox</value>
+  </data>
+  <data name="&gt;&gt;playlist_nameLabel.Parent" xml:space="preserve">
+    <value>playlistInfoPanel</value>
+  </data>
+  <data name="&gt;&gt;playlistInfoPanel.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Item Details</value>
+  </data>
+  <data name="trackInfoPanel.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;playlist_numTracksLabel.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="trackInfoPanel.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="playlistInfoPanel.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;track_albumBox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;trackInfoPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="trackInfoPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>512, 270</value>
+  </data>
+  <data name="playlist_numTracksBox.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>8, 16</value>
+  </data>
+  <data name="&gt;&gt;trackInfoPanel.Name" xml:space="preserve">
+    <value>trackInfoPanel</value>
+  </data>
+  <data name="track_albumLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="playlist_nameBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>200, 10</value>
+  </data>
+  <data name="&gt;&gt;playlist_numTracksBox.Parent" xml:space="preserve">
+    <value>playlistInfoPanel</value>
+  </data>
+  <data name="&gt;&gt;playlist_nameBox.Parent" xml:space="preserve">
+    <value>playlistInfoPanel</value>
+  </data>
+  <data name="&gt;&gt;track_albumBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;albumInfoPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;track_titleBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="artistInfoPanel.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;playlist_nameBox.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="artistInfoPanel.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="track_artistsBox.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="playlist_nameLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 17</value>
+  </data>
+  <data name="&gt;&gt;userInfoPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;artistInfoPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="track_albumBox.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="playlistInfoPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>512, 270</value>
+  </data>
+  <data name="playlist_numTracksLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;userInfoPanel.Name" xml:space="preserve">
+    <value>userInfoPanel</value>
+  </data>
+  <data name="&gt;&gt;albumInfoPanel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="track_titleBox.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="playlist_numTracksLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 17</value>
+  </data>
+  <data name="albumInfoPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>512, 270</value>
+  </data>
+  <data name="track_artistsLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>51, 17</value>
+  </data>
+  <data name="&gt;&gt;track_artistsLabel.Name" xml:space="preserve">
+    <value>track_artistsLabel</value>
+  </data>
+  <data name="track_titleLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>39, 17</value>
+  </data>
+  <data name="track_artistsLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="playlistInfoPanel.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>ItemDetailsWindow</value>
+  </data>
+  <data name="&gt;&gt;playlist_nameBox.Name" xml:space="preserve">
+    <value>playlist_nameBox</value>
+  </data>
+  <data name="&gt;&gt;track_titleLabel.Name" xml:space="preserve">
+    <value>track_titleLabel</value>
+  </data>
+  <data name="&gt;&gt;playlist_nameBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="track_titleLabel.Text" xml:space="preserve">
+    <value>&amp;Title:</value>
+  </data>
+  <data name="trackInfoPanel.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="albumInfoPanel.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="playlist_numTracksBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>300, 16</value>
+  </data>
+  <data name="playlist_numTracksLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 50</value>
+  </data>
+  <data name="&gt;&gt;track_titleLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="artistInfoPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 270</value>
+  </data>
+  <data name="userInfoPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 1080</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterParent</value>
+  </data>
+  <data name="&gt;&gt;playlist_numTracksLabel.Parent" xml:space="preserve">
+    <value>playlistInfoPanel</value>
+  </data>
+  <data name="trackInfoPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="playlist_numTracksBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>200, 50</value>
+  </data>
+  <data name="&gt;&gt;closeButton.Name" xml:space="preserve">
+    <value>closeButton</value>
+  </data>
+  <data name="&gt;&gt;playlistInfoPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="albumInfoPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 540</value>
+  </data>
+  <data name="&gt;&gt;albumInfoPanel.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="track_artistsLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="playlist_nameLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="track_titleBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>200, 10</value>
+  </data>
+  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="track_artistsLabel.Text" xml:space="preserve">
+    <value>&amp;Artists:</value>
+  </data>
+  <data name="playlist_numTracksLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;track_artistsLabel.Parent" xml:space="preserve">
+    <value>trackInfoPanel</value>
+  </data>
+  <data name="track_titleLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="playlist_nameBox.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;albumInfoPanel.Name" xml:space="preserve">
+    <value>albumInfoPanel</value>
+  </data>
+  <data name="&gt;&gt;track_albumLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="userInfoPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>512, 270</value>
+  </data>
+  <data name="playlist_numTracksLabel.Text" xml:space="preserve">
+    <value>Number of &amp;tracks:</value>
+  </data>
+  <data name="&gt;&gt;track_titleLabel.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="closeButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="&gt;&gt;trackInfoPanel.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="userInfoPanel.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;trackInfoPanel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="track_titleLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 10</value>
+  </data>
+  <data name="&gt;&gt;userInfoPanel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="track_albumLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 90</value>
+  </data>
+  <data name="&gt;&gt;track_artistsBox.Parent" xml:space="preserve">
+    <value>trackInfoPanel</value>
+  </data>
+  <data name="playlist_nameBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>300, 16</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;artistInfoPanel.Name" xml:space="preserve">
+    <value>artistInfoPanel</value>
+  </data>
+  <data name="albumInfoPanel.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="userInfoPanel.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;closeButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;track_artistsBox.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;track_artistsLabel.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;track_artistsLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;playlist_numTracksBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="userInfoPanel.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="track_titleBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>300, 16</value>
+  </data>
+  <data name="playlist_nameLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 10</value>
+  </data>
+  <data name="userInfoPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="track_artistsLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 50</value>
+  </data>
+  <data name="&gt;&gt;track_albumLabel.Name" xml:space="preserve">
+    <value>track_albumLabel</value>
+  </data>
+  <data name="artistInfoPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="&gt;&gt;track_albumLabel.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;playlist_numTracksBox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="track_titleLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;track_titleBox.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="playlist_nameLabel.Text" xml:space="preserve">
+    <value>&amp;Name:</value>
+  </data>
+  <data name="track_albumLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>51, 17</value>
+  </data>
+  <data name="&gt;&gt;track_artistsBox.Name" xml:space="preserve">
+    <value>track_artistsBox</value>
+  </data>
+  <data name="&gt;&gt;closeButton.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;playlist_nameLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;artistInfoPanel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="track_albumLabel.Text" xml:space="preserve">
+    <value>A&amp;lbum:</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>512, 321</value>
+  </data>
+  <data name="playlist_nameLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="artistInfoPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>512, 270</value>
+  </data>
+  <data name="&gt;&gt;playlist_numTracksLabel.Name" xml:space="preserve">
+    <value>playlist_numTracksLabel</value>
+  </data>
+  <data name="playlistInfoPanel.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;playlistInfoPanel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="playlistInfoPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 810</value>
+  </data>
+  <data name="closeButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>220, 285</value>
+  </data>
+  <data name="&gt;&gt;track_albumLabel.Parent" xml:space="preserve">
+    <value>trackInfoPanel</value>
+  </data>
+  <data name="albumInfoPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="track_albumBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>200, 90</value>
+  </data>
+  <data name="&gt;&gt;track_artistsBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="track_artistsBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>200, 50</value>
+  </data>
+  <data name="track_albumBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>300, 16</value>
+  </data>
+  <data name="trackInfoPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="closeButton.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="closeButton.Text" xml:space="preserve">
+    <value>Cl&amp;ose</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>de</value>
+  </metadata>
+</root>

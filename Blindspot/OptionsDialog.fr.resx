@@ -118,11 +118,17 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="editHotkeysButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>140, 23</value>
+  <data name="autoUpdateTypeLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>102, 13</value>
   </data>
-  <data name="editHotkeysButton.Text" xml:space="preserve">
-    <value>Modifier raccourcis &amp;clavier</value>
+  <data name="autoUpdateTypeLabel.Text" xml:space="preserve">
+    <value>&amp;Type de mise à jour:</value>
+  </data>
+  <data name="autoUpdateEnabledBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>184, 17</value>
+  </data>
+  <data name="autoUpdateEnabledBox.Text" xml:space="preserve">
+    <value>&amp;Activer la mise à jour automatique</value>
   </data>
   <data name="languageLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>46, 13</value>
@@ -132,6 +138,69 @@
   </data>
   <data name="generalPage.Text" xml:space="preserve">
     <value>Générales</value>
+  </data>
+  <data name="keyboardLayoutLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>42, 13</value>
+  </data>
+  <data name="keyboardLayoutLabel.Text" xml:space="preserve">
+    <value>&amp;Clavier:</value>
+  </data>
+  <data name="keyboardPageDescription.Size" type="System.Drawing.Size, System.Drawing">
+    <value>334, 13</value>
+  </data>
+  <data name="keyboardPageDescription.Text" xml:space="preserve">
+    <value>Sélectionnez une disposition de clavier existant, ou créer votre propre</value>
+  </data>
+  <data name="editHotkeysButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>140, 23</value>
+  </data>
+  <data name="editHotkeysButton.Text" xml:space="preserve">
+    <value>Modifier raccourcis &amp;clavier</value>
+  </data>
+  <data name="keyboardPage.Text" xml:space="preserve">
+    <value>clavier</value>
+  </data>
+  <data name="screenReaderSapiFallback.Size" type="System.Drawing.Size, System.Drawing">
+    <value>256, 17</value>
+  </data>
+  <data name="screenReaderSapiFallback.Text" xml:space="preserve">
+    <value>Utilisez SAPI quand il n'ya pas de lecteur d'écran</value>
+  </data>
+  <data name="screenReaderTrackChangeBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>195, 17</value>
+  </data>
+  <data name="screenReaderTrackChangeBox.Text" xml:space="preserve">
+    <value>Annoncer les changements de piste</value>
+  </data>
+  <data name="screenReaderBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>186, 17</value>
+  </data>
+  <data name="screenReaderBox.Text" xml:space="preserve">
+    <value>Activer la sortie de lecteur d'écran</value>
+  </data>
+  <data name="speechPage.Text" xml:space="preserve">
+    <value>Discours</value>
+  </data>
+  <data name="visualOutputTimeLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>183, 13</value>
+  </data>
+  <data name="visualOutputTimeLabel.Text" xml:space="preserve">
+    <value>Secondes pour afficher la sortie pour:</value>
+  </data>
+  <data name="visualDisplayTrackChangesBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>196, 17</value>
+  </data>
+  <data name="visualDisplayTrackChangesBox.Text" xml:space="preserve">
+    <value>changements d'affichage de la piste</value>
+  </data>
+  <data name="visualOutputBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>136, 17</value>
+  </data>
+  <data name="visualOutputBox.Text" xml:space="preserve">
+    <value>Activer la sortie visuelle</value>
+  </data>
+  <data name="visualPage.Text" xml:space="preserve">
+    <value>Visuel</value>
   </data>
   <data name="closeButton.Text" xml:space="preserve">
     <value>&amp;Quitter</value>

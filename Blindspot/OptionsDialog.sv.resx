@@ -117,21 +117,93 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="generalPage.Text" xml:space="preserve">
-    <value>Allmänna</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="editHotkeysButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>205, 23</value>
+  <data name="autoUpdateTypeLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 13</value>
   </data>
-  <data name="editHotkeysButton.Text" xml:space="preserve">
-    <value>Redigera &amp;tangentbordets snabbknappar</value>
+  <data name="autoUpdateTypeLabel.Text" xml:space="preserve">
+    <value>&amp;Typ av uppdateringar:</value>
+  </data>
+  <data name="autoUpdateEnabledBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>193, 17</value>
+  </data>
+  <data name="autoUpdateEnabledBox.Text" xml:space="preserve">
+    <value>Aktivera &amp;automatiska uppdateringar</value>
   </data>
   <data name="languageLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>38, 13</value>
   </data>
   <data name="languageLabel.Text" xml:space="preserve">
     <value>&amp;Språk:</value>
+  </data>
+  <data name="generalPage.Text" xml:space="preserve">
+    <value>Allmänna</value>
+  </data>
+  <data name="keyboardDescriptionLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>65, 13</value>
+  </data>
+  <data name="keyboardDescriptionLabel.Text" xml:space="preserve">
+    <value>&amp;Beskrivning:</value>
+  </data>
+  <data name="keyboardLayoutLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>104, 13</value>
+  </data>
+  <data name="keyboardLayoutLabel.Text" xml:space="preserve">
+    <value>&amp;Tangentbordslayout:</value>
+  </data>
+  <data name="keyboardPageDescription.Size" type="System.Drawing.Size, System.Drawing">
+    <value>270, 13</value>
+  </data>
+  <data name="keyboardPageDescription.Text" xml:space="preserve">
+    <value>Välj en befintlig tangentbordslayout, eller skapa en egen</value>
+  </data>
+  <data name="editHotkeysButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>205, 23</value>
+  </data>
+  <data name="editHotkeysButton.Text" xml:space="preserve">
+    <value>Redigera &amp;tangentbordets snabbknappar</value>
+  </data>
+  <data name="keyboardPage.Text" xml:space="preserve">
+    <value>Tangentbord</value>
+  </data>
+  <data name="screenReaderSapiFallback.Size" type="System.Drawing.Size, System.Drawing">
+    <value>196, 17</value>
+  </data>
+  <data name="screenReaderSapiFallback.Text" xml:space="preserve">
+    <value>Använd SAPI när ingen skärmläsare</value>
+  </data>
+  <data name="screenReaderTrackChangeBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>142, 17</value>
+  </data>
+  <data name="screenReaderTrackChangeBox.Text" xml:space="preserve">
+    <value>Meddela ändringar i spår</value>
+  </data>
+  <data name="screenReaderBox.Text" xml:space="preserve">
+    <value>Aktivera skärmläsare utgång</value>
+  </data>
+  <data name="speechPage.Text" xml:space="preserve">
+    <value>Tal</value>
+  </data>
+  <data name="visualOutputTimeLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>156, 13</value>
+  </data>
+  <data name="visualOutputTimeLabel.Text" xml:space="preserve">
+    <value>Sekunder för att visa utdata för:</value>
+  </data>
+  <data name="visualDisplayTrackChangesBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 17</value>
+  </data>
+  <data name="visualDisplayTrackChangesBox.Text" xml:space="preserve">
+    <value>Visa ändringar i spår</value>
+  </data>
+  <data name="visualOutputBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 17</value>
+  </data>
+  <data name="visualOutputBox.Text" xml:space="preserve">
+    <value>Aktivera visuell utgång</value>
+  </data>
+  <data name="visualPage.Text" xml:space="preserve">
+    <value>Visuell</value>
   </data>
   <data name="closeButton.Text" xml:space="preserve">
     <value>&amp;Avbryt</value>

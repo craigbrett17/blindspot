@@ -117,52 +117,340 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="&gt;&gt;keyboardDescriptionBox.Parent" xml:space="preserve">
-    <value>step2GroupBox</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="languageBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>170, 120</value>
   </data>
-  <data name="&gt;&gt;keyboardDescriptionLabel.Parent" xml:space="preserve">
-    <value>step2GroupBox</value>
-  </data>
-  <data name="&gt;&gt;skipButton.Name" xml:space="preserve">
-    <value>skipButton</value>
+  <data name="languageBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 24</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="keyboardStyleLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="keyboardDescriptionLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;keyboardStyleNoChangeBox.Name" xml:space="preserve">
-    <value>keyboardStyleNoChangeBox</value>
-  </data>
-  <data name="step2GroupBox.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="languageBox.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
   <data name="&gt;&gt;languageBox.Name" xml:space="preserve">
     <value>languageBox</value>
   </data>
-  <data name="&gt;&gt;keyboardDescriptionLabel.Name" xml:space="preserve">
-    <value>keyboardDescriptionLabel</value>
-  </data>
-  <data name="nextButton.Text" xml:space="preserve">
-    <value>&amp;Next &gt;</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="step1GroupBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="saveButton.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="&gt;&gt;languageBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;languageBox.Parent" xml:space="preserve">
     <value>step1GroupBox</value>
   </data>
-  <data name="&gt;&gt;step1GroupBox.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="&gt;&gt;languageBox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="languageLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="languageLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 120</value>
+  </data>
+  <data name="languageLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 17</value>
+  </data>
+  <data name="languageLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="languageLabel.Text" xml:space="preserve">
+    <value>Select your &amp;language:</value>
+  </data>
+  <data name="&gt;&gt;languageLabel.Name" xml:space="preserve">
+    <value>languageLabel</value>
+  </data>
+  <data name="&gt;&gt;languageLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;languageLabel.Parent" xml:space="preserve">
+    <value>step1GroupBox</value>
   </data>
   <data name="&gt;&gt;languageLabel.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="step1WelcomeLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 10</value>
+  </data>
+  <data name="step1WelcomeLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>360, 95</value>
+  </data>
+  <data name="step1WelcomeLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="step1WelcomeLabel.Text" xml:space="preserve">
+    <value>Welcome to the Blindspot First time wizard. This will help you set some important first-time settings for using Blindspot. Click 'Skip' to exit this wizard. You may change these settings in the options dialog later.</value>
+  </data>
+  <data name="&gt;&gt;step1WelcomeLabel.Name" xml:space="preserve">
+    <value>step1WelcomeLabel</value>
+  </data>
+  <data name="&gt;&gt;step1WelcomeLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;step1WelcomeLabel.Parent" xml:space="preserve">
+    <value>step1GroupBox</value>
+  </data>
+  <data name="&gt;&gt;step1WelcomeLabel.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="step1GroupBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="step1GroupBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>390, 210</value>
+  </data>
+  <data name="step1GroupBox.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;step1GroupBox.Name" xml:space="preserve">
+    <value>step1GroupBox</value>
+  </data>
+  <data name="&gt;&gt;step1GroupBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;step1GroupBox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;step1GroupBox.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="keyboardStyleNoChangeBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="keyboardStyleNoChangeBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 185</value>
+  </data>
+  <data name="keyboardStyleNoChangeBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>238, 21</value>
+  </data>
+  <data name="keyboardStyleNoChangeBox.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="keyboardStyleNoChangeBox.Text" xml:space="preserve">
+    <value>Don't change my keyboard layout</value>
+  </data>
+  <data name="&gt;&gt;keyboardStyleNoChangeBox.Name" xml:space="preserve">
+    <value>keyboardStyleNoChangeBox</value>
+  </data>
+  <data name="&gt;&gt;keyboardStyleNoChangeBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;keyboardStyleNoChangeBox.Parent" xml:space="preserve">
+    <value>step2GroupBox</value>
+  </data>
+  <data name="&gt;&gt;keyboardStyleNoChangeBox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="keyboardDescriptionBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 75</value>
+  </data>
+  <data name="keyboardDescriptionBox.Multiline" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="keyboardDescriptionBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>350, 100</value>
+  </data>
+  <data name="keyboardDescriptionBox.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;keyboardDescriptionBox.Name" xml:space="preserve">
+    <value>keyboardDescriptionBox</value>
+  </data>
+  <data name="&gt;&gt;keyboardDescriptionBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;keyboardDescriptionBox.Parent" xml:space="preserve">
+    <value>step2GroupBox</value>
+  </data>
+  <data name="&gt;&gt;keyboardDescriptionBox.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="keyboardDescriptionLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="keyboardDescriptionLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 50</value>
+  </data>
+  <data name="keyboardDescriptionLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>79, 17</value>
+  </data>
+  <data name="keyboardDescriptionLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="keyboardDescriptionLabel.Text" xml:space="preserve">
+    <value>&amp;Description</value>
+  </data>
+  <data name="&gt;&gt;keyboardDescriptionLabel.Name" xml:space="preserve">
+    <value>keyboardDescriptionLabel</value>
+  </data>
+  <data name="&gt;&gt;keyboardDescriptionLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;keyboardDescriptionLabel.Parent" xml:space="preserve">
+    <value>step2GroupBox</value>
+  </data>
+  <data name="&gt;&gt;keyboardDescriptionLabel.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="keyboardStyleBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>210, 10</value>
+  </data>
+  <data name="keyboardStyleBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>130, 24</value>
+  </data>
+  <data name="keyboardStyleBox.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;keyboardStyleBox.Name" xml:space="preserve">
+    <value>keyboardStyleBox</value>
+  </data>
+  <data name="&gt;&gt;keyboardStyleBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;keyboardStyleBox.Parent" xml:space="preserve">
+    <value>step2GroupBox</value>
+  </data>
+  <data name="&gt;&gt;keyboardStyleBox.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="keyboardStyleLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="keyboardStyleLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 10</value>
+  </data>
+  <data name="keyboardStyleLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>192, 17</value>
+  </data>
+  <data name="keyboardStyleLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="keyboardStyleLabel.Text" xml:space="preserve">
+    <value>Select your keyboard la&amp;yout: </value>
+  </data>
+  <data name="&gt;&gt;keyboardStyleLabel.Name" xml:space="preserve">
+    <value>keyboardStyleLabel</value>
+  </data>
+  <data name="&gt;&gt;keyboardStyleLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;keyboardStyleLabel.Parent" xml:space="preserve">
+    <value>step2GroupBox</value>
+  </data>
+  <data name="&gt;&gt;keyboardStyleLabel.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="step2GroupBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="step2GroupBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>390, 210</value>
+  </data>
+  <data name="step2GroupBox.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="step2GroupBox.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;step2GroupBox.Name" xml:space="preserve">
+    <value>step2GroupBox</value>
+  </data>
+  <data name="&gt;&gt;step2GroupBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;step2GroupBox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;step2GroupBox.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="skipButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>25, 230</value>
+  </data>
+  <data name="skipButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="skipButton.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="skipButton.Text" xml:space="preserve">
+    <value>S&amp;kip</value>
+  </data>
+  <data name="&gt;&gt;skipButton.Name" xml:space="preserve">
+    <value>skipButton</value>
+  </data>
+  <data name="&gt;&gt;skipButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;skipButton.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;skipButton.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="backButton.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="backButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>110, 230</value>
+  </data>
+  <data name="backButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="backButton.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="backButton.Text" xml:space="preserve">
+    <value>&lt; &amp;Back</value>
+  </data>
+  <data name="&gt;&gt;backButton.Name" xml:space="preserve">
+    <value>backButton</value>
+  </data>
+  <data name="&gt;&gt;backButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;backButton.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;backButton.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="nextButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>200, 230</value>
+  </data>
+  <data name="nextButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="nextButton.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="nextButton.Text" xml:space="preserve">
+    <value>&amp;Next &gt;</value>
+  </data>
+  <data name="&gt;&gt;nextButton.Name" xml:space="preserve">
+    <value>nextButton</value>
+  </data>
+  <data name="&gt;&gt;nextButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nextButton.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;nextButton.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="saveButton.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="saveButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>285, 230</value>
+  </data>
+  <data name="saveButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="saveButton.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="saveButton.Text" xml:space="preserve">
+    <value>&amp;Save</value>
   </data>
   <data name="&gt;&gt;saveButton.Name" xml:space="preserve">
     <value>saveButton</value>
@@ -170,326 +458,116 @@
   <data name="&gt;&gt;saveButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="step1WelcomeLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;skipButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="skipButton.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;backButton.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="languageBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 24</value>
-  </data>
-  <data name="&gt;&gt;step1WelcomeLabel.Name" xml:space="preserve">
-    <value>step1WelcomeLabel</value>
-  </data>
-  <data name="keyboardStyleNoChangeBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>379, 261</value>
-  </data>
-  <data name="keyboardDescriptionBox.Multiline" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="step1WelcomeLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 10</value>
-  </data>
-  <data name="&gt;&gt;step2GroupBox.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;languageLabel.Parent" xml:space="preserve">
-    <value>step1GroupBox</value>
-  </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>8, 16</value>
-  </data>
-  <data name="&gt;&gt;keyboardStyleBox.Name" xml:space="preserve">
-    <value>keyboardStyleBox</value>
-  </data>
-  <data name="nextButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
-  </data>
-  <data name="languageLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 120</value>
-  </data>
-  <data name="keyboardDescriptionLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;keyboardStyleNoChangeBox.Parent" xml:space="preserve">
-    <value>step2GroupBox</value>
-  </data>
-  <data name="step1WelcomeLabel.Text" xml:space="preserve">
-    <value>Welcome to the Blindspot First time wizard. This will help you set some important first-time settings for using Blindspot. Click 'Skip' to exit this wizard. You may change these settings in the options dialog later.</value>
-  </data>
-  <data name="languageBox.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="languageLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 17</value>
-  </data>
-  <data name="keyboardDescriptionLabel.Text" xml:space="preserve">
-    <value>&amp;Description</value>
-  </data>
-  <data name="saveButton.Text" xml:space="preserve">
-    <value>&amp;Save</value>
-  </data>
-  <data name="&gt;&gt;skipButton.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="keyboardDescriptionBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>350, 100</value>
-  </data>
-  <data name="&gt;&gt;nextButton.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;step1GroupBox.Name" xml:space="preserve">
-    <value>step1GroupBox</value>
-  </data>
-  <data name="keyboardStyleLabel.Text" xml:space="preserve">
-    <value>Select your keyboard la&amp;yout: </value>
-  </data>
-  <data name="&gt;&gt;keyboardStyleLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="keyboardStyleNoChangeBox.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;keyboardDescriptionBox.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;keyboardDescriptionBox.Name" xml:space="preserve">
-    <value>keyboardDescriptionBox</value>
-  </data>
-  <data name="languageLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;keyboardStyleLabel.Parent" xml:space="preserve">
-    <value>step2GroupBox</value>
-  </data>
-  <data name="&gt;&gt;keyboardStyleBox.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;languageLabel.Name" xml:space="preserve">
-    <value>languageLabel</value>
-  </data>
-  <data name="step1WelcomeLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>360, 95</value>
-  </data>
-  <data name="backButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
-  </data>
-  <data name="&gt;&gt;keyboardStyleLabel.Name" xml:space="preserve">
-    <value>keyboardStyleLabel</value>
-  </data>
-  <data name="&gt;&gt;keyboardDescriptionLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="languageBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>170, 120</value>
-  </data>
-  <data name="languageLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;keyboardStyleNoChangeBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="keyboardStyleLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 17</value>
-  </data>
-  <data name="&gt;&gt;nextButton.Name" xml:space="preserve">
-    <value>nextButton</value>
-  </data>
-  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10pt</value>
-  </data>
-  <data name="&gt;&gt;keyboardStyleBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;nextButton.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="nextButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>200, 230</value>
-  </data>
-  <data name="&gt;&gt;step1GroupBox.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="backButton.Text" xml:space="preserve">
-    <value>&lt; &amp;Back</value>
-  </data>
-  <data name="backButton.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="keyboardDescriptionBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 75</value>
-  </data>
-  <data name="saveButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
-  </data>
-  <data name="step1GroupBox.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;nextButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="keyboardDescriptionLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>79, 17</value>
-  </data>
-  <data name="skipButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
-  </data>
-  <data name="&gt;&gt;keyboardDescriptionBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;keyboardStyleBox.Parent" xml:space="preserve">
-    <value>step2GroupBox</value>
-  </data>
-  <data name="step2GroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>390, 210</value>
-  </data>
-  <data name="&gt;&gt;step2GroupBox.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="keyboardStyleLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 10</value>
-  </data>
-  <data name="step2GroupBox.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="keyboardStyleBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>210, 10</value>
-  </data>
-  <data name="keyboardStyleNoChangeBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>238, 21</value>
-  </data>
-  <data name="&gt;&gt;step1WelcomeLabel.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;step2GroupBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="skipButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>25, 230</value>
-  </data>
-  <data name="keyboardStyleBox.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;languageBox.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;languageBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="saveButton.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>FirstTimeWizard</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Setup Blindspot</value>
-  </data>
-  <data name="&gt;&gt;languageLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;keyboardDescriptionLabel.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;step1WelcomeLabel.Parent" xml:space="preserve">
-    <value>step1GroupBox</value>
-  </data>
-  <data name="&gt;&gt;keyboardStyleNoChangeBox.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;backButton.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;step1WelcomeLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="step2GroupBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="backButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>110, 230</value>
-  </data>
-  <data name="&gt;&gt;step1GroupBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="keyboardStyleBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>130, 24</value>
-  </data>
-  <data name="keyboardDescriptionLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 50</value>
-  </data>
-  <data name="&gt;&gt;step2GroupBox.Name" xml:space="preserve">
-    <value>step2GroupBox</value>
-  </data>
   <data name="&gt;&gt;saveButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;skipButton.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="backButton.TabIndex" type="System.Int32, mscorlib">
+  <data name="&gt;&gt;saveButton.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="languageLabel.Text" xml:space="preserve">
-    <value>Select your &amp;language:</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
-    <value>CenterScreen</value>
-  </data>
-  <data name="&gt;&gt;backButton.Name" xml:space="preserve">
-    <value>backButton</value>
-  </data>
-  <data name="keyboardStyleNoChangeBox.Text" xml:space="preserve">
-    <value>Don't change my keyboard layout</value>
-  </data>
-  <data name="keyboardDescriptionBox.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="nextButton.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;keyboardStyleLabel.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="skipButton.Text" xml:space="preserve">
-    <value>S&amp;kip</value>
-  </data>
-  <data name="step1GroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>390, 210</value>
-  </data>
-  <data name="&gt;&gt;backButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="keyboardStyleLabel.AutoSize" type="System.Boolean, mscorlib">
+  <data name="graphicalOutputBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="saveButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>285, 230</value>
+  <data name="graphicalOutputBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 70</value>
   </data>
-  <data name="keyboardStyleNoChangeBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 185</value>
+  <data name="graphicalOutputBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>136, 21</value>
   </data>
-  <data name="&gt;&gt;saveButton.ZOrder" xml:space="preserve">
+  <data name="graphicalOutputBox.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="graphicalOutputBox.Text" xml:space="preserve">
+    <value>Use &amp;visual output</value>
+  </data>
+  <data name="&gt;&gt;graphicalOutputBox.Name" xml:space="preserve">
+    <value>graphicalOutputBox</value>
+  </data>
+  <data name="&gt;&gt;graphicalOutputBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;graphicalOutputBox.Parent" xml:space="preserve">
+    <value>step3GroupBox</value>
+  </data>
+  <data name="&gt;&gt;graphicalOutputBox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="screenReaderOutputBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="screenReaderOutputBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 30</value>
+  </data>
+  <data name="screenReaderOutputBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>210, 21</value>
+  </data>
+  <data name="screenReaderOutputBox.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="screenReaderOutputBox.Text" xml:space="preserve">
+    <value>Use screen &amp;reader for output</value>
+  </data>
+  <data name="&gt;&gt;screenReaderOutputBox.Name" xml:space="preserve">
+    <value>screenReaderOutputBox</value>
+  </data>
+  <data name="&gt;&gt;screenReaderOutputBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;screenReaderOutputBox.Parent" xml:space="preserve">
+    <value>step3GroupBox</value>
+  </data>
+  <data name="&gt;&gt;screenReaderOutputBox.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="step3GroupBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="step3GroupBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>390, 210</value>
+  </data>
+  <data name="step3GroupBox.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
+  </data>
+  <data name="step3GroupBox.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;step3GroupBox.Name" xml:space="preserve">
+    <value>step3GroupBox</value>
+  </data>
+  <data name="&gt;&gt;step3GroupBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;step3GroupBox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;step3GroupBox.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>8, 16</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>379, 261</value>
+  </data>
+  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Setup Blindspot</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>FirstTimeWizard</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>
