@@ -118,17 +118,23 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="albumButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>165, 25</value>
+  </data>
+  <data name="artistButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>90, 25</value>
+  </data>
   <data name="artistButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>66, 21</value>
   </data>
   <data name="artistButton.Text" xml:space="preserve">
     <value>A&amp;rtiste</value>
   </data>
-  <data name="titleButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 21</value>
+  <data name="trackButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>82, 21</value>
   </data>
-  <data name="titleButton.Text" xml:space="preserve">
-    <value>&amp;Titre</value>
+  <data name="trackButton.Text" xml:space="preserve">
+    <value>&amp;Chanson</value>
   </data>
   <data name="typeBox.Text" xml:space="preserve">
     <value>Type de recherche</value>

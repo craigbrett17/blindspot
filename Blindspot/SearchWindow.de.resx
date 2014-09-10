@@ -127,8 +127,11 @@
   <data name="artistButton.Text" xml:space="preserve">
     <value>&amp;Künstler</value>
   </data>
-  <data name="titleButton.Text" xml:space="preserve">
-    <value>&amp;Titel</value>
+  <data name="trackButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>56, 21</value>
+  </data>
+  <data name="trackButton.Text" xml:space="preserve">
+    <value>&amp;Spur</value>
   </data>
   <data name="typeBox.Text" xml:space="preserve">
     <value>Suche Art</value>
