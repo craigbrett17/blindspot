@@ -270,4 +270,7 @@
   <data name="TrayIconOptionsMenuItemText" xml:space="preserve">
     <value>&amp;Opciones</value>
   </data>
+  <data name="LoadingAlbum" xml:space="preserve">
+    <value>Cargando álbum</value>
+  </data>
 </root>

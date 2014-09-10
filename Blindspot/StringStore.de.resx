@@ -270,4 +270,7 @@
   <data name="UnexpectedErrorOccurred" xml:space="preserve">
     <value>Unerwarteter fehler aufgetreten.</value>
   </data>
+  <data name="LoadingAlbum" xml:space="preserve">
+    <value>Lade Album</value>
+  </data>
 </root>

@@ -41,12 +41,16 @@ namespace Blindspot.Commands
             {
                 LoadPlaylist(item);
             }
+            else if (item is AlbumBufferItem)
+            {
+                LoadAlbum(item);
+            }
             else
             {
                 _output.OutputMessage(String.Format("{0} {1}", item.ToString(), StringStore.ItemActivated), false);
             }
         }
-
+        
         private void ActivateTrackItem(BufferItem item)
         {
             var tbi = item as TrackBufferItem;
@@ -108,6 +112,22 @@ namespace Blindspot.Commands
                     playlistBuffer.Add(new TrackBufferItem(t));
                 });
             }
+        }
+
+        private void LoadAlbum(BufferItem item)
+        {
+            AlbumBufferItem abi = item as AlbumBufferItem;
+            _output.OutputMessage(StringStore.LoadingAlbum, false);
+            buffers.Add(new AlbumBufferList(abi.Model.Name));
+            buffers.CurrentListIndex = buffers.Count - 1;
+            var albumBuffer = buffers.CurrentList;
+            _output.OutputMessage(albumBuffer.ToString(), false);
+            var tracks = SpotifyController.GetAlbumTracks(abi.Model.AlbumPtr).ToList();
+            _output.OutputMessage(String.Format("{0} {1}", tracks.Count, StringStore.TracksLoaded), false);
+            tracks.ForEach(t =>
+            {
+                albumBuffer.Add(new TrackBufferItem(new Track(t)));
+            });
         }
 
         private void TogglePlayPause(bool isPaused)
