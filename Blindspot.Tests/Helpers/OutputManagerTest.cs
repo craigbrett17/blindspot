@@ -17,6 +17,7 @@ namespace Blindspot.Tests.Helpers
             var mockScreenReader = builder.BuildMock();
             var outputManager = new OutputManager(mockScreenReader);
             UserSettings.Instance.ScreenReaderOutput = true;
+            UserSettings.Instance.GraphicalOutput = false;
 
             // act
             outputManager.OutputMessage("Put me out");
