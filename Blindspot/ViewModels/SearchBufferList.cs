@@ -35,7 +35,7 @@ namespace Blindspot.ViewModels
 
         private void GetNextSetOfResults()
         {
-            _search = SpotifyClient.Instance.GetMoreTracksFromSearch(_search);
+            _search = SpotifyClient.Instance.GetMoreResultsFromSearch(_search);
             if (_search.Tracks == null || _search.Tracks.Count == 0) return; // no new search results
             _search.Tracks.ForEach(pointer =>
             {

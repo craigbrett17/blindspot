@@ -41,10 +41,16 @@ namespace Blindspot.Core
         public Search SearchTracks(string query)
         {
             Search search = new Search(query, SearchType.Track);
-            return GetMoreTracksFromSearch(search);
+            return GetMoreResultsFromSearch(search);
         }
 
-        public Search GetMoreTracksFromSearch(Search search)
+        public Search SearchAlbums(string query)
+        {
+            Search search = new Search(query, SearchType.Album);
+            return GetMoreResultsFromSearch(search);
+        }
+
+        public Search GetMoreResultsFromSearch(Search search)
         {
             search.BeginBrowse();
             bool loadedInTime = WaitFor(() => search.IsLoaded, RequestTimeout);
@@ -55,7 +61,7 @@ namespace Blindspot.Core
             }
             return search;
         }
-
+        
         public bool IsRunning
         {
             get { throw new NotImplementedException(); }
@@ -166,6 +172,6 @@ namespace Blindspot.Core
             }
             return false;
         }
-
+        
     }
 }

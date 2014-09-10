@@ -15,7 +15,8 @@ namespace Blindspot.Commands
     {
         private BufferListCollection buffers;
         private OutputManager _output;
-
+        private SpotifyClient spotify = SpotifyClient.Instance;
+        
         public NewSearchCommand(BufferListCollection buffersIn)
         {
             buffers = buffersIn;
@@ -40,33 +41,7 @@ namespace Blindspot.Commands
             searchDialog.Dispose();
             if (searchType == SearchType.Track)
             {
-                _output.OutputMessage(StringStore.Searching, false);
-                var spotify = SpotifyClient.Instance;
-                var search = spotify.SearchTracks(searchText);
-                buffers.Add(new SearchBufferList(search));
-                buffers.CurrentListIndex = buffers.Count - 1;
-                var searchBuffer = buffers.CurrentList;
-                var tracks = search.Tracks;
-                if (tracks == null || tracks.Count == 0)
-                {
-                    if (search != null && !String.IsNullOrEmpty(search.DidYouMean))
-                    {
-                        searchBuffer.Add(new BufferItem("No search results. Did you mean: " + search.DidYouMean));
-                    }
-                    else
-                    {
-                        searchBuffer.Add(new BufferItem(StringStore.NoSearchResults));
-                    }
-                }
-                else
-                {
-                    _output.OutputMessage(tracks.Count + " " + StringStore.SearchResults, false);
-                    foreach (IntPtr pointer in tracks)
-                    {
-                        searchBuffer.Add(new TrackBufferItem(new Track(pointer)));
-                    }
-                    _output.OutputBufferListState(buffers, NavigationDirection.Right);
-                }
+                SearchForTracks(searchText);
             }
             else if (searchType == SearchType.Artist)
             {
@@ -74,8 +49,70 @@ namespace Blindspot.Commands
             }
             else if (searchType == SearchType.Album)
             {
-                MessageBox.Show("Not implemented yet! Boo to the developers!", StringStore.Oops, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                SearchForAlbums(searchText);
             }
+        }
+        
+        private void SearchForTracks(string searchText)
+        {
+            _output.OutputMessage(StringStore.Searching, false);
+            var search = spotify.SearchTracks(searchText);
+            var searchBuffer = CreateSearchBuffer(search);
+            var tracks = search.Tracks;
+            if (tracks == null || tracks.Count == 0)
+            {
+                OutputNoSearchResultsToSearchBuffer(search, searchBuffer);
+            }
+            else
+            {
+                _output.OutputMessage(tracks.Count + " " + StringStore.SearchResults, false);
+                foreach (IntPtr pointer in tracks)
+                {
+                    searchBuffer.Add(new TrackBufferItem(new Track(pointer)));
+                }
+                _output.OutputBufferListState(buffers, NavigationDirection.Right);
+            }
+        }
+
+        private void SearchForAlbums(string searchText)
+        {
+            _output.OutputMessage(StringStore.Searching, false);
+            Search search = spotify.SearchAlbums(searchText);
+            var searchBuffer = CreateSearchBuffer(search);
+            var albums = search.Albums;
+            if (albums == null || albums.Count == 0)
+            {
+                OutputNoSearchResultsToSearchBuffer(search, searchBuffer);
+            }
+            else
+            {
+                _output.OutputMessage(albums.Count + " " + StringStore.SearchResults, false);
+                foreach (IntPtr pointer in albums)
+                {
+                    searchBuffer.Add(new AlbumBufferItem(new Album(pointer)));
+                }
+                _output.OutputBufferListState(buffers, NavigationDirection.Right);
+            }
+        }
+
+        private static void OutputNoSearchResultsToSearchBuffer(Search search, BufferList searchBuffer)
+        {
+            if (search != null && !String.IsNullOrEmpty(search.DidYouMean))
+            {
+                searchBuffer.Add(new BufferItem("No search results. Did you mean: " + search.DidYouMean));
+            }
+            else
+            {
+                searchBuffer.Add(new BufferItem(StringStore.NoSearchResults));
+            }
+        }
+
+        private BufferList CreateSearchBuffer(Search search)
+        {
+            buffers.Add(new SearchBufferList(search));
+            buffers.CurrentListIndex = buffers.Count - 1;
+            var searchBuffer = buffers.CurrentList;
+            return searchBuffer;
         }
 
     }
