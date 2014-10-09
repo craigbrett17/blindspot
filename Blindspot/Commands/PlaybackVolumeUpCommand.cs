@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Blindspot.Helpers;
+using Blindspot.Playback;
 
 namespace Blindspot.Commands
 {

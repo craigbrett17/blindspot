@@ -7,10 +7,9 @@ using NAudio.Wave;
 using System.IO;
 using System.Threading;
 using Logger = Blindspot.Core.Logger;
-using TrackBufferItem = Blindspot.ViewModels.TrackBufferItem;
-using Blindspot.ViewModels;
+using Blindspot.Core.Models;
 
-namespace Blindspot.Helpers
+namespace Blindspot.Playback
 {
     public class PlaybackManager : IDisposable
     {
@@ -30,10 +29,10 @@ namespace Blindspot.Helpers
         private BufferedWaveProvider bufferedWaveProvider;
         private IWavePlayer waveOut;
         private VolumeWaveProvider16 volumeProvider;
-        private System.Windows.Forms.Timer timer1;
-        private Stack<TrackBufferItem> _previousTracks { get; set; }
-        private TrackBufferItem _playingTrackItem;
-        public TrackBufferItem PlayingTrackItem
+        private System.Timers.Timer timer1;
+        private Stack<Track> _previousTracks { get; set; }
+        private Track _playingTrackItem;
+        public Track PlayingTrackItem
         {
             get { return _playingTrackItem; }
             set
@@ -52,11 +51,11 @@ namespace Blindspot.Helpers
 
         public PlaybackManager()
         {
-            this.timer1 = new System.Windows.Forms.Timer();
+            this.timer1 = new System.Timers.Timer();
             this.timer1.Interval = 250;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.timer1.Elapsed += new System.Timers.ElapsedEventHandler(this.timer1_Tick);
             gatekeeper = new ByteGateKeeper();
-            _previousTracks = new Stack<TrackBufferItem>();
+            _previousTracks = new Stack<Track>();
         }
 
         public void AddBytesToPlayingStream(byte[] bytes)
@@ -186,7 +185,7 @@ namespace Blindspot.Helpers
             }
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void timer1_Tick(object sender, System.Timers.ElapsedEventArgs e)
         {
             if (playbackState != StreamingPlaybackState.Stopped)
             {
@@ -271,7 +270,7 @@ namespace Blindspot.Helpers
                 _previousTracks.Push(PlayingTrackItem);
         }
 
-        public TrackBufferItem GetPreviousTrack()
+        public Track GetPreviousTrack()
         {
             if (_previousTracks.Any())
             {
@@ -280,15 +279,15 @@ namespace Blindspot.Helpers
             return null;
         }
 
-        public void PutTracksIntoPreviousTracks(IEnumerable<BufferItem> items)
+        public void PutTracksIntoPreviousTracks(IEnumerable<Track> items)
         {
             foreach (var item in items)
             {
-                PutTrackIntoPreviousTrack((TrackBufferItem)item);
+                PutTrackIntoPreviousTrack(item);
             }
         }
 
-        public void PutTrackIntoPreviousTrack(TrackBufferItem item)
+        public void PutTrackIntoPreviousTrack(Track item)
         {
             _previousTracks.Push(item);
         }

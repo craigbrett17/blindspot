@@ -6,6 +6,7 @@ using System.Text;
 using Blindspot.Core;
 using Blindspot.Core.Models;
 using Blindspot.Helpers;
+using Blindspot.Playback;
 using Blindspot.ViewModels;
 using ScreenReaderAPIWrapper;
 using NotifyIcon = System.Windows.Forms.NotifyIcon;
@@ -58,7 +59,7 @@ namespace Blindspot.Commands
                 return;
             }
             Session.Play();
-            playbackManager.PlayingTrackItem = item;
+            playbackManager.PlayingTrackItem = item.Model;
             playbackManager.fullyDownloaded = false;
             playbackManager.Play();
             var settings = UserSettings.Instance;

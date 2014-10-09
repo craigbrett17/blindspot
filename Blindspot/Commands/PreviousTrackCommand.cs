@@ -6,6 +6,7 @@ using System.Text;
 using Blindspot.Core;
 using Blindspot.Core.Models;
 using Blindspot.Helpers;
+using Blindspot.Playback;
 using Blindspot.ViewModels;
 using ScreenReaderAPIWrapper;
 
@@ -35,8 +36,9 @@ namespace Blindspot.Commands
             if (playbackManager.HasPreviousTracks)
             {
                 var nextTrack = playbackManager.GetPreviousTrack();
-                playQueue.Insert(0, nextTrack);
-                PlayNewTrackBufferItem(nextTrack);
+                var nextTrackItem = new TrackBufferItem(nextTrack);
+                playQueue.Insert(0, nextTrackItem);
+                PlayNewTrackBufferItem(nextTrackItem);
                 playQueue.CurrentItemIndex = 0;
             }
         }
@@ -51,7 +53,7 @@ namespace Blindspot.Commands
                 return;
             }
             Session.Play();
-            playbackManager.PlayingTrackItem = item;
+            playbackManager.PlayingTrackItem = item.Model;
             playbackManager.fullyDownloaded = false;
             playbackManager.Play();
             var settings = UserSettings.Instance;

@@ -11,6 +11,7 @@ using Blindspot.Commands;
 using Blindspot.Core;
 using Blindspot.Core.Models;
 using Blindspot.Helpers;
+using Blindspot.Playback;
 using Blindspot.ViewModels;
 
 namespace Blindspot
@@ -333,7 +334,7 @@ namespace Blindspot
                 return;
             }
             Session.Play();
-            playbackManager.PlayingTrackItem = item;
+            playbackManager.PlayingTrackItem = item.Model;
             playbackManager.fullyDownloaded = false;
             playbackManager.Play();
             output.OutputTrackItem(playbackManager.PlayingTrackItem,
