@@ -56,7 +56,7 @@ namespace Blindspot.Commands
         {
             var tbi = item as TrackBufferItem;
             var playQueue = buffers[0];
-            if (playbackManager.PlayingTrackItem != null && tbi.Model.TrackPtr == playbackManager.PlayingTrackItem.TrackPtr)
+            if (playbackManager.PlayingTrack != null && tbi.Model.TrackPtr == playbackManager.PlayingTrack.TrackPtr)
             {
                 TogglePlayPause(playbackManager.IsPaused);
                 return;
@@ -156,14 +156,14 @@ namespace Blindspot.Commands
                 return;
             }
             Session.Play();
-            playbackManager.PlayingTrackItem = item.Model;
+            playbackManager.PlayingTrack = item.Model;
             playbackManager.fullyDownloaded = false;
             playbackManager.Play();
         }
 
         private void ClearCurrentlyPlayingTrack()
         {
-            if (playbackManager.PlayingTrackItem != null)
+            if (playbackManager.PlayingTrack != null)
             {
                 playbackManager.Stop();
                 Session.UnloadPlayer();

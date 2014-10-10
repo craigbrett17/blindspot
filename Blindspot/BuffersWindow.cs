@@ -318,7 +318,7 @@ namespace Blindspot
 
         private void ClearCurrentlyPlayingTrack()
         {
-            if (playbackManager.PlayingTrackItem != null)
+            if (playbackManager.PlayingTrack != null)
             {
                 playbackManager.Stop();
                 Session.UnloadPlayer();
@@ -334,17 +334,17 @@ namespace Blindspot
                 return;
             }
             Session.Play();
-            playbackManager.PlayingTrackItem = item.Model;
+            playbackManager.PlayingTrack = item.Model;
             playbackManager.fullyDownloaded = false;
             playbackManager.Play();
-            output.OutputTrackItem(playbackManager.PlayingTrackItem,
+            output.OutputTrackModel(playbackManager.PlayingTrack,
                     settings.OutputTrackChangesGraphically, settings.OutputTrackChangesWithSpeech);
         }
 
         private void HandleEndOfCurrentTrack()
         {
             playbackManager.AddCurrentTrackToPreviousTracks();
-            playbackManager.PlayingTrackItem = null;
+            playbackManager.PlayingTrack = null;
             _playQueueBuffer.RemoveAt(0);
             if (_playQueueBuffer.Count > 0)
             {
@@ -388,13 +388,14 @@ namespace Blindspot
 
         private void HandleChangeOfTrack()
         {
-            if (playbackManager.PlayingTrackItem == null)
+            if (playbackManager.PlayingTrack == null)
             {
                 _trayIcon.Text = "Blindspot";
             }
             else
             {
-                _trayIcon.Text = String.Format("Blindspot - {0}", playbackManager.PlayingTrackItem.ToTruncatedString());
+                var trackItem = new TrackBufferItem(playbackManager.PlayingTrack);
+                _trayIcon.Text = String.Format("Blindspot - {0}", trackItem.ToTruncatedString());
             }
         }
 

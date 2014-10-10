@@ -32,7 +32,7 @@ namespace Blindspot.Playback
         private System.Timers.Timer timer1;
         private Stack<Track> _previousTracks { get; set; }
         private Track _playingTrackItem;
-        public Track PlayingTrackItem
+        public Track PlayingTrack
         {
             get { return _playingTrackItem; }
             set
@@ -266,8 +266,8 @@ namespace Blindspot.Playback
 
         public void AddCurrentTrackToPreviousTracks()
         {
-            if (PlayingTrackItem != null)
-                _previousTracks.Push(PlayingTrackItem);
+            if (PlayingTrack != null)
+                _previousTracks.Push(PlayingTrack);
         }
 
         public Track GetPreviousTrack()
