@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Blindspot.Helpers
+namespace Blindspot.Playback
 {
     /// <summary>
     /// An object that regulates the passing of music data from a store into a circular buffer

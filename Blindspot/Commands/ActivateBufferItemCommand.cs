@@ -6,6 +6,7 @@ using System.Text;
 using Blindspot.Core;
 using Blindspot.Core.Models;
 using Blindspot.Helpers;
+using Blindspot.Playback;
 using Blindspot.ViewModels;
 using NotifyIcon = System.Windows.Forms.NotifyIcon;
 
@@ -55,7 +56,7 @@ namespace Blindspot.Commands
         {
             var tbi = item as TrackBufferItem;
             var playQueue = buffers[0];
-            if (playbackManager.PlayingTrackItem != null && tbi.Model.TrackPtr == playbackManager.PlayingTrackItem.Model.TrackPtr)
+            if (playbackManager.PlayingTrack != null && tbi.Model.TrackPtr == playbackManager.PlayingTrack.TrackPtr)
             {
                 TogglePlayPause(playbackManager.IsPaused);
                 return;
@@ -67,7 +68,7 @@ namespace Blindspot.Commands
                 int indexOfChosenTrack = playQueue.IndexOf(tbi);
                 if (indexOfChosenTrack > 0)
                 {
-                    var skippedTracks = playQueue.Take(indexOfChosenTrack);
+                    var skippedTracks = playQueue.Take(indexOfChosenTrack).Cast<TrackBufferItem>().Select(i => i.Model);
                     playbackManager.PutTracksIntoPreviousTracks(skippedTracks);
                     playQueue.RemoveRange(0, indexOfChosenTrack);
                 }
@@ -83,7 +84,7 @@ namespace Blindspot.Commands
                     int indexOfTrack = tracklist.CurrentItemIndex;
                     if (indexOfTrack > 0)
                     {
-                        var preceedingTracks = tracklist.Take(indexOfTrack);
+                        var preceedingTracks = tracklist.Take(indexOfTrack).Cast<TrackBufferItem>().Select(i => i.Model);
                         playbackManager.PutTracksIntoPreviousTracks(preceedingTracks);
                     }
                     for (int index = indexOfTrack + 1; index < tracklist.Count; index++)
@@ -155,14 +156,14 @@ namespace Blindspot.Commands
                 return;
             }
             Session.Play();
-            playbackManager.PlayingTrackItem = item;
+            playbackManager.PlayingTrack = item.Model;
             playbackManager.fullyDownloaded = false;
             playbackManager.Play();
         }
 
         private void ClearCurrentlyPlayingTrack()
         {
-            if (playbackManager.PlayingTrackItem != null)
+            if (playbackManager.PlayingTrack != null)
             {
                 playbackManager.Stop();
                 Session.UnloadPlayer();

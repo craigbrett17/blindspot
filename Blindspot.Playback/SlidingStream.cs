@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 
-namespace Blindspot.Helpers
+namespace Blindspot.Playback
 {
     public class SlidingStream : Stream
     {

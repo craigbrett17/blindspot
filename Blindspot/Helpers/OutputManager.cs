@@ -5,6 +5,7 @@ using System.Text;
 using System.Drawing;
 using ScreenReaderAPIWrapper;
 using Blindspot.ViewModels;
+using Blindspot.Core.Models;
 
 namespace Blindspot.Helpers
 {
@@ -15,6 +16,7 @@ namespace Blindspot.Helpers
         void OutputMessageGraphically(string title, string message, NavigationDirection navigationDirection = NavigationDirection.None);
         void OutputTrackItem(TrackBufferItem item, bool graphicalOutput = true, bool screenReaderOutput = true);
         void OutputBufferListState(BufferListCollection buffers, NavigationDirection direction, bool interrupt = true);
+        void OutputTrackModel(Track track, bool graphicalOutput = true, bool screenReaderOutput = true);
     }
     
     /// <summary>
@@ -145,6 +147,14 @@ namespace Blindspot.Helpers
             string titleString = string.Format("{0} ({1}/{2})",
                 currentList.Name, currentList.CurrentItemIndex + 1, currentList.Count);
             OutputMessageGraphically(titleString, currentList.CurrentItem.ToString());
+        }
+
+        public void OutputTrackModel(Track track, bool graphicalOutput = true, bool screenReaderOutput = true)
+        {
+            // need to decide if we want any unique logic here
+            // for now, we just wrap it in a T.B.I as it suits
+            var item = new TrackBufferItem(track);
+            this.OutputTrackItem(item, graphicalOutput, screenReaderOutput);
         }
     }
 

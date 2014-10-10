@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using Blindspot.Helpers;
+using Blindspot.Playback;
 
 namespace Blindspot.Commands
 {
@@ -25,9 +26,9 @@ namespace Blindspot.Commands
 
         public override void Execute(object sender, HandledEventArgs e)
         {
-            if (playbackManager.PlayingTrackItem != null)
+            if (playbackManager.PlayingTrack != null)
             {
-                _output.OutputTrackItem(playbackManager.PlayingTrackItem);
+                _output.OutputTrackModel(playbackManager.PlayingTrack);
             }
             else
             {

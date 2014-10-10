@@ -75,9 +75,6 @@
     <ApplicationIcon>blindspot.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="NAudio">
-      <HintPath>..\packages\NAudio.1.7.1\lib\net35\NAudio.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -161,9 +158,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Helpers\ByteGateKeeper.cs" />
-    <Compile Include="Helpers\SlidingStream.cs" />
-    <Compile Include="Helpers\PlaybackManager.cs" />
     <Compile Include="Helpers\UserSettings.cs" />
     <Compile Include="LoginWindow.cs">
       <SubType>Form</SubType>
@@ -395,6 +389,10 @@
     <ProjectReference Include="..\Blindspot.Core\Blindspot.Core.csproj">
       <Project>{5b03d9f4-79fb-4d3a-b90a-780b51efa7a8}</Project>
       <Name>Blindspot.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Blindspot.Playback\Blindspot.Playback.csproj">
+      <Project>{5afc4061-64a3-46cf-ac85-0da2046ac15d}</Project>
+      <Name>Blindspot.Playback</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
