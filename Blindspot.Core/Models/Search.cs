@@ -151,6 +151,7 @@ namespace Blindspot.Core.Models
     {
         Track,
         Artist,
-        Album
+        Album,
+        YoutubeTrack
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 using Blindspot.Core;
 using Blindspot.Core.Models;
 using Blindspot.Helpers;
@@ -18,12 +19,15 @@ namespace Blindspot.Commands
         private BufferListCollection buffers;
         private PlaybackManager playbackManager;
         private IOutputManager _output;
+        private WebBrowser _youtubePlayer;
+        private string _currentYoutubeId = null;
         
-        public ActivateBufferItemCommand(BufferListCollection buffersIn, PlaybackManager pbManagerIn)
+        public ActivateBufferItemCommand(BufferListCollection buffersIn, PlaybackManager pbManagerIn, WebBrowser browserIn)
         {
             buffers = buffersIn;
             playbackManager = pbManagerIn;
             _output = OutputManager.Instance;
+            _youtubePlayer = browserIn;
         }
         
         public override string Key
@@ -37,6 +41,10 @@ namespace Blindspot.Commands
             if (item is TrackBufferItem)
             {
                 ActivateTrackItem(item);
+            }
+            else if (item is YoutubeTrackBufferItem)
+            {
+                ActivateYoutubeTrackItem(item);
             }
             else if (item is PlaylistBufferItem)
             {
@@ -131,6 +139,41 @@ namespace Blindspot.Commands
             });
         }
 
+        private void ActivateYoutubeTrackItem(BufferItem item)
+        {
+            var tbi = item as YoutubeTrackBufferItem;
+            var playQueue = buffers[0];
+            if (_currentYoutubeId != null && tbi.Model.Id == _currentYoutubeId)
+            {
+                ToggleYoutubePlayPause(playbackManager.IsPaused);
+                return;
+            }
+            ClearCurrentlyPlayingTrack();
+            PlayNewYoutubeTrackBufferItem(tbi);
+            if (buffers.CurrentListIndex == 0 && playQueue.Contains(tbi)) // if they've picked it from the play queue
+            {
+                int indexOfChosenTrack = playQueue.IndexOf(tbi);
+                if (indexOfChosenTrack > 0)
+                {
+                    var skippedTracks = playQueue.Take(indexOfChosenTrack).Cast<TrackBufferItem>().Select(i => i.Model);
+                    playbackManager.PutTracksIntoPreviousTracks(skippedTracks);
+                    playQueue.RemoveRange(0, indexOfChosenTrack);
+                }
+            }
+            else
+            {
+                playQueue.Clear();
+                playbackManager.ClearPreviousTracks();
+                playQueue.Add(tbi);
+            }
+            playQueue.CurrentItemIndex = 0;
+        }
+
+        private void ToggleYoutubePlayPause(bool p)
+        {
+            _output.OutputMessage("Pausing");
+        }
+
         private void TogglePlayPause(bool isPaused)
         {
             if (!isPaused)
@@ -161,12 +204,22 @@ namespace Blindspot.Commands
             playbackManager.Play();
         }
 
+        private void PlayNewYoutubeTrackBufferItem(YoutubeTrackBufferItem item)
+        {
+            _youtubePlayer.Navigate(new Uri("http://www.youtube.com/watch?v=" + item.Model.Id + "&autoplay=true&html5=true"));
+            _currentYoutubeId = item.Model.Id;
+        }
+
         private void ClearCurrentlyPlayingTrack()
         {
             if (playbackManager.PlayingTrack != null)
             {
                 playbackManager.Stop();
                 Session.UnloadPlayer();
+            }
+            if (_youtubePlayer != null)
+            {
+                _youtubePlayer.Hide();
             }
         }
 

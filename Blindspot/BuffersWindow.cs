@@ -29,6 +29,7 @@ namespace Blindspot
         private bool downloadedUpdate = false; // for checks for updates
         protected NotifyIcon _trayIcon;
         private BufferList _playQueueBuffer;
+        private WebBrowser youtubePlayer;
 
         #region user32 functions for moving away from window
         // need a bit of pinvoke here to move away from the window if the user manages to reach the window
@@ -64,6 +65,8 @@ namespace Blindspot
             Buffers.Add(_playQueueBuffer);
             Buffers.Add(new BufferList("Playlists", false));
             spotify = SpotifyClient.Instance;
+            youtubePlayer = new WebBrowser();
+            youtubePlayer.Visible = false;
         }
 
         private void SetupFormEventHandlers()
@@ -240,7 +243,7 @@ namespace Blindspot
                 new LastBufferItemCommand(Buffers),
                 new NextBufferItemJumpCommand(Buffers),
                 new PreviousBufferItemJumpCommand(Buffers),
-                new ActivateBufferItemCommand(Buffers, playbackManager),
+                new ActivateBufferItemCommand(Buffers, playbackManager, youtubePlayer),
                 new PlaybackVolumeUpCommand(playbackManager),
                 new PlaybackVolumeDownCommand(playbackManager),
                 new DismissBufferCommand(Buffers),

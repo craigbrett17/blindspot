@@ -45,11 +45,16 @@ namespace Blindspot.Commands
             }
             else if (searchType == SearchType.Artist)
             {
-                MessageBox.Show("Not implemented yet! Boo to the developers!", StringStore.Oops, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                // MessageBox.Show("Not implemented yet! Boo to the developers!", StringStore.Oops, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                SearchYoutube(searchText);
             }
             else if (searchType == SearchType.Album)
             {
                 SearchForAlbums(searchText);
+            }
+            else if (searchType == SearchType.YoutubeTrack)
+            {
+                SearchYoutube(searchText);
             }
         }
         
@@ -90,6 +95,28 @@ namespace Blindspot.Commands
                 foreach (IntPtr pointer in albums)
                 {
                     searchBuffer.Add(new AlbumBufferItem(new Album(pointer)));
+                }
+                _output.OutputBufferListState(buffers, NavigationDirection.Right);
+            }
+        }
+
+        private void SearchYoutube(string searchText)
+        {
+            _output.OutputMessage(StringStore.Searching, false);
+            var tracks = YoutubeClient.Instance.SearchVideos(searchText);
+            var searchBuffer = new PlaylistBufferList(String.Format("{0}: {1}", StringStore.SearchFor, searchText));
+            buffers.Add(searchBuffer);
+            buffers.CurrentListIndex = buffers.Count - 1;
+            if (tracks == null || tracks.Count() == 0)
+            {
+                OutputNoSearchResultsToSearchBuffer(null, searchBuffer);
+            }
+            else
+            {
+                _output.OutputMessage(tracks.Count() + " " + StringStore.SearchResults, false);
+                foreach (YoutubeTrack track in tracks)
+                {
+                    searchBuffer.Add(new YoutubeTrackBufferItem(track));
                 }
                 _output.OutputBufferListState(buffers, NavigationDirection.Right);
             }
