@@ -162,13 +162,18 @@ namespace Blindspot.Playback
                         Logger.WriteDebug("Creating buffered wave provider");
                         this.gatekeeper.MinimumSampleSize = bufferedWaveProvider.WaveFormat.AverageBytesPerSecond * secondsToBuffer;
                     }
-                    if (bufferedWaveProvider != null && bufferedWaveProvider.BufferLength - bufferedWaveProvider.BufferedBytes < bufferedWaveProvider.WaveFormat.AverageBytesPerSecond / 4)
+                    // in case its still null
+                    if (bufferedWaveProvider == null)
+                        continue;
+
+                    var freeBufferBytes = bufferedWaveProvider.BufferLength - bufferedWaveProvider.BufferedBytes;
+                    if (freeBufferBytes < bufferedWaveProvider.WaveFormat.AverageBytesPerSecond / 4)
                     {
                         Logger.WriteDebug("Buffer getting full, taking a break");
-                        Thread.Sleep(500);
+                        Thread.Sleep(450);
                     }
                     // do we have at least double the buffered sample's size in free space, just in case
-                    else if (bufferedWaveProvider.BufferLength - bufferedWaveProvider.BufferedBytes > bufferedWaveProvider.WaveFormat.AverageBytesPerSecond * (secondsToBuffer * 2))
+                    else if (freeBufferBytes > bufferedWaveProvider.WaveFormat.AverageBytesPerSecond * (secondsToBuffer * 2))
                     {
                         var sample = gatekeeper.Read();
                         if (sample != null)
@@ -176,6 +181,7 @@ namespace Blindspot.Playback
                             bufferedWaveProvider.AddSamples(sample, 0, sample.Length);
                         }
                     }
+                    Thread.Sleep(250);
                 } while (playbackState != StreamingPlaybackState.Stopped);
                 Logger.WriteDebug("Playback stopped");
             }
