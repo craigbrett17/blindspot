@@ -182,7 +182,9 @@
     <Compile Include="ItemDetailsWindow.Designer.cs">
       <DependentUpon>ItemDetailsWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\ArtistBufferItem.cs" />
     <Compile Include="ViewModels\AlbumBufferItem.cs" />
+    <Compile Include="ViewModels\ArtistBufferList.cs" />
     <Compile Include="ViewModels\BufferItem.cs" />
     <Compile Include="ViewModels\BufferList.cs" />
     <Compile Include="ViewModels\BufferListCollection.cs" />

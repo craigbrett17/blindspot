@@ -273,4 +273,7 @@
   <data name="LoadingAlbum" xml:space="preserve">
     <value>Chargement album</value>
   </data>
+  <data name="LoadingArtistAlbums" xml:space="preserve">
+    <value>Chargement albums artiste</value>
+  </data>
 </root>

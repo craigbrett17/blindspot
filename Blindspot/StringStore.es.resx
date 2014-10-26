@@ -273,4 +273,7 @@
   <data name="LoadingAlbum" xml:space="preserve">
     <value>Cargando álbum</value>
   </data>
+  <data name="LoadingArtistAlbums" xml:space="preserve">
+    <value>Cargando artista Álbumes </value>
+  </data>
 </root>

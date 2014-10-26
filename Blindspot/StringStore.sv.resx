@@ -273,4 +273,7 @@
   <data name="LoadingAlbum" xml:space="preserve">
     <value>Laddar album</value>
   </data>
+  <data name="LoadingArtistAlbums" xml:space="preserve">
+    <value>Läser artist album</value>
+  </data>
 </root>

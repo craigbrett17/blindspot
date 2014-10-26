@@ -196,6 +196,15 @@ namespace Blindspot {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Loading artist albums.
+        /// </summary>
+        internal static string LoadingArtistAlbums {
+            get {
+                return ResourceManager.GetString("LoadingArtistAlbums", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Loading playlist.
         /// </summary>
         internal static string LoadingPlaylist {

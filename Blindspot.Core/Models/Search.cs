@@ -79,6 +79,10 @@ namespace Blindspot.Core.Models
             {
                 LoadAlbums();
             }
+            else if (this.Type == SearchType.Artist)
+            {
+                LoadArtists();
+            }
             this.IsLoaded = true;
         }
 
@@ -104,6 +108,18 @@ namespace Blindspot.Core.Models
             }
             Albums = albumPtrs;
             albumOffset += numAlbums;
+        }
+
+        private void LoadArtists()
+        {
+            int numArtists = libspotify.sp_search_num_artists(_browsePtr);
+            List<IntPtr> artistPtrs = new List<IntPtr>();
+            for (int i = 0; i < numArtists; i++)
+            {
+                artistPtrs.Add(libspotify.sp_search_artist(_browsePtr, i));
+            }
+            Artists = artistPtrs;
+            artistOffset += numArtists;
         }
 
         #region IDisposable Members

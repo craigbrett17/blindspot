@@ -45,7 +45,7 @@ namespace Blindspot.Commands
             }
             else if (searchType == SearchType.Artist)
             {
-                MessageBox.Show("Not implemented yet! Boo to the developers!", StringStore.Oops, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                SearchForArtists(searchText);
             }
             else if (searchType == SearchType.Album)
             {
@@ -56,7 +56,7 @@ namespace Blindspot.Commands
         private void SearchForTracks(string searchText)
         {
             _output.OutputMessage(StringStore.Searching, false);
-            var search = spotify.SearchTracks(searchText);
+            var search = spotify.Search(searchText, SearchType.Track);
             var searchBuffer = CreateSearchBuffer(search);
             var tracks = search.Tracks;
             if (tracks == null || tracks.Count == 0)
@@ -77,7 +77,7 @@ namespace Blindspot.Commands
         private void SearchForAlbums(string searchText)
         {
             _output.OutputMessage(StringStore.Searching, false);
-            Search search = spotify.SearchAlbums(searchText);
+            Search search = spotify.Search(searchText, SearchType.Album);
             var searchBuffer = CreateSearchBuffer(search);
             var albums = search.Albums;
             if (albums == null || albums.Count == 0)
@@ -90,6 +90,27 @@ namespace Blindspot.Commands
                 foreach (IntPtr pointer in albums)
                 {
                     searchBuffer.Add(new AlbumBufferItem(new Album(pointer)));
+                }
+                _output.OutputBufferListState(buffers, NavigationDirection.Right);
+            }
+        }
+
+        private void SearchForArtists(string searchText)
+        {
+            _output.OutputMessage(StringStore.Searching, false);
+            Search search = spotify.Search(searchText, SearchType.Artist);
+            var searchBuffer = CreateSearchBuffer(search);
+            var artists = search.Artists;
+            if (artists == null || artists.Count == 0)
+            {
+                OutputNoSearchResultsToSearchBuffer(search, searchBuffer);
+            }
+            else
+            {
+                _output.OutputMessage(artists.Count + " " + StringStore.SearchResults, false);
+                foreach (IntPtr pointer in artists)
+                {
+                    searchBuffer.Add(new ArtistBufferItem(new Artist(pointer)));
                 }
                 _output.OutputBufferListState(buffers, NavigationDirection.Right);
             }

@@ -46,6 +46,10 @@ namespace Blindspot.Commands
             {
                 LoadAlbum(item);
             }
+            else if (item is ArtistBufferItem)
+            {
+                LoadArtist(item);
+            }
             else
             {
                 _output.OutputMessage(String.Format("{0} {1}", item.ToString(), StringStore.ItemActivated), false);
@@ -128,6 +132,22 @@ namespace Blindspot.Commands
             tracks.ForEach(t =>
             {
                 albumBuffer.Add(new TrackBufferItem(new Track(t)));
+            });
+        }
+
+        private void LoadArtist(BufferItem item)
+        {
+            ArtistBufferItem abi = item as ArtistBufferItem;
+            _output.OutputMessage(StringStore.LoadingArtistAlbums, false);
+            buffers.Add(new ArtistBufferList(abi.Model.Name));
+            buffers.CurrentListIndex = buffers.Count - 1;
+            var artistBuffer = buffers.CurrentList;
+            _output.OutputMessage(artistBuffer.ToString(), false);
+            var albums = SpotifyController.GetArtistAlbums(abi.Model.ArtistPtr).ToList();
+            _output.OutputMessage(String.Format("{0} {1}", albums.Count, StringStore.SearchResults), false);
+            albums.ForEach(a =>
+            {
+                artistBuffer.Add(new AlbumBufferItem(new Album(a)));
             });
         }
 

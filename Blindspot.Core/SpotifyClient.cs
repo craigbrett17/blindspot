@@ -38,15 +38,9 @@ namespace Blindspot.Core
         public int RequestTimeout { get; set; }
         public Search LastSearch { get; set; }
 
-        public Search SearchTracks(string query)
+        public Search Search(string query, SearchType searchType)
         {
-            Search search = new Search(query, SearchType.Track);
-            return GetMoreResultsFromSearch(search);
-        }
-
-        public Search SearchAlbums(string query)
-        {
-            Search search = new Search(query, SearchType.Album);
+            Search search = new Search(query, searchType);
             return GetMoreResultsFromSearch(search);
         }
 
