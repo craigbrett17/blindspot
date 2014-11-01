@@ -134,6 +134,8 @@ namespace Blindspot.Core.Models
 
                 this.AlbumPtrs = albumPtrs;
 
+                // need to decide how we want this to work. a refactor may be in order around starting a browse
+                // ideas include Lazy artist browsing (not that artists are lazy)
                 //this.SpotifyBio = Functions.PtrToString(libspotify.sp_artistbrowse_biography(_browsePtr));
 
                 this.IsBrowseComplete = true;
