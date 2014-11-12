@@ -276,4 +276,13 @@
   <data name="LoadingArtistAlbums" xml:space="preserve">
     <value>Läser artist album</value>
   </data>
+  <data name="TrayIconGettingStartedMenuItemText" xml:space="preserve">
+    <value>Se Komma &amp;igång</value>
+  </data>
+  <data name="TrayIconHelpMenuItemText" xml:space="preserve">
+    <value>&amp;Hjälp</value>
+  </data>
+  <data name="TrayIconHotkeyListMenuItemText" xml:space="preserve">
+    <value>Visa &amp;Kortkommando Lista</value>
+  </data>
 </root>

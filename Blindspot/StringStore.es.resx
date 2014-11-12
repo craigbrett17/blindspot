@@ -276,4 +276,13 @@
   <data name="LoadingArtistAlbums" xml:space="preserve">
     <value>Cargando artista Álbumes </value>
   </data>
+  <data name="TrayIconGettingStartedMenuItemText" xml:space="preserve">
+    <value>Ver Guía de &amp;introducción</value>
+  </data>
+  <data name="TrayIconHelpMenuItemText" xml:space="preserve">
+    <value>&amp;Ayudar</value>
+  </data>
+  <data name="TrayIconHotkeyListMenuItemText" xml:space="preserve">
+    <value>Vista de lista &amp;Teclas de acceso rápido</value>
+  </data>
 </root>

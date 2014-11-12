@@ -96,6 +96,8 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\BrowseHotkeyListCommand.cs" />
+    <Compile Include="Commands\BrowseGettingStartedCommand.cs" />
     <Compile Include="Commands\NextTrackCommand.cs" />
     <Compile Include="Commands\ActivateBufferItemCommand.cs" />
     <Compile Include="Commands\AddToQueueCommand.cs" />

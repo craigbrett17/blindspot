@@ -502,6 +502,33 @@ namespace Blindspot {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to View Getting &amp;Started Guide.
+        /// </summary>
+        internal static string TrayIconGettingStartedMenuItemText {
+            get {
+                return ResourceManager.GetString("TrayIconGettingStartedMenuItemText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Help.
+        /// </summary>
+        internal static string TrayIconHelpMenuItemText {
+            get {
+                return ResourceManager.GetString("TrayIconHelpMenuItemText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View &amp;Hotkeys List.
+        /// </summary>
+        internal static string TrayIconHotkeyListMenuItemText {
+            get {
+                return ResourceManager.GetString("TrayIconHotkeyListMenuItemText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &amp;Options.
         /// </summary>
         internal static string TrayIconOptionsMenuItemText {

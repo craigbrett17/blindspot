@@ -253,7 +253,9 @@ namespace Blindspot
                 new MediaPlayPauseCommand(playbackManager),
                 new NextTrackCommand(Buffers, playbackManager),
                 new PreviousTrackCommand(Buffers, playbackManager),
-                new ShowContextMenuCommand(_trayIcon)
+                new ShowContextMenuCommand(_trayIcon),
+                new BrowseGettingStartedCommand(),
+                new BrowseHotkeyListCommand()
             };
 
             // the hotkeys use the key to know which command to execute
@@ -380,7 +382,12 @@ namespace Blindspot
                 {
                     new ToolStripSeparator(),
                     MakeCommandMenuItem(StringStore.TrayIconOptionsMenuItemText, "options_dialog"),
-                    MakeCommandMenuItem(StringStore.TrayIconAboutMenuItemText, "show_about_window"),
+                    new ToolStripMenuItem(StringStore.TrayIconHelpMenuItemText, null, new ToolStripItem[]
+                    {
+                        MakeCommandMenuItem(StringStore.TrayIconGettingStartedMenuItemText, "show_getting_started"),
+                        MakeCommandMenuItem(StringStore.TrayIconHotkeyListMenuItemText, "show_hotkey_list"),
+                        MakeCommandMenuItem(StringStore.TrayIconAboutMenuItemText, "show_about_window"),
+                    }),
                     MakeCommandMenuItem(StringStore.TrayIconExitMenuItemText, "close_blindspot"),
                 };
             }
