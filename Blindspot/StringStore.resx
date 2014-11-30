@@ -270,4 +270,19 @@
   <data name="TrayIconOptionsMenuItemText" xml:space="preserve">
     <value>&amp;Options</value>
   </data>
+  <data name="LoadingAlbum" xml:space="preserve">
+    <value>Loading album</value>
+  </data>
+  <data name="LoadingArtistAlbums" xml:space="preserve">
+    <value>Loading artist albums</value>
+  </data>
+  <data name="TrayIconGettingStartedMenuItemText" xml:space="preserve">
+    <value>View Getting &amp;Started Guide</value>
+  </data>
+  <data name="TrayIconHelpMenuItemText" xml:space="preserve">
+    <value>&amp;Help</value>
+  </data>
+  <data name="TrayIconHotkeyListMenuItemText" xml:space="preserve">
+    <value>View &amp;Hotkeys List</value>
+  </data>
 </root>

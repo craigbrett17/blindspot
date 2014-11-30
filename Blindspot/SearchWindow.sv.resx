@@ -130,8 +130,11 @@
   <data name="artistButton.Text" xml:space="preserve">
     <value>Konstnä&amp;r</value>
   </data>
-  <data name="titleButton.Text" xml:space="preserve">
-    <value>&amp;Titel</value>
+  <data name="trackButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 21</value>
+  </data>
+  <data name="trackButton.Text" xml:space="preserve">
+    <value>&amp;Låt</value>
   </data>
   <data name="typeBox.Text" xml:space="preserve">
     <value>Sök Typ</value>

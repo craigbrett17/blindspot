@@ -2,7 +2,7 @@
 ;Comes with .NET installing and extraction of files
 
 ;What version are we on?
-!define VERSION "2.0"
+!define VERSION "2.1"
 ;The name of the executable
 !define APP_EXECUTABLE "Blindspot.exe"
 !ifndef INCLUDE_DOTNET

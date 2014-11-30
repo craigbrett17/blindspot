@@ -187,6 +187,24 @@ namespace Blindspot {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Loading album.
+        /// </summary>
+        internal static string LoadingAlbum {
+            get {
+                return ResourceManager.GetString("LoadingAlbum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading artist albums.
+        /// </summary>
+        internal static string LoadingArtistAlbums {
+            get {
+                return ResourceManager.GetString("LoadingArtistAlbums", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Loading playlist.
         /// </summary>
         internal static string LoadingPlaylist {
@@ -480,6 +498,33 @@ namespace Blindspot {
         internal static string TrayIconExitMenuItemText {
             get {
                 return ResourceManager.GetString("TrayIconExitMenuItemText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View Getting &amp;Started Guide.
+        /// </summary>
+        internal static string TrayIconGettingStartedMenuItemText {
+            get {
+                return ResourceManager.GetString("TrayIconGettingStartedMenuItemText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &amp;Help.
+        /// </summary>
+        internal static string TrayIconHelpMenuItemText {
+            get {
+                return ResourceManager.GetString("TrayIconHelpMenuItemText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View &amp;Hotkeys List.
+        /// </summary>
+        internal static string TrayIconHotkeyListMenuItemText {
+            get {
+                return ResourceManager.GetString("TrayIconHotkeyListMenuItemText", resourceCulture);
             }
         }
         

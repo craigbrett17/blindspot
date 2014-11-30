@@ -11,6 +11,7 @@ using Blindspot.Commands;
 using Blindspot.Core;
 using Blindspot.Core.Models;
 using Blindspot.Helpers;
+using Blindspot.Playback;
 using Blindspot.ViewModels;
 
 namespace Blindspot
@@ -252,7 +253,9 @@ namespace Blindspot
                 new MediaPlayPauseCommand(playbackManager),
                 new NextTrackCommand(Buffers, playbackManager),
                 new PreviousTrackCommand(Buffers, playbackManager),
-                new ShowContextMenuCommand(_trayIcon)
+                new ShowContextMenuCommand(_trayIcon),
+                new BrowseGettingStartedCommand(),
+                new BrowseHotkeyListCommand()
             };
 
             // the hotkeys use the key to know which command to execute
@@ -317,7 +320,7 @@ namespace Blindspot
 
         private void ClearCurrentlyPlayingTrack()
         {
-            if (playbackManager.PlayingTrackItem != null)
+            if (playbackManager.PlayingTrack != null)
             {
                 playbackManager.Stop();
                 Session.UnloadPlayer();
@@ -333,17 +336,17 @@ namespace Blindspot
                 return;
             }
             Session.Play();
-            playbackManager.PlayingTrackItem = item;
+            playbackManager.PlayingTrack = item.Model;
             playbackManager.fullyDownloaded = false;
             playbackManager.Play();
-            output.OutputTrackItem(playbackManager.PlayingTrackItem,
+            output.OutputTrackModel(playbackManager.PlayingTrack,
                     settings.OutputTrackChangesGraphically, settings.OutputTrackChangesWithSpeech);
         }
 
         private void HandleEndOfCurrentTrack()
         {
             playbackManager.AddCurrentTrackToPreviousTracks();
-            playbackManager.PlayingTrackItem = null;
+            playbackManager.PlayingTrack = null;
             _playQueueBuffer.RemoveAt(0);
             if (_playQueueBuffer.Count > 0)
             {
@@ -379,7 +382,12 @@ namespace Blindspot
                 {
                     new ToolStripSeparator(),
                     MakeCommandMenuItem(StringStore.TrayIconOptionsMenuItemText, "options_dialog"),
-                    MakeCommandMenuItem(StringStore.TrayIconAboutMenuItemText, "show_about_window"),
+                    new ToolStripMenuItem(StringStore.TrayIconHelpMenuItemText, null, new ToolStripItem[]
+                    {
+                        MakeCommandMenuItem(StringStore.TrayIconGettingStartedMenuItemText, "show_getting_started"),
+                        MakeCommandMenuItem(StringStore.TrayIconHotkeyListMenuItemText, "show_hotkey_list"),
+                        MakeCommandMenuItem(StringStore.TrayIconAboutMenuItemText, "show_about_window"),
+                    }),
                     MakeCommandMenuItem(StringStore.TrayIconExitMenuItemText, "close_blindspot"),
                 };
             }
@@ -387,13 +395,14 @@ namespace Blindspot
 
         private void HandleChangeOfTrack()
         {
-            if (playbackManager.PlayingTrackItem == null)
+            if (playbackManager.PlayingTrack == null)
             {
                 _trayIcon.Text = "Blindspot";
             }
             else
             {
-                _trayIcon.Text = String.Format("Blindspot - {0}", playbackManager.PlayingTrackItem.ToTruncatedString());
+                var trackItem = new TrackBufferItem(playbackManager.PlayingTrack);
+                _trayIcon.Text = String.Format("Blindspot - {0}", trackItem.ToTruncatedString());
             }
         }
 

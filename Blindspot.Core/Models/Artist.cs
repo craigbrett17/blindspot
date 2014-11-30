@@ -43,7 +43,10 @@ namespace Blindspot.Core.Models
         public string Name { get; private set; }        
         public bool IsBrowseComplete { get; private set; }
         public List<IntPtr> AlbumPtrs { get; private set; }
-        
+
+        public string SpotifyBio { get; set; }
+        public List<string> RelatedArtists { get; set; }
+
         public Artist(IntPtr artistPtr) {
 
             if (artistPtr == IntPtr.Zero)
@@ -51,7 +54,6 @@ namespace Blindspot.Core.Models
 
             this.ArtistPtr = artistPtr;
             this.Name = Functions.PtrToString(libspotify.sp_artist_name(artistPtr));
-            
         }
 
         #region IDisposable Members
@@ -131,6 +133,10 @@ namespace Blindspot.Core.Models
                 }
 
                 this.AlbumPtrs = albumPtrs;
+
+                // need to decide how we want this to work. a refactor may be in order around starting a browse
+                // ideas include Lazy artist browsing (not that artists are lazy)
+                //this.SpotifyBio = Functions.PtrToString(libspotify.sp_artistbrowse_biography(_browsePtr));
 
                 this.IsBrowseComplete = true;
 

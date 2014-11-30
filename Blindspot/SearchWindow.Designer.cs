@@ -32,7 +32,7 @@
             this.typeBox = new System.Windows.Forms.GroupBox();
             this.albumButton = new System.Windows.Forms.RadioButton();
             this.artistButton = new System.Windows.Forms.RadioButton();
-            this.titleButton = new System.Windows.Forms.RadioButton();
+            this.trackButton = new System.Windows.Forms.RadioButton();
             this.searchTextLabel = new System.Windows.Forms.Label();
             this.searchTextBox = new System.Windows.Forms.TextBox();
             this.searchButton = new System.Windows.Forms.Button();
@@ -45,7 +45,7 @@
             resources.ApplyResources(this.typeBox, "typeBox");
             this.typeBox.Controls.Add(this.albumButton);
             this.typeBox.Controls.Add(this.artistButton);
-            this.typeBox.Controls.Add(this.titleButton);
+            this.typeBox.Controls.Add(this.trackButton);
             this.typeBox.Name = "typeBox";
             this.typeBox.TabStop = false;
             // 
@@ -63,13 +63,13 @@
             this.artistButton.TabStop = true;
             this.artistButton.UseVisualStyleBackColor = true;
             // 
-            // titleButton
+            // trackButton
             // 
-            resources.ApplyResources(this.titleButton, "titleButton");
-            this.titleButton.Checked = true;
-            this.titleButton.Name = "titleButton";
-            this.titleButton.TabStop = true;
-            this.titleButton.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.trackButton, "trackButton");
+            this.trackButton.Checked = true;
+            this.trackButton.Name = "trackButton";
+            this.trackButton.TabStop = true;
+            this.trackButton.UseVisualStyleBackColor = true;
             // 
             // searchTextLabel
             // 
@@ -125,7 +125,7 @@
         private System.Windows.Forms.GroupBox typeBox;
         private System.Windows.Forms.RadioButton albumButton;
         private System.Windows.Forms.RadioButton artistButton;
-        private System.Windows.Forms.RadioButton titleButton;
+        private System.Windows.Forms.RadioButton trackButton;
         private System.Windows.Forms.Label searchTextLabel;
         private System.Windows.Forms.TextBox searchTextBox;
         private System.Windows.Forms.Button searchButton;

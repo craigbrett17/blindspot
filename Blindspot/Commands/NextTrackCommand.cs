@@ -6,6 +6,7 @@ using System.Text;
 using Blindspot.Core;
 using Blindspot.Core.Models;
 using Blindspot.Helpers;
+using Blindspot.Playback;
 using Blindspot.ViewModels;
 using ScreenReaderAPIWrapper;
 using NotifyIcon = System.Windows.Forms.NotifyIcon;
@@ -58,21 +59,21 @@ namespace Blindspot.Commands
                 return;
             }
             Session.Play();
-            playbackManager.PlayingTrackItem = item;
+            playbackManager.PlayingTrack = item.Model;
             playbackManager.fullyDownloaded = false;
             playbackManager.Play();
             var settings = UserSettings.Instance;
-            output.OutputTrackItem(playbackManager.PlayingTrackItem,
+            output.OutputTrackModel(playbackManager.PlayingTrack,
                     settings.OutputTrackChangesGraphically, settings.OutputTrackChangesWithSpeech);
         }
 
         private void ClearCurrentlyPlayingTrack()
         {
-            if (playbackManager.PlayingTrackItem != null)
+            if (playbackManager.PlayingTrack != null)
             {
                 playbackManager.Stop();
                 Session.UnloadPlayer();
-                playbackManager.PlayingTrackItem = null;
+                playbackManager.PlayingTrack = null;
             }
         }
 

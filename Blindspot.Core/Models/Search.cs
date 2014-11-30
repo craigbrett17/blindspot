@@ -75,6 +75,14 @@ namespace Blindspot.Core.Models
             {
                 LoadTracks();
             }
+            else if (this.Type == SearchType.Album)
+            {
+                LoadAlbums();
+            }
+            else if (this.Type == SearchType.Artist)
+            {
+                LoadArtists();
+            }
             this.IsLoaded = true;
         }
 
@@ -88,6 +96,30 @@ namespace Blindspot.Core.Models
             }
             Tracks = trackPtrs;
             trackOffset += numtracks;
+        }
+
+        private void LoadAlbums()
+        {
+            int numAlbums = libspotify.sp_search_num_albums(_browsePtr);
+            List<IntPtr> albumPtrs = new List<IntPtr>();
+            for (int i = 0; i < numAlbums; i++)
+            {
+                albumPtrs.Add(libspotify.sp_search_album(_browsePtr, i));
+            }
+            Albums = albumPtrs;
+            albumOffset += numAlbums;
+        }
+
+        private void LoadArtists()
+        {
+            int numArtists = libspotify.sp_search_num_artists(_browsePtr);
+            List<IntPtr> artistPtrs = new List<IntPtr>();
+            for (int i = 0; i < numArtists; i++)
+            {
+                artistPtrs.Add(libspotify.sp_search_artist(_browsePtr, i));
+            }
+            Artists = artistPtrs;
+            artistOffset += numArtists;
         }
 
         #region IDisposable Members

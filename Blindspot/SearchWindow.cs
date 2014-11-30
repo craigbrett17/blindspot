@@ -29,7 +29,7 @@ namespace Blindspot
                 return;
             }
             this.SearchText = searchTextBox.Text;
-            if (titleButton.Checked)
+            if (trackButton.Checked)
             {
                 this.Type = SearchType.Track; 
             }
