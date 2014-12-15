@@ -23,7 +23,54 @@ namespace Blindspot.Helpers
 
         public void BuildContextMenu()
         {
+            var currentList = _buffers.CurrentList;
+            var currentItem = _buffers.CurrentList.CurrentItem;
+
+            if (currentList is PlaylistBufferList)
+                AddPlaylistListMenuItems();
+            else if (currentList is AlbumBufferList)
+                AddAlbumListMenuItems();
+            else if (currentList is SearchBufferList)
+                AddSearchListMenuItems();
+
+            if (currentItem is PlaylistBufferItem)
+                AddPlaylistItemMenuItems();
+            else if (currentItem is AlbumBufferItem)
+                AddAlbumItemMenuItems();
+            else if (currentItem is TrackBufferItem)
+                AddTrackItemMenuItems();
+
             _trayIcon.ContextMenuStrip.Items.AddRange(globalTrayIconMenuItems);
+        }
+
+        private void AddSearchListMenuItems()
+        {
+            
+        }
+
+        private void AddAlbumListMenuItems()
+        {
+            
+        }
+
+        private void AddPlaylistListMenuItems()
+        {
+            
+        }
+
+        private void AddTrackItemMenuItems()
+        {
+            _trayIcon.ContextMenuStrip.Items.Add(MakeCommandMenuItem("Add to playlist", "add_to_playlist"));
+        }
+
+        private void AddAlbumItemMenuItems()
+        {
+            
+        }
+
+        private void AddPlaylistItemMenuItems()
+        {
+            
         }
         
         private ToolStripItem[] globalTrayIconMenuItems

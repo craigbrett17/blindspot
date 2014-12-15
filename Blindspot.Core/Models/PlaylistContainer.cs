@@ -57,12 +57,24 @@ namespace Blindspot.Core.Models
 
         public class PlaylistInfo {
             public IntPtr ContainerPtr;
-            public IntPtr Pointer;
+            public IntPtr Pointer { get; set; }
             public ulong FolderID;
             public libspotify.sp_playlist_type PlaylistType;
-            public string Name;
+            public string Name { get; set; }
             public PlaylistInfo Parent;
             public List<PlaylistInfo> Children = new List<PlaylistInfo>();
+            public IntPtr OwnerPointer;
+            public string OwnerName;
+
+            public bool UserCanContribute
+            {
+                get
+                {
+                    var userPointer = libspotify.sp_session_user(Session.GetSessionPtr());
+                    var isCollaborative = libspotify.sp_playlist_is_collaborative(Pointer);
+                    return OwnerPointer == userPointer || isCollaborative;
+                }
+            }
         }
 
         private PlaylistContainer(IntPtr containerPtr) {
@@ -206,7 +218,10 @@ namespace Blindspot.Core.Models
                         Pointer = playlistPtr,
                         PlaylistType = libspotify.sp_playlist_type.SP_PLAYLIST_TYPE_PLAYLIST,
                         ContainerPtr = _containerPtr,
-                        Name = Functions.PtrToString(libspotify.sp_playlist_name(playlistPtr))
+                        Name = Functions.PtrToString(libspotify.sp_playlist_name(playlistPtr)),
+                        OwnerPointer = libspotify.sp_playlist_owner(playlistPtr),
+                        OwnerName = Functions.PtrToString(libspotify.sp_user_display_name(libspotify.sp_playlist_owner(playlistPtr))),
+                        
                     });
 
                 }

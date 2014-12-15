@@ -257,7 +257,8 @@ namespace Blindspot
                 new PreviousTrackCommand(Buffers, playbackManager),
                 new ShowContextMenuCommand(_trayIcon),
                 new BrowseGettingStartedCommand(),
-                new BrowseHotkeyListCommand()
+                new BrowseHotkeyListCommand(),
+                new AddToPlaylistCommand(Buffers)
             };
 
             // the hotkeys use the key to know which command to execute

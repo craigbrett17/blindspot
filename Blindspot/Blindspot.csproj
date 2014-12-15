@@ -96,6 +96,13 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddToPlaylistWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddToPlaylistWindow.Designer.cs">
+      <DependentUpon>AddToPlaylistWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Commands\AddToPlaylistCommand.cs" />
     <Compile Include="Commands\BrowseHotkeyListCommand.cs" />
     <Compile Include="Commands\BrowseGettingStartedCommand.cs" />
     <Compile Include="Commands\NextTrackCommand.cs" />
@@ -207,6 +214,9 @@
     <Compile Include="ViewModels\PlaylistBufferList.cs" />
     <Compile Include="ViewModels\SearchBufferList.cs" />
     <Compile Include="ViewModels\TrackBufferItem.cs" />
+    <EmbeddedResource Include="AddToPlaylistWindow.resx">
+      <DependentUpon>AddToPlaylistWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="BuffersWindow.resx">
       <DependentUpon>BuffersWindow.cs</DependentUpon>
     </EmbeddedResource>
