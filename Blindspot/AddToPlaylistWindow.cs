@@ -12,7 +12,7 @@ namespace Blindspot
 {
     public partial class AddToPlaylistWindow : Form
     {
-        private SpotifyClient spotify = SpotifyClient.Instance;
+        private ISpotifyClient spotify = SpotifyClient.Instance;
         public bool ShouldAddNewPlaylist { get { return newPlaylistBox.Checked; } }
         public string NewPlaylistName { get { return newPlaylistBox.Text; } }
         public IntPtr ExistingPlaylistPointer { get { return (IntPtr)existingPlaylistsDropdownBox.SelectedValue; } }
@@ -24,12 +24,13 @@ namespace Blindspot
 
         private void AddToPlaylistWindow_Load(object sender, EventArgs e)
         {
-            var playlists = SpotifyController.GetAllSessionPlaylists()
+            var playlists = spotify.GetAllSessionPlaylists()
                 .Where(p => p.UserCanContribute).ToArray();
 
-            existingPlaylistsDropdownBox.DisplayMember = "Name";
             existingPlaylistsDropdownBox.ValueMember = "Pointer";
-            existingPlaylistsDropdownBox.Items.AddRange(playlists);
+            existingPlaylistsDropdownBox.DisplayMember = "Name";
+            existingPlaylistsDropdownBox.DataSource = playlists;
+            existingPlaylistsDropdownBox.SelectedIndex = 0;
         }
 
         private void addButton_Click(object sender, EventArgs e)

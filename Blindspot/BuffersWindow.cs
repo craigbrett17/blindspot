@@ -22,7 +22,7 @@ namespace Blindspot
         public Dictionary<string, HotkeyCommandBase> Commands { get; set; }
         public BufferListCollection Buffers { get; set; }
         private PlaybackManager playbackManager;
-        private SpotifyClient spotify;
+        private ISpotifyClient spotify;
         private UserSettings settings = UserSettings.Instance;
         private UpdateManager updater = UpdateManager.Instance;
         private IOutputManager output = OutputManager.Instance;

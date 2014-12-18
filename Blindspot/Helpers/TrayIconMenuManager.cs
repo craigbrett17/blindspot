@@ -61,6 +61,7 @@ namespace Blindspot.Helpers
         private void AddTrackItemMenuItems()
         {
             _trayIcon.ContextMenuStrip.Items.Add(MakeCommandMenuItem("Add to playlist", "add_to_playlist"));
+            _trayIcon.ContextMenuStrip.Items.Add(new ToolStripSeparator());
         }
 
         private void AddAlbumItemMenuItems()

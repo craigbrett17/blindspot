@@ -22,8 +22,8 @@ namespace Blindspot.Core
             this.RequestTimeout = 15;
         }
 
-        private static SpotifyClient _instance;
-        public static SpotifyClient Instance
+        private static ISpotifyClient _instance;
+        public static ISpotifyClient Instance
         {
             get
             {
@@ -83,7 +83,12 @@ namespace Blindspot.Core
 
         public List<PlaylistContainer.PlaylistInfo> GetAllSessionPlaylists()
         {
-            throw new NotImplementedException();
+            var sessionContainer = PlaylistContainer.GetSessionContainer();
+            WaitFor(() =>
+            {
+                return sessionContainer.IsLoaded && sessionContainer.PlaylistsAreLoaded;
+            }, RequestTimeout);
+            return sessionContainer.GetAllPlaylists();
         }
 
         public List<PlaylistContainer.PlaylistInfo> GetPlaylists(PlaylistContainer.PlaylistInfo playlist)
@@ -142,6 +147,31 @@ namespace Blindspot.Core
             return (SpotifyError)Session.LoginError;
         }
 
+        public SpotifyError AddTrackToPlaylist(IntPtr trackPtr, IntPtr playlistPtr)
+        {
+            IntPtr trackArrayPointer = IntPtr.Zero;
+            try
+            {
+                // yes, even a single track needs to be an array. let's fake it
+                IntPtr[] tracksToAddArray = new[] { trackPtr };
+                int arraySizeInBytes = IntPtr.Size * tracksToAddArray.Length;
+                trackArrayPointer = Marshal.AllocHGlobal(arraySizeInBytes);
+                // now we copy the physical array into the block of memory that the pointer points to
+                Marshal.Copy(tracksToAddArray, 0, trackArrayPointer, tracksToAddArray.Length);
+
+                // setup done, now we just call libspotify and get it to do its thing
+                var currentCount = libspotify.sp_playlist_num_tracks(playlistPtr);
+                var error = libspotify.sp_playlist_add_tracks(playlistPtr, trackArrayPointer, 1, currentCount, GetSession());
+                return (SpotifyError)error;
+            }
+            finally
+            {
+                // whatever happens, release the block of memory we used for the array of tracks
+                if (trackArrayPointer != IntPtr.Zero)
+                    Marshal.FreeHGlobal(trackArrayPointer);
+            }
+        }
+
         private IntPtr GetSession()
         {
             var session = Session.GetSessionPtr();
@@ -153,6 +183,7 @@ namespace Blindspot.Core
         }
 
         // ok, I haven't been able to think of a better way of doing this yet, well done Jamcast
+        // if we were using .NET 4.5 we could use awaits... oh well
         private static bool WaitFor(Func<bool> t, int timeout)
         {
             DateTime start = DateTime.Now;
@@ -166,6 +197,6 @@ namespace Blindspot.Core
             }
             return false;
         }
-        
+
     }
 }
