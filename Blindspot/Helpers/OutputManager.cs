@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Drawing;
+using System.Threading.Tasks;
 using ScreenReaderAPIWrapper;
 using Blindspot.ViewModels;
 using Blindspot.Core.Models;
+using System.Threading;
 
 namespace Blindspot.Helpers
 {
@@ -17,6 +19,7 @@ namespace Blindspot.Helpers
         void OutputTrackItem(TrackBufferItem item, bool graphicalOutput = true, bool screenReaderOutput = true);
         void OutputBufferListState(BufferListCollection buffers, NavigationDirection direction, bool interrupt = true);
         void OutputTrackModel(Track track, bool graphicalOutput = true, bool screenReaderOutput = true);
+        void OutputMessageWithDelay(string message, int milisecondsDelay, bool interrupt = false);
     }
     
     /// <summary>
@@ -155,6 +158,15 @@ namespace Blindspot.Helpers
             // for now, we just wrap it in a T.B.I as it suits
             var item = new TrackBufferItem(track);
             this.OutputTrackItem(item, graphicalOutput, screenReaderOutput);
+        }
+        
+        public void OutputMessageWithDelay(string message, int milisecondsDelay, bool interrupt = false)
+        {
+            Task.Factory.StartNew(() =>
+            {
+                Thread.Sleep(milisecondsDelay);
+                OutputMessage(message, interrupt);
+            });
         }
     }
 
