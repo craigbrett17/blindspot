@@ -20,7 +20,7 @@ namespace Blindspot.Commands
         {
             _buffers = buffers;
         }
-        
+
         public override string Key
         {
             get { return "add_to_playlist"; }
@@ -36,23 +36,34 @@ namespace Blindspot.Commands
             if (dialog.DialogResult != DialogResult.OK)
                 return;
 
+            IntPtr playlistPointer = IntPtr.Zero;
             if (dialog.ShouldAddNewPlaylist)
             {
-                
+                var newPlaylistPointer = spotify.CreateNewPlaylist(dialog.NewPlaylistName);
+                if (newPlaylistPointer == IntPtr.Zero)
+                {
+                    MessageBox.Show("Playlist not created", "Unable to create playlist", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                playlistPointer = newPlaylistPointer;
             }
             else
             {
-                var response = spotify.AddTrackToPlaylist(trackItem.Model.TrackPtr, dialog.ExistingPlaylistPointer);
-                if (!response.IsError)
-                {
-                    output.OutputMessage("Track added");
-                }
-                else
-                {
-                    MessageBox.Show(response.Message, "Unable to add track to playlist", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                playlistPointer = dialog.ExistingPlaylistPointer;
+            }
+
+            var response = spotify.AddTrackToPlaylist(trackItem.Model.TrackPtr, playlistPointer);
+            if (!response.IsError)
+            {
+                output.OutputMessageWithDelay("Track added", 1000);
+            }
+            else
+            {
+                MessageBox.Show(response.Message, "Unable to add track to playlist", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
     }
 }

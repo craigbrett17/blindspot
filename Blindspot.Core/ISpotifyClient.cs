@@ -27,5 +27,6 @@ namespace Blindspot.Core
         void SetPrivateSession(bool enable);
         SpotifyError GetLoginError();
         SpotifyError AddTrackToPlaylist(IntPtr trackPtr, IntPtr playlistPtr);
+        IntPtr CreateNewPlaylist(string name);
     }
 }

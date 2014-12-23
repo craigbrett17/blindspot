@@ -172,6 +172,27 @@ namespace Blindspot.Core
             }
         }
 
+        public IntPtr CreateNewPlaylist(string name)
+        {
+            IntPtr namePointer = IntPtr.Zero;
+            try
+            {
+                var sessionContainerPointer = libspotify.sp_session_playlistcontainer(GetSession());
+                // have to turn the name into a byte[] as we can't use StringToGlobalHUni
+                // make a byte array of it and copy it into unmanaged memory
+                byte[] nameBytes = Encoding.UTF8.GetBytes(name);
+                namePointer = Marshal.AllocHGlobal(nameBytes.Length);
+                Marshal.Copy(nameBytes, 0, namePointer, nameBytes.Length);
+                var newPointer = libspotify.sp_playlistcontainer_add_new_playlist(sessionContainerPointer, namePointer);
+                return newPointer;
+            }
+            finally
+            {
+                if (namePointer != IntPtr.Zero)
+                    Marshal.FreeHGlobal(namePointer);
+            }
+        }
+
         private IntPtr GetSession()
         {
             var session = Session.GetSessionPtr();
@@ -181,7 +202,7 @@ namespace Blindspot.Core
             }
             return session;
         }
-
+        
         // ok, I haven't been able to think of a better way of doing this yet, well done Jamcast
         // if we were using .NET 4.5 we could use awaits... oh well
         private static bool WaitFor(Func<bool> t, int timeout)
@@ -197,6 +218,6 @@ namespace Blindspot.Core
             }
             return false;
         }
-
+        
     }
 }

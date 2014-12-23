@@ -14,7 +14,7 @@ namespace Blindspot
     {
         private ISpotifyClient spotify = SpotifyClient.Instance;
         public bool ShouldAddNewPlaylist { get { return newPlaylistBox.Checked; } }
-        public string NewPlaylistName { get { return newPlaylistBox.Text; } }
+        public string NewPlaylistName { get { return newPlaylistTextbox.Text; } }
         public IntPtr ExistingPlaylistPointer { get { return (IntPtr)existingPlaylistsDropdownBox.SelectedValue; } }
 
         public AddToPlaylistWindow()
