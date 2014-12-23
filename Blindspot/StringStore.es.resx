@@ -285,4 +285,22 @@
   <data name="TrayIconHotkeyListMenuItemText" xml:space="preserve">
     <value>Vista de lista &amp;Teclas de acceso rápido</value>
   </data>
+  <data name="InvalidPlaylistName" xml:space="preserve">
+    <value>Nombre de la lista de reproducción no es válido</value>
+  </data>
+  <data name="PlaylistNotCreated" xml:space="preserve">
+    <value>Lista de reproducción no se crea</value>
+  </data>
+  <data name="PleaseEnterANameForYourNewPlaylist" xml:space="preserve">
+    <value>Por favor, introduzca un nombre para la nueva lista de reproducción</value>
+  </data>
+  <data name="TrackAdded" xml:space="preserve">
+    <value>Pista añadió</value>
+  </data>
+  <data name="TrayIconAddToAPlaylistText" xml:space="preserve">
+    <value>Añadir a una lista de &amp;reproducción</value>
+  </data>
+  <data name="UnableToAddTrackToPlaylist" xml:space="preserve">
+    <value>No se puede añadir la pista a esta lista de reproducción</value>
+  </data>
 </root>

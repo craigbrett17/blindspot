@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddToPlaylistWindow));
             this.newOrExistingBox = new System.Windows.Forms.GroupBox();
             this.existingPlaylistBox = new System.Windows.Forms.RadioButton();
             this.newPlaylistBox = new System.Windows.Forms.RadioButton();
@@ -44,100 +45,70 @@
             // 
             this.newOrExistingBox.Controls.Add(this.existingPlaylistBox);
             this.newOrExistingBox.Controls.Add(this.newPlaylistBox);
-            this.newOrExistingBox.Location = new System.Drawing.Point(0, 0);
+            resources.ApplyResources(this.newOrExistingBox, "newOrExistingBox");
             this.newOrExistingBox.Name = "newOrExistingBox";
-            this.newOrExistingBox.Size = new System.Drawing.Size(330, 50);
-            this.newOrExistingBox.TabIndex = 0;
             this.newOrExistingBox.TabStop = false;
             // 
             // existingPlaylistBox
             // 
-            this.existingPlaylistBox.AutoSize = true;
-            this.existingPlaylistBox.Location = new System.Drawing.Point(125, 18);
+            resources.ApplyResources(this.existingPlaylistBox, "existingPlaylistBox");
             this.existingPlaylistBox.Name = "existingPlaylistBox";
-            this.existingPlaylistBox.Size = new System.Drawing.Size(140, 24);
-            this.existingPlaylistBox.TabIndex = 1;
-            this.existingPlaylistBox.Text = "&Existing playlist";
             this.existingPlaylistBox.UseVisualStyleBackColor = true;
             this.existingPlaylistBox.CheckedChanged += new System.EventHandler(this.existingPlaylistBox_CheckedChanged);
             // 
             // newPlaylistBox
             // 
-            this.newPlaylistBox.AutoSize = true;
+            resources.ApplyResources(this.newPlaylistBox, "newPlaylistBox");
             this.newPlaylistBox.Checked = true;
-            this.newPlaylistBox.Location = new System.Drawing.Point(3, 18);
             this.newPlaylistBox.Name = "newPlaylistBox";
-            this.newPlaylistBox.Size = new System.Drawing.Size(116, 24);
-            this.newPlaylistBox.TabIndex = 0;
             this.newPlaylistBox.TabStop = true;
-            this.newPlaylistBox.Text = "&New playlist";
             this.newPlaylistBox.UseVisualStyleBackColor = true;
             this.newPlaylistBox.CheckedChanged += new System.EventHandler(this.newPlaylistBox_CheckedChanged);
             // 
             // newPlaylistLabel
             // 
-            this.newPlaylistLabel.AutoSize = true;
-            this.newPlaylistLabel.Location = new System.Drawing.Point(10, 190);
+            resources.ApplyResources(this.newPlaylistLabel, "newPlaylistLabel");
             this.newPlaylistLabel.Name = "newPlaylistLabel";
-            this.newPlaylistLabel.Size = new System.Drawing.Size(136, 20);
-            this.newPlaylistLabel.TabIndex = 4;
-            this.newPlaylistLabel.Text = "New Playlist n&ame";
             // 
             // newPlaylistTextbox
             // 
-            this.newPlaylistTextbox.Location = new System.Drawing.Point(10, 225);
+            resources.ApplyResources(this.newPlaylistTextbox, "newPlaylistTextbox");
             this.newPlaylistTextbox.Name = "newPlaylistTextbox";
-            this.newPlaylistTextbox.Size = new System.Drawing.Size(250, 26);
-            this.newPlaylistTextbox.TabIndex = 5;
             // 
             // addButton
             // 
-            this.addButton.Location = new System.Drawing.Point(50, 290);
+            resources.ApplyResources(this.addButton, "addButton");
             this.addButton.Name = "addButton";
-            this.addButton.Size = new System.Drawing.Size(75, 23);
-            this.addButton.TabIndex = 6;
-            this.addButton.Text = "&Add";
             this.addButton.UseVisualStyleBackColor = true;
             this.addButton.Click += new System.EventHandler(this.addButton_Click);
             // 
             // cancelButton
             // 
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelButton.Location = new System.Drawing.Point(130, 290);
+            resources.ApplyResources(this.cancelButton, "cancelButton");
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(75, 23);
-            this.cancelButton.TabIndex = 7;
-            this.cancelButton.Text = "&Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // existingPlaylistsDropdownLabel
             // 
-            this.existingPlaylistsDropdownLabel.AutoSize = true;
-            this.existingPlaylistsDropdownLabel.Location = new System.Drawing.Point(10, 70);
+            resources.ApplyResources(this.existingPlaylistsDropdownLabel, "existingPlaylistsDropdownLabel");
             this.existingPlaylistsDropdownLabel.Name = "existingPlaylistsDropdownLabel";
-            this.existingPlaylistsDropdownLabel.Size = new System.Drawing.Size(65, 20);
-            this.existingPlaylistsDropdownLabel.TabIndex = 2;
-            this.existingPlaylistsDropdownLabel.Text = "Playlists";
             // 
             // existingPlaylistsDropdownBox
             // 
             this.existingPlaylistsDropdownBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.existingPlaylistsDropdownBox.DropDownWidth = 350;
-            this.existingPlaylistsDropdownBox.Enabled = false;
+            resources.ApplyResources(this.existingPlaylistsDropdownBox, "existingPlaylistsDropdownBox");
             this.existingPlaylistsDropdownBox.FormattingEnabled = true;
-            this.existingPlaylistsDropdownBox.Location = new System.Drawing.Point(10, 100);
             this.existingPlaylistsDropdownBox.Name = "existingPlaylistsDropdownBox";
-            this.existingPlaylistsDropdownBox.Size = new System.Drawing.Size(250, 28);
-            this.existingPlaylistsDropdownBox.TabIndex = 3;
             // 
             // AddToPlaylistWindow
             // 
             this.AcceptButton = this.addButton;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cancelButton;
-            this.ClientSize = new System.Drawing.Size(328, 345);
             this.Controls.Add(this.existingPlaylistsDropdownBox);
             this.Controls.Add(this.existingPlaylistsDropdownLabel);
             this.Controls.Add(this.cancelButton);
@@ -149,8 +120,6 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AddToPlaylistWindow";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Add to playlist";
             this.Load += new System.EventHandler(this.AddToPlaylistWindow_Load);
             this.newOrExistingBox.ResumeLayout(false);
             this.newOrExistingBox.PerformLayout();

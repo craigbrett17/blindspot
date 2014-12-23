@@ -37,7 +37,7 @@ namespace Blindspot
         {
             if (ShouldAddNewPlaylist && newPlaylistTextbox.Text.Length == 0)
             {
-                MessageBox.Show("Please enter a name for your new playlist", "Invalid playlist name", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(StringStore.PleaseEnterANameForYourNewPlaylist, StringStore.InvalidPlaylistName, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             DialogResult = DialogResult.OK;

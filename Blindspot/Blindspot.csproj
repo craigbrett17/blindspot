@@ -214,7 +214,19 @@
     <Compile Include="ViewModels\PlaylistBufferList.cs" />
     <Compile Include="ViewModels\SearchBufferList.cs" />
     <Compile Include="ViewModels\TrackBufferItem.cs" />
+    <EmbeddedResource Include="AddToPlaylistWindow.de.resx">
+      <DependentUpon>AddToPlaylistWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddToPlaylistWindow.es.resx">
+      <DependentUpon>AddToPlaylistWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddToPlaylistWindow.fr.resx">
+      <DependentUpon>AddToPlaylistWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AddToPlaylistWindow.resx">
+      <DependentUpon>AddToPlaylistWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddToPlaylistWindow.sv.resx">
       <DependentUpon>AddToPlaylistWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="BuffersWindow.resx">

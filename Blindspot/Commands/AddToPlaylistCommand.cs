@@ -42,7 +42,7 @@ namespace Blindspot.Commands
                 var newPlaylistPointer = spotify.CreateNewPlaylist(dialog.NewPlaylistName);
                 if (newPlaylistPointer == IntPtr.Zero)
                 {
-                    MessageBox.Show("Playlist not created", "Unable to create playlist", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(StringStore.PlaylistNotCreated, StringStore.UnexpectedErrorOccurred, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
@@ -56,11 +56,11 @@ namespace Blindspot.Commands
             var response = spotify.AddTrackToPlaylist(trackItem.Model.TrackPtr, playlistPointer);
             if (!response.IsError)
             {
-                output.OutputMessageWithDelay("Track added", 1000);
+                output.OutputMessageWithDelay(StringStore.TrackAdded, 1000);
             }
             else
             {
-                MessageBox.Show(response.Message, "Unable to add track to playlist", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(response.Message, StringStore.UnableToAddTrackToPlaylist, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

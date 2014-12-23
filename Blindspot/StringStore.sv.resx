@@ -285,4 +285,22 @@
   <data name="TrayIconHotkeyListMenuItemText" xml:space="preserve">
     <value>Visa &amp;Kortkommando Lista</value>
   </data>
+  <data name="InvalidPlaylistName" xml:space="preserve">
+    <value>Ogiltigt spellistans namn</value>
+  </data>
+  <data name="PlaylistNotCreated" xml:space="preserve">
+    <value>spellista inte skapat</value>
+  </data>
+  <data name="PleaseEnterANameForYourNewPlaylist" xml:space="preserve">
+    <value>Ange ett namn på den nya spellistan</value>
+  </data>
+  <data name="TrackAdded" xml:space="preserve">
+    <value>Spår tillsatt</value>
+  </data>
+  <data name="TrayIconAddToAPlaylistText" xml:space="preserve">
+    <value>Lägg till en spellista</value>
+  </data>
+  <data name="UnableToAddTrackToPlaylist" xml:space="preserve">
+    <value>Det går inte att lägga till låten i spellistan</value>
+  </data>
 </root>

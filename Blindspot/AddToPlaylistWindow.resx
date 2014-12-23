@@ -117,4 +117,250 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="existingPlaylistBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="existingPlaylistBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>125, 18</value>
+  </data>
+  <data name="existingPlaylistBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>140, 24</value>
+  </data>
+  <data name="existingPlaylistBox.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="existingPlaylistBox.Text" xml:space="preserve">
+    <value>&amp;Existing playlist</value>
+  </data>
+  <data name="&gt;&gt;existingPlaylistBox.Name" xml:space="preserve">
+    <value>existingPlaylistBox</value>
+  </data>
+  <data name="&gt;&gt;existingPlaylistBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;existingPlaylistBox.Parent" xml:space="preserve">
+    <value>newOrExistingBox</value>
+  </data>
+  <data name="&gt;&gt;existingPlaylistBox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="newPlaylistBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="newPlaylistBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 18</value>
+  </data>
+  <data name="newPlaylistBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>116, 24</value>
+  </data>
+  <data name="newPlaylistBox.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="newPlaylistBox.Text" xml:space="preserve">
+    <value>&amp;New playlist</value>
+  </data>
+  <data name="&gt;&gt;newPlaylistBox.Name" xml:space="preserve">
+    <value>newPlaylistBox</value>
+  </data>
+  <data name="&gt;&gt;newPlaylistBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;newPlaylistBox.Parent" xml:space="preserve">
+    <value>newOrExistingBox</value>
+  </data>
+  <data name="&gt;&gt;newPlaylistBox.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="newOrExistingBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="newOrExistingBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>330, 50</value>
+  </data>
+  <data name="newOrExistingBox.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;newOrExistingBox.Name" xml:space="preserve">
+    <value>newOrExistingBox</value>
+  </data>
+  <data name="&gt;&gt;newOrExistingBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;newOrExistingBox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;newOrExistingBox.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="newPlaylistLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="newPlaylistLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 190</value>
+  </data>
+  <data name="newPlaylistLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>136, 20</value>
+  </data>
+  <data name="newPlaylistLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="newPlaylistLabel.Text" xml:space="preserve">
+    <value>New Playlist n&amp;ame</value>
+  </data>
+  <data name="&gt;&gt;newPlaylistLabel.Name" xml:space="preserve">
+    <value>newPlaylistLabel</value>
+  </data>
+  <data name="&gt;&gt;newPlaylistLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;newPlaylistLabel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;newPlaylistLabel.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="newPlaylistTextbox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 225</value>
+  </data>
+  <data name="newPlaylistTextbox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>250, 26</value>
+  </data>
+  <data name="newPlaylistTextbox.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;newPlaylistTextbox.Name" xml:space="preserve">
+    <value>newPlaylistTextbox</value>
+  </data>
+  <data name="&gt;&gt;newPlaylistTextbox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;newPlaylistTextbox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;newPlaylistTextbox.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="addButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>50, 290</value>
+  </data>
+  <data name="addButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 28</value>
+  </data>
+  <data name="addButton.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="addButton.Text" xml:space="preserve">
+    <value>&amp;Add</value>
+  </data>
+  <data name="&gt;&gt;addButton.Name" xml:space="preserve">
+    <value>addButton</value>
+  </data>
+  <data name="&gt;&gt;addButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;addButton.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;addButton.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="cancelButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>130, 290</value>
+  </data>
+  <data name="cancelButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 28</value>
+  </data>
+  <data name="cancelButton.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="cancelButton.Text" xml:space="preserve">
+    <value>&amp;Cancel</value>
+  </data>
+  <data name="&gt;&gt;cancelButton.Name" xml:space="preserve">
+    <value>cancelButton</value>
+  </data>
+  <data name="&gt;&gt;cancelButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cancelButton.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cancelButton.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="existingPlaylistsDropdownLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="existingPlaylistsDropdownLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 70</value>
+  </data>
+  <data name="existingPlaylistsDropdownLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>65, 20</value>
+  </data>
+  <data name="existingPlaylistsDropdownLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="existingPlaylistsDropdownLabel.Text" xml:space="preserve">
+    <value>Playlists</value>
+  </data>
+  <data name="&gt;&gt;existingPlaylistsDropdownLabel.Name" xml:space="preserve">
+    <value>existingPlaylistsDropdownLabel</value>
+  </data>
+  <data name="&gt;&gt;existingPlaylistsDropdownLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;existingPlaylistsDropdownLabel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;existingPlaylistsDropdownLabel.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="existingPlaylistsDropdownBox.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="existingPlaylistsDropdownBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 100</value>
+  </data>
+  <data name="existingPlaylistsDropdownBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>250, 28</value>
+  </data>
+  <data name="existingPlaylistsDropdownBox.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;existingPlaylistsDropdownBox.Name" xml:space="preserve">
+    <value>existingPlaylistsDropdownBox</value>
+  </data>
+  <data name="&gt;&gt;existingPlaylistsDropdownBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;existingPlaylistsDropdownBox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;existingPlaylistsDropdownBox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>9, 20</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>328, 345</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterParent</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Add to playlist</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>AddToPlaylistWindow</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

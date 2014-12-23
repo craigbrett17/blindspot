@@ -285,4 +285,22 @@
   <data name="TrayIconHotkeyListMenuItemText" xml:space="preserve">
     <value>Ansicht &amp;Tastenkombinationen Liste</value>
   </data>
+  <data name="InvalidPlaylistName" xml:space="preserve">
+    <value>Ungültige Namen der Wiedergabeliste</value>
+  </data>
+  <data name="PlaylistNotCreated" xml:space="preserve">
+    <value>Play nicht erstellt</value>
+  </data>
+  <data name="PleaseEnterANameForYourNewPlaylist" xml:space="preserve">
+    <value>Bitte geben Sie einen Namen für die neue Wiedergabeliste</value>
+  </data>
+  <data name="TrackAdded" xml:space="preserve">
+    <value>Track hinzugefügt</value>
+  </data>
+  <data name="TrayIconAddToAPlaylistText" xml:space="preserve">
+    <value>Zu einer &amp;Playlist hinzufügen</value>
+  </data>
+  <data name="UnableToAddTrackToPlaylist" xml:space="preserve">
+    <value>Kann nicht diesen Track der Playliste hinzufügen</value>
+  </data>
 </root>
