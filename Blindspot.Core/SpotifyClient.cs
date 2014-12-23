@@ -219,5 +219,11 @@ namespace Blindspot.Core
             return false;
         }
         
+        public IntPtr[] GetTrackPointersFromPtrToPtrArray(IntPtr tracksPtr, int numOfTracks)
+        {
+            IntPtr[] trackManagedBuffer = new IntPtr[numOfTracks];
+            Marshal.Copy(tracksPtr, trackManagedBuffer, 0, numOfTracks);
+            return trackManagedBuffer;
+        }
     }
 }

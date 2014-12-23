@@ -36,8 +36,8 @@ namespace Blindspot.Core.Models
 {
     public class Playlist : IDisposable {             
         
-        private delegate void tracks_added_delegate(IntPtr playlistPtr, IntPtr tracksPtr, int num_tracks, int position, IntPtr userDataPtr);
-        private delegate void tracks_removed_delegate(IntPtr playlistPtr, IntPtr tracksPtr, int num_tracks, IntPtr userDataPtr);
+        public delegate void tracks_added_delegate(IntPtr playlistPtr, IntPtr tracksPtr, int num_tracks, int position, IntPtr userDataPtr);
+        public delegate void tracks_removed_delegate(IntPtr playlistPtr, IntPtr tracksPtr, int num_tracks, IntPtr userDataPtr);
         private delegate void tracks_moved_delegate(IntPtr playlistPtr, IntPtr tracksPtr, int num_tracks, int new_position, IntPtr userDataPtr);
         private delegate void playlist_renamed_delegate(IntPtr playlistPtr, IntPtr userDataPtr);
         private delegate void playlist_state_changed_delegate(IntPtr playlistPtr, IntPtr userDataPtr);
@@ -63,7 +63,10 @@ namespace Blindspot.Core.Models
         private image_changed_delegate fn_image_changed;
         private track_message_changed_delegate fn_track_message_changed;
         private subscribers_changed_delegate fn_subscribers_changed;
-                        
+
+        public event tracks_added_delegate OnTrackAdded;
+        public event tracks_removed_delegate OnTrackRemoved;
+
         private IntPtr _callbacksPtr;
         private bool _disposed;
 
@@ -240,7 +243,6 @@ namespace Blindspot.Core.Models
         private void populateMetadata() {
 
             this.Name = Functions.PtrToString(libspotify.sp_playlist_name(this.Pointer));
-            //this.TrackCount = libspotify.sp_playlist_num_tracks(this.Pointer);
             this.Description = Functions.PtrToString(libspotify.sp_playlist_get_description(this.Pointer));
             this.SubscriberCount = (int)libspotify.sp_playlist_num_subscribers(this.Pointer);
             this.IsInRAM = libspotify.sp_playlist_is_in_ram(Session.GetSessionPtr(), this.Pointer);
@@ -249,12 +251,16 @@ namespace Blindspot.Core.Models
 
         }
 
-        private void tracks_added(IntPtr playlistPtr, IntPtr tracksPtr, int num_tracks, int position, IntPtr userDataPtr) {
-
+        private void tracks_added(IntPtr playlistPtr, IntPtr tracksPtr, int num_tracks, int position, IntPtr userDataPtr)
+        {
+            if (OnTrackAdded != null)
+                OnTrackAdded(playlistPtr, tracksPtr, num_tracks, position, userDataPtr);
         }
 
-        private void tracks_removed(IntPtr playlistPtr, IntPtr tracksPtr, int num_tracks, IntPtr userDataPtr) {
-        
+        private void tracks_removed(IntPtr playlistPtr, IntPtr tracksPtr, int num_tracks, IntPtr userDataPtr)
+        {
+            if (OnTrackRemoved != null)
+                OnTrackRemoved(playlistPtr, tracksPtr, num_tracks, userDataPtr);
         }
 
         private void tracks_moved(IntPtr playlistPtr, IntPtr tracksPtr, int num_tracks, int new_position, IntPtr userDataPtr) {

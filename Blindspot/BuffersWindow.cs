@@ -63,7 +63,7 @@ namespace Blindspot
             Buffers = new BufferListCollection();
             _playQueueBuffer = new BufferList("Play Queue", false);
             Buffers.Add(_playQueueBuffer);
-            Buffers.Add(new BufferList("Playlists", false));
+            Buffers.Add(new PlaylistContainerBufferList("Playlists", false));
             spotify = SpotifyClient.Instance;
             _trayIconMenuManager = new TrayIconMenuManager(Buffers, Commands, _trayIcon);
         }
@@ -191,11 +191,20 @@ namespace Blindspot
             output.OutputMessage(StringStore.LoadingPlaylists, false);
             var playlists = LoadUserPlaylists();
             if (playlists == null) return;
-            Buffers[1].Clear();
+
+            var playlistsBuffer = Buffers[1] as PlaylistContainerBufferList;
+            if (playlistsBuffer == null)
+                throw new NullReferenceException("PlaylistsBuffer is null");
+
+            playlistsBuffer.Clear();
             playlists.ForEach(p =>
             {
-                Buffers[1].Add(new PlaylistBufferItem(p));
+                playlistsBuffer.Add(new PlaylistBufferItem(p));
             });
+            // we put a reference to the session container on the playlists buffer
+            // so that it can subscribe to playlist added and removed events and in future maybe other things
+            playlistsBuffer.Model = PlaylistContainer.GetSessionContainer();
+
             output.OutputMessage(String.Format("{0} {1}", playlists.Count, StringStore.PlaylistsLoaded), false);
             Buffers.CurrentListIndex = 1; // start on the playllists list
             output.OutputBufferListState(Buffers, NavigationDirection.None, false);

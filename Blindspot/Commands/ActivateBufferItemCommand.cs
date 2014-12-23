@@ -104,19 +104,17 @@ namespace Blindspot.Commands
         {
             PlaylistBufferItem pbi = item as PlaylistBufferItem;
             _output.OutputMessage(StringStore.LoadingPlaylist, false);
-            buffers.Add(new PlaylistBufferList(pbi.Model.Name));
+            var playlist = SpotifyController.GetPlaylist(pbi.Model.Pointer, true);
+            buffers.Add(new PlaylistBufferList(playlist));
             buffers.CurrentListIndex = buffers.Count - 1;
             var playlistBuffer = buffers.CurrentList;
             _output.OutputMessage(playlistBuffer.ToString(), false);
-            using (var playlist = SpotifyController.GetPlaylist(pbi.Model.Pointer, true))
+            _output.OutputMessage(String.Format("{0} {1}", playlist.TrackCount, StringStore.TracksLoaded), false);
+            var tracks = playlist.GetTracks();
+            tracks.ForEach(t =>
             {
-                _output.OutputMessage(String.Format("{0} {1}", playlist.TrackCount, StringStore.TracksLoaded), false);
-                var tracks = playlist.GetTracks();
-                tracks.ForEach(t =>
-                {
-                    playlistBuffer.Add(new TrackBufferItem(t));
-                });
-            }
+                playlistBuffer.Add(new TrackBufferItem(t));
+            });
         }
 
         private void LoadAlbum(BufferItem item)
