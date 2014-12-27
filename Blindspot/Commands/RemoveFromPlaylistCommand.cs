@@ -36,11 +36,11 @@ namespace Blindspot.Commands
             var response = spotify.RemoveTrackFromPlaylist(trackIndex, playlistList.Model.Pointer);
             if (!response.IsError)
             {
-                output.OutputMessage("Track Removed");
+                output.OutputMessage(StringStore.TrackRemoved);
             }
             else
             {
-                MessageBox.Show(response.Message, "Unable to remove track", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(response.Message, StringStore.UnableToRemoveTrack, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         

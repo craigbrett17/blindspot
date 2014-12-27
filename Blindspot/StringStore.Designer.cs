@@ -511,6 +511,15 @@ namespace Blindspot {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Track removed.
+        /// </summary>
+        internal static string TrackRemoved {
+            get {
+                return ResourceManager.GetString("TrackRemoved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to tracks loaded.
         /// </summary>
         internal static string TracksLoaded {
@@ -583,6 +592,15 @@ namespace Blindspot {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &amp;Remove from playlist.
+        /// </summary>
+        internal static string TrayIconRemoveFromPlaylistText {
+            get {
+                return ResourceManager.GetString("TrayIconRemoveFromPlaylistText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unable to add track to playlist.
         /// </summary>
         internal static string UnableToAddTrackToPlaylist {
@@ -597,6 +615,15 @@ namespace Blindspot {
         internal static string UnableToPlayTrack {
             get {
                 return ResourceManager.GetString("UnableToPlayTrack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to remove track.
+        /// </summary>
+        internal static string UnableToRemoveTrack {
+            get {
+                return ResourceManager.GetString("UnableToRemoveTrack", resourceCulture);
             }
         }
         

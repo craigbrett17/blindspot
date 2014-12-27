@@ -303,4 +303,13 @@
   <data name="UnableToAddTrackToPlaylist" xml:space="preserve">
     <value>No se puede añadir la pista a esta lista de reproducción</value>
   </data>
+  <data name="TrackRemoved" xml:space="preserve">
+    <value>Elimina Track</value>
+  </data>
+  <data name="TrayIconRemoveFromPlaylistText" xml:space="preserve">
+    <value>&amp;Elimina pista de lista de reproducción</value>
+  </data>
+  <data name="UnableToRemoveTrack" xml:space="preserve">
+    <value>No se puede eliminar la pista</value>
+  </data>
 </root>

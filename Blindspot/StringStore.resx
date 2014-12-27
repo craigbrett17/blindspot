@@ -303,4 +303,13 @@
   <data name="UnableToAddTrackToPlaylist" xml:space="preserve">
     <value>Unable to add track to playlist</value>
   </data>
+  <data name="TrackRemoved" xml:space="preserve">
+    <value>Track removed</value>
+  </data>
+  <data name="TrayIconRemoveFromPlaylistText" xml:space="preserve">
+    <value>&amp;Remove from playlist</value>
+  </data>
+  <data name="UnableToRemoveTrack" xml:space="preserve">
+    <value>Unable to remove track</value>
+  </data>
 </root>

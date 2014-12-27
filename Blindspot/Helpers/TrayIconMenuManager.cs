@@ -66,7 +66,7 @@ namespace Blindspot.Helpers
         {
             _trayIcon.ContextMenuStrip.Items.Add(MakeCommandMenuItem(StringStore.TrayIconAddToAPlaylistText, "add_to_playlist"));
             if (isInPlaylistList)
-                _trayIcon.ContextMenuStrip.Items.Add(MakeCommandMenuItem("Remove from playlist", "remove_from_playlist"));
+                _trayIcon.ContextMenuStrip.Items.Add(MakeCommandMenuItem(StringStore.TrayIconRemoveFromPlaylistText, "remove_from_playlist"));
             _trayIcon.ContextMenuStrip.Items.Add(new ToolStripSeparator());
         }
 

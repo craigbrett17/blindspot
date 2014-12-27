@@ -303,4 +303,13 @@
   <data name="UnableToAddTrackToPlaylist" xml:space="preserve">
     <value>Det går inte att lägga till låten i spellistan</value>
   </data>
+  <data name="TrackRemoved" xml:space="preserve">
+    <value>Spår avlägsnades</value>
+  </data>
+  <data name="TrayIconRemoveFromPlaylistText" xml:space="preserve">
+    <value>&amp;Ta bort från spellista</value>
+  </data>
+  <data name="UnableToRemoveTrack" xml:space="preserve">
+    <value>Det går inte att ta bort spår</value>
+  </data>
 </root>
