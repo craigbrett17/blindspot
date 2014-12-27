@@ -22,13 +22,14 @@ namespace Blindspot
         public Dictionary<string, HotkeyCommandBase> Commands { get; set; }
         public BufferListCollection Buffers { get; set; }
         private PlaybackManager playbackManager;
-        private SpotifyClient spotify;
+        private ISpotifyClient spotify;
         private UserSettings settings = UserSettings.Instance;
         private UpdateManager updater = UpdateManager.Instance;
         private IOutputManager output = OutputManager.Instance;
         private bool downloadedUpdate = false; // for checks for updates
         protected NotifyIcon _trayIcon;
         private BufferList _playQueueBuffer;
+        private TrayIconMenuManager _trayIconMenuManager;
 
         #region user32 functions for moving away from window
         // need a bit of pinvoke here to move away from the window if the user manages to reach the window
@@ -62,8 +63,9 @@ namespace Blindspot
             Buffers = new BufferListCollection();
             _playQueueBuffer = new BufferList("Play Queue", false);
             Buffers.Add(_playQueueBuffer);
-            Buffers.Add(new BufferList("Playlists", false));
+            Buffers.Add(new PlaylistContainerBufferList("Playlists", false));
             spotify = SpotifyClient.Instance;
+            _trayIconMenuManager = new TrayIconMenuManager(Buffers, Commands, _trayIcon);
         }
 
         private void SetupFormEventHandlers()
@@ -189,11 +191,20 @@ namespace Blindspot
             output.OutputMessage(StringStore.LoadingPlaylists, false);
             var playlists = LoadUserPlaylists();
             if (playlists == null) return;
-            Buffers[1].Clear();
+
+            var playlistsBuffer = Buffers[1] as PlaylistContainerBufferList;
+            if (playlistsBuffer == null)
+                throw new NullReferenceException("PlaylistsBuffer is null");
+
+            playlistsBuffer.Clear();
             playlists.ForEach(p =>
             {
-                Buffers[1].Add(new PlaylistBufferItem(p));
+                playlistsBuffer.Add(new PlaylistBufferItem(p));
             });
+            // we put a reference to the session container on the playlists buffer
+            // so that it can subscribe to playlist added and removed events and in future maybe other things
+            playlistsBuffer.Model = PlaylistContainer.GetSessionContainer();
+
             output.OutputMessage(String.Format("{0} {1}", playlists.Count, StringStore.PlaylistsLoaded), false);
             Buffers.CurrentListIndex = 1; // start on the playllists list
             output.OutputBufferListState(Buffers, NavigationDirection.None, false);
@@ -255,11 +266,16 @@ namespace Blindspot
                 new PreviousTrackCommand(Buffers, playbackManager),
                 new ShowContextMenuCommand(_trayIcon),
                 new BrowseGettingStartedCommand(),
-                new BrowseHotkeyListCommand()
+                new BrowseHotkeyListCommand(),
+                new AddToPlaylistCommand(Buffers),
+                new RemoveFromPlaylistCommand(Buffers)
             };
 
             // the hotkeys use the key to know which command to execute
-            Commands = hotkeyCommands.ToDictionary(k => k.Key, v => v);
+            hotkeyCommands.ForEach(command =>
+            {
+                Commands.Add(command.Key, command);
+            });
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
@@ -371,27 +387,9 @@ namespace Blindspot
             e.Cancel = false; // we haven't got any items in there yet, but please don't cancel!
             _trayIcon.ContextMenuStrip.Items.Clear(); // rebuild the context menu dynamically
 
-            _trayIcon.ContextMenuStrip.Items.AddRange(_globalTrayIconMenuItems);
+            _trayIconMenuManager.BuildContextMenu();
         }
 
-        private ToolStripItem[] _globalTrayIconMenuItems
-        {
-            get
-            {
-                return new ToolStripItem[]
-                {
-                    new ToolStripSeparator(),
-                    MakeCommandMenuItem(StringStore.TrayIconOptionsMenuItemText, "options_dialog"),
-                    new ToolStripMenuItem(StringStore.TrayIconHelpMenuItemText, null, new ToolStripItem[]
-                    {
-                        MakeCommandMenuItem(StringStore.TrayIconGettingStartedMenuItemText, "show_getting_started"),
-                        MakeCommandMenuItem(StringStore.TrayIconHotkeyListMenuItemText, "show_hotkey_list"),
-                        MakeCommandMenuItem(StringStore.TrayIconAboutMenuItemText, "show_about_window"),
-                    }),
-                    MakeCommandMenuItem(StringStore.TrayIconExitMenuItemText, "close_blindspot"),
-                };
-            }
-        }
 
         private void HandleChangeOfTrack()
         {
@@ -415,17 +413,6 @@ namespace Blindspot
             });
             KeyManager = BufferHotkeyManager.LoadFromTextFile(this);
         }
-
-        private ToolStripMenuItem MakeCommandMenuItem(string text, string commandKey)
-        {
-            if (Commands.ContainsKey(commandKey))
-                return new ToolStripMenuItem(text, null, new EventHandler((sender, e) => Commands[commandKey].Execute(this, null)));
-            else
-            {
-                Logger.WriteDebug("No such command {0}", commandKey);
-                return null;
-            }
-        }
-
+        
     }
 }

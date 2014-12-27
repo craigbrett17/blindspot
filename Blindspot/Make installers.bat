@@ -6,5 +6,5 @@ echo Finished making installers
 echo.
 
 echo gzipping up no .NET installer and naming to blindspot_dev.exe.gz
-call 7za a -tgzip "blindspot_dev.exe.gz" "Blindspot Installer no DotNet.exe" >nul
+call 7z a -tgzip "blindspot_dev.exe.gz" "Blindspot Installer no DotNet.exe" >nul
 pause

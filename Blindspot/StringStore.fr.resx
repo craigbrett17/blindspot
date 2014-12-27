@@ -285,4 +285,31 @@
   <data name="TrayIconHotkeyListMenuItemText" xml:space="preserve">
     <value>Liste Voir &amp;Raccourcis</value>
   </data>
+  <data name="InvalidPlaylistName" xml:space="preserve">
+    <value>Non valide nom de la playlist</value>
+  </data>
+  <data name="PlaylistNotCreated" xml:space="preserve">
+    <value>Playlist pas créé</value>
+  </data>
+  <data name="PleaseEnterANameForYourNewPlaylist" xml:space="preserve">
+    <value>Se il vous plaît entrez un nom pour votre nouvelle playlist</value>
+  </data>
+  <data name="TrackAdded" xml:space="preserve">
+    <value>Piste ajouté</value>
+  </data>
+  <data name="TrayIconAddToAPlaylistText" xml:space="preserve">
+    <value>Ajouter à une &amp;playlist</value>
+  </data>
+  <data name="UnableToAddTrackToPlaylist" xml:space="preserve">
+    <value>Impossible d'ajouter ce morceau à la playlist</value>
+  </data>
+  <data name="TrackRemoved" xml:space="preserve">
+    <value>Piste retiré</value>
+  </data>
+  <data name="TrayIconRemoveFromPlaylistText" xml:space="preserve">
+    <value>&amp;Retirer de la playlist</value>
+  </data>
+  <data name="UnableToRemoveTrack" xml:space="preserve">
+    <value>Impossible de supprimer la piste</value>
+  </data>
 </root>

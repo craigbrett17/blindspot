@@ -21,8 +21,14 @@ namespace Blindspot.Core
         string GetUserDisplayName(IntPtr userPtr);
         void Session_OnLoggedIn(IntPtr obj);
         void Session_OnNotifyMainThread(IntPtr sessionPtr);
+        Search Search(string searchText, SearchType searchType);
+        Search GetMoreResultsFromSearch(Search search);
         Search LastSearch { get; }
         void SetPrivateSession(bool enable);
         SpotifyError GetLoginError();
+        SpotifyError AddTrackToPlaylist(IntPtr trackPtr, IntPtr playlistPtr);
+        IntPtr CreateNewPlaylist(string name);
+        SpotifyError RemoveTrackFromPlaylist(int trackIndexInPlaylist, IntPtr playlistPtr);
+        SpotifyError RemoveTracksFromPlaylist(int[] trackIndexesInPlaylist, IntPtr playlistPtr);
     }
 }

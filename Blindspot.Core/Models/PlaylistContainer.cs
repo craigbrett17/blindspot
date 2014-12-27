@@ -37,8 +37,8 @@ namespace Blindspot.Core.Models
 {
     public class PlaylistContainer : IDisposable {
 
-        private delegate void playlist_added_delegate(IntPtr containerPtr, IntPtr playlistPtr, int position, IntPtr userDataPtr);
-        private delegate void playlist_removed_delegate(IntPtr containerPtr, IntPtr playlistPtr, int position, IntPtr userDataPtr);
+        public delegate void playlist_added_delegate(IntPtr containerPtr, IntPtr playlistPtr, int position, IntPtr userDataPtr);
+        public delegate void playlist_removed_delegate(IntPtr containerPtr, IntPtr playlistPtr, int position, IntPtr userDataPtr);
         private delegate void playlist_moved_delegate(IntPtr containerPtr, IntPtr playlistPtr, int position, int new_position, IntPtr userDataPtr);
         private delegate void container_loaded_delegate(IntPtr containerPtr, IntPtr userDataPtr);
         
@@ -46,6 +46,9 @@ namespace Blindspot.Core.Models
         private playlist_added_delegate fn_playlist_added_delegate;
         private playlist_moved_delegate fn_playlist_moved_delegate;
         private playlist_removed_delegate fn_playlist_removed_delegate;
+
+        public event playlist_added_delegate OnPlaylistAdded;
+        public event playlist_removed_delegate OnPlaylistRemoved;
 
         private IntPtr _containerPtr;
         private IntPtr _callbacksPtr;
@@ -55,14 +58,39 @@ namespace Blindspot.Core.Models
         
         private static PlaylistContainer _sessionContainer;
 
-        public class PlaylistInfo {
+        public class PlaylistInfo
+        {
             public IntPtr ContainerPtr;
-            public IntPtr Pointer;
+            public IntPtr Pointer { get; set; }
             public ulong FolderID;
             public libspotify.sp_playlist_type PlaylistType;
-            public string Name;
+            public string Name { get; set; }
             public PlaylistInfo Parent;
             public List<PlaylistInfo> Children = new List<PlaylistInfo>();
+            public IntPtr OwnerPointer;
+            public string OwnerName;
+
+            public PlaylistInfo()
+            { }
+
+            public PlaylistInfo(IntPtr playlistPtr)
+            {
+                this.Pointer = playlistPtr;
+                PlaylistType = libspotify.sp_playlist_type.SP_PLAYLIST_TYPE_PLAYLIST;
+                Name = Functions.PtrToString(libspotify.sp_playlist_name(playlistPtr));
+                OwnerPointer = libspotify.sp_playlist_owner(playlistPtr);
+                OwnerName = Functions.PtrToString(libspotify.sp_user_display_name(OwnerPointer));
+            }
+
+            public bool UserCanContribute
+            {
+                get
+                {
+                    var userPointer = libspotify.sp_session_user(Session.GetSessionPtr());
+                    var isCollaborative = libspotify.sp_playlist_is_collaborative(Pointer);
+                    return OwnerPointer == userPointer || isCollaborative;
+                }
+            }
         }
 
         private PlaylistContainer(IntPtr containerPtr) {
@@ -206,7 +234,10 @@ namespace Blindspot.Core.Models
                         Pointer = playlistPtr,
                         PlaylistType = libspotify.sp_playlist_type.SP_PLAYLIST_TYPE_PLAYLIST,
                         ContainerPtr = _containerPtr,
-                        Name = Functions.PtrToString(libspotify.sp_playlist_name(playlistPtr))
+                        Name = Functions.PtrToString(libspotify.sp_playlist_name(playlistPtr)),
+                        OwnerPointer = libspotify.sp_playlist_owner(playlistPtr),
+                        OwnerName = Functions.PtrToString(libspotify.sp_user_display_name(libspotify.sp_playlist_owner(playlistPtr))),
+                        
                     });
 
                 }
@@ -354,10 +385,11 @@ namespace Blindspot.Core.Models
             
         }
 
-        private void playlist_added(IntPtr containerPtr, IntPtr playlistPtr, int position, IntPtr userDataPtr) {
-
+        private void playlist_added(IntPtr containerPtr, IntPtr playlistPtr, int position, IntPtr userDataPtr)
+        {
             Logger.WriteDebug("playlist_added at position {0}", position);
-            
+            if (OnPlaylistAdded != null)
+                OnPlaylistAdded(containerPtr, playlistPtr, position, userDataPtr);
         }
         
         private void playlist_moved(IntPtr containerPtr, IntPtr playlistPtr, int position, int new_position, IntPtr userDataPtr) {
@@ -366,10 +398,11 @@ namespace Blindspot.Core.Models
 
         }
 
-        private void playlist_removed(IntPtr containerPtr, IntPtr playlistPtr, int position, IntPtr userDataPtr) {
-
+        private void playlist_removed(IntPtr containerPtr, IntPtr playlistPtr, int position, IntPtr userDataPtr)
+        {
             Logger.WriteDebug("playlist_removed");
-
+            if (OnPlaylistRemoved != null)
+                OnPlaylistRemoved(containerPtr, playlistPtr, position, userDataPtr);
         }
                
     }
