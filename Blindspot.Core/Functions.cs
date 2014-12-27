@@ -33,7 +33,7 @@ using libspotifydotnet;
 // namespace Jamcast.Plugins.Spotify.API {
 namespace Blindspot.Core
 {
-    internal static class Functions {
+    public static class Functions {
 
         internal static string PtrToString(IntPtr ptr) {
 
@@ -159,6 +159,29 @@ namespace Blindspot.Core
 
         }
 
-    }
+        /// <summary>
+        /// Gets a managed array of Int32 from a pointer to an address in memory
+        /// </summary>
+        /// <param name="arrayPointer">The pointer to the array in memory that should be retrieved</param>
+        /// <param name="arrayLength">The length of the array to retrieve</param>
+        public static int[] GetIntArrayFromPointer(IntPtr arrayPointer, int arrayLength)
+        {
+            int[] managedArray = new int[arrayLength];
+            Marshal.Copy(arrayPointer, managedArray, 0, arrayLength);
+            return managedArray;
+        }
 
+        /// <summary>
+        /// Gets a managed array of pointers from a pointer to an address in memory
+        /// </summary>
+        /// <param name="arrayPointer">The pointer to the array in memory that should be retrieved</param>
+        /// <param name="arrayLength">The length of the array to retrieve</param>
+        public static IntPtr[] GetPointerArrayFromPointer(IntPtr arrayPointer, int arrayLength)
+        {
+            IntPtr[] managedArray = new IntPtr[arrayLength];
+            Marshal.Copy(arrayPointer, managedArray, 0, arrayLength);
+            return managedArray;
+        }
+
+    }
 }

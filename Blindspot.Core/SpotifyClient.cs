@@ -219,11 +219,16 @@ namespace Blindspot.Core
             return false;
         }
         
-        public IntPtr[] GetTrackPointersFromPtrToPtrArray(IntPtr tracksPtr, int numOfTracks)
+        public SpotifyError RemoveTrackFromPlaylist(int trackIndexInPlaylist, IntPtr playlistPtr)
         {
-            IntPtr[] trackManagedBuffer = new IntPtr[numOfTracks];
-            Marshal.Copy(tracksPtr, trackManagedBuffer, 0, numOfTracks);
-            return trackManagedBuffer;
+            int[] trackIndexArray = new[] { trackIndexInPlaylist };
+            return RemoveTracksFromPlaylist(trackIndexArray, playlistPtr);
+        }
+
+        public SpotifyError RemoveTracksFromPlaylist(int[] trackIndexesInPlaylist, IntPtr playlistPtr)
+        {
+            var response = libspotify.sp_playlist_remove_tracks(playlistPtr, trackIndexesInPlaylist, trackIndexesInPlaylist.Length);
+            return (SpotifyError)response;
         }
     }
 }

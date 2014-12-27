@@ -28,6 +28,7 @@ namespace Blindspot.Core
         SpotifyError GetLoginError();
         SpotifyError AddTrackToPlaylist(IntPtr trackPtr, IntPtr playlistPtr);
         IntPtr CreateNewPlaylist(string name);
-        IntPtr[] GetTrackPointersFromPtrToPtrArray(IntPtr tracksPtr, int numOfTracks);
+        SpotifyError RemoveTrackFromPlaylist(int trackIndexInPlaylist, IntPtr playlistPtr);
+        SpotifyError RemoveTracksFromPlaylist(int[] trackIndexesInPlaylist, IntPtr playlistPtr);
     }
 }

@@ -25,3 +25,4 @@ next_track=ctrl+shift+alt+right
 previous_track=MediaPreviousTrack
 previous_track=ctrl+shift+alt+left
 show_context_menu=ctrl+win+m
+remove_from_playlist=ctrl+win+delete

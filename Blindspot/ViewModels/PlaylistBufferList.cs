@@ -32,8 +32,7 @@ namespace Blindspot.ViewModels
 
         private void TrackAddedToPlaylist(IntPtr playlistPtr, IntPtr tracksPtr, int num_tracks, int position, IntPtr userDataPtr)
         {
-            // not sure where to put the function to get the pointers[] from the pointer, alternative suggestions welcome
-            var trackPointers = spotify.GetTrackPointersFromPtrToPtrArray(tracksPtr, num_tracks);
+            var trackPointers = Functions.GetPointerArrayFromPointer(tracksPtr, num_tracks);
             var tracks = trackPointers.Select(trackPointer => new Track(trackPointer));
             var trackItems = tracks.Select(track => new TrackBufferItem(track));
             
@@ -42,15 +41,18 @@ namespace Blindspot.ViewModels
 
         private void TrackRemovedFromPlaylist(IntPtr playlistPtr, IntPtr tracksPtr, int num_tracks, IntPtr userDataPtr)
         {
-            var trackPointers = spotify.GetTrackPointersFromPtrToPtrArray(tracksPtr, num_tracks);
-            // remove all tracks that have the given pointers
-            this.RemoveAll(item =>
+            var trackIndexes = Functions.GetIntArrayFromPointer(tracksPtr, num_tracks);
+            // have this list in reverse order, so we can remove without effecting other track indexes
+            // in this program we're probably removing one at a time, but helps for interactions from outside to be able to handle more
+            trackIndexes = trackIndexes.OrderByDescending(t => t).ToArray();
+            foreach (int index in trackIndexes)
             {
-                var tbi = item as TrackBufferItem;
-                if (tbi == null) return false; // it's not a match as it's not even a track
-
-                return trackPointers.Any(pointer => pointer == tbi.Model.TrackPtr);
-            });
+                // decide what to do about removing these tracks from the Model, too
+                this.RemoveAt(index);
+            }
+            this.CurrentItemIndex = (trackIndexes.Min() > this.Count - 1)
+                ? this.Count - 1
+                : trackIndexes.Min();
         }
 
         public void Dispose()

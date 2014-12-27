@@ -63,7 +63,6 @@ namespace Blindspot.Commands
                 MessageBox.Show(response.Message, StringStore.UnableToAddTrackToPlaylist, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-
+        
     }
 }

@@ -102,6 +102,7 @@
     <Compile Include="AddToPlaylistWindow.Designer.cs">
       <DependentUpon>AddToPlaylistWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="Commands\RemoveFromPlaylistCommand.cs" />
     <Compile Include="Commands\AddToPlaylistCommand.cs" />
     <Compile Include="Commands\BrowseHotkeyListCommand.cs" />
     <Compile Include="Commands\BrowseGettingStartedCommand.cs" />

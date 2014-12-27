@@ -25,9 +25,13 @@ namespace Blindspot.Helpers
         {
             var currentList = _buffers.CurrentList;
             var currentItem = _buffers.CurrentList.CurrentItem;
+            bool isInPlaylistBuffer = false;
 
             if (currentList is PlaylistBufferList)
+            {
                 AddPlaylistListMenuItems();
+                isInPlaylistBuffer = true;
+            }
             else if (currentList is AlbumBufferList)
                 AddAlbumListMenuItems();
             else if (currentList is SearchBufferList)
@@ -38,7 +42,7 @@ namespace Blindspot.Helpers
             else if (currentItem is AlbumBufferItem)
                 AddAlbumItemMenuItems();
             else if (currentItem is TrackBufferItem)
-                AddTrackItemMenuItems();
+                AddTrackItemMenuItems(isInPlaylistBuffer);
 
             _trayIcon.ContextMenuStrip.Items.AddRange(globalTrayIconMenuItems);
         }
@@ -58,9 +62,11 @@ namespace Blindspot.Helpers
             
         }
 
-        private void AddTrackItemMenuItems()
+        private void AddTrackItemMenuItems(bool isInPlaylistList)
         {
             _trayIcon.ContextMenuStrip.Items.Add(MakeCommandMenuItem(StringStore.TrayIconAddToAPlaylistText, "add_to_playlist"));
+            if (isInPlaylistList)
+                _trayIcon.ContextMenuStrip.Items.Add(MakeCommandMenuItem("Remove from playlist", "remove_from_playlist"));
             _trayIcon.ContextMenuStrip.Items.Add(new ToolStripSeparator());
         }
 
