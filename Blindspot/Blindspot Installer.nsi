@@ -2,7 +2,7 @@
 ;Comes with .NET installing and extraction of files
 
 ;What version are we on?
-!define VERSION "2.1"
+!define VERSION "2.2"
 ;The name of the executable
 !define APP_EXECUTABLE "Blindspot.exe"
 !ifndef INCLUDE_DOTNET
@@ -30,6 +30,7 @@ InstallDirRegKey HKCU "Software\Blindspot" ""
 
 ; Request application privileges for Windows Vista and later
 ; Since we may well be installing .NET framework, we need admin privilages
+; also apparently only possible to install to program files if admin (why, Microsoft?)
 RequestExecutionLevel admin
 
 ; Warn before exiting installer
@@ -167,6 +168,20 @@ SetOutPath "${APPDATADIR}\Keyboard Layouts"
 File "Keyboard Layouts\*.txt"
 File "Keyboard Layouts\Layout Descriptions.xml"
 
+; now to copy local app data stuff to common program data directory
+; This is important to have $APPDATA variable point to ProgramData folder instead of current user's Roaming folder
+SetShellVarContext all
+
+SetOutPath "$APPDATA\Blindspot\Settings"
+File /oname=hotkeys.txt "Keyboard Layouts\Standard.txt"
+SetOutPath "$APPDATA\Blindspot\Keyboard Layouts"
+File "Keyboard Layouts\*.txt"
+File "Keyboard Layouts\Layout Descriptions.xml"
+
+; This sets us permissions
+AccessControl::GrantOnFile "$APPDATA\Blindspot" "(S-1-5-32-545)" "FullAccess"
+
+SetShellVarContext current
 SetOutPath "$INSTDIR"
 
 ;Store installation folder

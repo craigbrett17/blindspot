@@ -1,7 +1,7 @@
 @ECHO OFF
 echo Making installers for both .NET and no .NET
-call "%programfiles%\NSIS\makensis.exe" /DINCLUDE_DOTNET=0 "Blindspot Installer.nsi" >nul
-call "%programfiles%\NSIS\makensis.exe" /DINCLUDE_DOTNET=1 "Blindspot Installer.nsi" >nul
+call "%programfiles(x86)%\NSIS\makensis.exe" /DINCLUDE_DOTNET=0 "Blindspot Installer.nsi" >nul
+call "%programfiles(x86)%\NSIS\makensis.exe" /DINCLUDE_DOTNET=1 "Blindspot Installer.nsi" >nul
 echo Finished making installers
 echo.
 
