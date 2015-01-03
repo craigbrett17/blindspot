@@ -31,6 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OptionsDialog));
             this.tabHolder = new System.Windows.Forms.TabControl();
             this.generalPage = new System.Windows.Forms.TabPage();
+            this.deviceBox = new System.Windows.Forms.ComboBox();
+            this.deviceLabel = new System.Windows.Forms.Label();
             this.autoUpdateTypeBox = new System.Windows.Forms.ComboBox();
             this.autoUpdateTypeLabel = new System.Windows.Forms.Label();
             this.autoUpdateEnabledBox = new System.Windows.Forms.CheckBox();
@@ -75,6 +77,8 @@
             // generalPage
             // 
             resources.ApplyResources(this.generalPage, "generalPage");
+            this.generalPage.Controls.Add(this.deviceBox);
+            this.generalPage.Controls.Add(this.deviceLabel);
             this.generalPage.Controls.Add(this.autoUpdateTypeBox);
             this.generalPage.Controls.Add(this.autoUpdateTypeLabel);
             this.generalPage.Controls.Add(this.autoUpdateEnabledBox);
@@ -82,6 +86,18 @@
             this.generalPage.Controls.Add(this.languageLabel);
             this.generalPage.Name = "generalPage";
             this.generalPage.UseVisualStyleBackColor = true;
+            // 
+            // deviceBox
+            // 
+            resources.ApplyResources(this.deviceBox, "deviceBox");
+            this.deviceBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.deviceBox.FormattingEnabled = true;
+            this.deviceBox.Name = "deviceBox";
+            // 
+            // deviceLabel
+            // 
+            resources.ApplyResources(this.deviceLabel, "deviceLabel");
+            this.deviceLabel.Name = "deviceLabel";
             // 
             // autoUpdateTypeBox
             // 
@@ -302,5 +318,7 @@
         private System.Windows.Forms.CheckBox visualOutputBox;
         private System.Windows.Forms.NumericUpDown visualOutputTimeBox;
         private System.Windows.Forms.Label visualOutputTimeLabel;
+        private System.Windows.Forms.ComboBox deviceBox;
+        private System.Windows.Forms.Label deviceLabel;
     }
 }

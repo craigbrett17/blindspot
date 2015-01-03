@@ -24,6 +24,7 @@ namespace Blindspot.Helpers
         public bool OutputTrackChangesWithSpeech { get; set; }
         public bool SapiIsScreenReaderFallback { get; set; }
         public int VisualOutputDisplayTime { get; set; }
+        public Guid OutputDeviceID { get; set; }
 
         [NonSerialized]
         private static string fileLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"Blindspot\Settings\user_settings.xml");

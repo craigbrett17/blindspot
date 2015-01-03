@@ -26,6 +26,7 @@ namespace Blindspot.Playback
         private volatile float volume = 1f;
         private volatile StreamingPlaybackState playbackState;
         public bool fullyDownloaded { get; set; }
+        public Guid PlaybackDeviceID { get; set; }
         private BufferedWaveProvider bufferedWaveProvider;
         private IWavePlayer waveOut;
         private VolumeWaveProvider16 volumeProvider;
@@ -246,7 +247,7 @@ namespace Blindspot.Playback
 
         private IWavePlayer CreateWaveOut()
         {
-            return new WaveOutEvent();
+            return new DirectSoundOut(PlaybackDeviceID);
         }
 
         private void waveOut_PlaybackStopped(object sender, StoppedEventArgs e)
