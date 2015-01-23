@@ -26,7 +26,6 @@ namespace Blindspot.Playback
         private volatile float volume = 1f;
         private volatile StreamingPlaybackState playbackState;
         public bool fullyDownloaded { get; set; }
-        public Guid PlaybackDeviceID { get; set; }
         private BufferedWaveProvider bufferedWaveProvider;
         private IWavePlayer waveOut;
         private VolumeWaveProvider16 volumeProvider;
@@ -43,7 +42,31 @@ namespace Blindspot.Playback
                     OnPlayingTrackChanged();
             }
         }
-        
+        private Guid _playbackDeviceID;
+        public Guid PlaybackDeviceID
+        {
+            get { return _playbackDeviceID; }
+            set
+            {
+                _playbackDeviceID = value;
+                if (waveOut != null)
+                {
+                    waveOut.Pause(); // so we don't lose our place in the track
+                    // make new replacement WaveOut for new device
+                    var newWaveOut = new DirectSoundOut(_playbackDeviceID);
+                    if (bufferedWaveProvider != null && volumeProvider != null)
+                        newWaveOut.Init(volumeProvider);
+
+                    // destroy the old WaveOut and replace it with our new one
+                    StopAndDisposeWaveOut();
+                    waveOut = newWaveOut;
+
+                    if (playbackState == StreamingPlaybackState.Playing)
+                        waveOut.Play();
+                }
+            }
+        }
+
         public delegate void PlaybackManagerErrorHandler(string message);
         public event PlaybackManagerErrorHandler OnError;
         public event Action OnEndOfTrack;
@@ -57,6 +80,12 @@ namespace Blindspot.Playback
             this.timer1.Elapsed += new System.Timers.ElapsedEventHandler(this.timer1_Tick);
             gatekeeper = new ByteGateKeeper();
             _previousTracks = new Stack<Track>();
+        }
+
+        public PlaybackManager(Guid playbackDeviceId)
+            : this()
+        {
+            _playbackDeviceID = playbackDeviceId;
         }
 
         public void AddBytesToPlayingStream(byte[] bytes)
@@ -97,12 +126,7 @@ namespace Blindspot.Playback
             if (playbackState != StreamingPlaybackState.Stopped)
             {
                 this.playbackState = StreamingPlaybackState.Stopped;
-                if (waveOut != null)
-                {
-                    waveOut.Stop();
-                    waveOut.Dispose();
-                    waveOut = null;
-                }
+                StopAndDisposeWaveOut();
                 // n.b. streaming thread may not yet have exited
                 Thread.Sleep(500);
                 gatekeeper.Clear();
@@ -248,6 +272,14 @@ namespace Blindspot.Playback
         private IWavePlayer CreateWaveOut()
         {
             return new DirectSoundOut(PlaybackDeviceID);
+        }
+
+        private void StopAndDisposeWaveOut()
+        {
+            if (waveOut == null) return;
+            waveOut.Stop();
+            waveOut.Dispose();
+            waveOut = null;
         }
 
         private void waveOut_PlaybackStopped(object sender, StoppedEventArgs e)

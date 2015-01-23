@@ -57,9 +57,9 @@ namespace Blindspot
             InitializeComponent();
             InitializeTrayIcon();
             Commands = new Dictionary<string, HotkeyCommandBase>();
-            playbackManager = new PlaybackManager();
-            playbackManager.PlaybackDeviceID = settings.OutputDeviceID;
+            playbackManager = new PlaybackManager(settings.OutputDeviceID);
             playbackManager.OnError += new PlaybackManager.PlaybackManagerErrorHandler(StreamingError);
+            
             SetupFormEventHandlers();
             Buffers = new BufferListCollection();
             _playQueueBuffer = new BufferList("Play Queue", false);
@@ -67,6 +67,7 @@ namespace Blindspot
             Buffers.Add(new PlaylistContainerBufferList("Playlists", false));
             spotify = SpotifyClient.Instance;
             _trayIconMenuManager = new TrayIconMenuManager(Buffers, Commands, _trayIcon);
+            settings.PropertyChanged += new PropertyChangedEventHandler(OnUserSettingChange);
         }
 
         private void SetupFormEventHandlers()
@@ -414,6 +415,18 @@ namespace Blindspot
             });
             KeyManager = BufferHotkeyManager.LoadFromTextFile(this);
         }
-        
+
+        private void OnUserSettingChange(object sender, PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case "OutputDeviceID":
+                    playbackManager.PlaybackDeviceID = settings.OutputDeviceID;
+                    break;
+                default:
+                    break;
+            }
+        }
+
     }
 }
