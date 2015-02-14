@@ -63,10 +63,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ByteGateKeeper.cs" />
     <Compile Include="PlaybackManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SlidingStream.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
