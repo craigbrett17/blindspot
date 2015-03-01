@@ -65,6 +65,7 @@ namespace Blindspot.Playback
                 }
             }
         }
+		private bool DirectSound { get; set; }
 
         public delegate void PlaybackManagerErrorHandler(string message);
         public event PlaybackManagerErrorHandler OnError;
@@ -85,6 +86,12 @@ namespace Blindspot.Playback
         {
             _playbackDeviceID = playbackDeviceId;
         }
+
+		public PlaybackManager(Guid playbackDeviceId, bool useDirectSound)
+			: this(playbackDeviceId)
+		{
+			DirectSound = useDirectSound;
+		}
 
         public void AddBytesToPlayingStream(byte[] bytes)
         {
@@ -249,7 +256,10 @@ namespace Blindspot.Playback
 
         private IWavePlayer CreateWaveOut()
         {
+			if (this.DirectSound)
             return new DirectSoundOut(PlaybackDeviceID);
+			else
+				return new WaveOutEvent();
         }
 
         private void StopAndDisposeWaveOut()

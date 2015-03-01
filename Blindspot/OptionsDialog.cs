@@ -77,6 +77,7 @@ namespace Blindspot
             var devicesList = deviceBox.Items.Cast<DirectSoundDeviceInfo>().ToList(); // need to pull the items out of the combobox
             deviceBox.SelectedIndex = devicesList.FindIndex(device => device.Guid == settings.OutputDeviceID);
             if (deviceBox.SelectedIndex == -1) deviceBox.SelectedIndex = 0;
+			deviceBox.Enabled = settings.UseDirectSound;
 
             screenReaderBox.Checked = settings.ScreenReaderOutput;
             screenReaderSapiFallbackBox.Checked = settings.SapiIsScreenReaderFallback;

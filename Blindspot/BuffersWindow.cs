@@ -57,7 +57,7 @@ namespace Blindspot
             InitializeComponent();
             InitializeTrayIcon();
             Commands = new Dictionary<string, HotkeyCommandBase>();
-            playbackManager = new PlaybackManager(settings.OutputDeviceID);
+            playbackManager = new PlaybackManager(settings.OutputDeviceID, settings.UseDirectSound);
             playbackManager.OnError += new PlaybackManager.PlaybackManagerErrorHandler(StreamingError);
             
             SetupFormEventHandlers();

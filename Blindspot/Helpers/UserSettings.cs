@@ -26,6 +26,7 @@ namespace Blindspot.Helpers
         public bool OutputTrackChangesWithSpeech { get; set; }
         public bool SapiIsScreenReaderFallback { get; set; }
         public int VisualOutputDisplayTime { get; set; }
+		public bool UseDirectSound { get; set; }
 
         private Guid _outputDeviceID;
         public Guid OutputDeviceID
@@ -69,6 +70,7 @@ namespace Blindspot.Helpers
             OutputTrackChangesGraphically = true;
             SapiIsScreenReaderFallback = true;
             VisualOutputDisplayTime = 5;
+			UseDirectSound = true;
         }
 
         private static void LoadFromBinary()
