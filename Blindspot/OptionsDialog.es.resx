@@ -117,7 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="generalPage.Text" xml:space="preserve">
+    <value>Generales</value>
+  </data>
+  <data name="keyboardPage.Text" xml:space="preserve">
+    <value>teclado</value>
+  </data>
+  <data name="speechPage.Text" xml:space="preserve">
+    <value>Habla</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="skipUnplayableBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>191, 24</value>
+  </data>
+  <data name="skipUnplayableBox.Text" xml:space="preserve">
+    <value>&amp;Saltar Pistas injugable</value>
+  </data>
   <data name="deviceLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>152, 20</value>
   </data>
@@ -141,9 +156,6 @@
   </data>
   <data name="languageLabel.Text" xml:space="preserve">
     <value>&amp;Idioma:</value>
-  </data>
-  <data name="generalPage.Text" xml:space="preserve">
-    <value>Generales</value>
   </data>
   <data name="keyboardDescriptionLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>96, 20</value>
@@ -172,9 +184,6 @@
   <data name="editHotkeysButton.Text" xml:space="preserve">
     <value>Editar atajos de &amp;teclado</value>
   </data>
-  <data name="keyboardPage.Text" xml:space="preserve">
-    <value>teclado</value>
-  </data>
   <data name="screenReaderTrackChangeBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>232, 24</value>
   </data>
@@ -186,9 +195,6 @@
   </data>
   <data name="screenReaderBox.Text" xml:space="preserve">
     <value>Activación de la salida del lector de pantalla</value>
-  </data>
-  <data name="speechPage.Text" xml:space="preserve">
-    <value>Habla</value>
   </data>
   <data name="visualOutputTimeLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>263, 20</value>

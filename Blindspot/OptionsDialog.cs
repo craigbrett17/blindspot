@@ -52,6 +52,7 @@ namespace Blindspot
         public bool OutputTrackChangeGraphicallyChanged;
         public bool VisualDisplayTimeChanged;
         public bool OutputDeviceChanged;
+		public bool SkipUnplayableSettingChanged;
 
         public OptionsDialog()
         {
@@ -78,6 +79,7 @@ namespace Blindspot
             deviceBox.SelectedIndex = devicesList.FindIndex(device => device.Guid == settings.OutputDeviceID);
             if (deviceBox.SelectedIndex == -1) deviceBox.SelectedIndex = 0;
 			deviceBox.Enabled = settings.UseDirectSound;
+			skipUnplayableBox.Checked = settings.SkipUnplayableTracks;
 
             screenReaderBox.Checked = settings.ScreenReaderOutput;
             screenReaderSapiFallbackBox.Checked = settings.SapiIsScreenReaderFallback;
@@ -104,6 +106,7 @@ namespace Blindspot
             KeyboardSettingsChanged = keyboardSettingsHaveChanged;
             AutoUpdateSettingsChanged = autoUpdateSettingsHaveChanged;
             OutputDeviceChanged = deviceBox.SelectedIndex >= 0 && ((DirectSoundDeviceInfo)deviceBox.SelectedItem).Guid != settings.OutputDeviceID;
+			SkipUnplayableSettingChanged = skipUnplayableBox.Checked != settings.SkipUnplayableTracks;
 
             ScreenReaderOutputChanged = screenReaderBox.Checked != settings.ScreenReaderOutput;
             SAPIIsFallbackChanged = screenReaderSapiFallbackBox.Checked != settings.SapiIsScreenReaderFallback;
@@ -145,6 +148,11 @@ namespace Blindspot
                 settings.OutputDeviceID = ((DirectSoundDeviceInfo)deviceBox.SelectedItem).Guid;
                 hasAnythingChanged = true;
             }
+			if (SkipUnplayableSettingChanged)
+			{
+				settings.SkipUnplayableTracks = skipUnplayableBox.Checked;
+				hasAnythingChanged = true;
+			}
             if (ScreenReaderOutputChanged)
             {
                 settings.ScreenReaderOutput = screenReaderBox.Checked;

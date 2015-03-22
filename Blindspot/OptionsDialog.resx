@@ -156,8 +156,11 @@
   <data name="autoUpdateTypeBox.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="speechPage.Text" xml:space="preserve">
-    <value>Speech</value>
+  <data name="&gt;&gt;deviceLabel.Name" xml:space="preserve">
+    <value>deviceLabel</value>
+  </data>
+  <data name="skipUnplayableBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="editHotkeysButton.Text" xml:space="preserve">
     <value>Customise Layout</value>
@@ -205,7 +208,7 @@
     <value>keyboardPage</value>
   </data>
   <data name="&gt;&gt;autoUpdateTypeBox.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="deviceBox.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -219,8 +222,8 @@
   <data name="autoUpdateEnabledBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>221, 24</value>
   </data>
-  <data name="autoUpdateTypeBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
+  <data name="skipUnplayableBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>193, 24</value>
   </data>
   <data name="visualOutputTimeBox.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Center</value>
@@ -242,6 +245,12 @@
   </data>
   <data name="screenReaderSapiFallbackBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 108</value>
+  </data>
+  <data name="&gt;&gt;skipUnplayableBox.Name" xml:space="preserve">
+    <value>skipUnplayableBox</value>
+  </data>
+  <data name="skipUnplayableBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 210</value>
   </data>
   <data name="&gt;&gt;autoUpdateTypeLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -315,9 +324,6 @@
   <data name="generalPage.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="languageBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 28</value>
-  </data>
   <data name="screenReaderBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
   </data>
@@ -375,9 +381,6 @@
   <data name="keyboardPage.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 29</value>
   </data>
-  <data name="autoUpdateEnabledBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="&gt;&gt;autoUpdateTypeBox.Name" xml:space="preserve">
     <value>autoUpdateTypeBox</value>
   </data>
@@ -408,9 +411,6 @@
   <data name="visualOutputTimeLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 108</value>
   </data>
-  <data name="visualOutputTimeLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
   <data name="okButton.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
@@ -429,14 +429,17 @@
   <data name="visualDisplayTrackChangesBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 62</value>
   </data>
-  <data name="&gt;&gt;keyboardDescriptionLabel.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;languageLabel.ZOrder" xml:space="preserve">
+    <value>7</value>
   </data>
   <data name="deviceLabel.Text" xml:space="preserve">
     <value>&amp;Output device</value>
   </data>
   <data name="keyboardDescriptionBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>598, 152</value>
+  </data>
+  <data name="speechPage.Text" xml:space="preserve">
+    <value>Speech</value>
   </data>
   <data name="&gt;&gt;keyboardLayoutBox.Parent" xml:space="preserve">
     <value>keyboardPage</value>
@@ -446,6 +449,9 @@
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>OptionsDialog</value>
+  </data>
+  <data name="screenReaderBox.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>726, 555</value>
@@ -459,17 +465,17 @@
   <data name="keyboardPage.Text" xml:space="preserve">
     <value>Keyboard</value>
   </data>
-  <data name="screenReaderBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>237, 24</value>
-  </data>
   <data name="&gt;&gt;visualPage.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="skipUnplayableBox.Text" xml:space="preserve">
+    <value>S&amp;kip unplayable tracks</value>
   </data>
   <data name="&gt;&gt;deviceLabel.Parent" xml:space="preserve">
     <value>generalPage</value>
   </data>
   <data name="&gt;&gt;autoUpdateEnabledBox.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="&gt;&gt;keyboardPageDescription.ZOrder" xml:space="preserve">
     <value>4</value>
@@ -498,11 +504,11 @@
   <data name="&gt;&gt;keyboardPageDescription.Name" xml:space="preserve">
     <value>keyboardPageDescription</value>
   </data>
+  <data name="autoUpdateEnabledBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="&gt;&gt;speechPage.ZOrder" xml:space="preserve">
     <value>2</value>
-  </data>
-  <data name="deviceLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 160</value>
   </data>
   <data name="autoUpdateTypeBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>180, 108</value>
@@ -540,6 +546,9 @@
   <data name="&gt;&gt;closeButton.Name" xml:space="preserve">
     <value>closeButton</value>
   </data>
+  <data name="deviceLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 160</value>
+  </data>
   <data name="&gt;&gt;visualOutputTimeLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -564,6 +573,9 @@
   <data name="&gt;&gt;visualDisplayTrackChangesBox.Name" xml:space="preserve">
     <value>visualDisplayTrackChangesBox</value>
   </data>
+  <data name="&gt;&gt;speechPage.Parent" xml:space="preserve">
+    <value>tabHolder</value>
+  </data>
   <data name="autoUpdateEnabledBox.Text" xml:space="preserve">
     <value>Enable automatic &amp;updates</value>
   </data>
@@ -585,6 +597,9 @@
   <data name="autoUpdateTypeLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
   </data>
+  <data name="autoUpdateTypeBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
   <data name="&gt;&gt;deviceLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -594,26 +609,29 @@
   <data name="screenReaderTrackChangeBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
   </data>
-  <data name="&gt;&gt;visualOutputBox.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="&gt;&gt;keyboardDescriptionLabel.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
-  <data name="&gt;&gt;deviceLabel.Name" xml:space="preserve">
-    <value>deviceLabel</value>
+  <data name="screenReaderBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>237, 24</value>
   </data>
   <data name="&gt;&gt;screenReaderBox.Parent" xml:space="preserve">
     <value>speechPage</value>
   </data>
-  <data name="&gt;&gt;languageLabel.ZOrder" xml:space="preserve">
-    <value>6</value>
+  <data name="autoUpdateTypeBox.Items" xml:space="preserve">
+    <value>stable</value>
   </data>
   <data name="autoUpdateEnabledBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
   </data>
   <data name="&gt;&gt;deviceBox.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="keyboardLayoutBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>180, 28</value>
+  </data>
+  <data name="&gt;&gt;skipUnplayableBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="editHotkeysButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
@@ -621,8 +639,8 @@
   <data name="&gt;&gt;autoUpdateTypeLabel.Name" xml:space="preserve">
     <value>autoUpdateTypeLabel</value>
   </data>
-  <data name="&gt;&gt;speechPage.Parent" xml:space="preserve">
-    <value>tabHolder</value>
+  <data name="visualOutputTimeLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
   <data name="screenReaderSapiFallbackBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -642,8 +660,11 @@
   <data name="keyboardPageDescription.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
   </data>
+  <data name="&gt;&gt;speechPage.Name" xml:space="preserve">
+    <value>speechPage</value>
+  </data>
   <data name="&gt;&gt;deviceLabel.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;tabHolder.Parent" xml:space="preserve">
     <value>$this</value>
@@ -656,6 +677,9 @@
   </data>
   <data name="&gt;&gt;visualDisplayTrackChangesBox.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="&gt;&gt;visualDisplayTrackChangesBox.Parent" xml:space="preserve">
+    <value>visualPage</value>
   </data>
   <data name="&gt;&gt;keyboardPageDescription.Parent" xml:space="preserve">
     <value>keyboardPage</value>
@@ -671,6 +695,9 @@
   </data>
   <data name="&gt;&gt;keyboardPageDescription.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="skipUnplayableBox.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
   </data>
   <data name="visualOutputTimeBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>285, 108</value>
@@ -693,6 +720,9 @@
   <data name="&gt;&gt;keyboardLayoutLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;visualOutputBox.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
   <data name="&gt;&gt;screenReaderTrackChangeBox.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
@@ -702,11 +732,11 @@
   <data name="&gt;&gt;closeButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;visualDisplayTrackChangesBox.Parent" xml:space="preserve">
-    <value>visualPage</value>
+  <data name="&gt;&gt;skipUnplayableBox.Parent" xml:space="preserve">
+    <value>generalPage</value>
   </data>
   <data name="&gt;&gt;languageBox.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="&gt;&gt;keyboardLayoutBox.Name" xml:space="preserve">
     <value>keyboardLayoutBox</value>
@@ -735,9 +765,6 @@
   <data name="&gt;&gt;generalPage.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;visualOutputTimeBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="speechPage.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
@@ -759,8 +786,8 @@
   <data name="editHotkeysButton.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="autoUpdateTypeBox.Items" xml:space="preserve">
-    <value>stable</value>
+  <data name="&gt;&gt;skipUnplayableBox.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;keyboardPage.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -795,8 +822,8 @@
   <data name="keyboardPage.Size" type="System.Drawing.Size, System.Drawing">
     <value>720, 459</value>
   </data>
-  <data name="&gt;&gt;speechPage.Name" xml:space="preserve">
-    <value>speechPage</value>
+  <data name="languageBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 28</value>
   </data>
   <data name="screenReaderBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -804,8 +831,8 @@
   <data name="&gt;&gt;tabHolder.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="screenReaderBox.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="&gt;&gt;visualOutputTimeBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;visualOutputTimeBox.Name" xml:space="preserve">
     <value>visualOutputTimeBox</value>
@@ -814,7 +841,7 @@
     <value>4, 0, 4, 0</value>
   </data>
   <data name="&gt;&gt;autoUpdateTypeLabel.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="&gt;&gt;okButton.Parent" xml:space="preserve">
     <value>$this</value>

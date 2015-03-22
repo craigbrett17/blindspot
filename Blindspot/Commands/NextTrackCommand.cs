@@ -51,18 +51,24 @@ namespace Blindspot.Commands
 
         private void PlayNewTrackBufferItem(TrackBufferItem item)
         {
-            var response = Session.LoadPlayer(item.Model.TrackPtr);
             var output = OutputManager.Instance;
-            if (response.IsError)
+			var settings = UserSettings.Instance;
+			var response = Session.LoadPlayer(item.Model.TrackPtr);
+			if (response.IsError && !settings.SkipUnplayableTracks)
             {
                 output.OutputMessage(StringStore.UnableToPlayTrack + response.Message, false);
                 return;
             }
+			if (response.IsError && settings.SkipUnplayableTracks)
+			{
+				// move to next track again
+				Execute(this, new HandledEventArgs());
+				return;
+			}
             Session.Play();
             playbackManager.PlayingTrack = item.Model;
             playbackManager.fullyDownloaded = false;
             playbackManager.Play();
-            var settings = UserSettings.Instance;
             output.OutputTrackModel(playbackManager.PlayingTrack,
                     settings.OutputTrackChangesGraphically, settings.OutputTrackChangesWithSpeech);
         }

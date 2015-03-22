@@ -66,7 +66,6 @@ namespace Blindspot.Commands
                 return;
             }
             ClearCurrentlyPlayingTrack();
-            PlayNewTrackBufferItem(tbi);
             if (buffers.CurrentListIndex == 0 && playQueue.Contains(tbi)) // if they've picked it from the play queue
             {
                 int indexOfChosenTrack = playQueue.IndexOf(tbi);
@@ -97,7 +96,8 @@ namespace Blindspot.Commands
                     }
                 }
             }
-            playQueue.CurrentItemIndex = 0;
+			PlayNewTrackBufferItem(tbi);
+			playQueue.CurrentItemIndex = 0;
         }
 
         private void LoadPlaylist(BufferItem item)
@@ -168,11 +168,19 @@ namespace Blindspot.Commands
         private void PlayNewTrackBufferItem(TrackBufferItem item)
         {
             var response = Session.LoadPlayer(item.Model.TrackPtr);
-            if (response.IsError)
-            {
-                _output.OutputMessage(StringStore.UnableToPlayTrack + response.Message, false);
-                return;
-            }
+			if (response.IsError && !UserSettings.Instance.SkipUnplayableTracks)
+			{
+				_output.OutputMessage(StringStore.UnableToPlayTrack + response.Message, false);
+				return;
+			}
+			if (response.IsError && UserSettings.Instance.SkipUnplayableTracks)
+			{
+				playbackManager.AddCurrentTrackToPreviousTracks();
+				playbackManager.PlayingTrack = null;
+				buffers[0].RemoveAt(0);
+				PlayNextQueuedTrack();
+				return; // don't carry on with this, as it got handled in a recursive call
+			}
             Session.Play();
             playbackManager.PlayingTrack = item.Model;
             playbackManager.fullyDownloaded = false;
@@ -188,5 +196,16 @@ namespace Blindspot.Commands
             }
         }
 
+		private void PlayNextQueuedTrack()
+		{
+			var playQueue = buffers[0];
+			if (playQueue.Count > 0)
+			{
+				var nextBufferItem = playQueue[0] as TrackBufferItem;
+				PlayNewTrackBufferItem(nextBufferItem);
+				playQueue.CurrentItemIndex = 0;
+			}
+		}
+		
     }
 }

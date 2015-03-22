@@ -117,7 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="generalPage.Text" xml:space="preserve">
+    <value>Allmänna</value>
+  </data>
+  <data name="keyboardPage.Text" xml:space="preserve">
+    <value>Tangentbord</value>
+  </data>
+  <data name="speechPage.Text" xml:space="preserve">
+    <value>Tal</value>
+  </data>
+  <data name="visualPage.Text" xml:space="preserve">
+    <value>Visuell</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="skipUnplayableBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 209</value>
+  </data>
+  <data name="skipUnplayableBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>192, 24</value>
+  </data>
+  <data name="skipUnplayableBox.Text" xml:space="preserve">
+    <value>&amp;Hoppa ospelbara spår</value>
+  </data>
   <data name="deviceLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>111, 20</value>
   </data>
@@ -141,9 +162,6 @@
   </data>
   <data name="languageLabel.Text" xml:space="preserve">
     <value>&amp;Språk:</value>
-  </data>
-  <data name="generalPage.Text" xml:space="preserve">
-    <value>Allmänna</value>
   </data>
   <data name="keyboardDescriptionLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>94, 20</value>
@@ -169,9 +187,6 @@
   <data name="editHotkeysButton.Text" xml:space="preserve">
     <value>Redigera &amp;tangentbordets snabbknappar</value>
   </data>
-  <data name="keyboardPage.Text" xml:space="preserve">
-    <value>Tangentbord</value>
-  </data>
   <data name="screenReaderTrackChangeBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>209, 24</value>
   </data>
@@ -183,9 +198,6 @@
   </data>
   <data name="screenReaderBox.Text" xml:space="preserve">
     <value>Aktivera skärmläsare utgång</value>
-  </data>
-  <data name="speechPage.Text" xml:space="preserve">
-    <value>Tal</value>
   </data>
   <data name="visualOutputTimeLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>232, 20</value>
@@ -204,9 +216,6 @@
   </data>
   <data name="visualOutputBox.Text" xml:space="preserve">
     <value>Aktivera visuell utgång</value>
-  </data>
-  <data name="visualPage.Text" xml:space="preserve">
-    <value>Visuell</value>
   </data>
   <data name="closeButton.Text" xml:space="preserve">
     <value>&amp;Avbryt</value>

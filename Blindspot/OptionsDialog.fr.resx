@@ -117,7 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="generalPage.Text" xml:space="preserve">
+    <value>Générales</value>
+  </data>
+  <data name="keyboardPage.Text" xml:space="preserve">
+    <value>clavier</value>
+  </data>
+  <data name="speechPage.Text" xml:space="preserve">
+    <value>Discours</value>
+  </data>
+  <data name="visualPage.Text" xml:space="preserve">
+    <value>Visuel</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="skipUnplayableBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>205, 24</value>
+  </data>
+  <data name="skipUnplayableBox.Text" xml:space="preserve">
+    <value>&amp;Passer pistes injouables</value>
+  </data>
   <data name="deviceLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>141, 20</value>
   </data>
@@ -142,9 +160,6 @@
   <data name="languageLabel.Text" xml:space="preserve">
     <value>&amp;Langue:</value>
   </data>
-  <data name="generalPage.Text" xml:space="preserve">
-    <value>Générales</value>
-  </data>
   <data name="keyboardLayoutLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>60, 20</value>
   </data>
@@ -163,9 +178,6 @@
   <data name="editHotkeysButton.Text" xml:space="preserve">
     <value>Modifier raccourcis &amp;clavier</value>
   </data>
-  <data name="keyboardPage.Text" xml:space="preserve">
-    <value>clavier</value>
-  </data>
   <data name="screenReaderTrackChangeBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>289, 24</value>
   </data>
@@ -177,9 +189,6 @@
   </data>
   <data name="screenReaderBox.Text" xml:space="preserve">
     <value>Activer la sortie de lecteur d'écran</value>
-  </data>
-  <data name="speechPage.Text" xml:space="preserve">
-    <value>Discours</value>
   </data>
   <data name="visualOutputTimeLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>273, 20</value>
@@ -198,9 +207,6 @@
   </data>
   <data name="visualOutputBox.Text" xml:space="preserve">
     <value>Activer la sortie visuelle</value>
-  </data>
-  <data name="visualPage.Text" xml:space="preserve">
-    <value>Visuel</value>
   </data>
   <data name="closeButton.Text" xml:space="preserve">
     <value>&amp;Quitter</value>

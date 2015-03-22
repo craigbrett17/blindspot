@@ -345,14 +345,19 @@ namespace Blindspot
             }
         }
 
-        private void PlayNewTrackBufferItem(TrackBufferItem item)
+        private void PlayTrackBufferItem(TrackBufferItem item)
         {
             var response = Session.LoadPlayer(item.Model.TrackPtr);
-            if (response.IsError)
+            if (response.IsError && !settings.SkipUnplayableTracks)
             {
                 output.OutputMessage(StringStore.UnableToPlayTrack + response.Message, false);
                 return;
             }
+			if (response.IsError && settings.SkipUnplayableTracks)
+			{
+				HandleEndOfCurrentTrack();
+				return; // don't carry on with this, as it got handled in a recursive call
+			}
             Session.Play();
             playbackManager.PlayingTrack = item.Model;
             playbackManager.fullyDownloaded = false;
@@ -366,13 +371,18 @@ namespace Blindspot
             playbackManager.AddCurrentTrackToPreviousTracks();
             playbackManager.PlayingTrack = null;
             _playQueueBuffer.RemoveAt(0);
-            if (_playQueueBuffer.Count > 0)
-            {
-                var nextBufferItem = _playQueueBuffer[0] as TrackBufferItem;
-                PlayNewTrackBufferItem(nextBufferItem);
-                _playQueueBuffer.CurrentItemIndex = 0;
-            }
+			PlayNextQueuedTrack();
         }
+
+		private void PlayNextQueuedTrack()
+		{
+			if (_playQueueBuffer.Count > 0)
+			{
+				var nextBufferItem = _playQueueBuffer[0] as TrackBufferItem;
+				PlayTrackBufferItem(nextBufferItem);
+				_playQueueBuffer.CurrentItemIndex = 0;
+			}
+		}
 
         private void _trayIcon_MouseUp(object sender, MouseEventArgs e)
         {
