@@ -44,7 +44,8 @@ namespace Blindspot.Commands
                     if (nextTrack == null) return;
 
                     PlayNewTrackBufferItem(nextTrack);
-                    playQueue.CurrentItemIndex = 0;
+					if (playQueue.Any())
+						playQueue.CurrentItemIndex = 0;
                 }
             }
         }

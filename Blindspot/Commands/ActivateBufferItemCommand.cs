@@ -97,7 +97,8 @@ namespace Blindspot.Commands
                 }
             }
 			PlayNewTrackBufferItem(tbi);
-			playQueue.CurrentItemIndex = 0;
+			if (playQueue.Any())
+				playQueue.CurrentItemIndex = 0;
         }
 
         private void LoadPlaylist(BufferItem item)
@@ -203,7 +204,8 @@ namespace Blindspot.Commands
 			{
 				var nextBufferItem = playQueue[0] as TrackBufferItem;
 				PlayNewTrackBufferItem(nextBufferItem);
-				playQueue.CurrentItemIndex = 0;
+				if (playQueue.Any())
+					playQueue.CurrentItemIndex = 0;
 			}
 		}
 		
