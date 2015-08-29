@@ -74,12 +74,14 @@ namespace Blindspot.ViewModels
 
         public virtual void FirstItem()
         {
-            CurrentItemIndex = 0;
+			if (this.Any())
+				CurrentItemIndex = 0;
         }
 
         public virtual void LastItem()
         {
-            CurrentItemIndex = this.Count - 1;
+			if (this.Any())
+				CurrentItemIndex = this.Count - 1;
         }
 
         public virtual void NextJump()
