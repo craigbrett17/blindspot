@@ -59,7 +59,7 @@ namespace Blindspot
             Commands = new Dictionary<string, HotkeyCommandBase>();
             playbackManager = new PlaybackManager(settings.OutputDeviceID, settings.UseDirectSound);
             playbackManager.OnError += new PlaybackManager.PlaybackManagerErrorHandler(StreamingError);
-            
+
             SetupFormEventHandlers();
             Buffers = new BufferListCollection();
             _playQueueBuffer = new BufferList("Play Queue", false);
@@ -263,6 +263,7 @@ namespace Blindspot
                 new ShowOptionsDialogCommand(this),
                 new ShowItemDetailsCommand(Buffers),
                 new AddToQueueCommand(Buffers),
+                new AddNextInQueueCommand(Buffers),
                 new MediaPlayPauseCommand(playbackManager),
                 new NextTrackCommand(Buffers, playbackManager),
                 new PreviousTrackCommand(Buffers, playbackManager),
@@ -353,11 +354,11 @@ namespace Blindspot
                 output.OutputMessage(StringStore.UnableToPlayTrack + response.Message, false);
                 return;
             }
-			if (response.IsError && settings.SkipUnplayableTracks)
-			{
-				HandleEndOfCurrentTrack();
-				return; // don't carry on with this, as it got handled in a recursive call
-			}
+            if (response.IsError && settings.SkipUnplayableTracks)
+            {
+                HandleEndOfCurrentTrack();
+                return; // don't carry on with this, as it got handled in a recursive call
+            }
             Session.Play();
             playbackManager.PlayingTrack = item.Model;
             playbackManager.fullyDownloaded = false;
@@ -371,18 +372,18 @@ namespace Blindspot
             playbackManager.AddCurrentTrackToPreviousTracks();
             playbackManager.PlayingTrack = null;
             _playQueueBuffer.RemoveAt(0);
-			PlayNextQueuedTrack();
+            PlayNextQueuedTrack();
         }
 
-		private void PlayNextQueuedTrack()
-		{
-			if (_playQueueBuffer.Count > 0)
-			{
-				var nextBufferItem = _playQueueBuffer[0] as TrackBufferItem;
-				PlayTrackBufferItem(nextBufferItem);
-				_playQueueBuffer.CurrentItemIndex = 0;
-			}
-		}
+        private void PlayNextQueuedTrack()
+        {
+            if (_playQueueBuffer.Count > 0)
+            {
+                var nextBufferItem = _playQueueBuffer[0] as TrackBufferItem;
+                PlayTrackBufferItem(nextBufferItem);
+                _playQueueBuffer.CurrentItemIndex = 0;
+            }
+        }
 
         private void _trayIcon_MouseUp(object sender, MouseEventArgs e)
         {

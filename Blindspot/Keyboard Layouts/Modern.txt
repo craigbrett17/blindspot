@@ -18,6 +18,7 @@ show_about_window=alt+shift+h
 options_dialog=alt+shift+o
 item_details=alt+shift+v
 add_to_queue=alt+shift+q
+add_next_in_queue=alt+shift+x
 media_play_pause=MediaPlayPause
 next_track=MediaNextTrack
 next_track=ctrl+shift+alt+right
