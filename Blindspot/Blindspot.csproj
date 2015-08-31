@@ -135,6 +135,7 @@
     <Compile Include="Commands\ShowContextMenuCommand.cs" />
     <Compile Include="Commands\ShowItemDetailsCommand.cs" />
     <Compile Include="Commands\ShowOptionsDialogCommand.cs" />
+    <Compile Include="Commands\ToggleShuffleCommand.cs" />
     <Compile Include="FirstTimeWizard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -154,6 +155,10 @@
     <Compile Include="OptionsDialog.Designer.cs">
       <DependentUpon>OptionsDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Shuffling\FisherYatesShuffle.cs" />
+    <Compile Include="Shuffling\IShuffle.cs" />
+    <Compile Include="Shuffling\RandomWrapper.cs" />
+    <Compile Include="Shuffling\ShuffleExtensions.cs" />
     <Compile Include="StringStore.sv.Designer.cs">
       <DependentUpon>StringStore.sv.resx</DependentUpon>
       <AutoGen>True</AutoGen>

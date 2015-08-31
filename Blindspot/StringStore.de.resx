@@ -312,4 +312,10 @@
   <data name="UnableToRemoveTrack" xml:space="preserve">
     <value>Kann diesen Track nicht entfernen</value>
   </data>
+  <data name="ShuffleOff" xml:space="preserve">
+    <value>Schlurfenden deaktiviert</value>
+  </data>
+  <data name="ShuffleOn" xml:space="preserve">
+    <value>Schlurfenden aktiviert</value>
+  </data>
 </root>

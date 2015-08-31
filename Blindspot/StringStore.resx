@@ -312,4 +312,10 @@
   <data name="UnableToRemoveTrack" xml:space="preserve">
     <value>Unable to remove track</value>
   </data>
+  <data name="ShuffleOff" xml:space="preserve">
+    <value>Shuffling off</value>
+  </data>
+  <data name="ShuffleOn" xml:space="preserve">
+    <value>Shuffling on</value>
+  </data>
 </root>

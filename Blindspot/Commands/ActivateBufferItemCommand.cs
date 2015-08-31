@@ -8,7 +8,7 @@ using Blindspot.Core.Models;
 using Blindspot.Helpers;
 using Blindspot.Playback;
 using Blindspot.ViewModels;
-using NotifyIcon = System.Windows.Forms.NotifyIcon;
+using Toore.Shuffling;
 
 namespace Blindspot.Commands
 {
@@ -83,17 +83,7 @@ namespace Blindspot.Commands
                 playQueue.Add(tbi);
                 if (buffers.CurrentList is PlaylistBufferList || buffers.CurrentList is AlbumBufferList) // add the remaining playlist or album to the queue
                 {
-                    var tracklist = buffers.CurrentList;
-                    int indexOfTrack = tracklist.CurrentItemIndex;
-                    if (indexOfTrack > 0)
-                    {
-                        var preceedingTracks = tracklist.Take(indexOfTrack).Cast<TrackBufferItem>().Select(i => i.Model);
-                        playbackManager.PutTracksIntoPreviousTracks(preceedingTracks);
-                    }
-                    for (int index = indexOfTrack + 1; index < tracklist.Count; index++)
-                    {
-                        playQueue.Add(tracklist[index]);
-                    }
+                    AddRemainingTracksToQueue(item, playQueue);
                 }
             }
 			PlayNewTrackBufferItem(tbi);
@@ -208,6 +198,44 @@ namespace Blindspot.Commands
 					playQueue.CurrentItemIndex = 0;
 			}
 		}
-		
+
+        private void AddRemainingTracksToQueue(BufferItem item, BufferList playQueue)
+        {
+            var settings = UserSettings.Instance;
+            var tracklist = buffers.CurrentList;
+            if (settings.Shuffle)
+            {
+                ShuffleAndQueueTracks(item, playQueue, tracklist);
+            }
+            else
+            {
+                QueueRemainingTracksWithoutShuffling(playQueue, tracklist);
+            }
+        }
+        
+        private static void ShuffleAndQueueTracks(BufferItem item, BufferList playQueue, BufferList tracklist)
+        {
+            var algorithm = new FisherYatesShuffle(new RandomWrapper());
+            var shuffled = tracklist.Shuffle(algorithm).ToList();
+            foreach (var shuffledItem in shuffled.Where(i => i != item))
+            {
+                playQueue.Add(shuffledItem);
+            }
+        }
+
+        private void QueueRemainingTracksWithoutShuffling(BufferList playQueue, BufferList tracklist)
+        {
+            int indexOfTrack = tracklist.CurrentItemIndex;
+            if (indexOfTrack > 0)
+            {
+                var preceedingTracks = tracklist.Take(indexOfTrack).Cast<TrackBufferItem>().Select(i => i.Model);
+                playbackManager.PutTracksIntoPreviousTracks(preceedingTracks);
+            }
+            for (int index = indexOfTrack + 1; index < tracklist.Count; index++)
+            {
+                playQueue.Add(tracklist[index]);
+            }
+        }
+
     }
 }

@@ -312,4 +312,10 @@
   <data name="UnableToRemoveTrack" xml:space="preserve">
     <value>Det går inte att ta bort spår</value>
   </data>
+  <data name="ShuffleOff" xml:space="preserve">
+    <value>Shuffling deaktiverad</value>
+  </data>
+  <data name="ShuffleOn" xml:space="preserve">
+    <value>Shuffling aktiverad</value>
+  </data>
 </root>

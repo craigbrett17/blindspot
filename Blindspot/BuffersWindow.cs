@@ -271,7 +271,8 @@ namespace Blindspot
                 new BrowseGettingStartedCommand(),
                 new BrowseHotkeyListCommand(),
                 new AddToPlaylistCommand(Buffers),
-                new RemoveFromPlaylistCommand(Buffers)
+                new RemoveFromPlaylistCommand(Buffers),
+                new ToggleShuffleCommand()
             };
 
             // the hotkeys use the key to know which command to execute

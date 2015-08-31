@@ -28,6 +28,7 @@ namespace Blindspot.Helpers
         public int VisualOutputDisplayTime { get; set; }
 		public bool UseDirectSound { get; set; }
 		public bool SkipUnplayableTracks { get; set; }
+        public bool Shuffle { get; set; }
 
         private Guid _outputDeviceID;
         public Guid OutputDeviceID

@@ -312,4 +312,10 @@
   <data name="UnableToRemoveTrack" xml:space="preserve">
     <value>Impossible de supprimer la piste</value>
   </data>
+  <data name="ShuffleOff" xml:space="preserve">
+    <value>Remaniement désactivé</value>
+  </data>
+  <data name="ShuffleOn" xml:space="preserve">
+    <value>Remaniement activé</value>
+  </data>
 </root>
