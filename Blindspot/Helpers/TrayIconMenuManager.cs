@@ -86,6 +86,7 @@ namespace Blindspot.Helpers
             {
                 return new ToolStripItem[]
                 {
+                    MakeSelectableCommandMenuItem(StringStore.Shuffle, "toggle_shuffle", UserSettings.Instance.Shuffle),
                     MakeCommandMenuItem(StringStore.TrayIconOptionsMenuItemText, "options_dialog"),
                     new ToolStripMenuItem(StringStore.TrayIconHelpMenuItemText, null, new ToolStripItem[]
                     {
@@ -107,6 +108,13 @@ namespace Blindspot.Helpers
                 Logger.WriteDebug("No such command {0}", commandKey);
                 return null;
             }
+        }
+
+        private ToolStripMenuItem MakeSelectableCommandMenuItem(string text, string commandKey, bool isSelected)
+        {
+            var item = MakeCommandMenuItem(text, commandKey);
+            item.Checked = isSelected;
+            return item;
         }
     }
 }

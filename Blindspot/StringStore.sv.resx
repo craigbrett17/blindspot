@@ -318,4 +318,7 @@
   <data name="ShuffleOn" xml:space="preserve">
     <value>Shuffling aktiverad</value>
   </data>
+  <data name="Shuffle" xml:space="preserve">
+    <value>Blanda</value>
+  </data>
 </root>

@@ -493,6 +493,15 @@ namespace Blindspot {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Shuffle.
+        /// </summary>
+        internal static string Shuffle {
+            get {
+                return ResourceManager.GetString("Shuffle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Shuffling off.
         /// </summary>
         internal static string ShuffleOff {
