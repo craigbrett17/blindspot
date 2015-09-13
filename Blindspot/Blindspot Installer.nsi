@@ -208,6 +208,7 @@ CreateShortCut "$SMPROGRAMS\$StartMenuFolder\Go to Blindspot app data folder.lnk
 CreateShortCut "$SMPROGRAMS\$StartMenuFolder\Getting started guide.lnk" "http://blindspot.codeplex.com/wikipage?title=Getting%20Started&referringTitle=Documentation"
 CreateShortCut "$SMPROGRAMS\$StartMenuFolder\Keyboard shortcuts.lnk" "http://blindspot.codeplex.com/wikipage?title=Hotkey%20list&referringTitle=Documentation"
 CreateShortCut "$SMPROGRAMS\$StartMenuFolder\FAQ.lnk" "http://blindspot.codeplex.com/wikipage?title=FAQ&referringTitle=Documentation"
+CreateShortCut "$SMPROGRAMS\$StartMenuFolder\What's New.lnk" "http://blindspot.codeplex.com/wikipage?title=What%27s%20new"
 CreateShortCut "$SMPROGRAMS\$StartMenuFolder\Uninstall.lnk" "$INSTDIR\Uninstall Blindspot.exe"
 !insertmacro MUI_STARTMENU_WRITE_END
 SectionEnd
