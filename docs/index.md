@@ -18,4 +18,4 @@ To use Blindspot, you need the following:
 
 ### Project Status
 
-This app is stable at version 2.1 and is ready for use. Hit the download button to get it now!
+This app is currently actively being tested at beta version 2.2. Go to the [Github release](https://github.com/craigbrett17/blindspot/releases/latest) to get yourself a copy!

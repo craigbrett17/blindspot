@@ -6,9 +6,9 @@ This page will teach you how to use Blindspot to perform some of the basic funct
 
 ### Installation
 
-First off, you'll need to get yourself an installer. You'll find one on the project home page at [http://blindspot.codeplex.com](http://blindspot.codeplex.com). There may be other download links around the internet, but using the project home page ensures that you have the most up to date version and that you in fact have the right program, we cannot vouch for downloads from other sites. 
+First off, you'll need to get yourself an installer. You'll find one on the project releases page at [https://github.com/craigbrett17/blindspot/releases/latest](https://github.com/craigbrett17/blindspot/releases/latest). There may be other download links around the internet, but using the project home page ensures that you have the most up to date version and that you in fact have the right program, we cannot vouch for downloads from other sites. 
 
-You will see 2 possible installer options on this page. One with .NET and one without. If you have a previous version of Blindspot, or else know you have installed something with the .NET framework, pick the one without, as it's a smaller download and will therefore be done quicker. Otherwise, get the one with, as you will need it for Blindspot to work. 
+You will (eventually) see 2 possible installer options on this page. One with .NET and one without. If you have a previous version of Blindspot, are using a version of Windows 7 or later or else know you have installed something with the .NET framework, pick the one without, as it's a smaller download and will therefore be done quicker. Otherwise, get the one with, as you will need it for Blindspot to work. 
 
 Now you have the download, open it up and begin the installer. You will be walked through a simple installer. The installer will mention the .NET framework on the welcome page. If you don't currently have a suitable version of the .NET framework installed, this will be dealt with later.
 
