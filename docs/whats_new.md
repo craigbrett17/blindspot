@@ -1,5 +1,5 @@
 ---
-title: Blindspot What's New
+title: What's New
 ---
 
 # What's new in Blindspot

@@ -1,5 +1,5 @@
 ---
-title: Blindspot - Getting Started
+title: Getting Started
 ---
 
 ## Getting Started guide

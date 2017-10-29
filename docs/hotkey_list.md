@@ -1,5 +1,5 @@
 ---
-title: Blindspot hotkey list
+title: Hotkey List
 ---
 
 ## Blindspot Default Hotkeys

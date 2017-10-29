@@ -1,5 +1,5 @@
 ---
-title: Blindspot Home
+title: Home
 ---
 
 ## Blindspot Home
