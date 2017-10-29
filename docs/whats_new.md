@@ -2,8 +2,6 @@
 title: What's New
 ---
 
-# What's new in Blindspot
-
 This page shows all published versions of Blindspot with their change logs.
 
 ## Blindspot v2.2 (Sep 2015)

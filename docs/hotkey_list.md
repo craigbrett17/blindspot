@@ -2,8 +2,6 @@
 title: Hotkey List
 ---
 
-## Blindspot Default Hotkeys
-
 The below table shows the default hotkeys for Blindspot. These may be changed by the user; details can be found in the [FAQ](FAQ) page.
 
 ### Hotkeys Table

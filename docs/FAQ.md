@@ -1,8 +1,6 @@
 ---
-title: Frequently Asked Questions (FAQ)
+title: Frequently Asked Questions
 ---
-
-## Frequently Asked Questions
 
 Below are some of the most frequently asked (or anticipated to be some of the most frequently asked) questions about Blindspot. If you have some of your own, please add them to the discussion forum and it may end up here.
 

@@ -2,8 +2,6 @@
 title: Getting Started
 ---
 
-## Getting Started guide
-
 This page will teach you how to use Blindspot to perform some of the basic functions it has to offer. 
 
 ### Installation
