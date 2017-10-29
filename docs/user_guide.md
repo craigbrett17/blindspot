@@ -1,3 +1,7 @@
+---
+title: Blindspot user guide
+---
+
 ## Blindspot User Guide
 
 Hello and welcome to the Blindspot user guide. Please click on one of the sections to go to the help section you need.

@@ -1,3 +1,7 @@
+---
+title: Blindspot Home
+---
+
 ## Blindspot Home
 
 Welcome to the Blindspot project home. Blindspot is an accessible Windowless Windows desktop app, focusing on providing access to the Spotify service to blind or partially-sighted screen reader users. 
