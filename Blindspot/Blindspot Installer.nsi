@@ -64,7 +64,7 @@ Var StartMenuFolder
 "$(finishpage_text_reboot)"
 !define MUI_FINISHPAGE_REBOOTLATER_DEFAULT
 !define MUI_FINISHPAGE_RUN $INSTDIR\Blindspot.exe
-!define MUI_FINISHPAGE_SHOWREADME http://blindspot.codeplex.com/wikipage?title=Getting%20Started&referringTitle=Documentation
+!define MUI_FINISHPAGE_SHOWREADME https://craigbrett17.github.io/blindspot/getting_started
 !define MUI_FINISHPAGE_SHOWREADME_TEXT "$(show_readme)"
 !define MUI_FINISHPAGE_SHOWREADME_NOTCHECKED
 !insertmacro MUI_PAGE_FINISH
@@ -205,10 +205,10 @@ CreateDirectory "$SMPROGRAMS\$StartMenuFolder"
 CreateShortCut "$SMPROGRAMS\$StartMenuFolder\Blindspot.lnk" "$INSTDIR\Blindspot.exe"
 CreateShortCut "$SMPROGRAMS\$StartMenuFolder\Go to Blindspot app data folder.lnk" "${APPDATADIR}\"
 ; Shortcut for the helpfiles
-CreateShortCut "$SMPROGRAMS\$StartMenuFolder\Getting started guide.lnk" "http://blindspot.codeplex.com/wikipage?title=Getting%20Started&referringTitle=Documentation"
-CreateShortCut "$SMPROGRAMS\$StartMenuFolder\Keyboard shortcuts.lnk" "http://blindspot.codeplex.com/wikipage?title=Hotkey%20list&referringTitle=Documentation"
-CreateShortCut "$SMPROGRAMS\$StartMenuFolder\FAQ.lnk" "http://blindspot.codeplex.com/wikipage?title=FAQ&referringTitle=Documentation"
-CreateShortCut "$SMPROGRAMS\$StartMenuFolder\What's New.lnk" "http://blindspot.codeplex.com/wikipage?title=What%27s%20new"
+CreateShortCut "$SMPROGRAMS\$StartMenuFolder\Getting started guide.lnk" "https://craigbrett17.github.io/blindspot/getting_started"
+CreateShortCut "$SMPROGRAMS\$StartMenuFolder\Keyboard shortcuts.lnk" "https://craigbrett17.github.io/blindspot/hotkey_list"
+CreateShortCut "$SMPROGRAMS\$StartMenuFolder\FAQ.lnk" "https://craigbrett17.github.io/blindspot/faq"
+CreateShortCut "$SMPROGRAMS\$StartMenuFolder\What's New.lnk" "https://craigbrett17.github.io/blindspot/whats_new"
 CreateShortCut "$SMPROGRAMS\$StartMenuFolder\Uninstall.lnk" "$INSTDIR\Uninstall Blindspot.exe"
 !insertmacro MUI_STARTMENU_WRITE_END
 SectionEnd

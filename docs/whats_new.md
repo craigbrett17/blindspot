@@ -4,7 +4,7 @@ title: What's New
 
 This page shows all published versions of Blindspot with their change logs.
 
-## Blindspot v2.2 (Sep 2015)
+## Blindspot v2.2 (Sep 2015, finished on Nov 2017)
 
 ### New in this release
 * Playlist management: Add and remove tracks from existing playlists, or to a new playlist altogether. Accessible through the Blindspot context menu.
@@ -14,10 +14,13 @@ This page shows all published versions of Blindspot with their change logs.
 * Added an add next in queue command (alt+shift+x by default), to add the currently selected track to play next.
 * Much more simplified playback code. Please let us know of any issues arising.
 * Created a what's new page and added a start menu item to take you to it.
+* Moved project to GitHub, created a GitHub pages page to replace the more user friendly CodePlex homepage. 
 
 ### Bug fixes in this release
 * Fixed a bug where Blindspot would not launch if the user launching the application wasn't the same as the one who installed it. Important for scenarios where people may have a separate administrator user for handling installs.
 * Fixed an issue with empty buffers and the home/end commands crashing the app
+* Fixed an issue where Blindspot would incorrectly say 1 of 0 items on an empty buffer, closes GitHub [issue #21](https://github.com/craigbrett17/blindspot/issues/21)
+* Fixed an issue where Blindspot would not display the number of tracks in a playlist on the item details window, closes GitHub [issue #22](https://github.com/craigbrett17/blindspot/issues/22)
 
 ## Blindspot v2.1 (Nov 2014)
 
