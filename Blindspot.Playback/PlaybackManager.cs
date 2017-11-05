@@ -20,8 +20,7 @@ namespace Blindspot.Playback
             Paused,
             Buffering
         }
-
-        private ByteGateKeeper gatekeeper;
+        
         const int secondsToBuffer = 3;
         private volatile float volume = 1f;
         private volatile StreamingPlaybackState playbackState;
@@ -42,7 +41,32 @@ namespace Blindspot.Playback
                     OnPlayingTrackChanged();
             }
         }
-        
+        private Guid _playbackDeviceID;
+        public Guid PlaybackDeviceID
+        {
+            get { return _playbackDeviceID; }
+            set
+            {
+                _playbackDeviceID = value;
+                if (waveOut != null)
+                {
+                    waveOut.Pause(); // so we don't lose our place in the track
+                    // make new replacement WaveOut for new device
+                    var newWaveOut = new DirectSoundOut(_playbackDeviceID);
+                    if (bufferedWaveProvider != null && volumeProvider != null)
+                        newWaveOut.Init(volumeProvider);
+
+                    // destroy the old WaveOut and replace it with our new one
+                    StopAndDisposeWaveOut();
+                    waveOut = newWaveOut;
+
+                    if (playbackState == StreamingPlaybackState.Playing)
+                        waveOut.Play();
+                }
+            }
+        }
+		private bool DirectSound { get; set; }
+
         public delegate void PlaybackManagerErrorHandler(string message);
         public event PlaybackManagerErrorHandler OnError;
         public event Action OnEndOfTrack;
@@ -54,13 +78,25 @@ namespace Blindspot.Playback
             this.timer1 = new System.Timers.Timer();
             this.timer1.Interval = 250;
             this.timer1.Elapsed += new System.Timers.ElapsedEventHandler(this.timer1_Tick);
-            gatekeeper = new ByteGateKeeper();
             _previousTracks = new Stack<Track>();
         }
 
+        public PlaybackManager(Guid playbackDeviceId)
+            : this()
+        {
+            _playbackDeviceID = playbackDeviceId;
+        }
+
+		public PlaybackManager(Guid playbackDeviceId, bool useDirectSound)
+			: this(playbackDeviceId)
+		{
+			DirectSound = useDirectSound;
+		}
+
         public void AddBytesToPlayingStream(byte[] bytes)
         {
-            gatekeeper.QueueBytes(bytes);
+            if (bufferedWaveProvider != null)
+                bufferedWaveProvider.AddSamples(bytes, 0, bytes.Length);
         }
 
         public void Play()
@@ -96,15 +132,9 @@ namespace Blindspot.Playback
             if (playbackState != StreamingPlaybackState.Stopped)
             {
                 this.playbackState = StreamingPlaybackState.Stopped;
-                if (waveOut != null)
-                {
-                    waveOut.Stop();
-                    waveOut.Dispose();
-                    waveOut = null;
-                }
+                StopAndDisposeWaveOut();
                 // n.b. streaming thread may not yet have exited
                 Thread.Sleep(500);
-                gatekeeper.Clear();
                 this.bufferedWaveProvider = null;
                 timer1.Enabled = false;
                 if (OnPlaybackStopped != null)
@@ -158,9 +188,8 @@ namespace Blindspot.Playback
                     if (bufferedWaveProvider == null)
                     {
                         this.bufferedWaveProvider = new BufferedWaveProvider(new WaveFormat(44100, 2));
-                        this.bufferedWaveProvider.BufferDuration = TimeSpan.FromSeconds(20); // allow us to get well ahead of ourselves
+                        this.bufferedWaveProvider.BufferDuration = TimeSpan.FromMinutes(20); // allow us to get well ahead of ourselves
                         Logger.WriteDebug("Creating buffered wave provider");
-                        this.gatekeeper.MinimumSampleSize = bufferedWaveProvider.WaveFormat.AverageBytesPerSecond * secondsToBuffer;
                     }
                     // in case its still null
                     if (bufferedWaveProvider == null)
@@ -171,15 +200,6 @@ namespace Blindspot.Playback
                     {
                         Logger.WriteDebug("Buffer getting full, taking a break");
                         Thread.Sleep(450);
-                    }
-                    // do we have at least double the buffered sample's size in free space, just in case
-                    else if (freeBufferBytes > bufferedWaveProvider.WaveFormat.AverageBytesPerSecond * (secondsToBuffer * 2))
-                    {
-                        var sample = gatekeeper.Read();
-                        if (sample != null)
-                        {
-                            bufferedWaveProvider.AddSamples(sample, 0, sample.Length);
-                        }
                     }
                     Thread.Sleep(250);
                 } while (playbackState != StreamingPlaybackState.Stopped);
@@ -220,25 +240,15 @@ namespace Blindspot.Playback
                         Logger.WriteDebug(String.Format("Started playing, waveOut.PlaybackState={0}", waveOut.PlaybackState));
                         this.playbackState = StreamingPlaybackState.Playing;
                     }
-                    else if (this.fullyDownloaded && bufferedSeconds < secondsToBuffer)
+                    // stop when right at the end
+                    else if (this.fullyDownloaded && bufferedSeconds == 0)
                     {
-                        // put the last bytes in the buffer if there's only spare bytes left
-                        if (gatekeeper.IsSlidingStreamEmpty && gatekeeper.HasSpareBytes)
-                        {
-                            var sample = gatekeeper.ReadSpareBytes();
-                            Logger.WriteDebug("{0} bytes left as spare bytes, adding to the end", sample.Length);
-                            bufferedWaveProvider.AddSamples(sample, 0, sample.Length);
-                        }
-                        // if there's no spare bytes and the stream is empty, stop
-                        else if (bufferedSeconds == 0 && gatekeeper.IsSlidingStreamEmpty)
-                        {
-                            Logger.WriteDebug("Reached end of stream");
-                            Stop();
+                        Logger.WriteDebug("Reached end of stream");
+                        Stop();
 
-                            // handle end of track logic
-                            if (OnEndOfTrack != null)
-                                OnEndOfTrack();
-                        }
+                        // handle end of track logic
+                        if (OnEndOfTrack != null)
+                            OnEndOfTrack();
                     }
                 }
             }
@@ -246,7 +256,18 @@ namespace Blindspot.Playback
 
         private IWavePlayer CreateWaveOut()
         {
-            return new WaveOutEvent();
+			if (this.DirectSound)
+            return new DirectSoundOut(PlaybackDeviceID);
+			else
+				return new WaveOutEvent();
+        }
+
+        private void StopAndDisposeWaveOut()
+        {
+            if (waveOut == null) return;
+            waveOut.Stop();
+            waveOut.Dispose();
+            waveOut = null;
         }
 
         private void waveOut_PlaybackStopped(object sender, StoppedEventArgs e)
@@ -262,7 +283,6 @@ namespace Blindspot.Playback
         {
             Stop();
             timer1.Dispose();
-            gatekeeper.Dispose();
         }
 
         public bool IsPaused

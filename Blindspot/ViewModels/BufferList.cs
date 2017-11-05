@@ -74,12 +74,14 @@ namespace Blindspot.ViewModels
 
         public virtual void FirstItem()
         {
-            CurrentItemIndex = 0;
+			if (this.Any())
+				CurrentItemIndex = 0;
         }
 
         public virtual void LastItem()
         {
-            CurrentItemIndex = this.Count - 1;
+			if (this.Any())
+				CurrentItemIndex = this.Count - 1;
         }
 
         public virtual void NextJump()
@@ -108,7 +110,12 @@ namespace Blindspot.ViewModels
 
         public override string ToString()
         {
-            return String.Format("{0}: {1} {3} {2} {4}", this.Name, this.CurrentItemIndex + 1, this.Count, StringStore.Of, StringStore.Items);
+            return String.Format("{0}: {1} {3} {2} {4}",
+                this.Name,
+                (this.Any()) ? this.CurrentItemIndex + 1 : 0,
+                this.Count,
+                StringStore.Of,
+                StringStore.Items);
         }
     }
 }

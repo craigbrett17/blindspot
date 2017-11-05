@@ -285,4 +285,40 @@
   <data name="TrayIconHotkeyListMenuItemText" xml:space="preserve">
     <value>Visa &amp;Kortkommando Lista</value>
   </data>
+  <data name="InvalidPlaylistName" xml:space="preserve">
+    <value>Ogiltigt spellistans namn</value>
+  </data>
+  <data name="PlaylistNotCreated" xml:space="preserve">
+    <value>spellista inte skapat</value>
+  </data>
+  <data name="PleaseEnterANameForYourNewPlaylist" xml:space="preserve">
+    <value>Ange ett namn på den nya spellistan</value>
+  </data>
+  <data name="TrackAdded" xml:space="preserve">
+    <value>Spår tillsatt</value>
+  </data>
+  <data name="TrayIconAddToAPlaylistText" xml:space="preserve">
+    <value>Lägg till en spellista</value>
+  </data>
+  <data name="UnableToAddTrackToPlaylist" xml:space="preserve">
+    <value>Det går inte att lägga till låten i spellistan</value>
+  </data>
+  <data name="TrackRemoved" xml:space="preserve">
+    <value>Spår avlägsnades</value>
+  </data>
+  <data name="TrayIconRemoveFromPlaylistText" xml:space="preserve">
+    <value>&amp;Ta bort från spellista</value>
+  </data>
+  <data name="UnableToRemoveTrack" xml:space="preserve">
+    <value>Det går inte att ta bort spår</value>
+  </data>
+  <data name="ShuffleOff" xml:space="preserve">
+    <value>Shuffling deaktiverad</value>
+  </data>
+  <data name="ShuffleOn" xml:space="preserve">
+    <value>Shuffling aktiverad</value>
+  </data>
+  <data name="Shuffle" xml:space="preserve">
+    <value>Blanda</value>
+  </data>
 </root>

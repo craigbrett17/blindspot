@@ -15,7 +15,7 @@ namespace Blindspot.Commands
     {
         private BufferListCollection buffers;
         private OutputManager _output;
-        private SpotifyClient spotify = SpotifyClient.Instance;
+        private ISpotifyClient spotify = SpotifyClient.Instance;
         
         public NewSearchCommand(BufferListCollection buffersIn)
         {

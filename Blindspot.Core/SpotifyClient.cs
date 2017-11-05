@@ -22,8 +22,8 @@ namespace Blindspot.Core
             this.RequestTimeout = 15;
         }
 
-        private static SpotifyClient _instance;
-        public static SpotifyClient Instance
+        private static ISpotifyClient _instance;
+        public static ISpotifyClient Instance
         {
             get
             {
@@ -83,7 +83,12 @@ namespace Blindspot.Core
 
         public List<PlaylistContainer.PlaylistInfo> GetAllSessionPlaylists()
         {
-            throw new NotImplementedException();
+            var sessionContainer = PlaylistContainer.GetSessionContainer();
+            WaitFor(() =>
+            {
+                return sessionContainer.IsLoaded && sessionContainer.PlaylistsAreLoaded;
+            }, RequestTimeout);
+            return sessionContainer.GetAllPlaylists();
         }
 
         public List<PlaylistContainer.PlaylistInfo> GetPlaylists(PlaylistContainer.PlaylistInfo playlist)
@@ -142,6 +147,52 @@ namespace Blindspot.Core
             return (SpotifyError)Session.LoginError;
         }
 
+        public SpotifyError AddTrackToPlaylist(IntPtr trackPtr, IntPtr playlistPtr)
+        {
+            IntPtr trackArrayPointer = IntPtr.Zero;
+            try
+            {
+                // yes, even a single track needs to be an array. let's fake it
+                IntPtr[] tracksToAddArray = new[] { trackPtr };
+                int arraySizeInBytes = IntPtr.Size * tracksToAddArray.Length;
+                trackArrayPointer = Marshal.AllocHGlobal(arraySizeInBytes);
+                // now we copy the physical array into the block of memory that the pointer points to
+                Marshal.Copy(tracksToAddArray, 0, trackArrayPointer, tracksToAddArray.Length);
+
+                // setup done, now we just call libspotify and get it to do its thing
+                var currentCount = libspotify.sp_playlist_num_tracks(playlistPtr);
+                var error = libspotify.sp_playlist_add_tracks(playlistPtr, trackArrayPointer, 1, currentCount, GetSession());
+                return (SpotifyError)error;
+            }
+            finally
+            {
+                // whatever happens, release the block of memory we used for the array of tracks
+                if (trackArrayPointer != IntPtr.Zero)
+                    Marshal.FreeHGlobal(trackArrayPointer);
+            }
+        }
+
+        public IntPtr CreateNewPlaylist(string name)
+        {
+            IntPtr namePointer = IntPtr.Zero;
+            try
+            {
+                var sessionContainerPointer = libspotify.sp_session_playlistcontainer(GetSession());
+                // have to turn the name into a byte[] as we can't use StringToGlobalHUni
+                // make a byte array of it and copy it into unmanaged memory
+                byte[] nameBytes = Encoding.UTF8.GetBytes(name);
+                namePointer = Marshal.AllocHGlobal(nameBytes.Length);
+                Marshal.Copy(nameBytes, 0, namePointer, nameBytes.Length);
+                var newPointer = libspotify.sp_playlistcontainer_add_new_playlist(sessionContainerPointer, namePointer);
+                return newPointer;
+            }
+            finally
+            {
+                if (namePointer != IntPtr.Zero)
+                    Marshal.FreeHGlobal(namePointer);
+            }
+        }
+
         private IntPtr GetSession()
         {
             var session = Session.GetSessionPtr();
@@ -151,8 +202,9 @@ namespace Blindspot.Core
             }
             return session;
         }
-
+        
         // ok, I haven't been able to think of a better way of doing this yet, well done Jamcast
+        // if we were using .NET 4.5 we could use awaits... oh well
         private static bool WaitFor(Func<bool> t, int timeout)
         {
             DateTime start = DateTime.Now;
@@ -167,5 +219,16 @@ namespace Blindspot.Core
             return false;
         }
         
+        public SpotifyError RemoveTrackFromPlaylist(int trackIndexInPlaylist, IntPtr playlistPtr)
+        {
+            int[] trackIndexArray = new[] { trackIndexInPlaylist };
+            return RemoveTracksFromPlaylist(trackIndexArray, playlistPtr);
+        }
+
+        public SpotifyError RemoveTracksFromPlaylist(int[] trackIndexesInPlaylist, IntPtr playlistPtr)
+        {
+            var response = libspotify.sp_playlist_remove_tracks(playlistPtr, trackIndexesInPlaylist, trackIndexesInPlaylist.Length);
+            return (SpotifyError)response;
+        }
     }
 }

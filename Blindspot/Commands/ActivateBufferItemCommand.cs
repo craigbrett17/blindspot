@@ -8,7 +8,7 @@ using Blindspot.Core.Models;
 using Blindspot.Helpers;
 using Blindspot.Playback;
 using Blindspot.ViewModels;
-using NotifyIcon = System.Windows.Forms.NotifyIcon;
+using Toore.Shuffling;
 
 namespace Blindspot.Commands
 {
@@ -66,7 +66,6 @@ namespace Blindspot.Commands
                 return;
             }
             ClearCurrentlyPlayingTrack();
-            PlayNewTrackBufferItem(tbi);
             if (buffers.CurrentListIndex == 0 && playQueue.Contains(tbi)) // if they've picked it from the play queue
             {
                 int indexOfChosenTrack = playQueue.IndexOf(tbi);
@@ -84,39 +83,29 @@ namespace Blindspot.Commands
                 playQueue.Add(tbi);
                 if (buffers.CurrentList is PlaylistBufferList || buffers.CurrentList is AlbumBufferList) // add the remaining playlist or album to the queue
                 {
-                    var tracklist = buffers.CurrentList;
-                    int indexOfTrack = tracklist.CurrentItemIndex;
-                    if (indexOfTrack > 0)
-                    {
-                        var preceedingTracks = tracklist.Take(indexOfTrack).Cast<TrackBufferItem>().Select(i => i.Model);
-                        playbackManager.PutTracksIntoPreviousTracks(preceedingTracks);
-                    }
-                    for (int index = indexOfTrack + 1; index < tracklist.Count; index++)
-                    {
-                        playQueue.Add(tracklist[index]);
-                    }
+                    AddRemainingTracksToQueue(item, playQueue);
                 }
             }
-            playQueue.CurrentItemIndex = 0;
+			PlayNewTrackBufferItem(tbi);
+			if (playQueue.Any())
+				playQueue.CurrentItemIndex = 0;
         }
 
         private void LoadPlaylist(BufferItem item)
         {
             PlaylistBufferItem pbi = item as PlaylistBufferItem;
             _output.OutputMessage(StringStore.LoadingPlaylist, false);
-            buffers.Add(new PlaylistBufferList(pbi.Model.Name));
+            var playlist = SpotifyController.GetPlaylist(pbi.Model.Pointer, true);
+            buffers.Add(new PlaylistBufferList(playlist));
             buffers.CurrentListIndex = buffers.Count - 1;
             var playlistBuffer = buffers.CurrentList;
             _output.OutputMessage(playlistBuffer.ToString(), false);
-            using (var playlist = SpotifyController.GetPlaylist(pbi.Model.Pointer, true))
+            _output.OutputMessage(String.Format("{0} {1}", playlist.TrackCount, StringStore.TracksLoaded), false);
+            var tracks = playlist.GetTracks();
+            tracks.ForEach(t =>
             {
-                _output.OutputMessage(String.Format("{0} {1}", playlist.TrackCount, StringStore.TracksLoaded), false);
-                var tracks = playlist.GetTracks();
-                tracks.ForEach(t =>
-                {
-                    playlistBuffer.Add(new TrackBufferItem(t));
-                });
-            }
+                playlistBuffer.Add(new TrackBufferItem(t));
+            });
         }
 
         private void LoadAlbum(BufferItem item)
@@ -170,11 +159,19 @@ namespace Blindspot.Commands
         private void PlayNewTrackBufferItem(TrackBufferItem item)
         {
             var response = Session.LoadPlayer(item.Model.TrackPtr);
-            if (response.IsError)
-            {
-                _output.OutputMessage(StringStore.UnableToPlayTrack + response.Message, false);
-                return;
-            }
+			if (response.IsError && !UserSettings.Instance.SkipUnplayableTracks)
+			{
+				_output.OutputMessage(StringStore.UnableToPlayTrack + response.Message, false);
+				return;
+			}
+			if (response.IsError && UserSettings.Instance.SkipUnplayableTracks)
+			{
+				playbackManager.AddCurrentTrackToPreviousTracks();
+				playbackManager.PlayingTrack = null;
+				buffers[0].RemoveAt(0);
+				PlayNextQueuedTrack();
+				return; // don't carry on with this, as it got handled in a recursive call
+			}
             Session.Play();
             playbackManager.PlayingTrack = item.Model;
             playbackManager.fullyDownloaded = false;
@@ -187,6 +184,56 @@ namespace Blindspot.Commands
             {
                 playbackManager.Stop();
                 Session.UnloadPlayer();
+            }
+        }
+
+		private void PlayNextQueuedTrack()
+		{
+			var playQueue = buffers[0];
+			if (playQueue.Count > 0)
+			{
+				var nextBufferItem = playQueue[0] as TrackBufferItem;
+				PlayNewTrackBufferItem(nextBufferItem);
+				if (playQueue.Any())
+					playQueue.CurrentItemIndex = 0;
+			}
+		}
+
+        private void AddRemainingTracksToQueue(BufferItem item, BufferList playQueue)
+        {
+            var settings = UserSettings.Instance;
+            var tracklist = buffers.CurrentList;
+            if (settings.Shuffle)
+            {
+                ShuffleAndQueueTracks(item, playQueue, tracklist);
+            }
+            else
+            {
+                QueueRemainingTracksWithoutShuffling(playQueue, tracklist);
+            }
+        }
+        
+        private static void ShuffleAndQueueTracks(BufferItem item, BufferList playQueue, BufferList tracklist)
+        {
+            var algorithm = new FisherYatesShuffle(new RandomWrapper());
+            var shuffled = tracklist.Shuffle(algorithm).ToList();
+            foreach (var shuffledItem in shuffled.Where(i => i != item))
+            {
+                playQueue.Add(shuffledItem);
+            }
+        }
+
+        private void QueueRemainingTracksWithoutShuffling(BufferList playQueue, BufferList tracklist)
+        {
+            int indexOfTrack = tracklist.CurrentItemIndex;
+            if (indexOfTrack > 0)
+            {
+                var preceedingTracks = tracklist.Take(indexOfTrack).Cast<TrackBufferItem>().Select(i => i.Model);
+                playbackManager.PutTracksIntoPreviousTracks(preceedingTracks);
+            }
+            for (int index = indexOfTrack + 1; index < tracklist.Count; index++)
+            {
+                playQueue.Add(tracklist[index]);
             }
         }
 

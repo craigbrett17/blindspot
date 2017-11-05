@@ -285,4 +285,40 @@
   <data name="TrayIconHotkeyListMenuItemText" xml:space="preserve">
     <value>Vista de lista &amp;Teclas de acceso rápido</value>
   </data>
+  <data name="InvalidPlaylistName" xml:space="preserve">
+    <value>Nombre de la lista de reproducción no es válido</value>
+  </data>
+  <data name="PlaylistNotCreated" xml:space="preserve">
+    <value>Lista de reproducción no se crea</value>
+  </data>
+  <data name="PleaseEnterANameForYourNewPlaylist" xml:space="preserve">
+    <value>Por favor, introduzca un nombre para la nueva lista de reproducción</value>
+  </data>
+  <data name="TrackAdded" xml:space="preserve">
+    <value>Pista añadió</value>
+  </data>
+  <data name="TrayIconAddToAPlaylistText" xml:space="preserve">
+    <value>Añadir a una lista de &amp;reproducción</value>
+  </data>
+  <data name="UnableToAddTrackToPlaylist" xml:space="preserve">
+    <value>No se puede añadir la pista a esta lista de reproducción</value>
+  </data>
+  <data name="TrackRemoved" xml:space="preserve">
+    <value>Elimina Track</value>
+  </data>
+  <data name="TrayIconRemoveFromPlaylistText" xml:space="preserve">
+    <value>&amp;Elimina pista de lista de reproducción</value>
+  </data>
+  <data name="UnableToRemoveTrack" xml:space="preserve">
+    <value>No se puede eliminar la pista</value>
+  </data>
+  <data name="ShuffleOff" xml:space="preserve">
+    <value>Barajar discapacitados</value>
+  </data>
+  <data name="ShuffleOn" xml:space="preserve">
+    <value>Barajar habilitados</value>
+  </data>
+  <data name="Shuffle" xml:space="preserve">
+    <value>Aleatorio</value>
+  </data>
 </root>

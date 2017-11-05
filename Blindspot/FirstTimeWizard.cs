@@ -27,6 +27,7 @@ namespace Blindspot
         public FirstTimeWizard()
         {
             InitializeComponent();
+            SetupLocalFolder();
             SetupLanguageBox();
             LoadKeyboardDescriptions();
             SetupKeyboardSettingsBox();
@@ -37,6 +38,28 @@ namespace Blindspot
         {
             keyboardDescriptionBox.Text = GetKeyboardDescription();
         }
+
+        private void SetupLocalFolder()
+        {
+            // check for existance of local appdata folder
+            if (LocalAppDataFoldersExist())
+                return; // we're all good here
+
+            var commonAppDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "Blindspot");
+            if (!Directory.Exists(commonAppDataPath))
+                throw new DirectoryNotFoundException("The Blindspot common program data directory was not found. Please try rerunning the installer.");
+
+            var localAppDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Blindspot");
+            DirectoryCopy(commonAppDataPath, localAppDataPath, true);
+        }
+
+        private static bool LocalAppDataFoldersExist()
+        {
+            var localAppDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Blindspot");
+            var KeyboardPath = Path.Combine(localAppDataPath, "Keyboard Layouts");
+            return (Directory.Exists(localAppDataPath) && Directory.Exists(KeyboardPath));
+        }
+
 
         private void LoadKeyboardDescriptions()
         {
@@ -69,6 +92,9 @@ namespace Blindspot
             languageBox.ValueMember = "LCID";
             int currentUICultureID = CurrentUICulture.LCID;
             languageBox.SelectedValue = currentUICultureID;
+            
+            // in case we can't set the culture to something we're expecting, make sure the first option is selected by default
+            if (languageBox.SelectedIndex == -1) languageBox.SelectedIndex = 0;
         }
 
         private void SetupKeyboardSettingsBox()
@@ -168,6 +194,44 @@ namespace Blindspot
         private void keyboardStyleNoChangeBox_CheckedChanged(object sender, EventArgs e)
         {
             keyboardStyleBox.Enabled = !keyboardStyleNoChangeBox.Checked;
+        }
+
+        private static void DirectoryCopy(string sourceDirName, string destDirName, bool copySubDirs)
+        {
+            // Get the subdirectories for the specified directory.
+            DirectoryInfo dir = new DirectoryInfo(sourceDirName);
+            DirectoryInfo[] dirs = dir.GetDirectories();
+
+            if (!dir.Exists)
+            {
+                throw new DirectoryNotFoundException(
+                    "Source directory does not exist or could not be found: "
+                    + sourceDirName);
+            }
+
+            // If the destination directory doesn't exist, create it. 
+            if (!Directory.Exists(destDirName))
+            {
+                Directory.CreateDirectory(destDirName);
+            }
+
+            // Get the files in the directory and copy them to the new location.
+            FileInfo[] files = dir.GetFiles();
+            foreach (FileInfo file in files)
+            {
+                string temppath = Path.Combine(destDirName, file.Name);
+                file.CopyTo(temppath, false);
+            }
+
+            // If copying subdirectories, copy them and their contents to new location. 
+            if (copySubDirs)
+            {
+                foreach (DirectoryInfo subdir in dirs)
+                {
+                    string temppath = Path.Combine(destDirName, subdir.Name);
+                    DirectoryCopy(subdir.FullName, temppath, copySubDirs);
+                }
+            }
         }
 
     }

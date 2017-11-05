@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Xml.Serialization;
@@ -7,7 +9,7 @@ namespace Blindspot.Helpers
 {
     [Serializable()]
     [XmlRoot]
-    public class UserSettings
+    public class UserSettings : INotifyPropertyChanged
     {
         public string Username { get; set; }
         public bool AutoLogin { get; set; }
@@ -24,6 +26,16 @@ namespace Blindspot.Helpers
         public bool OutputTrackChangesWithSpeech { get; set; }
         public bool SapiIsScreenReaderFallback { get; set; }
         public int VisualOutputDisplayTime { get; set; }
+		public bool UseDirectSound { get; set; }
+		public bool SkipUnplayableTracks { get; set; }
+        public bool Shuffle { get; set; }
+
+        private Guid _outputDeviceID;
+        public Guid OutputDeviceID
+        {
+            get { return _outputDeviceID; }
+            set { SetField(ref _outputDeviceID, value, "OutputDeviceID"); }
+        }
 
         [NonSerialized]
         private static string fileLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"Blindspot\Settings\user_settings.xml");
@@ -60,6 +72,8 @@ namespace Blindspot.Helpers
             OutputTrackChangesGraphically = true;
             SapiIsScreenReaderFallback = true;
             VisualOutputDisplayTime = 5;
+			UseDirectSound = true;
+			SkipUnplayableTracks = true;
         }
 
         private static void LoadFromBinary()
@@ -104,5 +118,23 @@ namespace Blindspot.Helpers
             Beta,
             Dev
         }
+
+        #region INotifyPropertyChanged things
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            var handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        protected bool SetField<T>(ref T field, T value, string propertyName)
+        {
+            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+            field = value;
+            OnPropertyChanged(propertyName);
+            return true;
+        } 
+        #endregion
     }
 }

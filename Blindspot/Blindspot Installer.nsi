@@ -2,7 +2,7 @@
 ;Comes with .NET installing and extraction of files
 
 ;What version are we on?
-!define VERSION "2.1"
+!define VERSION "2.2"
 ;The name of the executable
 !define APP_EXECUTABLE "Blindspot.exe"
 !ifndef INCLUDE_DOTNET
@@ -30,6 +30,7 @@ InstallDirRegKey HKCU "Software\Blindspot" ""
 
 ; Request application privileges for Windows Vista and later
 ; Since we may well be installing .NET framework, we need admin privilages
+; also apparently only possible to install to program files if admin (why, Microsoft?)
 RequestExecutionLevel admin
 
 ; Warn before exiting installer
@@ -63,7 +64,7 @@ Var StartMenuFolder
 "$(finishpage_text_reboot)"
 !define MUI_FINISHPAGE_REBOOTLATER_DEFAULT
 !define MUI_FINISHPAGE_RUN $INSTDIR\Blindspot.exe
-!define MUI_FINISHPAGE_SHOWREADME http://blindspot.codeplex.com/wikipage?title=Getting%20Started&referringTitle=Documentation
+!define MUI_FINISHPAGE_SHOWREADME https://craigbrett17.github.io/blindspot/getting_started
 !define MUI_FINISHPAGE_SHOWREADME_TEXT "$(show_readme)"
 !define MUI_FINISHPAGE_SHOWREADME_NOTCHECKED
 !insertmacro MUI_PAGE_FINISH
@@ -167,6 +168,20 @@ SetOutPath "${APPDATADIR}\Keyboard Layouts"
 File "Keyboard Layouts\*.txt"
 File "Keyboard Layouts\Layout Descriptions.xml"
 
+; now to copy local app data stuff to common program data directory
+; This is important to have $APPDATA variable point to ProgramData folder instead of current user's Roaming folder
+SetShellVarContext all
+
+SetOutPath "$APPDATA\Blindspot\Settings"
+File /oname=hotkeys.txt "Keyboard Layouts\Standard.txt"
+SetOutPath "$APPDATA\Blindspot\Keyboard Layouts"
+File "Keyboard Layouts\*.txt"
+File "Keyboard Layouts\Layout Descriptions.xml"
+
+; This sets us permissions
+AccessControl::GrantOnFile "$APPDATA\Blindspot" "(S-1-5-32-545)" "FullAccess"
+
+SetShellVarContext current
 SetOutPath "$INSTDIR"
 
 ;Store installation folder
@@ -190,9 +205,10 @@ CreateDirectory "$SMPROGRAMS\$StartMenuFolder"
 CreateShortCut "$SMPROGRAMS\$StartMenuFolder\Blindspot.lnk" "$INSTDIR\Blindspot.exe"
 CreateShortCut "$SMPROGRAMS\$StartMenuFolder\Go to Blindspot app data folder.lnk" "${APPDATADIR}\"
 ; Shortcut for the helpfiles
-CreateShortCut "$SMPROGRAMS\$StartMenuFolder\Getting started guide.lnk" "http://blindspot.codeplex.com/wikipage?title=Getting%20Started&referringTitle=Documentation"
-CreateShortCut "$SMPROGRAMS\$StartMenuFolder\Keyboard shortcuts.lnk" "http://blindspot.codeplex.com/wikipage?title=Hotkey%20list&referringTitle=Documentation"
-CreateShortCut "$SMPROGRAMS\$StartMenuFolder\FAQ.lnk" "http://blindspot.codeplex.com/wikipage?title=FAQ&referringTitle=Documentation"
+CreateShortCut "$SMPROGRAMS\$StartMenuFolder\Getting started guide.lnk" "https://craigbrett17.github.io/blindspot/getting_started"
+CreateShortCut "$SMPROGRAMS\$StartMenuFolder\Keyboard shortcuts.lnk" "https://craigbrett17.github.io/blindspot/hotkey_list"
+CreateShortCut "$SMPROGRAMS\$StartMenuFolder\FAQ.lnk" "https://craigbrett17.github.io/blindspot/faq"
+CreateShortCut "$SMPROGRAMS\$StartMenuFolder\What's New.lnk" "https://craigbrett17.github.io/blindspot/whats_new"
 CreateShortCut "$SMPROGRAMS\$StartMenuFolder\Uninstall.lnk" "$INSTDIR\Uninstall Blindspot.exe"
 !insertmacro MUI_STARTMENU_WRITE_END
 SectionEnd

@@ -1,6 +1,7 @@
 ﻿using Blindspot.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
@@ -13,6 +14,8 @@ using System.Threading;
 using System.Windows.Forms;
 using ScreenReaderAPIWrapper;
 using System.Xml.Linq;
+using NAudio.CoreAudioApi;
+using NAudio.Wave;
 
 namespace Blindspot
 {
@@ -48,6 +51,8 @@ namespace Blindspot
         public bool VisualOutputChanged;
         public bool OutputTrackChangeGraphicallyChanged;
         public bool VisualDisplayTimeChanged;
+        public bool OutputDeviceChanged;
+		public bool SkipUnplayableSettingChanged;
 
         public OptionsDialog()
         {
@@ -55,6 +60,7 @@ namespace Blindspot
             SetupLanguageBox();
             LoadKeyboardDescriptions();
             SetupKeyboardSettingsBox();
+            SetupOutputDeviceBox();
         }
 
         private void OptionsDialog_Load(object sender, EventArgs e)
@@ -69,6 +75,11 @@ namespace Blindspot
             autoUpdateTypeBox.Enabled = settings.UpdatesInterestedIn != UserSettings.UpdateType.None;
             if (autoUpdateEnabledBox.Checked)
                 autoUpdateTypeBox.Text = settings.UpdatesInterestedIn.ToString();
+            var devicesList = deviceBox.Items.Cast<DirectSoundDeviceInfo>().ToList(); // need to pull the items out of the combobox
+            deviceBox.SelectedIndex = devicesList.FindIndex(device => device.Guid == settings.OutputDeviceID);
+            if (deviceBox.SelectedIndex == -1) deviceBox.SelectedIndex = 0;
+			deviceBox.Enabled = settings.UseDirectSound;
+			skipUnplayableBox.Checked = settings.SkipUnplayableTracks;
 
             screenReaderBox.Checked = settings.ScreenReaderOutput;
             screenReaderSapiFallbackBox.Checked = settings.SapiIsScreenReaderFallback;
@@ -94,6 +105,8 @@ namespace Blindspot
             LangSettingsChanged = langSettingsHaveChanged;
             KeyboardSettingsChanged = keyboardSettingsHaveChanged;
             AutoUpdateSettingsChanged = autoUpdateSettingsHaveChanged;
+            OutputDeviceChanged = deviceBox.SelectedIndex >= 0 && ((DirectSoundDeviceInfo)deviceBox.SelectedItem).Guid != settings.OutputDeviceID;
+			SkipUnplayableSettingChanged = skipUnplayableBox.Checked != settings.SkipUnplayableTracks;
 
             ScreenReaderOutputChanged = screenReaderBox.Checked != settings.ScreenReaderOutput;
             SAPIIsFallbackChanged = screenReaderSapiFallbackBox.Checked != settings.SapiIsScreenReaderFallback;
@@ -130,6 +143,16 @@ namespace Blindspot
                     : UserSettings.UpdateType.None;
                 hasAnythingChanged = true;
             }
+            if (OutputDeviceChanged)
+            {
+                settings.OutputDeviceID = ((DirectSoundDeviceInfo)deviceBox.SelectedItem).Guid;
+                hasAnythingChanged = true;
+            }
+			if (SkipUnplayableSettingChanged)
+			{
+				settings.SkipUnplayableTracks = skipUnplayableBox.Checked;
+				hasAnythingChanged = true;
+			}
             if (ScreenReaderOutputChanged)
             {
                 settings.ScreenReaderOutput = screenReaderBox.Checked;
@@ -264,6 +287,17 @@ namespace Blindspot
             }
         }
 
+        private void SetupOutputDeviceBox()
+        {
+            deviceBox.DisplayMember = "Description";
+            // can't just use Guid as a value member here unfortunately
+            // doesn't seem to come through. Means a bit of ugly casting
+            foreach (var device in DirectSoundOut.Devices)
+            {
+                deviceBox.Items.Add(device);
+            }
+        }
+
         private string GetKeyboardDescription()
         {
             string notFound = StringStore.NoDescriptionAvailable;
@@ -332,6 +366,6 @@ namespace Blindspot
                 control.Enabled = enabled;
             }
         }
-
+        
     }
 }

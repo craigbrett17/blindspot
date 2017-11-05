@@ -75,6 +75,10 @@
     <ApplicationIcon>blindspot.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NAudio, Version=1.7.1.17, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NAudio.1.7.1\lib\net35\NAudio.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -96,6 +100,15 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddToPlaylistWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddToPlaylistWindow.Designer.cs">
+      <DependentUpon>AddToPlaylistWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Commands\AddNextInQueueCommand.cs" />
+    <Compile Include="Commands\RemoveFromPlaylistCommand.cs" />
+    <Compile Include="Commands\AddToPlaylistCommand.cs" />
     <Compile Include="Commands\BrowseHotkeyListCommand.cs" />
     <Compile Include="Commands\BrowseGettingStartedCommand.cs" />
     <Compile Include="Commands\NextTrackCommand.cs" />
@@ -122,6 +135,7 @@
     <Compile Include="Commands\ShowContextMenuCommand.cs" />
     <Compile Include="Commands\ShowItemDetailsCommand.cs" />
     <Compile Include="Commands\ShowOptionsDialogCommand.cs" />
+    <Compile Include="Commands\ToggleShuffleCommand.cs" />
     <Compile Include="FirstTimeWizard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -133,6 +147,7 @@
     <Compile Include="Helpers\TaskbarNotifier.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Helpers\TrayIconMenuManager.cs" />
     <Compile Include="Helpers\UpdateManager.cs" />
     <Compile Include="OptionsDialog.cs">
       <SubType>Form</SubType>
@@ -140,6 +155,10 @@
     <Compile Include="OptionsDialog.Designer.cs">
       <DependentUpon>OptionsDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Shuffling\FisherYatesShuffle.cs" />
+    <Compile Include="Shuffling\IShuffle.cs" />
+    <Compile Include="Shuffling\RandomWrapper.cs" />
+    <Compile Include="Shuffling\ShuffleExtensions.cs" />
     <Compile Include="StringStore.sv.Designer.cs">
       <DependentUpon>StringStore.sv.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -203,9 +222,25 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\PlaylistBufferItem.cs" />
     <Compile Include="ViewModels\AlbumBufferList.cs" />
+    <Compile Include="ViewModels\PlaylistContainerBufferList.cs" />
     <Compile Include="ViewModels\PlaylistBufferList.cs" />
     <Compile Include="ViewModels\SearchBufferList.cs" />
     <Compile Include="ViewModels\TrackBufferItem.cs" />
+    <EmbeddedResource Include="AddToPlaylistWindow.de.resx">
+      <DependentUpon>AddToPlaylistWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddToPlaylistWindow.es.resx">
+      <DependentUpon>AddToPlaylistWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddToPlaylistWindow.fr.resx">
+      <DependentUpon>AddToPlaylistWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddToPlaylistWindow.resx">
+      <DependentUpon>AddToPlaylistWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddToPlaylistWindow.sv.resx">
+      <DependentUpon>AddToPlaylistWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="BuffersWindow.resx">
       <DependentUpon>BuffersWindow.cs</DependentUpon>
     </EmbeddedResource>
