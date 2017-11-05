@@ -1,0 +1,29 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+nav {
+    min-width: 100%;
+    background-color: #cccccc;
+
+    ul {
+        display: flex;
+        justify-content: space-around;
+        list-style: none;
+
+        li {
+            list-style: none;
+            padding: 0;
+
+            &:hover {
+                background-color: #bbbbbb;
+            }
+
+            a {
+                padding: 0 1em;
+                text-decoration: none;
+            }
+        }
+    }
+}
