@@ -65,6 +65,7 @@ namespace Blindspot.Core.Models
             public ulong FolderID;
             public libspotify.sp_playlist_type PlaylistType;
             public string Name { get; set; }
+            public int NumberOfTracks { get; set; }
             public PlaylistInfo Parent;
             public List<PlaylistInfo> Children = new List<PlaylistInfo>();
             public IntPtr OwnerPointer;
@@ -80,6 +81,7 @@ namespace Blindspot.Core.Models
                 Name = Functions.PtrToString(libspotify.sp_playlist_name(playlistPtr));
                 OwnerPointer = libspotify.sp_playlist_owner(playlistPtr);
                 OwnerName = Functions.PtrToString(libspotify.sp_user_display_name(OwnerPointer));
+                NumberOfTracks = libspotify.sp_playlist_num_tracks(playlistPtr);
             }
 
             public bool UserCanContribute
@@ -230,16 +232,7 @@ namespace Blindspot.Core.Models
 
                     IntPtr playlistPtr = libspotify.sp_playlistcontainer_playlist(_containerPtr, i);
 
-                    playlists.Add(new PlaylistInfo() {
-                        Pointer = playlistPtr,
-                        PlaylistType = libspotify.sp_playlist_type.SP_PLAYLIST_TYPE_PLAYLIST,
-                        ContainerPtr = _containerPtr,
-                        Name = Functions.PtrToString(libspotify.sp_playlist_name(playlistPtr)),
-                        OwnerPointer = libspotify.sp_playlist_owner(playlistPtr),
-                        OwnerName = Functions.PtrToString(libspotify.sp_user_display_name(libspotify.sp_playlist_owner(playlistPtr))),
-                        
-                    });
-
+                    playlists.Add(new PlaylistInfo(playlistPtr));
                 }
 
             }

@@ -71,6 +71,7 @@ namespace Blindspot
         {
             playlistInfoPanel.Visible = true;
             playlist_nameBox.Text = playlistInfo.Name;
+            playlist_numTracksBox.Text = playlistInfo.NumberOfTracks.ToString();
         }
 
         private void closeButton_Click(object sender, EventArgs e)
